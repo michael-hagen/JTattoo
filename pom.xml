@@ -1,14 +1,47 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-
-  <groupId>com.jtattoo</groupId>
-  <artifactId>JTattoo</artifactId>
-  <version>1.6.6ß</version>
-  <packaging>jar</packaging>
-
-  <name>JTattoo</name>
-  <url>http://maven.apache.org</url>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>    
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.jtattoo</groupId>
+    <artifactId>JTattoo</artifactId>
+    <version>1.6.6-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>JTattoo</name>
+    <description>A LookAndFeel library for swing</description>
+    <url>http://jtattoo.com</url>
+    <licenses>
+        <license>
+            <comments>JTattoo is multiple lincensed. If your are an open source developer you can use it under the terms and conditions of the GPLv2 or later. See license.txt to get more informations</comments>
+            <name>The GNU General Public License version 2.0 or later</name>
+            <url>http://www.gnu.org/licenses/gpl-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <url>git@github.com:michael-hagen/JTattoo.git</url>
+        <connection>scm:git:git@github.com:michael-hagen/JTattoo.git</connection>
+        <developerConnection>scm:git:git@github.com:michael-hagen/JTattoo.git</developerConnection>
+    </scm>
+    <developers>
+        <developer>
+            <id>michael-hagen</id>
+            <name>Michael Hagen</name>
+            <email>hagen-michael@gmx.de</email>
+        </developer>
+    </developers>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>
@@ -23,15 +56,7 @@
         </plugins>
     </build>
     <properties>
-    <project.build.sourceEncoding>windows-1252</project.build.sourceEncoding>
-  </properties>
-
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+        <project.build.sourceEncoding>windows-1252</project.build.sourceEncoding>
+    </properties>
+  
 </project>
