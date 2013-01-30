@@ -652,7 +652,7 @@ public class BaseBorders {
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             if (((JToolBar) c).isFloatable()) {
                 Graphics2D g2D = (Graphics2D) g;
-                Composite composite = g2D.getComposite();
+                Composite savedComposite = g2D.getComposite();
                 AlphaComposite alpha = alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
                 g2D.setComposite(alpha);
                 if (((JToolBar) c).getOrientation() == HORIZONTAL) {
@@ -678,7 +678,7 @@ public class BaseBorders {
                     g.drawLine(x + 3, y + 7, w - 4, y + 7);
                     g.drawLine(x + 3, y + 10, w - 4, y + 10);
                 }
-                g2D.setComposite(composite);
+                g2D.setComposite(savedComposite);
             }
         }
 

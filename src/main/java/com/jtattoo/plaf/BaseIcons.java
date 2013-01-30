@@ -519,7 +519,7 @@ public class BaseIcons {
             if (!JTattooUtilities.isLeftToRight(c)) {
                 x += 3;
             }
-
+            
             AbstractButton b = (AbstractButton) c;
             ButtonModel model = b.getModel();
             if (c instanceof JCheckBoxMenuItem) {
@@ -626,12 +626,12 @@ public class BaseIcons {
             Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
             g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             if (!model.isRollover()) {
-                Composite composite = g2D.getComposite();
+                Composite savedComposite = g2D.getComposite();
                 AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
                 g2D.setComposite(alpha);
                 g2D.setColor(Color.white);
                 g2D.drawOval(x + 1, y + 1, WIDTH - 2, HEIGHT - 2);
-                g2D.setComposite(composite);
+                g2D.setComposite(savedComposite);
             }
             if (b.isEnabled()) {
                 if (AbstractLookAndFeel.getTheme().doShowFocusFrame() && b.hasFocus()) {
