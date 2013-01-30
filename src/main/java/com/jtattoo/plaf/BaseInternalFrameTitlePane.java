@@ -230,14 +230,14 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
                 iw = (int) (fac * (double) ih);
                 g.drawImage(image, x, 0, iw, ih, null);
             }
-            return iw + 4;
+            return iw;
         }
         return 0;
     }
 
     public void paintText(Graphics g, int x, int y, String title) {
         if (isMacStyleWindowDecoration()) {
-            x += paintIcon(g, x, y);
+            x += paintIcon(g, x, y) + 5;
         }
         if (isActive()) {
             g.setColor(AbstractLookAndFeel.getWindowTitleForegroundColor());
@@ -270,10 +270,9 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
         int xOffset = leftToRight ? 5 : width - 5;
         int titleWidth = width - buttonsWidth - 10;
 
-
-        if (!isMacStyleWindowDecoration()) {
-            Icon icon = frame.getFrameIcon();
-            if (icon != null) {
+        Icon icon = frame.getFrameIcon();
+        if (icon != null) {
+            if (!isMacStyleWindowDecoration()) {
                 if (!leftToRight) {
                     xOffset -= icon.getIconWidth();
                 }
@@ -281,6 +280,8 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
                 int iconWidth = paintIcon(g, xOffset, iconY);
                 xOffset += leftToRight ? iconWidth + 5 : -5;
                 titleWidth -= iconWidth + 5;
+            } else {
+                titleWidth -= icon.getIconWidth() + 5;
             }
         }
 
@@ -294,13 +295,6 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
         }
         if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
             xOffset = Math.max(buttonsWidth + 5, (width - titleLength) / 2);
-        }
-        if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
-            if (customTitlePanel == null) {
-                xOffset = Math.max(buttonsWidth + 5, (width - titleLength) / 2);
-            } else {
-                xOffset = buttonsWidth + 5;
-            }
         }
         paintText(g, xOffset, yOffset, frameTitle);
         paintBorder(g);
@@ -398,19 +392,6 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
             int x = leftToRight ? w - spacing : 0;
             int y = Math.max(0, ((h - buttonHeight) / 2) - 1);
 
-            int cpx = 0;
-            int cpy = 0;
-            int cpw = w;
-            int cph = h;
-
-            Icon icon = frame.getFrameIcon();
-            if (icon != null) {
-                cpx = 10 + icon.getIconWidth();
-                cpw -= cpx;
-            } else {
-                cpx = 5;
-                cpw -= 5;
-            }
             if (frame.isClosable()) {
                 x += leftToRight ? -buttonWidth : spacing;
                 closeButton.setBounds(x, y, buttonWidth, buttonHeight);
@@ -438,6 +419,19 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
             buttonsWidth = leftToRight ? w - x : x;
 
             if (customTitlePanel != null) {
+                int cpx = 0;
+                int cpy = 0;
+                int cpw = w;
+                int cph = h;
+
+                Icon icon = frame.getFrameIcon();
+                if (icon != null) {
+                    cpx = icon.getIconWidth() + 10;
+                } else {
+                    cpx = 5;
+                }
+                cpw -= cpx;
+                
                 if (!leftToRight) {
                     cpx += buttonsWidth;
                 }
@@ -456,21 +450,15 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
         }
 
         private void layoutMacStyle(Container c) {
-            int w = getWidth();
+            int spacing = getHorSpacing();
             int h = getHeight();
 
             // assumes all buttons have the same dimensions these dimensions include the borders
-            int spacing = getHorSpacing();
             int buttonHeight = h - getVerSpacing() - 1;
             int buttonWidth = buttonHeight;
 
             int x = 2;
             int y = centerButtons() ? Math.max(0, ((h - buttonHeight) / 2) - 1) : 0;
-
-            int cpx = 0;
-            int cpy = 0;
-            int cpw = w;
-            int cph = h;
 
             if (frame.isClosable()) {
                 closeButton.setBounds(x, y, buttonWidth, buttonHeight);
@@ -486,18 +474,14 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
             }
 
             buttonsWidth = x;
-
+            
             if (customTitlePanel != null) {
-                cpx += buttonsWidth + 5;
-                cpw -= buttonsWidth + 5;
-                Graphics g = getGraphics();
-                if (g != null) {
-                    FontMetrics fm = g.getFontMetrics();
-                    int tw = SwingUtilities.computeStringWidth(fm, JTattooUtilities.getClippedText(frame.getTitle(), fm, cpw));
-                    cpx += tw;
-                    cpw -= tw;
-                }
+                int cpx = buttonsWidth + 5;
+                int cpy = 0;
+                int cpw = customTitlePanel.getPreferredSize().width;
+                int cph = h;
                 customTitlePanel.setBounds(cpx, cpy, cpw, cph);
+                buttonsWidth += cpw + 5;
             }
         }
     } // end class BaseTitlePaneLayout

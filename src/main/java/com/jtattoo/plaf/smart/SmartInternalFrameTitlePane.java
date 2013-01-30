@@ -156,7 +156,7 @@ public class SmartInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
     public void paintText(Graphics g, int x, int y, String title) {
         if (isMacStyleWindowDecoration()) {
-            x += paintIcon(g, x, y);
+            x += paintIcon(g, x, y) + 5;
         }
         if (isActive()) {
             Color titleColor = AbstractLookAndFeel.getWindowTitleForegroundColor();

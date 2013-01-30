@@ -152,6 +152,7 @@ public class LunaDefaultTheme extends AbstractTheme {
                     new Color(214, 208, 197),};
         TAB_COLORS = ColorHelper.createColorArr(Color.white, new Color(236, 235, 230), 20);
         COL_HEADER_COLORS = TAB_COLORS;
+        CHECKBOX_COLORS = TAB_COLORS;
         TRACK_COLORS = ColorHelper.createColorArr(new Color(243, 241, 236), new Color(254, 254, 251), 20);
         THUMB_COLORS = ColorHelper.createColorArr(new Color(218, 230, 254), new Color(180, 197, 240), 20);
         //SLIDER_COLORS = ColorHelper.createColorArr(new Color(218, 230, 254), new Color(180, 197, 240), 20);

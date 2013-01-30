@@ -39,7 +39,7 @@ public class HiFiInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
     public void paintText(Graphics g, int x, int y, String title) {
         if (isMacStyleWindowDecoration()) {
-            x += paintIcon(g, x, y);
+            x += paintIcon(g, x, y) + 5;
         }
         g.setColor(Color.black);
         JTattooUtilities.drawString(frame, g, title, x + 1, y);

@@ -183,20 +183,15 @@ public class AcrylTitlePane extends BaseTitlePane {
         }
 
         private void layoutMacStyle(Container c) {
+            int spacing = getHorSpacing();
             int h = getHeight();
 
             // assumes all buttons have the same dimensions these dimensions include the borders
-            int spacing = getHorSpacing();
             int buttonHeight = h - getVerSpacing();
             int buttonWidth = buttonHeight;
 
             int x = 0;
-            int y = 0;//Math.max(0, ((h - buttonHeight) / 2) - 1);
-
-            int cpx = 0;
-            int cpy = 0;
-            int cpw = getWidth();
-            int cph = getHeight();
+            int y = 0;
 
             if (closeButton != null) {
                 closeButton.setBounds(x, y, buttonWidth, buttonHeight);
@@ -216,16 +211,12 @@ public class AcrylTitlePane extends BaseTitlePane {
             buttonsWidth = x;
            
             if (customTitlePanel != null) {
-                cpx += buttonsWidth;
-                cpw -= buttonsWidth;
-                Graphics g = getGraphics();
-                if (g != null) {
-                    FontMetrics fm = g.getFontMetrics();
-                    int tw = SwingUtilities.computeStringWidth(fm, JTattooUtilities.getClippedText(getTitle(), fm, cpw));
-                    cpx += tw;
-                    cpw -= tw;
-                }
+                int cpx = buttonsWidth + 5;
+                int cpy = 0;
+                int cpw = customTitlePanel.getPreferredSize().width;
+                int cph = h;
                 customTitlePanel.setBounds(cpx, cpy, cpw, cph);
+                buttonsWidth += cpw + 5;
             }
         }
         

@@ -465,14 +465,14 @@ public class BaseTitlePane extends JComponent {
     public void paintBackground(Graphics g) {
         if (isActive()) {
             Graphics2D g2D = (Graphics2D) g;
-            Composite composite = g2D.getComposite();
+            Composite savedComposite = g2D.getComposite();
             if (backgroundImage != null) {
                 g.drawImage(backgroundImage, 0, 0, null);
                 AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue);
                 g2D.setComposite(alpha);
             }
             JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowTitleColors(), 0, 0, getWidth(), getHeight());
-            g2D.setComposite(composite);
+            g2D.setComposite(savedComposite);
         } else {
             JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowInactiveTitleColors(), 0, 0, getWidth(), getHeight());
         }
@@ -536,11 +536,7 @@ public class BaseTitlePane extends JComponent {
             xOffset -= titleLength;
         }
         if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
-            if (customTitlePanel == null) {
-                xOffset = Math.max(buttonsWidth + 5, (width - titleLength) / 2);
-            } else {
-                xOffset = buttonsWidth + 5;
-            }
+            xOffset = Math.max(buttonsWidth + 5, (width - titleLength) / 2);
         }
         paintText(g, xOffset, yOffset, frameTitle);
     }
@@ -690,7 +686,7 @@ public class BaseTitlePane extends JComponent {
             int buttonHeight = h - getVerSpacing();
             int buttonWidth = buttonHeight;
 
-            int x = leftToRight ? spacing : w - buttonWidth - spacing;
+            int x = leftToRight ? w - spacing : 0;
             int y = Math.max(0, ((h - buttonHeight) / 2) - 1);
 
             int cpx = 0;
@@ -709,7 +705,6 @@ public class BaseTitlePane extends JComponent {
                 }
                 cpw -= 4 + mw;
             }
-            x = leftToRight ? w - spacing : 0;
             if (closeButton != null) {
                 x += leftToRight ? -buttonWidth : spacing;
                 closeButton.setBounds(x, y, buttonWidth, buttonHeight);
@@ -757,21 +752,16 @@ public class BaseTitlePane extends JComponent {
         }
 
         public void layoutMacStyle(Container c) {
+            int spacing = getHorSpacing();
             int w = getWidth();
             int h = getHeight();
 
             // assumes all buttons have the same dimensions these dimensions include the borders
-            int spacing = getHorSpacing();
             int buttonHeight = h - getVerSpacing() - 1;
             int buttonWidth = buttonHeight;
 
             int x = 2;
             int y = centerButtons() ? Math.max(0, ((h - buttonHeight) / 2) - 1) : 0;
-
-            int cpx = 0;
-            int cpy = 0;
-            int cpw = w;
-            int cph = h;
 
             if (closeButton != null) {
                 closeButton.setBounds(x, y, buttonWidth, buttonHeight);
@@ -791,16 +781,12 @@ public class BaseTitlePane extends JComponent {
             buttonsWidth = x;
 
             if (customTitlePanel != null) {
-                cpx += buttonsWidth + 5;
-                cpw -= buttonsWidth + 5;
-                Graphics g = getGraphics();
-                if (g != null) {
-                    FontMetrics fm = g.getFontMetrics();
-                    int tw = SwingUtilities.computeStringWidth(fm, JTattooUtilities.getClippedText(getTitle(), fm, cpw));
-                    cpx += tw;
-                    cpw -= tw;
-                }
+                int cpx = buttonsWidth + 5;
+                int cpy = 0;
+                int cpw = customTitlePanel.getPreferredSize().width;
+                int cph = h;
                 customTitlePanel.setBounds(cpx, cpy, cpw, cph);
+                buttonsWidth += cpw + 5;
             }
         }
     }

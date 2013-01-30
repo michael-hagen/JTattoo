@@ -27,6 +27,7 @@ import com.jtattoo.plaf.*;
 import java.awt.*;
 import javax.swing.Icon;
 import javax.swing.JInternalFrame;
+import javax.swing.SwingUtilities;
 
 /**
  * @author Michael Hagen
@@ -60,7 +61,7 @@ public class AcrylInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
     public void paintText(Graphics g, int x, int y, String title) {
         if (isMacStyleWindowDecoration()) {
-            x += paintIcon(g, x, y);
+            x += paintIcon(g, x, y) + 5;
         }
         Color shadowColor = AbstractLookAndFeel.getWindowTitleColorDark();
         if (isActive()) {
@@ -176,18 +177,48 @@ public class AcrylInternalFrameTitlePane extends BaseInternalFrameTitlePane {
             }
 
             buttonsWidth = leftToRight ? w - x : x;
+            
+            if (customTitlePanel != null) {
+                int cpx = 0;
+                int cpy = 0;
+                int cpw = w;
+                int cph = h;
+
+                Icon icon = frame.getFrameIcon();
+                if (icon != null) {
+                    cpx = icon.getIconWidth() + 10;
+                } else {
+                    cpx = 5;
+                }
+                cpw -= cpx;
+                
+                if (!leftToRight) {
+                    cpx += buttonsWidth;
+                }
+                cpw -= buttonsWidth;
+                Graphics g = getGraphics();
+                if (g != null) {
+                    FontMetrics fm = g.getFontMetrics();
+                    int tw = SwingUtilities.computeStringWidth(fm, JTattooUtilities.getClippedText(frame.getTitle(), fm, cpw));
+                    if (leftToRight) {
+                        cpx += tw;
+                    }
+                    cpw -= tw;
+                }
+                customTitlePanel.setBounds(cpx, cpy, cpw, cph);
+            }
         }
 
         private void layoutMacStyle(Container c) {
-            int h = getHeight();
-
-            // assumes all buttons have the same dimensions these dimensions include the borders
             int spacing = getHorSpacing();
+            int h = getHeight();
+            
+            // assumes all buttons have the same dimensions these dimensions include the borders
             int buttonHeight = h - getVerSpacing();
             int buttonWidth = buttonHeight;
 
             int x = 0;
-            int y = 0;//Math.max(0, ((h - buttonHeight) / 2) - 1);
+            int y = 0;
 
             if (frame.isClosable()) {
                 closeButton.setBounds(x, y, buttonWidth, buttonHeight);
@@ -203,6 +234,15 @@ public class AcrylInternalFrameTitlePane extends BaseInternalFrameTitlePane {
             }
 
             buttonsWidth = x;
+            
+            if (customTitlePanel != null) {
+                int cpx = buttonsWidth + 5;
+                int cpy = 0;
+                int cpw = customTitlePanel.getPreferredSize().width;
+                int cph = h;
+                customTitlePanel.setBounds(cpx, cpy, cpw, cph);
+                buttonsWidth += cpw + 5;
+            }
         }
 
     } // end class BaseTitlePaneLayout
