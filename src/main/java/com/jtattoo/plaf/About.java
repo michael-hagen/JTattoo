@@ -32,15 +32,16 @@ import javax.swing.*;
  * @author Michael Hagen
  */
 
-// ToDo:
+// TODO:
 // - Auf dem Mac scheint es ein Problem mit dem zeichnen des Aluminium Hintergrunds zu geben
 // - setMaximizedBounds unter Linux bei multiscreen Umgebungen funktioniert nicht. Aus diesem Grund
 //   wird in Linux die Toolbar beim maximieren verdeckt (siehe BaseTitlePane maximize)
 public class About extends JDialog {
 
-    public static String JTATTOO_VERSION = "Version: 1.6.6ß";
+    public static String JTATTOO_VERSION = "Version: 1.6.6"; // TODO: Try loading this from META-INF\maven\com.jtattoo\JTattoo\pom.properties
+    
     private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    private static final Dimension dlgSize = new Dimension(320, 240);
+    private static final Dimension dlgSize = new Dimension(440, 240);
     private static int dlgPosX = (screenSize.width / 2) - (dlgSize.width / 2);
     private static int dlgPosY = (screenSize.height / 2) - (dlgSize.height / 2);
 
@@ -49,17 +50,17 @@ public class About extends JDialog {
         JPanel contentPanel = new JPanel(null);
         JLabel titleLabel = new JLabel("JTattoo " + JTATTOO_VERSION);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        titleLabel.setBounds(0, 20, 312, 36);
+        titleLabel.setBounds(0, 20, dlgSize.width - 8, 36);
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
         contentPanel.add(titleLabel);
 
         JLabel copyrightLabel = new JLabel("(c) 2002 and later by MH Software-Entwicklung");
-        copyrightLabel.setBounds(0, 120, 312, 20);
+        copyrightLabel.setBounds(0, 80, dlgSize.width - 8, 20);
         copyrightLabel.setHorizontalAlignment(JLabel.CENTER);
         contentPanel.add(copyrightLabel);
 
         JButton okButton = new JButton("OK");
-        okButton.setBounds(120, 170, 80, 24);
+        okButton.setBounds((dlgSize.width - 80) / 2, 170, 80, 24);
         contentPanel.add(okButton);
 
         setContentPane(contentPanel);
