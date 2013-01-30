@@ -311,7 +311,8 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
      * and sets this value; the default is null, implying a native operating
      * system window title pane.
      *
-     * @param content the <code>JComponent</code> to use for the window title pane.
+     * @param root the <code>JRootPane</code> where to set the title pane
+     * @param titlePane the <code>BaseTitlePane</code> to use for the window title pane.
      */
     public void setTitlePane(JRootPane root, BaseTitlePane titlePane) {
         JLayeredPane layeredPane = root.getLayeredPane();
