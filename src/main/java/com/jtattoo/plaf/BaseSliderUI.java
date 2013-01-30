@@ -311,7 +311,7 @@ public class BaseSliderUI extends BasicSliderUI {
             }
         }
         Graphics2D g2D = (Graphics2D) g;
-        Composite composite = g2D.getComposite();
+        Composite savedComposite = g2D.getComposite();
         if (!slider.isEnabled()) {
             g.setColor(AbstractLookAndFeel.getBackgroundColor());
             g.fillRect(thumbRect.x + 1, thumbRect.y + 1, thumbRect.width - 2, thumbRect.height - 2);
@@ -319,7 +319,7 @@ public class BaseSliderUI extends BasicSliderUI {
             g2D.setComposite(alpha);
         }
         icon.paintIcon(null, g, thumbRect.x, thumbRect.y);
-        g2D.setComposite(composite);
+        g2D.setComposite(savedComposite);
     }
 
     protected class MyTrackListener extends TrackListener {

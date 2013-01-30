@@ -97,11 +97,7 @@ public class BaseRadioButtonUI extends BasicRadioButtonUI {
             paintBackground(g, c);
         }
 
-        Graphics2D g2D = (Graphics2D) g;
-        Composite savedComposite = g2D.getComposite();
-        g2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
         paintIcon(g, c, iconRect);
-        g2D.setComposite(savedComposite);
 
         if (text != null) {
             paintText(g, c, text, textRect);

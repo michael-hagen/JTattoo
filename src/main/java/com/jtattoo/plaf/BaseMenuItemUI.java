@@ -68,12 +68,12 @@ public class BaseMenuItemUI extends BasicMenuItemUI {
             g.fillRect(x, y, w, h);
         } else if (!AbstractLookAndFeel.getTheme().isMenuOpaque()) {
             Graphics2D g2D = (Graphics2D) g;
-            Composite composite = g2D.getComposite();
+            Composite savedComposite = g2D.getComposite();
             AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, AbstractLookAndFeel.getTheme().getMenuAlpha());
             g2D.setComposite(alpha);
             g.setColor(AbstractLookAndFeel.getMenuBackgroundColor());
             g.fillRect(x, y, w, h);
-            g2D.setComposite(composite);
+            g2D.setComposite(savedComposite);
         } else {
             g.setColor(AbstractLookAndFeel.getMenuBackgroundColor());
             g.fillRect(x, y, w, h);

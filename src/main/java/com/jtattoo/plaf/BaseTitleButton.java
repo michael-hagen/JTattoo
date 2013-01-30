@@ -50,11 +50,11 @@ public class BaseTitleButton extends NoFocusButton {
             super.paint(g);
         } else {
             Graphics2D g2D = (Graphics2D) g;
-            Composite composite = g2D.getComposite();
+            Composite savedComposite = g2D.getComposite();
             AlphaComposite alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
             g2D.setComposite(alphaComposite);
             super.paint(g);
-            g2D.setComposite(composite);
+            g2D.setComposite(savedComposite);
         }
     }
 

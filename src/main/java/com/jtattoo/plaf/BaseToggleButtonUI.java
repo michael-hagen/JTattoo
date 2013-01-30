@@ -169,11 +169,11 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
 
         if (b.getIcon() != null) {
             if (!b.isEnabled()) {
-                Composite composite = g2D.getComposite();
+                Composite savedComposite = g2D.getComposite();
                 AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
                 g2D.setComposite(alpha);
                 paintIcon(g, c, iconRect);
-                g2D.setComposite(composite);
+                g2D.setComposite(savedComposite);
             } else {
                 paintIcon(g, c, iconRect);
             }
