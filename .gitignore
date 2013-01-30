@@ -1,3 +1,9 @@
 /src/main/java/com/jtattoo/plaf/custom/quantycarlo/
 /src/main/java/com/jtattoo/plaf/custom/systemx/
 /target/
+/build.bat
+/clean.bat
+/pom.xml.build
+/pom.xml.custom.build
+/pom.build.xml
+/pom.custom.build.xml
