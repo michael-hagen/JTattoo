@@ -38,7 +38,7 @@ import javax.swing.*;
 //   wird in Linux die Toolbar beim maximieren verdeckt (siehe BaseTitlePane maximize)
 public class About extends JDialog {
 
-    public static String JTATTOO_VERSION = "Version: 1.6.6"; // TODO: Try loading this from META-INF\maven\com.jtattoo\JTattoo\pom.properties
+    public static String JTATTOO_VERSION = "Version: 1.6.7-STAGING"; // TODO: Try loading this from META-INF\maven\com.jtattoo\JTattoo\pom.properties
     
     private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private static final Dimension dlgSize = new Dimension(440, 240);
