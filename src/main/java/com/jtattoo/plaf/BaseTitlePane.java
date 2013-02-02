@@ -81,7 +81,7 @@ public class BaseTitlePane extends JComponent {
     protected boolean useMaximizedBounds = true;
 
     public BaseTitlePane(JRootPane root, BaseRootPaneUI ui) {
-        this.rootPane = root;
+        rootPane = root;
         rootPaneUI = ui;
         state = -1;
         iconifyIcon = UIManager.getIcon("InternalFrame.iconifyIcon");
@@ -203,25 +203,24 @@ public class BaseTitlePane extends JComponent {
     }
 
     protected void installSubcomponents() {
+        createActions();
+        createButtons();
         if (getWindowDecorationStyle() == BaseRootPaneUI.FRAME) {
-            createActions();
-            createButtons();
             if (!isMacStyleWindowDecoration()) {
                 createMenuBar();
                 add(menuBar);
             }
             add(iconifyButton);
             add(maxButton);
-            add(closeButton);
-        } else {
-            createActions();
-            createButtons();
-            add(closeButton);
         }
+        add(closeButton);
     }
 
     protected void installDefaults() {
         setFont(UIManager.getFont("InternalFrame.titleFont"));
+        if (rootPane.getClientProperty("customTitlePanel") instanceof JPanel) {
+            setCustomizedTitlePanel((JPanel)rootPane.getClientProperty("customTitlePanel"));
+        }
     }
 
     protected void uninstallDefaults() {
@@ -270,6 +269,7 @@ public class BaseTitlePane extends JComponent {
             customTitlePanel = panel;
             add(customTitlePanel);
         }
+        rootPane.putClientProperty("customTitlePanel", customTitlePanel);
         revalidate();
         repaint();
     }
