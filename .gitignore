@@ -1,6 +1,7 @@
+/doc/
+/target/
 /src/main/java/com/jtattoo/plaf/custom/quantycarlo/
 /src/main/java/com/jtattoo/plaf/custom/systemx/
-/target/
 /build.bat
 /clean.bat
 /pom.xml.build
