@@ -71,6 +71,9 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
         minIcon = UIManager.getIcon("InternalFrame.minimizeIcon");
         maxIcon = UIManager.getIcon("InternalFrame.maximizeIcon");
         closeIcon = UIManager.getIcon("InternalFrame.closeIcon");
+        if (frame.getClientProperty("customTitlePanel") instanceof JPanel) {
+            setCustomizedTitlePanel((JPanel)frame.getClientProperty("customTitlePanel"));
+        }
     }
 
     public void setCustomizedTitlePanel(JPanel panel) {
@@ -82,6 +85,7 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
             customTitlePanel = panel;
             add(customTitlePanel);
         }
+        frame.putClientProperty("customTitlePanel", customTitlePanel);
         revalidate();
         repaint();
     }
