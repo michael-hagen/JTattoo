@@ -27,6 +27,7 @@ import com.jtattoo.plaf.*;
 import java.awt.*;
 import java.awt.geom.*;
 import javax.swing.JComponent;
+import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 import javax.swing.text.View;
@@ -47,26 +48,22 @@ public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
 
     protected Color[] getContentBorderColors(int tabPlacement) {
         Color c = AbstractLookAndFeel.getTheme().getSelectionBackgroundColorDark();
-        return new Color[] { getSelectedBorderColor(0), c, c, c, ColorHelper.darker(c, 10) };
-    }
-
-    protected Color getSelectedBorderColor(int tabIndex) {
-        if (AbstractLookAndFeel.getTheme().isDarkTexture()) {
-            return ColorHelper.darker(super.getSelectedBorderColor(tabIndex), 20);
-        } else {
-            return super.getSelectedBorderColor(tabIndex);
-        }
+        return new Color[] { getLoBorderColor(0), c, c, c, ColorHelper.darker(c, 10) };
     }
 
     protected Color getLoBorderColor(int tabIndex) {
+        if (tabIndex == tabPane.getSelectedIndex() 
+                && tabPane.getBackgroundAt(tabIndex) instanceof ColorUIResource
+                && AbstractLookAndFeel.getTheme().isDarkTexture()) {
+            return ColorHelper.darker(super.getLoBorderColor(tabIndex), 20);
+        }
         return AbstractLookAndFeel.getFrameColor();
     }
-    
+
     protected Font getTabFont(boolean isSelected) {
         if (isSelected) {
             return super.getTabFont(isSelected).deriveFont(Font.BOLD);
-        }
-        else {
+        } else {
             return super.getTabFont(isSelected);
         }
     }

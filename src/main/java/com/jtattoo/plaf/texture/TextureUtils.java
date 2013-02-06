@@ -62,7 +62,7 @@ public class TextureUtils {
     private static Icon pressedTexture = null;
     private static Icon disabledTexture = null;
     private static Icon menubarTexture = null;
-
+    
     private TextureUtils() {
     }
 
@@ -163,7 +163,7 @@ public class TextureUtils {
         }
         return textureType;
     }
-
+    
     private static Icon getTexture(int textureType) {
         Icon texture = null;
         switch (textureType) {
