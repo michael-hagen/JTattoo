@@ -54,6 +54,8 @@ public class SmartDefaultTheme extends AbstractTheme {
         alterBackgroundColor = new ColorUIResource(236, 233, 215);
 
         selectionBackgroundColor = new ColorUIResource(201, 218, 254);
+        selectionBackgroundColorLight = new ColorUIResource(201, 218, 254);
+        selectionBackgroundColorDark = new ColorUIResource(201, 218, 254);
         frameColor = new ColorUIResource(128, 124, 112);
         focusCellColor = new ColorUIResource(255, 230, 120);
 

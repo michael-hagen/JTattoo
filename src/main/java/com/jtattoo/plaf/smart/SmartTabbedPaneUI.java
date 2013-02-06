@@ -44,6 +44,13 @@ public class SmartTabbedPaneUI extends BaseTabbedPaneUI {
         contentBorderInsets = new Insets(0, 0, 0, 0);
     }
 
+    protected Color getGapColor(int tabIndex) {
+        if (tabIndex == tabPane.getSelectedIndex()) {
+            return tabPane.getBackgroundAt(tabIndex);
+        }
+        return super.getGapColor(tabIndex);
+    }
+    
     protected Font getTabFont(boolean isSelected) {
         if (isSelected) {
             return super.getTabFont(isSelected).deriveFont(Font.BOLD);
