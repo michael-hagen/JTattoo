@@ -58,10 +58,8 @@ public class AcrylTabbedPaneUI extends BaseTabbedPaneUI {
                 }
             } else {
                 if (isSelected) {
-                    //colorArr = AbstractLookAndFeel.getTheme().getDefaultColors();
                     colorArr = ColorHelper.createColorArr(ColorHelper.brighter(backColor, 60), backColor, 20);
                 } else if (isRollover && isEnabled) {
-                    //colorArr = AbstractLookAndFeel.getTheme().getRolloverColors();
                     colorArr = ColorHelper.createColorArr(ColorHelper.brighter(backColor, 80), ColorHelper.brighter(backColor, 20), 20);
                 } else {
                     colorArr = ColorHelper.createColorArr(ColorHelper.brighter(backColor, 40), ColorHelper.darker(backColor, 10), 20);
@@ -87,11 +85,11 @@ public class AcrylTabbedPaneUI extends BaseTabbedPaneUI {
         return ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFrameColor(), 50);
     }
 
-    protected Color getSelectedBorderColor(int tabIndex) {
-        if (!(tabPane.getBackgroundAt(tabIndex) instanceof UIResource)) {
-            return getLoBorderColor(tabIndex);
+    protected Color getLoBorderColor(int tabIndex) {
+        if (tabIndex == tabPane.getSelectedIndex() && tabPane.getBackgroundAt(tabIndex) instanceof ColorUIResource) {
+            return ColorHelper.brighter(AbstractLookAndFeel.getFrameColor(), 10);
         }
-        return ColorHelper.brighter(AbstractLookAndFeel.getFrameColor(), 10);
+        return super.getLoBorderColor(tabIndex);
     }
     
     protected Font getTabFont(boolean isSelected) {
