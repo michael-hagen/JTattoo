@@ -125,7 +125,7 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
         textileProps.setProperty("selectionForegroundColor", "0 0 0");
         textileProps.setProperty("selectionBackgroundColor", "184 194 218");
         textileProps.setProperty("selectionBackgroundColorLight", "184 194 218");
-        textileProps.setProperty("selectionBackgroundColorDark", "152 168 201");
+        textileProps.setProperty("selectionBackgroundColorDark", "112 134 180");
 
         textileProps.setProperty("rolloverForegroundColor", "255 255 255");
         textileProps.setProperty("rolloverColor", "132 148 176");

@@ -67,8 +67,8 @@ public class TextureDefaultTheme extends AbstractTheme {
 
         selectionForegroundColor = black;
         selectionBackgroundColor = new ColorUIResource(200, 215, 240);
-        selectionBackgroundColorLight = new ColorUIResource(224, 215, 205);
-        selectionBackgroundColorDark = new ColorUIResource(197, 184, 168);
+        selectionBackgroundColorLight = new ColorUIResource(128, 128, 128);
+        selectionBackgroundColorDark = new ColorUIResource(64, 64, 64);
 
         focusColor = orange;
         focusCellColor = orange;
