@@ -26,6 +26,7 @@ package com.jtattoo.plaf.graphite;
 import com.jtattoo.plaf.*;
 import java.awt.*;
 import javax.swing.JComponent;
+import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
@@ -48,13 +49,16 @@ public class GraphiteTabbedPaneUI extends BaseTabbedPaneUI {
     }
 
     protected Color getLoBorderColor(int tabIndex) {
+        if (tabIndex == tabPane.getSelectedIndex() && tabPane.getBackgroundAt(tabIndex) instanceof ColorUIResource) {
+            return super.getLoBorderColor(tabIndex);
+        }
         return AbstractLookAndFeel.getControlShadow();
     }
-
+    
     protected Color[] getContentBorderColors(int tabPlacement) {
         if (sepColors == null) {
             sepColors = new Color[5];
-            sepColors[0] = getSelectedBorderColor(0);
+            sepColors[0] = getLoBorderColor(0);
             sepColors[1] = AbstractLookAndFeel.getControlColorDark();
             sepColors[2] = ColorHelper.darker(AbstractLookAndFeel.getControlColorDark(), 4);
             sepColors[3] = ColorHelper.darker(AbstractLookAndFeel.getControlColorDark(), 8);
