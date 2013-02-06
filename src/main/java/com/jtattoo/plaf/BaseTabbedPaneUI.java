@@ -568,7 +568,6 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
                     colorArr = ColorHelper.createColorArr(ColorHelper.brighter(backColor, 60), backColor, 20);
                 } else if (isRollover && isEnabled) {
                     colorArr = ColorHelper.createColorArr(ColorHelper.brighter(backColor, 80), ColorHelper.brighter(backColor, 20), 20);
-                    //colorArr = AbstractLookAndFeel.getTheme().getRolloverColors();
                 } else {
                     colorArr = ColorHelper.createColorArr(ColorHelper.brighter(backColor, 40), ColorHelper.darker(backColor, 10), 20);
                 }
@@ -577,44 +576,11 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         return colorArr;
     }
 
-    protected Color getSelectedBorderColor(int tabIndex) {
-        if (!(tabPane.getBackgroundAt(tabIndex) instanceof UIResource)) {
-            return getLoBorderColor(tabIndex);
-        }
-        return AbstractLookAndFeel.getControlDarkShadow();
-    }
-
     protected Color getLoBorderColor(int tabIndex) {
         return AbstractLookAndFeel.getControlDarkShadow();
     }
 
-    protected Color getLoGapBorderColor(int tabIndex) {
-        if (tabIndex == tabPane.getSelectedIndex()) {
-            return getSelectedBorderColor(tabIndex);
-        }
-        return getLoBorderColor(tabIndex);
-    }
-
     protected Color getHiBorderColor(int tabIndex) {
-        Color backColor = tabPane.getBackgroundAt(tabIndex);
-        if (tabIndex == tabPane.getSelectedIndex()) {
-            if (backColor instanceof UIResource) {
-                return AbstractLookAndFeel.getControlHighlight();
-            } else {
-                return ColorHelper.brighter(backColor, 40);
-            }
-        }
-        if (tabIndex >= 0 && tabIndex <= tabCount) {
-            if (!isTabOpaque() || backColor instanceof UIResource) {
-                return AbstractLookAndFeel.getControlHighlight();
-            } else {
-                return ColorHelper.brighter(backColor, 40);
-            }
-        }
-        return AbstractLookAndFeel.getControlHighlight();
-    }
-
-    protected Color getHiGapBorderColor(int tabIndex) {
         Color backColor = tabPane.getBackgroundAt(tabIndex);
         if (tabIndex == tabPane.getSelectedIndex()) {
             if (backColor instanceof UIResource) {
@@ -1083,9 +1049,6 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
         g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         Color borderColor = getLoBorderColor(tabIndex);
-        if (isSelected) {
-            borderColor = getSelectedBorderColor(tabIndex);
-        }
         g.setColor(borderColor);
         int d = 2 * GAP;
         if (isSelected) {
@@ -1114,11 +1077,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         Color loColor = getLoBorderColor(tabIndex);
         Color hiColor = getHiBorderColor(tabIndex);
 
-        if (isSelected) {
-            g.setColor(getSelectedBorderColor(tabIndex));
-        } else {
-            g.setColor(loColor);
-        }
+        g.setColor(loColor);
         g.drawLine(x1 + GAP, y1, x2, y1);
         g.drawLine(x1 + GAP, y1, x1, y1 + GAP);
         g.drawLine(x1, y1 + GAP + 1, x1, y2);
@@ -1164,21 +1123,6 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         Color loColor = getLoBorderColor(tabIndex);
         Color hiColor = getHiBorderColor(tabIndex);
 
-        if (isSelected) {
-            g.setColor(getSelectedBorderColor(tabIndex));
-        } else {
-            g.setColor(loColor);
-        }
-        g.drawLine(x1 + GAP, y1, x2 - 1, y1);
-        g.drawLine(x1 + GAP, y1, x1, y1 + GAP);
-        g.setColor(loColor);
-        g.drawLine(x1, y1 + GAP, x1, y2);
-        g.drawLine(x1 + GAP, y2, x2 - 1, y2);
-
-        if (tabIndex == lastIndex) {
-            g.drawLine(x1, y2, x1 + GAP, y2);
-        }
-
         g.setColor(hiColor);
         Composite savedComposite = g2D.getComposite();
         AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
@@ -1188,6 +1132,14 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         g.drawLine(x1 + 1, y1 + GAP + 1, x1 + 1, y2 - 1);
         g2D.setComposite(savedComposite);
 
+        g.setColor(loColor);
+        g.drawLine(x1 + GAP, y1, x2 - 1, y1);
+        g.drawLine(x1 + GAP, y1, x1, y1 + GAP);
+        g.drawLine(x1, y1 + GAP, x1, y2);
+        g.drawLine(x1 + GAP, y2, x2 - 1, y2);
+        if (tabIndex == lastIndex) {
+            g.drawLine(x1, y2, x1 + GAP, y2);
+        }
         // paint gap
         int gapTabIndex = getTabAtLocation(x1 + 2, y1 - 2);
         Color gapColor = getGapColor(gapTabIndex);
@@ -1197,12 +1149,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         }
 
         if ((tabIndex != firstIndex) || (currentRun != (runCount - 1))) {
-            loColor = getLoGapBorderColor(gapTabIndex);
+            loColor = getLoBorderColor(gapTabIndex);
             g.setColor(loColor);
             g.drawLine(x1, y1, x1, y1 + GAP - 1);
             if (tabIndex != firstIndex) {
                 g2D.setComposite(alpha);
-                hiColor = getHiGapBorderColor(gapTabIndex);
+                hiColor = getHiBorderColor(gapTabIndex);
                 g.setColor(hiColor);
                 g.drawLine(x1 + 1, y1, x1 + 1, y1 + GAP - 2);
                 g2D.setComposite(savedComposite);
@@ -1211,14 +1163,10 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
     }
 
     protected void paintRoundedBottomTabBorder(int tabIndex, Graphics g, int x1, int y1, int x2, int y2, boolean isSelected) {
-        //int currentRun = getRunForTab(tabPane.getTabCount(), tabIndex);
         Graphics2D g2D = (Graphics2D) g;
         Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
         g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         Color loColor = getLoBorderColor(tabIndex);
-        if (isSelected) {
-            loColor = getSelectedBorderColor(tabIndex);
-        }
         int d = 2 * GAP;
         g.setColor(loColor);
         g.drawLine(x1 + GAP, y2, x2 - GAP, y2);
@@ -1240,11 +1188,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         Color loColor = getLoBorderColor(tabIndex);
         Color hiColor = getHiBorderColor(tabIndex);
 
-        if (isSelected) {
-            g.setColor(getSelectedBorderColor(tabIndex));
-        } else {
-            g.setColor(loColor);
-        }
+        g.setColor(loColor);
         g.drawLine(x1, y1, x1, y2 - GAP);
         g.drawLine(x1, y2 - GAP, x1 + GAP, y2);
         g.drawLine(x1 + GAP, y2, x2, y2);
@@ -1284,20 +1228,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
         Color loColor = getLoBorderColor(tabIndex);
         Color hiColor = getHiBorderColor(tabIndex);
-
-        if (isSelected) {
-            g.setColor(getSelectedBorderColor(tabIndex));
-        } else {
-            g.setColor(loColor);
-        }
-        g.drawLine(x1, y1, x2 - GAP, y1);
-        g.drawLine(x2 - GAP, y1, x2, y1 + GAP);
-        g.drawLine(x2, y1 + GAP, x2, y2);
-
-        if (tabIndex == lastIndex) {
-            g.drawLine(x2, y2, x1, y2);
-        }
-
+ 
         Composite savedComposite = g2D.getComposite();
         AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
         g2D.setComposite(alpha);
@@ -1305,6 +1236,14 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         g.drawLine(x1, y1 + 1, x2 - GAP - 1, y1 + 1);
         g.drawLine(x2 - GAP, y1 + 1, x2 - 1, y1 + GAP);
         g2D.setComposite(savedComposite);
+        
+        g.setColor(loColor);
+        g.drawLine(x1, y1, x2 - GAP, y1);
+        g.drawLine(x2 - GAP, y1, x2, y1 + GAP);
+        g.drawLine(x2, y1 + GAP, x2, y2);
+        if (tabIndex == lastIndex) {
+            g.drawLine(x2, y2, x1, y2);
+        }
 
         // paint gap
         int gapTabIndex = getTabAtLocation(x1 + 2, y1 - 2);
@@ -1315,7 +1254,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         }
 
         if ((tabIndex != firstIndex) || (currentRun != (runCount - 1))) {
-            loColor = getLoGapBorderColor(gapTabIndex);
+            loColor = getLoBorderColor(gapTabIndex);
             g.setColor(loColor);
             g.drawLine(x2, y1, x2, y1 + GAP - 1);
         }
