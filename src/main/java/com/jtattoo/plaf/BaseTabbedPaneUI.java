@@ -2315,6 +2315,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
                 for (int i = 0; i < tabbedPane.getTabCount(); i++) {
                     JMenuItem item = new JMenuItem(tabbedPane.getTitleAt(i));
                     item.addActionListener(new ScrollTabsPopupMenuItemAction(tabbedPane, i));
+                    item.setEnabled(tabbedPane.isEnabledAt(i));
                     popup.add(item);
                 }
                 popup.show(ui.tabScroller.popupMenuButton, 0, 0);
