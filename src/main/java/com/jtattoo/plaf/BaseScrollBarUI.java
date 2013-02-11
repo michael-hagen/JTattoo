@@ -38,7 +38,6 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
     protected int incrGap = 0;
     protected int decrGap = 0;
     protected boolean isRollover = false;
-    protected boolean isSquareButtons = false;
 
     public static ComponentUI createUI(JComponent c) {
         return new BaseScrollBarUI();
@@ -48,7 +47,6 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
         super.installDefaults();
         
         scrollBarWidth = UIManager.getInt("ScrollBar.width");
-        isSquareButtons = UIManager.getBoolean("ScrollBar.squareButtons");
         incrGap = UIManager.getInt("ScrollBar.incrementButtonGap");
         decrGap = UIManager.getInt("ScrollBar.decrementButtonGap");
 
