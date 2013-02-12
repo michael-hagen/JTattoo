@@ -8,7 +8,7 @@ JTattoo is a look and feel library for swing based applications. JTattoo consist
 
 # Getting JTattoo
 
-- Download Page: http://jtattoo.net/Download.html
+- Download Page: http://www.jtattoo.net/Download.html
 
 - Maven Repository:
 ```xml
