@@ -26,7 +26,6 @@ package com.jtattoo.plaf.mcwin;
 import com.jtattoo.plaf.*;
 import java.awt.*;
 import javax.swing.JRootPane;
-import javax.swing.SwingUtilities;
 
 /**
  * @author  Michael Hagen
@@ -109,26 +108,19 @@ public class McWinTitlePane extends BaseTitlePane {
             int buttonHeight = h - getVerSpacing() - 1;
             int buttonWidth = buttonHeight;
 
-            int x = leftToRight ? spacing : w - buttonWidth - spacing;
-            int y = Math.max(0, ((h - buttonHeight) / 2) - 1);
-
-            int cpx = 0;
-            int cpy = 0;
-            int cpw = getWidth();
-            int cph = getHeight();
-
             if (menuBar != null) {
                 int mw = menuBar.getPreferredSize().width;
                 int mh = menuBar.getPreferredSize().height;
                 if (leftToRight) {
-                    cpx = 4 + mw;
                     menuBar.setBounds(2, (h - mh) / 2, mw, mh);
                 } else {
                     menuBar.setBounds(getWidth() - mw, (h - mh) / 2, mw, mh);
                 }
-                cpw -= 4 + mw;
             }
-            x = leftToRight ? w - spacing : 0;
+            
+            int x = leftToRight ? w - spacing : 0;
+            int y = Math.max(0, ((h - buttonHeight) / 2) - 1);
+            
             if (closeButton != null) {
                 x += leftToRight ? -buttonWidth : spacing;
                 closeButton.setBounds(x, y, buttonWidth, buttonHeight);
@@ -154,23 +146,21 @@ public class McWinTitlePane extends BaseTitlePane {
                     x += buttonWidth;
                 }
             }
+            
             buttonsWidth = leftToRight ? w - x : x;
 
             if (customTitlePanel != null) {
-                if (!leftToRight) {
-                    cpx += buttonsWidth;
+                int maxWidth = w - buttonsWidth - spacing - 20;
+                if (menuBar != null) {
+                    maxWidth -= menuBar.getPreferredSize().width;
+                    maxWidth -= spacing;
                 }
-                cpw -= buttonsWidth;
-                Graphics g = getGraphics();
-                if (g != null) {
-                    FontMetrics fm = g.getFontMetrics();
-                    int tw = SwingUtilities.computeStringWidth(fm, JTattooUtilities.getClippedText(getTitle(), fm, cpw));
-                    if (leftToRight) {
-                        cpx += tw;
-                    }
-                    cpw -= tw;
-                }
+                int cpw = Math.min(maxWidth, customTitlePanel.getPreferredSize().width);
+                int cph = h;
+                int cpx = leftToRight ? w - buttonsWidth - cpw : buttonsWidth;
+                int cpy = 0;
                 customTitlePanel.setBounds(cpx, cpy, cpw, cph);
+                buttonsWidth += customTitlePanel.getPreferredSize().width;
             }
         }
         
@@ -179,24 +169,24 @@ public class McWinTitlePane extends BaseTitlePane {
             int h = getHeight();
 
             // assumes all buttons have the same dimensions these dimensions include the borders
-            int buttonHeight = h - getVerSpacing();
-            int buttonWidth = buttonHeight;
+            int btnHeight = h - getVerSpacing();
+            int btnWidth = btnHeight;
 
             int x = 0;
             int y = 0;
 
             if (closeButton != null) {
-                closeButton.setBounds(x, y, buttonWidth, buttonHeight);
-                x += buttonWidth + spacing;
+                closeButton.setBounds(x, y, btnWidth, btnHeight);
+                x += btnWidth + spacing;
             }
             if ((iconifyButton != null) && (iconifyButton.getParent() != null)) {
-                iconifyButton.setBounds(x, y, buttonWidth, buttonHeight);
-                x += buttonWidth + spacing;
+                iconifyButton.setBounds(x, y, btnWidth, btnHeight);
+                x += btnWidth + spacing;
             }
             if ((maxButton != null) && (maxButton.getParent() != null)) {
                 if (DecorationHelper.isFrameStateSupported(Toolkit.getDefaultToolkit(), BaseRootPaneUI.MAXIMIZED_BOTH)) {
-                    maxButton.setBounds(x, y, buttonWidth, buttonHeight);
-                    x += buttonWidth + spacing;
+                    maxButton.setBounds(x, y, btnWidth, btnHeight);
+                    x += btnWidth + spacing;
                 }
             }
 

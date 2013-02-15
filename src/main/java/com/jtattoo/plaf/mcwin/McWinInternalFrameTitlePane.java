@@ -27,7 +27,6 @@ import com.jtattoo.plaf.*;
 import java.awt.*;
 import javax.swing.Icon;
 import javax.swing.JInternalFrame;
-import javax.swing.SwingUtilities;
 
 /**
  * @author Michael Hagen
@@ -169,33 +168,18 @@ public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
             buttonsWidth = leftToRight ? w - x : x;
             
             if (customTitlePanel != null) {
-                int cpx = 0;
-                int cpy = 0;
-                int cpw = w;
-                int cph = h;
-
+                int maxWidth = w - buttonsWidth - spacing - 20;
                 Icon icon = frame.getFrameIcon();
                 if (icon != null) {
-                    cpx = icon.getIconWidth() + 10;
-                } else {
-                    cpx = 5;
+                    maxWidth -= icon.getIconWidth();
+                    maxWidth -= spacing;
                 }
-                cpw -= cpx;
-                
-                if (!leftToRight) {
-                    cpx += buttonsWidth;
-                }
-                cpw -= buttonsWidth;
-                Graphics g = getGraphics();
-                if (g != null) {
-                    FontMetrics fm = g.getFontMetrics();
-                    int tw = SwingUtilities.computeStringWidth(fm, JTattooUtilities.getClippedText(frame.getTitle(), fm, cpw));
-                    if (leftToRight) {
-                        cpx += tw;
-                    }
-                    cpw -= tw;
-                }
+                int cpw = Math.min(maxWidth, customTitlePanel.getPreferredSize().width);
+                int cph = h;
+                int cpx = leftToRight ? w - buttonsWidth - cpw : buttonsWidth;
+                int cpy = 0;
                 customTitlePanel.setBounds(cpx, cpy, cpw, cph);
+                buttonsWidth += customTitlePanel.getPreferredSize().width;
             }
         }
 
@@ -204,23 +188,23 @@ public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
             int h = getHeight();
 
             // assumes all buttons have the same dimensions these dimensions include the borders
-            int buttonHeight = h - getVerSpacing();
-            int buttonWidth = buttonHeight;
+            int btnHeight = h - getVerSpacing();
+            int btnWidth = btnHeight;
 
             int x = 0;
             int y = 0;
 
             if (frame.isClosable()) {
-                closeButton.setBounds(x, y, buttonWidth, buttonHeight);
-                x += buttonWidth + spacing;
+                closeButton.setBounds(x, y, btnWidth, btnHeight);
+                x += btnWidth + spacing;
             }
             if (frame.isIconifiable() && !isPalette) {
-                iconButton.setBounds(x, y, buttonWidth, buttonHeight);
-                x += buttonWidth + spacing;
+                iconButton.setBounds(x, y, btnWidth, btnHeight);
+                x += btnWidth + spacing;
             }
             if (frame.isMaximizable() && !isPalette) {
-                maxButton.setBounds(x, y, buttonWidth, buttonHeight);
-                x += buttonWidth + spacing;
+                maxButton.setBounds(x, y, btnWidth, btnHeight);
+                x += btnWidth + spacing;
             }
 
             buttonsWidth = x;
