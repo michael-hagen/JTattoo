@@ -109,19 +109,30 @@ public class DecorationHelper {
         return (JTattooUtilities.getJavaVersion() >= 1.6010) && (JTattooUtilities.isMac() || JTattooUtilities.isWindows());
     }
 
-    public static void setTranslucentWindow(Window wnd) {
+    public static void setTranslucentWindow(Window wnd, boolean translucent) {
         if (isTranslucentWindowSupported()) {
             if (JTattooUtilities.getJavaVersion() >= 1.7) {
-                if (!wnd.getBackground().equals(new Color(0, 0, 0, 0))) {
-                    wnd.setBackground(new Color(0, 0, 0, 0));
+                if (translucent) {
+                    if (!wnd.getBackground().equals(new Color(0, 0, 0, 0))) {
+                        wnd.setBackground(new Color(0, 0, 0, 0));
+                    }
+                } else {
+                    if (!wnd.getBackground().equals(new Color(0, 0, 0, 0xff))) {
+                        wnd.setBackground(new Color(0, 0, 0, 0xff));
+                    }
                 }
             } else if (JTattooUtilities.getJavaVersion() >= 1.6010) {
                 try {
                     Class clazz = Class.forName("com.sun.awt.AWTUtilities");
                     Class classParams[] = {Window.class, Boolean.TYPE};
                     Method method = clazz.getMethod("setWindowOpaque", classParams);
-                    Object methodParams[] = {wnd, Boolean.FALSE};
-                    method.invoke(wnd, methodParams);
+                    if (translucent) {
+                        Object methodParams[] = {wnd, Boolean.FALSE};
+                        method.invoke(wnd, methodParams);
+                    } else {
+                        Object methodParams[] = {wnd, Boolean.TRUE};
+                        method.invoke(wnd, methodParams);
+                    }
                 } catch (Exception ex) {
                 }
             }
