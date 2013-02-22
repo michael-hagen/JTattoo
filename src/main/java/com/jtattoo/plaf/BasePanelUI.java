@@ -24,6 +24,7 @@
 package com.jtattoo.plaf;
 
 import java.awt.*;
+import java.lang.reflect.Field;
 import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicPanelUI;
@@ -45,6 +46,22 @@ public class BasePanelUI extends BasicPanelUI {
     protected void installDefaults(JPanel p) {
         super.installDefaults(p);
         p.setFont(AbstractLookAndFeel.getTheme().getControlTextFont());
+        
+        // We dont want medium weight popups for tool tips, so we force heavy weight popups.
+        try {
+            Field field;
+            if (JTattooUtilities.getJavaVersion() < 1.7) {
+                Class clazz = Class.forName("javax.swing.PopupFactory");
+                field = clazz.getDeclaredField("forceHeavyWeightPopupKey");
+            } else { //1.7.0, 1.8.0
+                Class clazz = Class.forName("javax.swing.ClientPropertyKey");
+                field = clazz.getDeclaredField("PopupFactory_FORCE_HEAVYWEIGHT_POPUP");
+            }
+            field.setAccessible(true);
+            p.putClientProperty(field.get(null), Boolean.TRUE);
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }        
     }
 
     public void update(Graphics g, JComponent c) {
