@@ -74,7 +74,6 @@ public class BaseToolTipUI extends MetalToolTipUI {
         };
     }
 
-    
     public void paint(Graphics g, JComponent c) {
         Graphics2D g2D = (Graphics2D) g;
         Composite savedComposit = g2D.getComposite();

@@ -34,13 +34,8 @@ import javax.swing.plaf.basic.BasicDesktopPaneUI;
  */
 public class BaseDesktopPaneUI extends BasicDesktopPaneUI {
 
-    private static BaseDesktopPaneUI desktopPaneUI = null;
-
     public static ComponentUI createUI(JComponent c) {
-        if (desktopPaneUI == null) {
-            desktopPaneUI = new BaseDesktopPaneUI();
-        }
-        return desktopPaneUI;
+        return new BaseDesktopPaneUI();
     }
 
     public void update(Graphics g, JComponent c) {
@@ -53,5 +48,6 @@ public class BaseDesktopPaneUI extends BasicDesktopPaneUI {
                 g.fillRect(0, 0, c.getWidth(), c.getHeight());
             }
         }
+        paint(g, c);
     }
 }
