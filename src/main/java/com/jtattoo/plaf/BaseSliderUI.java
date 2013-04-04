@@ -227,7 +227,7 @@ public class BaseSliderUI extends BasicSliderUI {
     public void paintTicks(Graphics g) {
         boolean leftToRight = JTattooUtilities.isLeftToRight(slider);
         Rectangle tickBounds = tickRect;
-        g.setColor(AbstractLookAndFeel.getForegroundColor());
+        g.setColor(slider.getForeground());
         if (slider.getOrientation() == JSlider.HORIZONTAL) {
             g.translate(0, tickBounds.y);
 

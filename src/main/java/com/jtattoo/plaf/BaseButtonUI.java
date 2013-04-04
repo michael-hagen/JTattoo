@@ -33,6 +33,7 @@ public class BaseButtonUI extends BasicButtonUI {
     protected static Rectangle viewRect = new Rectangle();
     protected static Rectangle textRect = new Rectangle();
     protected static Rectangle iconRect = new Rectangle();
+    protected static Color[] defaultColors = null;
 
     public static ComponentUI createUI(JComponent c) {
         return new BaseButtonUI();
@@ -43,6 +44,11 @@ public class BaseButtonUI extends BasicButtonUI {
         InputMap im = (InputMap) UIManager.get("Button.focusInputMap");
         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false), "pressed");
         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, true), "released");
+        Color cArr[] = AbstractLookAndFeel.getTheme().getButtonColors();
+        defaultColors = new Color[cArr.length];
+        for (int i = 0; i < cArr.length; i++) {
+            defaultColors[i] = ColorHelper.brighter(cArr[i], 20);
+        }
     }
 
     public void installDefaults(AbstractButton b) {
@@ -68,35 +74,36 @@ public class BaseButtonUI extends BasicButtonUI {
 
         int width = b.getWidth();
         int height = b.getHeight();
-        Color colors[] = AbstractLookAndFeel.getTheme().getButtonColors();
+        
         ButtonModel model = b.getModel();
+        Color colors[] = AbstractLookAndFeel.getTheme().getButtonColors();
         if (b.isEnabled()) {
-            if (b.getBackground() instanceof ColorUIResource) {
+            Color background = b.getBackground();
+            if (background instanceof ColorUIResource) {
                 if (model.isPressed() && model.isArmed()) {
                     colors = AbstractLookAndFeel.getTheme().getPressedColors();
-                } else {
-                    if (b.isRolloverEnabled() && model.isRollover()) {
-                        colors = AbstractLookAndFeel.getTheme().getRolloverColors();
-                    } else {
-                        if (AbstractLookAndFeel.getTheme().doShowFocusFrame() && b.hasFocus()) {
-                            colors = AbstractLookAndFeel.getTheme().getFocusColors();
-                        }
-                    }
+                } else if (b.isRolloverEnabled() && model.isRollover()) {
+                    colors = AbstractLookAndFeel.getTheme().getRolloverColors();
+                } else if (AbstractLookAndFeel.getTheme().doShowFocusFrame() && b.hasFocus()) {
+                    colors = AbstractLookAndFeel.getTheme().getFocusColors();
+                } else if (JTattooUtilities.isFrameActive(b) && (b.equals(b.getRootPane().getDefaultButton()))) {
+                    colors = defaultColors;
                 }
             } else {
                 if (model.isPressed() && model.isArmed()) {
-                    colors = ColorHelper.createColorArr(b.getBackground(), ColorHelper.darker(b.getBackground(), 50), 20);
+                    colors = ColorHelper.createColorArr(ColorHelper.darker(background, 30), ColorHelper.darker(background, 10), 20);
                 } else {
                     if (b.isRolloverEnabled() && model.isRollover()) {
-                        colors = ColorHelper.createColorArr(ColorHelper.brighter(b.getBackground(), 80), ColorHelper.brighter(b.getBackground(), 20), 20);
+                        colors = ColorHelper.createColorArr(ColorHelper.brighter(background, 50), ColorHelper.brighter(background, 10), 20);
                     } else {
-                        colors = ColorHelper.createColorArr(ColorHelper.brighter(b.getBackground(), 40), ColorHelper.darker(b.getBackground(), 20), 20);
+                        colors = ColorHelper.createColorArr(ColorHelper.brighter(background, 30), ColorHelper.darker(background, 10), 20);
                     }
                 }
             }
         } else { // disabled
             colors = AbstractLookAndFeel.getTheme().getDisabledColors();
         }
+        
         if (b.isBorderPainted() && (b.getBorder() != null)) {
             Insets insets = b.getBorder().getBorderInsets(b);
             int x = insets.left > 0 ? 1 : 0;
@@ -120,14 +127,19 @@ public class BaseButtonUI extends BasicButtonUI {
         }
 
         if (model.isEnabled()) {
+            Color foreground = b.getForeground();
             int offs = 0;
             if (model.isArmed() && model.isPressed()) {
                 offs = 1;
             }
-            if (model.isRollover()) {
-                g.setColor(AbstractLookAndFeel.getTheme().getRolloverForegroundColor());
-            } else if (model.isPressed()) {
-                g.setColor(AbstractLookAndFeel.getTheme().getPressedForegroundColor());
+            if (foreground instanceof ColorUIResource) {
+                if (model.isRollover()) {
+                    g.setColor(AbstractLookAndFeel.getTheme().getRolloverForegroundColor());
+                } else if (model.isPressed()) {
+                    g.setColor(AbstractLookAndFeel.getTheme().getPressedForegroundColor());
+                } else {
+                    g.setColor(b.getForeground());
+                }
             } else {
                 g.setColor(b.getForeground());
             }

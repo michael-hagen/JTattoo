@@ -57,22 +57,38 @@ public class AluminiumButtonUI extends BaseButtonUI {
         Composite composite = g2D.getComposite();
         Object savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
         g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        if (AbstractLookAndFeel.getTheme().doDrawSquareButtons()
-            || (((width < 64) || (height < 16)) && ((b.getText() == null) || b.getText().length() == 0))) {
-            Color[] colors = null;
-            if (b.getBackground() instanceof ColorUIResource) {
-                if (!model.isEnabled()) {
-                    colors = AbstractLookAndFeel.getTheme().getDisabledColors();
-                } else if (b.isRolloverEnabled() && model.isRollover()) {
-                    colors = AbstractLookAndFeel.getTheme().getRolloverColors();
-                } else if (b.equals(b.getRootPane().getDefaultButton())) {
-                    colors = AbstractLookAndFeel.getTheme().getSelectedColors();
+        
+        Color[] colors = null;
+        if (model.isEnabled()) {
+            Color background = b.getBackground();
+            if (background instanceof ColorUIResource) {
+                if (model.isPressed() && model.isArmed()) {
+                    colors = AbstractLookAndFeel.getTheme().getPressedColors();
                 } else {
-                    colors = AbstractLookAndFeel.getTheme().getButtonColors();
+                    if (b.isRolloverEnabled() && model.isRollover()) {
+                        colors = AbstractLookAndFeel.getTheme().getRolloverColors();
+                    } else if (b.equals(b.getRootPane().getDefaultButton())) {
+                        colors = AbstractLookAndFeel.getTheme().getSelectedColors();
+                    } else {
+                        colors = AbstractLookAndFeel.getTheme().getButtonColors();
+                    }
                 }
             } else {
-                colors = ColorHelper.createColorArr(ColorHelper.brighter(b.getBackground(), 20), ColorHelper.darker(b.getBackground(), 20), 20);
+                if (model.isPressed() && model.isArmed()) {
+                    colors = ColorHelper.createColorArr(ColorHelper.darker(background, 30), ColorHelper.darker(background, 10), 20);
+                } else {
+                    if (b.isRolloverEnabled() && model.isRollover()) {
+                        colors = ColorHelper.createColorArr(ColorHelper.brighter(background, 50), ColorHelper.brighter(background, 10), 20);
+                    } else {
+                        colors = ColorHelper.createColorArr(ColorHelper.brighter(background, 30), ColorHelper.darker(background, 10), 20);
+                    }
+                }
             }
+        } else {
+            colors = AbstractLookAndFeel.getTheme().getDisabledColors();
+        }
+        if (AbstractLookAndFeel.getTheme().doDrawSquareButtons()
+            || (((width < 64) || (height < 16)) && ((b.getText() == null) || b.getText().length() == 0))) {
             JTattooUtilities.fillHorGradient(g, colors, 0, 0, width - 1, height - 1);
             if (model.isEnabled()) {
                 g2D.setColor(AbstractLookAndFeel.getFrameColor());
@@ -84,31 +100,8 @@ public class AluminiumButtonUI extends BaseButtonUI {
             g2D.setComposite(alpha);
             g2D.setColor(Color.white);
             g2D.drawRect(1, 1, width - 3, height - 3);
-        } else if (model.isPressed() && model.isArmed()) {
-            int d = height - 2;
-            Color color = AbstractLookAndFeel.getTheme().getSelectionBackgroundColor();
-            g2D.setColor(color);
-            g2D.fillRoundRect(0, 0, width - 1, height - 1, d, d);
-
-            g2D.setColor(ColorHelper.darker(color, 40));
-            g2D.drawRoundRect(0, 0, width - 1, height - 1, d, d);
         } else {
             int d = height - 2;
-            Color[] colors = null;
-            if (b.getBackground() instanceof ColorUIResource) {
-                if (!model.isEnabled()) {
-                    colors = AbstractLookAndFeel.getTheme().getDisabledColors();
-                } else if (b.isRolloverEnabled() && model.isRollover()) {
-                    colors = AbstractLookAndFeel.getTheme().getRolloverColors();
-                } else if (b.equals(b.getRootPane().getDefaultButton())) {
-                    colors = AbstractLookAndFeel.getTheme().getSelectedColors();
-                } else {
-                    colors = AbstractLookAndFeel.getTheme().getButtonColors();
-                }
-            } else {
-                colors = ColorHelper.createColorArr(ColorHelper.brighter(b.getBackground(), 20), ColorHelper.darker(b.getBackground(), 20), 20);
-            }
-
             Shape savedClip = g.getClip();
             Area clipArea = new Area(new RoundRectangle2D.Double(0, 0, width - 1, height - 1, d, d));
             clipArea.intersect(new Area(savedClip));

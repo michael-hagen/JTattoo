@@ -67,6 +67,7 @@ public class MintButtonUI extends BaseButtonUI {
         int width = b.getWidth() - 2;
         int height = b.getHeight() - 2;
         ButtonModel model = b.getModel();
+        
         if (model.isPressed() && model.isArmed()) {
             Color color = AbstractLookAndFeel.getTheme().getSelectionBackgroundColor();
             g2D.setColor(color);
@@ -88,6 +89,7 @@ public class MintButtonUI extends BaseButtonUI {
             System.arraycopy(src, 0, colors, 0, colors.length);
             colors[colors.length - 2] = ColorHelper.darker(colors[colors.length - 2], 15);
         }
+        
         Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
         g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         // Paint shadow

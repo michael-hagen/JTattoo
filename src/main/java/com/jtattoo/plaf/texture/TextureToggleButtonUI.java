@@ -26,6 +26,7 @@ package com.jtattoo.plaf.texture;
 import com.jtattoo.plaf.*;
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
 
@@ -68,10 +69,12 @@ public class TextureToggleButtonUI extends BaseToggleButtonUI {
                 offs = 1;
             }
             Color fc = b.getForeground();
-            if (model.isPressed() || model.isSelected()) {
-                fc = AbstractLookAndFeel.getTheme().getPressedForegroundColor();
-            } else if (b.isRolloverEnabled() && model.isRollover()) {
-                fc = AbstractLookAndFeel.getTheme().getRolloverForegroundColor();
+            if (fc instanceof ColorUIResource) {
+                if (model.isPressed() || model.isSelected()) {
+                    fc = AbstractLookAndFeel.getTheme().getPressedForegroundColor();
+                } else if (b.isRolloverEnabled() && model.isRollover()) {
+                    fc = AbstractLookAndFeel.getTheme().getRolloverForegroundColor();
+                }
             }
             if (AbstractLookAndFeel.getTheme().isTextShadowOn() && ColorHelper.getGrayValue(fc) > 164) {
                 AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);

@@ -68,85 +68,71 @@ public class McWinButtonUI extends BaseButtonUI {
         Composite composite = g2D.getComposite();
         Object savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
         g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        if (AbstractLookAndFeel.getTheme().doDrawSquareButtons()
-                || (((width < 64) || (height < 16)) && ((b.getText() == null) || b.getText().length() == 0))) {
-            Color[] backColors = null;
-            if (b.getBackground() instanceof ColorUIResource) {
-                if (!model.isEnabled()) {
-                    backColors = AbstractLookAndFeel.getTheme().getDisabledColors();
-                } else if (model.isPressed() && model.isArmed()) {
-                    backColors = new Color[] { AbstractLookAndFeel.getTheme().getBackgroundColor() };
+        
+        Color colors[] = AbstractLookAndFeel.getTheme().getButtonColors();
+        if (b.isEnabled()) {
+            Color background = b.getBackground();
+            if (background instanceof ColorUIResource) {
+                if (model.isPressed() && model.isArmed()) {
+                    colors = AbstractLookAndFeel.getTheme().getPressedColors();
                 } else if (b.isRolloverEnabled() && model.isRollover()) {
-                    backColors = AbstractLookAndFeel.getTheme().getRolloverColors();
-                } else if (b.equals(b.getRootPane().getDefaultButton())) {
-                    if (JTattooUtilities.isFrameActive(b)) {
-                        if (AbstractLookAndFeel.getTheme().doShowFocusFrame() && b.hasFocus()) {
-                            backColors = AbstractLookAndFeel.getTheme().getFocusColors();
-                        } else {
-                            if (AbstractLookAndFeel.getTheme().isBrightMode()) {
-                                backColors = new Color[AbstractLookAndFeel.getTheme().getSelectedColors().length];
-                                for (int i = 0; i < backColors.length; i++) {
-                                    backColors[i] = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getSelectedColors()[i], 30);
-                                }
+                    colors = AbstractLookAndFeel.getTheme().getRolloverColors();
+                } else {
+                    if (b.equals(b.getRootPane().getDefaultButton())) {
+                        if (JTattooUtilities.isFrameActive(b)) {
+                            if (AbstractLookAndFeel.getTheme().doShowFocusFrame() && b.hasFocus()) {
+                                colors = AbstractLookAndFeel.getTheme().getFocusColors();
                             } else {
-                                backColors = AbstractLookAndFeel.getTheme().getSelectedColors();
+                                if (AbstractLookAndFeel.getTheme().isBrightMode()) {
+                                    colors = new Color[AbstractLookAndFeel.getTheme().getSelectedColors().length];
+                                    for (int i = 0; i < colors.length; i++) {
+                                        colors[i] = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getSelectedColors()[i], 30);
+                                    }
+                                } else {
+                                    colors = AbstractLookAndFeel.getTheme().getSelectedColors();
+                                }
                             }
                         }
                     } else {
-                        backColors = AbstractLookAndFeel.getTheme().getButtonColors();
-                    }
-                } else {
-                    if (AbstractLookAndFeel.getTheme().doShowFocusFrame() && b.hasFocus()) {
-                        backColors = AbstractLookAndFeel.getTheme().getFocusColors();
-                    } else {
-                        backColors = AbstractLookAndFeel.getTheme().getButtonColors();
+                        if (AbstractLookAndFeel.getTheme().doShowFocusFrame() && b.hasFocus()) {
+                            colors = AbstractLookAndFeel.getTheme().getFocusColors();
+                        }
                     }
                 }
-            } else {
-                backColors = ColorHelper.createColorArr(ColorHelper.brighter(b.getBackground(), 20), ColorHelper.darker(b.getBackground(), 20), 20);
+            } else { // backgound != ColorUIResource
+                if (model.isPressed() && model.isArmed()) {
+                    colors = ColorHelper.createColorArr(ColorHelper.darker(background, 30), ColorHelper.darker(background, 10), 20);
+                } else {
+                    if (b.isRolloverEnabled() && model.isRollover()) {
+                        colors = ColorHelper.createColorArr(ColorHelper.brighter(background, 50), ColorHelper.brighter(background, 10), 20);
+                    } else {
+                        colors = ColorHelper.createColorArr(ColorHelper.brighter(background, 30), ColorHelper.darker(background, 10), 20);
+                    }
+                }
             }
-            JTattooUtilities.fillHorGradient(g, backColors, 0, 0, width - 1, height - 1);
-            Color frameColor = backColors[backColors.length / 2];
+        } else { // disabled
+            colors = AbstractLookAndFeel.getTheme().getDisabledColors();
+        }
+        
+        if (AbstractLookAndFeel.getTheme().doDrawSquareButtons()
+                || (((width < 64) || (height < 16)) && ((b.getText() == null) || b.getText().length() == 0))) {
+            JTattooUtilities.fillHorGradient(g, colors, 0, 0, width - 1, height - 1);
+            Color frameColor = colors[colors.length / 2];
             g2D.setColor(ColorHelper.darker(frameColor, 25));
             g2D.drawRect(0, 0, width - 1, height - 1);
             AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
             g2D.setComposite(alpha);
             g2D.setColor(Color.white);
             g2D.drawRect(1, 1, width - 3, height - 3);
-        } else if (model.isPressed() && model.isArmed()) {
-            int d = height - 2;
-            Color color = AbstractLookAndFeel.getTheme().getBackgroundColor();
-            g2D.setColor(color);
-            g2D.fillRoundRect(1, 1, width - 1, height - 1, d, d);
-            g2D.setColor(ColorHelper.darker(color, 40));
-            g2D.drawRoundRect(0, 0, width - 1, height - 1, d, d);
         } else {
             int d = height - 2;
-            Color[] backColors = null;
-            if (b.getBackground() instanceof ColorUIResource) {
-                if (!model.isEnabled()) {
-                    backColors = AbstractLookAndFeel.getTheme().getDisabledColors();
-                } else if (b.isRolloverEnabled() && model.isRollover()) {
-                    backColors = AbstractLookAndFeel.getTheme().getRolloverColors();
-                } else if (b.equals(b.getRootPane().getDefaultButton())) {
-                    if (JTattooUtilities.isFrameActive(b)) {
-                        backColors = AbstractLookAndFeel.getTheme().getSelectedColors();
-                    } else {
-                        backColors = AbstractLookAndFeel.getTheme().getButtonColors();
-                    }
-                } else {
-                    backColors = AbstractLookAndFeel.getTheme().getButtonColors();
-                }
-            } else {
-                backColors = ColorHelper.createColorArr(ColorHelper.brighter(b.getBackground(), 20), ColorHelper.darker(b.getBackground(), 20), 20);
-            }
-            Color frameColor = backColors[backColors.length / 2];
+            Color frameColor = colors[colors.length / 2];
 
             Shape savedClip = g.getClip();
             Area clipArea = new Area(new RoundRectangle2D.Double(0, 0, width - 1, height - 1, d, d));
             clipArea.intersect(new Area(savedClip));
             g2D.setClip(clipArea);
-            JTattooUtilities.fillHorGradient(g, backColors, 0, 0, width - 1, height - 1);
+            JTattooUtilities.fillHorGradient(g, colors, 0, 0, width - 1, height - 1);
             g2D.setClip(savedClip);
 
             g2D.setColor(ColorHelper.darker(frameColor, 25));

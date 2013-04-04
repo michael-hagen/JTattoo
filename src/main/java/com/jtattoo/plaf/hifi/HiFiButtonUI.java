@@ -28,6 +28,7 @@ import java.awt.*;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 
@@ -76,8 +77,10 @@ public class HiFiButtonUI extends BaseButtonUI {
         AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
         g2D.setComposite(alpha);
         Color fc = b.getForeground();
-        if (model.isPressed() && model.isArmed()) {
-            fc = AbstractLookAndFeel.getTheme().getSelectionForegroundColor();
+        if (fc instanceof ColorUIResource) {
+            if (model.isPressed() && model.isArmed()) {
+                fc = AbstractLookAndFeel.getTheme().getSelectionForegroundColor();
+            }
         }
         if (!model.isEnabled()) {
             fc = AbstractLookAndFeel.getTheme().getDisabledForegroundColor();

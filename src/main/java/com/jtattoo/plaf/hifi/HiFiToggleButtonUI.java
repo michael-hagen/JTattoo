@@ -26,6 +26,7 @@ package com.jtattoo.plaf.hifi;
 import com.jtattoo.plaf.*;
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
 
 /**
@@ -56,8 +57,10 @@ public class HiFiToggleButtonUI extends BaseToggleButtonUI {
         AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
         g2D.setComposite(alpha);
         Color fc = b.getForeground();
-        if ((model.isPressed() && model.isArmed()) || model.isSelected()) {
-            fc = AbstractLookAndFeel.getTheme().getSelectionForegroundColor();
+        if (fc instanceof ColorUIResource) {
+            if ((model.isPressed() && model.isArmed()) || model.isSelected()) {
+                fc = AbstractLookAndFeel.getTheme().getSelectionForegroundColor();
+            }
         }
         if (!model.isEnabled()) {
             fc = AbstractLookAndFeel.getTheme().getDisabledForegroundColor();

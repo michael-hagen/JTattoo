@@ -69,10 +69,12 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
 
         int width = b.getWidth();
         int height = b.getHeight();
+        
         ButtonModel model = b.getModel();
         Color colors[] = null;
         if (b.isEnabled()) {
-            if (b.getBackground() instanceof ColorUIResource) {
+            Color background = b.getBackground();
+            if (background instanceof ColorUIResource) {
                 if (model.isPressed() && model.isArmed()) {
                     colors = AbstractLookAndFeel.getTheme().getPressedColors();
                 } else  if (b.isRolloverEnabled() && model.isRollover()) {
@@ -92,13 +94,17 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
                 }
             } else {
                 if (model.isPressed() && model.isArmed()) {
-                    colors = ColorHelper.createColorArr(b.getBackground(), ColorHelper.darker(b.getBackground(), 50), 20);
-                } else  if (b.isRolloverEnabled() && model.isRollover()) {
-                    colors = ColorHelper.createColorArr(ColorHelper.brighter(b.getBackground(), 80), ColorHelper.brighter(b.getBackground(), 20), 20);
+                    colors = ColorHelper.createColorArr(ColorHelper.darker(background, 30), ColorHelper.darker(background, 10), 20);
+                } else if (b.isRolloverEnabled() && model.isRollover()) {
+                    if (model.isSelected()) {
+                        colors = ColorHelper.createColorArr(ColorHelper.darker(background, 20), background, 20);
+                    } else {
+                        colors = ColorHelper.createColorArr(ColorHelper.brighter(background, 50), ColorHelper.brighter(background, 10), 20);
+                    }
                 } else if (model.isSelected()) {
-                    colors = ColorHelper.createColorArr(b.getBackground(), ColorHelper.darker(b.getBackground(), 50), 20);
+                    colors = ColorHelper.createColorArr(ColorHelper.darker(background, 40), ColorHelper.darker(background, 20), 20);
                 } else {
-                    colors = ColorHelper.createColorArr(ColorHelper.brighter(b.getBackground(), 40), ColorHelper.darker(b.getBackground(), 20), 20);
+                    colors = ColorHelper.createColorArr(ColorHelper.brighter(background, 30), ColorHelper.darker(background, 10), 20);
                 }
             }
         } else { // disabled
@@ -118,12 +124,17 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
         }
 
         if (model.isEnabled()) {
+            Color foreground = b.getForeground();
             int offs = 0;
             if ((model.isArmed() && model.isPressed()) || model.isSelected()) {
                 offs = 1;
             }
-            if (model.isRollover()) {
-                g.setColor(AbstractLookAndFeel.getTheme().getRolloverForegroundColor());
+            if (foreground instanceof ColorUIResource) {
+                if (model.isRollover()) {
+                    g.setColor(AbstractLookAndFeel.getTheme().getRolloverForegroundColor());
+                } else {
+                    g.setColor(b.getForeground());
+                }
             } else {
                 g.setColor(b.getForeground());
             }
