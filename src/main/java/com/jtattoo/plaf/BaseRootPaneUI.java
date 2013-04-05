@@ -837,25 +837,11 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
                 if (getTitlePane() != null && getTitlePane().contains(convertedPoint)) {
                     if ((ev.getClickCount() % 2) == 0 && ((ev.getModifiers() & InputEvent.BUTTON1_MASK) != 0)) {
                         if (frame.isResizable()) {
-                            PropertyChangeListener[] pcl = frame.getPropertyChangeListeners();
                             if ((state & BaseRootPaneUI.MAXIMIZED_BOTH) != 0) {
-                                for (int i = 0; i < pcl.length; i++) {
-                                    pcl[i].propertyChange(new PropertyChangeEvent(window, "windowRestore", Boolean.FALSE, Boolean.FALSE));
-                                }
-                                DecorationHelper.setExtendedState(frame, state & ~BaseRootPaneUI.MAXIMIZED_BOTH);
-                                for (int i = 0; i < pcl.length; i++) {
-                                    pcl[i].propertyChange(new PropertyChangeEvent(window, "windowRestored", Boolean.FALSE, Boolean.FALSE));
-                                }
+                                titlePane.restore();
                             } else {
-                                for (int i = 0; i < pcl.length; i++) {
-                                    pcl[i].propertyChange(new PropertyChangeEvent(window, "windowMaximize", Boolean.FALSE, Boolean.FALSE));
-                                }
-                                DecorationHelper.setExtendedState(frame, state | BaseRootPaneUI.MAXIMIZED_BOTH);
-                                for (int i = 0; i < pcl.length; i++) {
-                                    pcl[i].propertyChange(new PropertyChangeEvent(window, "windowMaximized", Boolean.FALSE, Boolean.FALSE));
-                                }
+                                titlePane.maximize();
                             }
-                            return;
                         }
                     }
                 }

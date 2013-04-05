@@ -76,6 +76,11 @@ public class BaseTitlePane extends JComponent {
     protected BaseRootPaneUI rootPaneUI;
     protected int buttonsWidth;
     protected int state;
+    // This flag is used to avoid a bug with OSX and java 1.7. The call to setExtendedState
+    // with both flags ICONIFY and MAXIMIZED_BOTH throws an illegal state exception, so we
+    // have to switch off the MAXIMIZED_BOTH flag in the iconify() method. If frame is deiconified
+    // we use the wasMaximized flag to restore the maximized state.
+    protected boolean wasMaximized;
     protected BufferedImage backgroundImage = null;
     protected float alphaValue = 0.85f;
     protected boolean useMaximizedBounds = true;
@@ -84,6 +89,7 @@ public class BaseTitlePane extends JComponent {
         rootPane = root;
         rootPaneUI = ui;
         state = -1;
+        wasMaximized = false;
         iconifyIcon = UIManager.getIcon("InternalFrame.iconifyIcon");
         maximizeIcon = UIManager.getIcon("InternalFrame.maximizeIcon");
         minimizeIcon = UIManager.getIcon("InternalFrame.minimizeIcon");
@@ -293,7 +299,12 @@ public class BaseTitlePane extends JComponent {
     protected void iconify() {
         Frame frame = getFrame();
         if (frame != null) {
-            DecorationHelper.setExtendedState(frame, state | Frame.ICONIFIED);
+            if (JTattooUtilities.isMac() && JTattooUtilities.getJavaVersion() >= 1.7) {
+                // Workarround to avoid a bug within OSX and Java 1.7
+                DecorationHelper.setExtendedState(frame, state & ~BaseRootPaneUI.MAXIMIZED_BOTH | Frame.ICONIFIED);
+            } else {
+                DecorationHelper.setExtendedState(frame, state | Frame.ICONIFIED);
+            }
         }
     }
 
@@ -833,12 +844,31 @@ public class BaseTitlePane extends JComponent {
             } else if (!JTattooUtilities.isMac() && "windowMoved".equals(name)) {
                 useMaximizedBounds = true;
             }
+
+            if (JTattooUtilities.isMac() && JTattooUtilities.getJavaVersion() >= 1.7) {
+                if ("windowRestored".equals(name)) {
+                    wasMaximized = false;
+                } else if ("windowMaximized".equals(name)) {
+                    wasMaximized = true;
+                }
+            }
         }
     }
 
 //-----------------------------------------------------------------------------------------------
     protected class WindowHandler extends WindowAdapter {
 
+        public void windowDeiconified(WindowEvent e) {
+            if (JTattooUtilities.isMac() && JTattooUtilities.getJavaVersion() >= 1.7 && wasMaximized) {
+                SwingUtilities.invokeLater(new Runnable() {
+
+                    public void run() {
+                        maximize();
+                    }
+                });
+            }
+        }
+        
         public void windowActivated(WindowEvent ev) {
             setActive(true);
         }
