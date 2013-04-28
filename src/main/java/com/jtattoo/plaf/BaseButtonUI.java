@@ -86,7 +86,9 @@ public class BaseButtonUI extends BasicButtonUI {
                     colors = AbstractLookAndFeel.getTheme().getRolloverColors();
                 } else if (AbstractLookAndFeel.getTheme().doShowFocusFrame() && b.hasFocus()) {
                     colors = AbstractLookAndFeel.getTheme().getFocusColors();
-                } else if (JTattooUtilities.isFrameActive(b) && (b.equals(b.getRootPane().getDefaultButton()))) {
+                } else if (JTattooUtilities.isFrameActive(b) 
+                        && (b.getRootPane() != null) 
+                        && (b.equals(b.getRootPane().getDefaultButton()))) {
                     colors = defaultColors;
                 }
             } else {
@@ -116,10 +118,10 @@ public class BaseButtonUI extends BasicButtonUI {
         }
     }
 
-    protected void paintText(Graphics g, AbstractButton b, Rectangle textRect) {
+    protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
         ButtonModel model = b.getModel();
         FontMetrics fm = g.getFontMetrics();
-        int mnemIndex = -1;
+        int mnemIndex;
         if (JTattooUtilities.getJavaVersion() >= 1.4) {
             mnemIndex = b.getDisplayedMnemonicIndex();
         } else {
@@ -143,12 +145,12 @@ public class BaseButtonUI extends BasicButtonUI {
             } else {
                 g.setColor(b.getForeground());
             }
-            JTattooUtilities.drawStringUnderlineCharAt(b, g, b.getText(), mnemIndex, textRect.x + offs, textRect.y + offs + fm.getAscent());
+            JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + offs, textRect.y + offs + fm.getAscent());
         } else {
             g.setColor(Color.white);
-            JTattooUtilities.drawStringUnderlineCharAt(b, g, b.getText(), mnemIndex, textRect.x + 1, textRect.y + 1 + fm.getAscent());
+            JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + 1, textRect.y + 1 + fm.getAscent());
             g.setColor(AbstractLookAndFeel.getDisabledForegroundColor());
-            JTattooUtilities.drawStringUnderlineCharAt(b, g, b.getText(), mnemIndex, textRect.x, textRect.y + fm.getAscent());
+            JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x, textRect.y + fm.getAscent());
         }
     }
 
@@ -216,7 +218,7 @@ public class BaseButtonUI extends BasicButtonUI {
                     g2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, savedRenderingHint);
                 }
             } else {
-                paintText(g, b, textRect);
+                paintText(g, b, textRect, text);
             }
         }
 
