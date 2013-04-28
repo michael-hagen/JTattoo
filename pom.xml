@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.jtattoo</groupId>
     <artifactId>JTattoo</artifactId>
-    <version>1.6.8</version>
+    <version>1.6.9</version>
     <packaging>jar</packaging>
     <name>JTattoo</name>
     <description>A LookAndFeel library for swing</description>
