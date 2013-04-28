@@ -77,7 +77,7 @@ public class MintBorders extends BaseBorders {
         }
 
         public Insets getBorderInsets(Component c) {
-            return new Insets(insets.top, insets.left, insets.bottom, insets.right);
+            return insets;
         }
 
         public Insets getBorderInsets(Component c, Insets borderInsets) {
@@ -89,7 +89,7 @@ public class MintBorders extends BaseBorders {
         }
 
         public boolean isBorderOpaque() {
-            return false;
+            return true;
         }
     } // class ButtonBorder
 
