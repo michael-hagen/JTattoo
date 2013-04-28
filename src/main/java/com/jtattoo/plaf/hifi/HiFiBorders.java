@@ -124,7 +124,7 @@ public class HiFiBorders extends BaseBorders {
         }
 
         public Insets getBorderInsets(Component c) {
-            return new Insets(insets.top, insets.left, insets.bottom, insets.right);
+            return insets;
         }
 
         public Insets getBorderInsets(Component c, Insets borderInsets) {
