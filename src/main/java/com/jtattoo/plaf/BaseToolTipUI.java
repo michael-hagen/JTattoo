@@ -150,7 +150,7 @@ public class BaseToolTipUI extends MetalToolTipUI {
 
             if (c instanceof JToolTip) {
                 JToolTip tip = (JToolTip) c;
-                if (tip.getComponent().isEnabled()) {
+                if (tip.getComponent() != null && tip.getComponent().isEnabled()) {
                     c.setForeground(AbstractLookAndFeel.getTheme().getTooltipForegroundColor());
                 } else {
                     c.setForeground(AbstractLookAndFeel.getTheme().getDisabledForegroundColor());
@@ -164,7 +164,6 @@ public class BaseToolTipUI extends MetalToolTipUI {
             // Draw background with borders
             if (ColorHelper.getGrayValue(backColor) < 128) {
                 g2D.setColor(ColorHelper.brighter(AbstractLookAndFeel.getTheme().getBackgroundColor(), 20));
-
             } else {
                 g2D.setColor(Color.white);
             }
