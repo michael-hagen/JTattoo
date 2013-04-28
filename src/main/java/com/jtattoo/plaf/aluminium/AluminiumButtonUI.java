@@ -58,7 +58,7 @@ public class AluminiumButtonUI extends BaseButtonUI {
         Object savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
         g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
-        Color[] colors = null;
+        Color[] colors;
         if (model.isEnabled()) {
             Color background = b.getBackground();
             if (background instanceof ColorUIResource) {
@@ -67,7 +67,7 @@ public class AluminiumButtonUI extends BaseButtonUI {
                 } else {
                     if (b.isRolloverEnabled() && model.isRollover()) {
                         colors = AbstractLookAndFeel.getTheme().getRolloverColors();
-                    } else if (b.equals(b.getRootPane().getDefaultButton())) {
+                    } else if (b.getRootPane() != null && b.equals(b.getRootPane().getDefaultButton())) {
                         colors = AbstractLookAndFeel.getTheme().getSelectedColors();
                     } else {
                         colors = AbstractLookAndFeel.getTheme().getButtonColors();
