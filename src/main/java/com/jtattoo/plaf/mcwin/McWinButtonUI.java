@@ -78,7 +78,7 @@ public class McWinButtonUI extends BaseButtonUI {
                 } else if (b.isRolloverEnabled() && model.isRollover()) {
                     colors = AbstractLookAndFeel.getTheme().getRolloverColors();
                 } else {
-                    if (b.equals(b.getRootPane().getDefaultButton())) {
+                    if (b.getRootPane() != null && b.equals(b.getRootPane().getDefaultButton())) {
                         if (JTattooUtilities.isFrameActive(b)) {
                             if (AbstractLookAndFeel.getTheme().doShowFocusFrame() && b.hasFocus()) {
                                 colors = AbstractLookAndFeel.getTheme().getFocusColors();
