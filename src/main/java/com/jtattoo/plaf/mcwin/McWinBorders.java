@@ -93,7 +93,7 @@ public class McWinBorders extends BaseBorders {
         }
 
         public boolean isBorderOpaque() {
-            return false;
+            return true;
         }
     } // class ButtonBorder
 
