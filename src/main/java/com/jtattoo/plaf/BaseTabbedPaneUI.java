@@ -335,11 +335,10 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
             tabPane.addFocusListener(focusListener);
         }
         // PENDING(api) : See comment for ContainerHandler
-        if ((containerListener = new ContainerHandler()) != null) {
-            tabPane.addContainerListener(containerListener);
-            if (tabPane.getTabCount() > 0) {
-                htmlViews = createHTMLViewList();
-            }
+        containerListener = new ContainerHandler();
+        tabPane.addContainerListener(containerListener);
+        if (tabPane.getTabCount() > 0) {
+            htmlViews = createHTMLViewList();
         }
     }
 
@@ -736,7 +735,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         Rectangle tabRect = rects[tabIndex];
         int selectedIndex = tabPane.getSelectedIndex();
         boolean isSelected = selectedIndex == tabIndex;
-        Graphics2D g2 = null;
+        Graphics2D g2D = null;
         Polygon cropShape = null;
         Shape savedClip = null;
         int cropx = 0;
@@ -744,7 +743,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
         if (scrollableTabLayoutEnabled()) {
             if (g instanceof Graphics2D) {
-                g2 = (Graphics2D) g;
+                g2D = (Graphics2D) g;
 
                 // Render visual for cropped tab edge...
                 Rectangle viewRect = tabScroller.viewport.getViewRect();
@@ -770,8 +769,8 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
                         }
                 }
                 if (cropShape != null) {
-                    savedClip = g2.getClip();
-                    g2.clip(cropShape);
+                    savedClip = g2D.getClip();
+                    g2D.clip(cropShape);
                 }
             }
         }
@@ -797,7 +796,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
         if (cropShape != null) {
             paintCroppedTabEdge(g, tabPlacement, tabIndex, cropx, cropy);
-            g2.setClip(savedClip);
+            if (g2D != null && savedClip != null) {
+                g2D.setClip(savedClip);
+            }
         }
     }
     /* This method will create and return a polygon shape for the given tab rectangle
@@ -827,10 +828,10 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
     private static final int CROP_SEGMENT = 12;
 
     private Polygon createCroppedTabClip(int tabPlacement, Rectangle tabRect, int cropline) {
-        int rlen = 0;
-        int start = 0;
-        int end = 0;
-        int ostart = 0;
+        int rlen;
+        int start;
+        int end;
+        int ostart;
 
         switch (tabPlacement) {
             case LEFT:
@@ -2244,7 +2245,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
     private static class ScrollTabsForwardAction extends AbstractAction {
 
         public void actionPerformed(ActionEvent e) {
-            JTabbedPane pane = null;
+            JTabbedPane pane;
             Object src = e.getSource();
             if (src instanceof JTabbedPane) {
                 pane = (JTabbedPane) src;
@@ -2264,7 +2265,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
     private static class ScrollTabsBackwardAction extends AbstractAction {
 
         public void actionPerformed(ActionEvent e) {
-            JTabbedPane pane = null;
+            JTabbedPane pane;
             Object src = e.getSource();
             if (src instanceof JTabbedPane) {
                 pane = (JTabbedPane) src;
@@ -2366,8 +2367,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
             for (int i = 0; i < tabPane.getTabCount(); i++) {
                 Component component = tabPane.getComponentAt(i);
                 if (component != null) {
-                    Dimension size = zeroSize;
-                    size = minimum ? component.getMinimumSize() : component.getPreferredSize();
+                    Dimension size = minimum ? component.getMinimumSize() : component.getPreferredSize();
                     if (size != null) {
                         cHeight = Math.max(size.height, cHeight);
                         cWidth = Math.max(size.width, cWidth);
@@ -2377,7 +2377,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
             // Add content border insets to minimum size
             width += cWidth;
             height += cHeight;
-            int tabExtent = 0;
+            int tabExtent;
 
             // Calculate how much space the tabs will need, based on the
             // minimum size required to display largest child + content border
@@ -3421,12 +3421,6 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
             }
         }
 
-//        public String toString() {
-//            return "leadingTabIndex = " + leadingTabIndex
-//                    + " - viewport.viewSize = " + viewport.getViewSize()
-//                    + " - viewport.viewRectangle = " + viewport.getViewRect()
-//                    + " - tabViewPosition = " + tabViewPosition;
-//        }
     }
 
     private class ScrollableTabViewport extends JViewport implements UIResource {
@@ -3511,8 +3505,6 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         public void paintTriangle(Graphics g, int x, int y, int size) {
             Color oldColor = g.getColor();
             int mid, i, j;
-
-            j = 0;
             size = Math.max(size, 2);
             mid = (size / 2) - 1;
 
