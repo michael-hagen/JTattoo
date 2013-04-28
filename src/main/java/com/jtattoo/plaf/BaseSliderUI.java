@@ -328,17 +328,17 @@ public class BaseSliderUI extends BasicSliderUI {
             super.mouseEntered(e);
             if (slider.isEnabled()) {
                 isRollover = thumbRect.contains(e.getPoint());
-                paintThumb(slider.getGraphics());
+                slider.repaint();
             }
         }
 
         public void mouseMoved(MouseEvent e) {
-            super.mouseEntered(e);
+            super.mouseMoved(e);
             if (slider.isEnabled()) {
                 boolean rollover = thumbRect.contains(e.getPoint());
                 if (rollover != isRollover) {
                     isRollover = rollover;
-                    paintThumb(slider.getGraphics());
+                    slider.repaint();
                 }
             }
         }
@@ -347,7 +347,7 @@ public class BaseSliderUI extends BasicSliderUI {
             super.mouseExited(e);
             if (slider.isEnabled()) {
                 isRollover = false;
-                paintThumb(slider.getGraphics());
+                slider.repaint();
             }
         }
     }
