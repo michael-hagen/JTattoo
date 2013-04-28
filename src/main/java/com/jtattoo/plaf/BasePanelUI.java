@@ -47,7 +47,7 @@ public class BasePanelUI extends BasicPanelUI {
         super.installDefaults(p);
         p.setFont(AbstractLookAndFeel.getTheme().getControlTextFont());
         
-        // We dont want medium weight popups for tool tips, so we force heavy weight popups.
+        // We don't want medium weight popups for tool tips, so we try to force heavy weight popups.
         try {
             Field field;
             if (JTattooUtilities.getJavaVersion() < 1.7) {
@@ -60,7 +60,6 @@ public class BasePanelUI extends BasicPanelUI {
             field.setAccessible(true);
             p.putClientProperty(field.get(null), Boolean.TRUE);
         } catch(Exception ex) {
-            ex.printStackTrace();
         }        
     }
 
