@@ -87,8 +87,9 @@ public class AluminiumBorders extends BaseBorders {
             borderInsets.bottom = insets.bottom;
             return borderInsets;
         }
+        
         public boolean isBorderOpaque() {
-            return false;
+            return true;
         }
     } // class ButtonBorder
 
