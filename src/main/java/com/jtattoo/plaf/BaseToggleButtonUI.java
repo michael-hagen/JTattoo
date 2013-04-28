@@ -71,7 +71,7 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
         int height = b.getHeight();
         
         ButtonModel model = b.getModel();
-        Color colors[] = null;
+        Color colors[];
         if (b.isEnabled()) {
             Color background = b.getBackground();
             if (background instanceof ColorUIResource) {
@@ -116,7 +116,7 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
     protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
         ButtonModel model = b.getModel();
         FontMetrics fm = g.getFontMetrics();
-        int mnemIndex = -1;
+        int mnemIndex;
         if (JTattooUtilities.getJavaVersion() >= 1.4) {
             mnemIndex = b.getDisplayedMnemonicIndex();
         } else {
