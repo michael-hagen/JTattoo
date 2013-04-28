@@ -94,7 +94,7 @@ public class FastBorders extends BaseBorders {
                 }
                 if (c instanceof JButton) {
                     JButton b = (JButton) c;
-                    if (b.equals(b.getRootPane().getDefaultButton())) {
+                    if (b.getRootPane() != null && b.equals(b.getRootPane().getDefaultButton())) {
                         g.setColor(defaultFrameColor);
                         g.drawRect(x, y, w - 1, h - 1);
                     }
@@ -106,7 +106,7 @@ public class FastBorders extends BaseBorders {
         }
 
         public Insets getBorderInsets(Component c) {
-            return new Insets(insets.top, insets.left, insets.bottom, insets.right);
+            return insets;
         }
 
         public Insets getBorderInsets(Component c, Insets borderInsets) {
