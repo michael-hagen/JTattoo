@@ -59,7 +59,9 @@ public class BernsteinButtonUI extends BaseButtonUI {
                     colors = AbstractLookAndFeel.getTheme().getRolloverColors();
                 } else if (AbstractLookAndFeel.getTheme().doShowFocusFrame() && b.hasFocus()) {
                     colors = AbstractLookAndFeel.getTheme().getFocusColors();
-                } else if (JTattooUtilities.isFrameActive(b) && (b.equals(b.getRootPane().getDefaultButton()))) {
+                } else if (JTattooUtilities.isFrameActive(b) 
+                        && (b.getRootPane() != null) 
+                        && (b.equals(b.getRootPane().getDefaultButton()))) {
                     colors = AbstractLookAndFeel.getTheme().getSelectedColors();
                 }
             } else {
