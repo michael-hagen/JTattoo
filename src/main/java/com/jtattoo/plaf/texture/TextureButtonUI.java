@@ -73,12 +73,12 @@ public class TextureButtonUI extends BaseButtonUI {
         g2D.setComposite(savedComposite);
     }
 
-    protected void paintText(Graphics g, AbstractButton b, Rectangle textRect) {
+    protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
         Graphics2D g2D = (Graphics2D) g;
         Composite savedComposite = g2D.getComposite();
         ButtonModel model = b.getModel();
         FontMetrics fm = g.getFontMetrics();
-        int mnemIndex = -1;
+        int mnemIndex;
         if (JTattooUtilities.getJavaVersion() >= 1.4) {
             mnemIndex = b.getDisplayedMnemonicIndex();
         } else {
@@ -102,11 +102,11 @@ public class TextureButtonUI extends BaseButtonUI {
                 AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
                 g2D.setComposite(alpha);
                 g.setColor(Color.black);
-                JTattooUtilities.drawStringUnderlineCharAt(b, g, b.getText(), mnemIndex, textRect.x + offs, textRect.y + offs + fm.getAscent() + 1);
+                JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + offs, textRect.y + offs + fm.getAscent() + 1);
                 g2D.setComposite(savedComposite);
             }
             g.setColor(fc);
-            JTattooUtilities.drawStringUnderlineCharAt(b, g, b.getText(), mnemIndex, textRect.x + offs, textRect.y + offs + fm.getAscent());
+            JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + offs, textRect.y + offs + fm.getAscent());
         } else {
             AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f);
             g2D.setComposite(alpha);
@@ -118,10 +118,10 @@ public class TextureButtonUI extends BaseButtonUI {
                 fc = AbstractLookAndFeel.getDisabledForegroundColor();
                 g.setColor(Color.white);
             }
-            JTattooUtilities.drawStringUnderlineCharAt(b, g, b.getText(), mnemIndex, textRect.x, textRect.y + 1 + fm.getAscent());
+            JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x, textRect.y + 1 + fm.getAscent());
             g2D.setComposite(savedComposite);
             g.setColor(fc);
-            JTattooUtilities.drawStringUnderlineCharAt(b, g, b.getText(), mnemIndex, textRect.x, textRect.y + fm.getAscent());
+            JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x, textRect.y + fm.getAscent());
         }
     }
 
