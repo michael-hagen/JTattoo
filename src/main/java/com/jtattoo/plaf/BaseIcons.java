@@ -33,26 +33,27 @@ import javax.swing.plaf.UIResource;
  */
 public class BaseIcons {
     
-    public static final Icon PEARL_RED_24x24 = new LazyImageIcon("icons/pearl_red_24x24.png");
-    public static final Icon PEARL_YELLOW_24x24 = new LazyImageIcon("icons/pearl_yellow_24x24.png");
-    public static final Icon PEARL_GREEN_24x24 = new LazyImageIcon("icons/pearl_green_24x24.png");
-    public static final Icon PEARL_GREY_24x24 = new LazyImageIcon("icons/pearl_grey_24x24.png");
-    public static final Icon PEARL_RED_28x28 = new LazyImageIcon("icons/pearl_red_28x28.png");
-    public static final Icon PEARL_YELLOW_28x28 = new LazyImageIcon("icons/pearl_yellow_28x28.png");
-    public static final Icon PEARL_GREEN_28x28 = new LazyImageIcon("icons/pearl_green_28x28.png");
-    public static final Icon PEARL_GREY_28x28 = new LazyImageIcon("icons/pearl_grey_28x28.png");
-    public static final Icon PEARL_RED_32x32 = new LazyImageIcon("icons/pearl_red_32x32.png");
-    public static final Icon PEARL_YELLOW_32x32 = new LazyImageIcon("icons/pearl_yellow_32x32.png");
-    public static final Icon PEARL_GREEN_32x32 = new LazyImageIcon("icons/pearl_green_32x32.png");
-    public static final Icon PEARL_GREY_32x32 = new LazyImageIcon("icons/pearl_grey_32x32.png");
-    public static final Icon ICONIZER_10x10 = new LazyImageIcon("icons/iconizer_10x10.png");
-    public static final Icon ICONIZER_12x12 = new LazyImageIcon("icons/iconizer_12x12.png");
-    public static final Icon MINIMIZER_10x10 = new LazyImageIcon("icons/minimizer_10x10.png");
-    public static final Icon MINIMIZER_12x12 = new LazyImageIcon("icons/minimizer_12x12.png");
-    public static final Icon MAXIMIZER_10x10 = new LazyImageIcon("icons/maximizer_10x10.png");
-    public static final Icon MAXIMIZER_12x12 = new LazyImageIcon("icons/maximizer_12x12.png");
-    public static final Icon CLOSER_10x10 = new LazyImageIcon("icons/closer_10x10.png");
-    public static final Icon CLOSER_12x12 = new LazyImageIcon("icons/closer_12x12.png");
+    public static final LazyImageIcon PEARL_RED_24x24 = new LazyImageIcon("icons/pearl_red_24x24.png");
+    public static final LazyImageIcon PEARL_YELLOW_24x24 = new LazyImageIcon("icons/pearl_yellow_24x24.png");
+    public static final LazyImageIcon PEARL_GREEN_24x24 = new LazyImageIcon("icons/pearl_green_24x24.png");
+    public static final LazyImageIcon PEARL_GREY_24x24 = new LazyImageIcon("icons/pearl_grey_24x24.png");
+    public static final LazyImageIcon PEARL_RED_28x28 = new LazyImageIcon("icons/pearl_red_28x28.png");
+    public static final LazyImageIcon PEARL_YELLOW_28x28 = new LazyImageIcon("icons/pearl_yellow_28x28.png");
+    public static final LazyImageIcon PEARL_GREEN_28x28 = new LazyImageIcon("icons/pearl_green_28x28.png");
+    public static final LazyImageIcon PEARL_GREY_28x28 = new LazyImageIcon("icons/pearl_grey_28x28.png");
+    public static final LazyImageIcon PEARL_RED_32x32 = new LazyImageIcon("icons/pearl_red_32x32.png");
+    public static final LazyImageIcon PEARL_YELLOW_32x32 = new LazyImageIcon("icons/pearl_yellow_32x32.png");
+    public static final LazyImageIcon PEARL_GREEN_32x32 = new LazyImageIcon("icons/pearl_green_32x32.png");
+    public static final LazyImageIcon PEARL_GREY_32x32 = new LazyImageIcon("icons/pearl_grey_32x32.png");
+    public static final LazyImageIcon ICONIZER_10x10 = new LazyImageIcon("icons/iconizer_10x10.png");
+    public static final LazyImageIcon ICONIZER_12x12 = new LazyImageIcon("icons/iconizer_12x12.png");
+    public static final LazyImageIcon MINIMIZER_10x10 = new LazyImageIcon("icons/minimizer_10x10.png");
+    public static final LazyImageIcon MINIMIZER_12x12 = new LazyImageIcon("icons/minimizer_12x12.png");
+    public static final LazyImageIcon MAXIMIZER_10x10 = new LazyImageIcon("icons/maximizer_10x10.png");
+    public static final LazyImageIcon MAXIMIZER_12x12 = new LazyImageIcon("icons/maximizer_12x12.png");
+    public static final LazyImageIcon CLOSER_10x10 = new LazyImageIcon("icons/closer_10x10.png");
+    public static final LazyImageIcon CLOSER_12x12 = new LazyImageIcon("icons/closer_12x12.png");
+    public static final LazyImageIcon EMPTY_8x8 = new LazyImageIcon("icons/empty_8x8.png");
 
     protected static Icon comboBoxIcon = null;
     protected static Icon checkBoxIcon = null;
@@ -508,7 +509,6 @@ public class BaseIcons {
 //-----------------------------------------------------------------------------------------------------------
     private static class CheckBoxIcon implements Icon {
 
-        private static final Color MENU_ITEM_BACKGROUND = new Color(248, 248, 248);
         private static Icon checkIcon = new LazyImageIcon("icons/CheckSymbol.gif");
         private static Icon checkIconDisabled = new LazyImageIcon("icons/CheckSymbolDisabled.gif");
         private static Icon checkPressedIcon = new LazyImageIcon("icons/CheckPressedSymbol.gif");
@@ -523,7 +523,7 @@ public class BaseIcons {
             AbstractButton b = (AbstractButton) c;
             ButtonModel model = b.getModel();
             if (c instanceof JCheckBoxMenuItem) {
-                g.setColor(MENU_ITEM_BACKGROUND);
+                g.setColor(Color.WHITE);
                 g.fillRect(x, y, WIDTH, HEIGHT);
                 if (b.isEnabled()) {
                     g.setColor(AbstractLookAndFeel.getFrameColor());
@@ -589,7 +589,6 @@ public class BaseIcons {
 //-----------------------------------------------------------------------------------------------------------
     private static class RadioButtonIcon implements Icon {
 
-        private static final Color MENU_ITEM_BACKGROUND = new Color(248, 248, 248);
         private static final int WIDTH = 14;
         private static final int HEIGHT = 14;
 
@@ -605,7 +604,7 @@ public class BaseIcons {
             clipArea.intersect(new Area(savedClip));
             g2D.setClip(clipArea);
             if (c instanceof JRadioButtonMenuItem) {
-                g.setColor(MENU_ITEM_BACKGROUND);
+                g.setColor(Color.WHITE);
                 g.fillRect(x, y, WIDTH, HEIGHT);
             } else {
                 if (b.isEnabled()) {
