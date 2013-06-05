@@ -133,7 +133,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
     private JRootPane root;
 
     private Cursor savedCursor = null;
-
+    
     /**
      * <code>Cursor</code> used to track the cursor set by the user.
      * This is initially <code>Cursor.DEFAULT_CURSOR</code>.
@@ -761,54 +761,73 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
             }
         }
 
+        private int getMinScreenY() {
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            GraphicsDevice devices[] = ge.getScreenDevices();
+            GraphicsDevice gd = devices[0];
+            GraphicsConfiguration gc = gd.getDefaultConfiguration();
+            int minScreenY = gc.getBounds().y + Toolkit.getDefaultToolkit().getScreenInsets(gc).top;
+            if (devices.length > 1) {
+                for (int i = 1; i < devices.length; i++) {
+                    gd = devices[i];
+                    gc = gd.getDefaultConfiguration();
+                    minScreenY = Math.min(minScreenY, gc.getBounds().y + Toolkit.getDefaultToolkit().getScreenInsets(gc).top);
+                }
+            }
+            return minScreenY;
+        }
+    
         public void mouseDragged(MouseEvent ev) {
             if (ev.getSource() instanceof Window) {
                 Window w = (Window) ev.getSource();
-                Point pt = ev.getPoint();
-
+                int minScreenY = getMinScreenY();
                 if (isMovingWindow) {
-                    Point windowPt = w.getLocationOnScreen();
-
-                    windowPt.x += pt.x - dragOffsetX;
-                    windowPt.y += pt.y - dragOffsetY;
-                    w.setLocation(windowPt);
+                    Point location = ev.getLocationOnScreen();
+                    location.x = location.x - dragOffsetX;
+                    location.y = Math.max(minScreenY, location.y - dragOffsetY);
+                    w.setLocation(location);        
                 } else if (dragCursor != 0) {
-                    Rectangle r = w.getBounds();
-                    Rectangle startBounds = new Rectangle(r);
+                    Point pt = ev.getPoint();
+                    Rectangle bounds = w.getBounds();
+                    Rectangle startBounds = new Rectangle(bounds);
                     Dimension min = MINIMUM_SIZE;
                     switch (dragCursor) {
                         case Cursor.E_RESIZE_CURSOR:
-                            adjust(r, min, 0, 0, pt.x + (dragWidth - dragOffsetX) - r.width, 0);
+                            adjust(bounds, min, 0, 0, pt.x + (dragWidth - dragOffsetX) - bounds.width, 0);
                             break;
                         case Cursor.S_RESIZE_CURSOR:
-                            adjust(r, min, 0, 0, 0, pt.y + (dragHeight - dragOffsetY) - r.height);
+                            adjust(bounds, min, 0, 0, 0, pt.y + (dragHeight - dragOffsetY) - bounds.height);
                             break;
                         case Cursor.N_RESIZE_CURSOR:
-                            adjust(r, min, 0, pt.y - dragOffsetY, 0, -(pt.y - dragOffsetY));
+                            adjust(bounds, min, 0, pt.y - dragOffsetY, 0, -(pt.y - dragOffsetY));
                             break;
                         case Cursor.W_RESIZE_CURSOR:
-                            adjust(r, min, pt.x - dragOffsetX, 0, -(pt.x - dragOffsetX), 0);
+                            adjust(bounds, min, pt.x - dragOffsetX, 0, -(pt.x - dragOffsetX), 0);
                             break;
                         case Cursor.NE_RESIZE_CURSOR:
-                            adjust(r, min, 0, pt.y - dragOffsetY, pt.x + (dragWidth - dragOffsetX) - r.width, -(pt.y - dragOffsetY));
+                            adjust(bounds, min, 0, pt.y - dragOffsetY, pt.x + (dragWidth - dragOffsetX) - bounds.width, -(pt.y - dragOffsetY));
                             break;
                         case Cursor.SE_RESIZE_CURSOR:
-                            adjust(r, min, 0, 0, pt.x + (dragWidth - dragOffsetX) - r.width, pt.y + (dragHeight - dragOffsetY) - r.height);
+                            adjust(bounds, min, 0, 0, pt.x + (dragWidth - dragOffsetX) - bounds.width, pt.y + (dragHeight - dragOffsetY) - bounds.height);
                             break;
                         case Cursor.NW_RESIZE_CURSOR:
-                            adjust(r, min, pt.x - dragOffsetX, pt.y - dragOffsetY, -(pt.x - dragOffsetX), -(pt.y - dragOffsetY));
+                            adjust(bounds, min, pt.x - dragOffsetX, pt.y - dragOffsetY, -(pt.x - dragOffsetX), -(pt.y - dragOffsetY));
                             break;
                         case Cursor.SW_RESIZE_CURSOR:
-                            adjust(r, min, pt.x - dragOffsetX, 0, -(pt.x - dragOffsetX), pt.y + (dragHeight - dragOffsetY) - r.height);
+                            adjust(bounds, min, pt.x - dragOffsetX, 0, -(pt.x - dragOffsetX), pt.y + (dragHeight - dragOffsetY) - bounds.height);
                             break;
                         default:
                             break;
                     }
-                    if (!r.equals(startBounds)) {
-                        w.setLocation(r.x, r.y);
-                        w.setSize(r.width, r.height);
+                    if (!bounds.equals(startBounds)) {
+                        if (bounds.y < minScreenY) {
+                            int delta = minScreenY - bounds.y;
+                            bounds.y = minScreenY;
+                            bounds.height -= delta;
+                        }
+                        w.setBounds(bounds);
                         w.validate();
-                        getRootPane().repaint();
+                        //getRootPane().repaint();
                     }
                 }
             }
