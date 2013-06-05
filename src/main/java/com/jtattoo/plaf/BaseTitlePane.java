@@ -495,7 +495,9 @@ public class BaseTitlePane extends JComponent {
             if (image != null) {
                 Graphics2D g2D = (Graphics2D)g;
                 Object savedHint = g2D.getRenderingHint(RenderingHints.KEY_INTERPOLATION);
-                g2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+                if (JTattooUtilities.getJavaVersion() >= 1.6) {
+                    g2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+                }
                 int h = getHeight();
                 int ih = image.getHeight(null);
                 int iw = image.getWidth(null);

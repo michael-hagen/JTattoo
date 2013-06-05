@@ -523,7 +523,7 @@ public class BaseIcons {
             AbstractButton b = (AbstractButton) c;
             ButtonModel model = b.getModel();
             if (c instanceof JCheckBoxMenuItem) {
-                g.setColor(Color.WHITE);
+                g.setColor(Color.white);
                 g.fillRect(x, y, WIDTH, HEIGHT);
                 if (b.isEnabled()) {
                     g.setColor(AbstractLookAndFeel.getFrameColor());
@@ -604,7 +604,7 @@ public class BaseIcons {
             clipArea.intersect(new Area(savedClip));
             g2D.setClip(clipArea);
             if (c instanceof JRadioButtonMenuItem) {
-                g.setColor(Color.WHITE);
+                g.setColor(Color.white);
                 g.fillRect(x, y, WIDTH, HEIGHT);
             } else {
                 if (b.isEnabled()) {
