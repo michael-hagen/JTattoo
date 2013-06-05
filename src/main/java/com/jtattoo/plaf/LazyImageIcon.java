@@ -34,7 +34,7 @@ import javax.swing.ImageIcon;
 public class LazyImageIcon implements Icon {
 
     private String name = null;
-    private Icon icon = null;
+    private ImageIcon icon = null;
 
     public LazyImageIcon(String name) {
         this.name = name;
@@ -51,28 +51,32 @@ public class LazyImageIcon implements Icon {
         return icon;
     }
 
+    public Image getImage() {
+        if (getIcon() != null) {
+            return icon.getImage();
+        }
+        return null;
+    }
+    
     public int getIconHeight() {
-        Icon ico = getIcon();
-        if (ico != null) {
-            return ico.getIconHeight();
+        if (getIcon() != null) {
+            return icon.getIconHeight();
         } else {
             return 16;
         }
     }
 
     public int getIconWidth() {
-        Icon ico = getIcon();
-        if (ico != null) {
-            return ico.getIconWidth();
+        if (getIcon() != null) {
+            return icon.getIconWidth();
         } else {
             return 16;
         }
     }
 
     public void paintIcon(Component c, Graphics g, int x, int y) {
-        Icon ico = getIcon();
-        if (ico != null) {
-            ico.paintIcon(c, g, x, y);
+        if (getIcon() != null) {
+            icon.paintIcon(c, g, x, y);
         } else {
             g.setColor(Color.red);
             g.fillRect(x, y, 16, 16);
