@@ -61,26 +61,28 @@ public class AluminiumUtils {
                 }
                 y += IMAGE_HEIGHT;
             }
-            // higlight
-            if (backgroundImage == null 
-                    || backgroundImage.getWidth(null) != d.width 
-                    || backgroundImage.getHeight(null) != d.height) {
-                backgroundImage = c.createImage(d.width, d.height);
-                Graphics2D ig2D = (Graphics2D)backgroundImage.getGraphics();
-                Point pt1 = new Point(0, 0);
-                Point pt2 = new Point(d.width, 0);
-                float fractions[] = {0.0f, 0.5f, 1.0f };
-                Color c1 = new Color(220, 220, 220);
-                Color colors[] = {c1, Color.white, c1};
-                ig2D.setPaint(new LinearGradientPaint(pt1, pt2, fractions, colors));
-                ig2D.fillRect(0, 0, d.width, d.height);
-                ig2D.dispose();
-            }
+            if (JTattooUtilities.getJavaVersion() >= 1.6) {
+                // higlight
+                if (backgroundImage == null 
+                        || backgroundImage.getWidth(null) != d.width 
+                        || backgroundImage.getHeight(null) != d.height) {
+                    backgroundImage = c.createImage(d.width, d.height);
+                    Graphics2D ig2D = (Graphics2D)backgroundImage.getGraphics();
+                    Point pt1 = new Point(0, 0);
+                    Point pt2 = new Point(d.width, 0);
+                    float fractions[] = {0.0f, 0.5f, 1.0f };
+                    Color c1 = new Color(220, 220, 220);
+                    Color colors[] = {c1, Color.white, c1};
+                    ig2D.setPaint(new LinearGradientPaint(pt1, pt2, fractions, colors));
+                    ig2D.fillRect(0, 0, d.width, d.height);
+                    ig2D.dispose();
+                }
 
-            Composite savedComposite = g2D.getComposite();
-            g2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));
-            g2D.drawImage(backgroundImage, -p.x, 0, null);
-            g2D.setComposite(savedComposite);
+                Composite savedComposite = g2D.getComposite();
+                g2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));
+                g2D.drawImage(backgroundImage, -p.x, 0, null);
+                g2D.setComposite(savedComposite);
+            }
         } else {
             g.setColor(c.getBackground());
             g.fillRect(0, 0, w, h);
