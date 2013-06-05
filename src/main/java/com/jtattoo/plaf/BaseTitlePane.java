@@ -493,16 +493,22 @@ public class BaseTitlePane extends JComponent {
         if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn() || (getWindow() instanceof JDialog)) {
             Image image = getFrameIconImage();
             if (image != null) {
+                Graphics2D g2D = (Graphics2D)g;
+                Object savedHint = g2D.getRenderingHint(RenderingHints.KEY_INTERPOLATION);
+                g2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
                 int h = getHeight();
                 int ih = image.getHeight(null);
                 int iw = image.getWidth(null);
                 if (ih <= h) {
-                    g.drawImage(image, x, (h - ih) / 2, iw, ih, null);
+                    g2D.drawImage(image, x, (h - ih) / 2, iw, ih, null);
                 } else {
                     double fac = (double)iw / (double)ih;
                     ih = h;
                     iw = (int)(fac * (double)ih);
-                    g.drawImage(image, x, 0, iw, ih, null);
+                    g2D.drawImage(image, x, 0, iw, ih, null);
+                }
+                if (savedHint != null) {
+                    g2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, savedHint);
                 }
                 return iw + 4;
             }
@@ -606,6 +612,9 @@ public class BaseTitlePane extends JComponent {
         public void paint(Graphics g) {
             Image image = getFrameIconImage();
             if (image != null) {
+                Graphics2D g2D = (Graphics2D)g;
+                Object savedHint = g2D.getRenderingHint(RenderingHints.KEY_INTERPOLATION);
+                g2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
                 int x = 0;
                 int y = 0;
                 int iw = image.getWidth(null);
@@ -617,8 +626,10 @@ public class BaseTitlePane extends JComponent {
                 } else {
                     y = (getHeight() - ih) / 2;
                 }
-                g.drawImage(image, x, y, iw, ih, null);
-
+                g2D.drawImage(image, x, y, iw, ih, null);
+                if (savedHint != null) {
+                    g2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, savedHint);
+                }
             } else {
                 Icon icon = UIManager.getIcon("InternalFrame.icon");
                 if (icon != null) {
