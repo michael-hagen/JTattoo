@@ -1,26 +1,25 @@
 /*
-* Copyright (c) 2002 and later by MH Software-Entwicklung. All Rights Reserved.
-*  
-* JTattoo is multiple licensed. If your are an open source developer you can use
-* it under the terms and conditions of the GNU General Public License version 2.0
-* or later as published by the Free Software Foundation.
-*  
-* see: gpl-2.0.txt
-* 
-* If you pay for a license you will become a registered user who could use the
-* software under the terms and conditions of the GNU Lesser General Public License
-* version 2.0 or later with classpath exception as published by the Free Software
-* Foundation.
-* 
-* see: lgpl-2.0.txt
-* see: classpath-exception.txt
-* 
-* Registered users could also use JTattoo under the terms and conditions of the 
-* Apache License, Version 2.0 as published by the Apache Software Foundation.
-*  
-* see: APACHE-LICENSE-2.0.txt
-*/
-
+ * Copyright (c) 2002 and later by MH Software-Entwicklung. All Rights Reserved.
+ *  
+ * JTattoo is multiple licensed. If your are an open source developer you can use
+ * it under the terms and conditions of the GNU General Public License version 2.0
+ * or later as published by the Free Software Foundation.
+ *  
+ * see: gpl-2.0.txt
+ * 
+ * If you pay for a license you will become a registered user who could use the
+ * software under the terms and conditions of the GNU Lesser General Public License
+ * version 2.0 or later with classpath exception as published by the Free Software
+ * Foundation.
+ * 
+ * see: lgpl-2.0.txt
+ * see: classpath-exception.txt
+ * 
+ * Registered users could also use JTattoo under the terms and conditions of the 
+ * Apache License, Version 2.0 as published by the Apache Software Foundation.
+ *  
+ * see: APACHE-LICENSE-2.0.txt
+ */
 package com.jtattoo.plaf;
 
 import java.awt.*;
@@ -28,6 +27,7 @@ import java.awt.event.*;
 import java.util.Enumeration;
 import java.util.List;
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicTableHeaderUI;
 import javax.swing.table.*;
@@ -70,7 +70,6 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
     public void installListeners() {
         super.installListeners();
         myMouseAdapter = new MouseAdapter() {
-
             public void mouseReleased(MouseEvent e) {
                 if ((header == null) || (header.getTable() == null)) {
                     return;
@@ -126,7 +125,6 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
             }
         };
         myMouseMotionAdapter = new MouseMotionAdapter() {
-
             public void mouseMoved(MouseEvent e) {
                 if ((header == null) || (header.getTable() == null)) {
                     return;
@@ -198,16 +196,16 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
             return 0;
         }
         int height = 0;
-	boolean accomodatedDefault = false;
+        boolean accomodatedDefault = false;
         TableColumnModel columnModel = header.getColumnModel();
         for (int column = 0; column < columnModel.getColumnCount(); column++) {
-	    TableColumn aColumn = columnModel.getColumn(column);
+            TableColumn aColumn = columnModel.getColumn(column);
             boolean isDefault = (aColumn.getHeaderRenderer() == null);
 
             if (!isDefault || !accomodatedDefault) {
-		Component comp = getHeaderRenderer(column);
-		int rendererHeight = comp.getPreferredSize().height;
-		height = Math.max(height, rendererHeight);
+                Component comp = getHeaderRenderer(column);
+                int rendererHeight = comp.getPreferredSize().height;
+                height = Math.max(height, rendererHeight);
 
                 // Configuring the header renderer to calculate its preferred size
                 // is expensive. Optimise this by assuming the default renderer
@@ -223,16 +221,15 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
                         }
                     }
                 }
-	    }
+            }
         }
         return height + 2;
     }
 
     /**
-     * Return the preferred size of the header. The preferred height is the
-     * maximum of the preferred heights of all of the components provided
-     * by the header renderers. The preferred width is the sum of the
-     * preferred widths of each column (plus inter-cell spacing).
+     * Return the preferred size of the header. The preferred height is the maximum of the preferred heights of all of
+     * the components provided by the header renderers. The preferred width is the sum of the preferred widths of each
+     * column (plus inter-cell spacing).
      */
     public Dimension getPreferredSize(JComponent c) {
         if ((header == null) || (header.getTable() == null)) {
@@ -266,7 +263,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
         if ((header == null) || (header.getTable() == null) || header.getColumnModel().getColumnCount() <= 0) {
             return;
         }
-
+        
         boolean ltr = header.getComponentOrientation().isLeftToRight();
         Rectangle clip = g.getClipBounds();
         Point left = clip.getLocation();
@@ -335,12 +332,17 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
         int y = cellRect.y;
         int w = cellRect.width;
         int h = cellRect.height;
-        if ((col == rolloverCol) && (component != null) && component.isEnabled()) {
-            JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getRolloverColors(), x, y, w, h);
-        } else if (drawAllwaysActive() || JTattooUtilities.isFrameActive(header)) {
-            JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getColHeaderColors(), x, y, w, h);
+        if (header.getBackground() instanceof ColorUIResource) {
+            if ((col == rolloverCol) && (component != null) && component.isEnabled()) {
+                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getRolloverColors(), x, y, w, h);
+            } else if (drawAllwaysActive() || JTattooUtilities.isFrameActive(header)) {
+                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getColHeaderColors(), x, y, w, h);
+            } else {
+                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getInActiveColors(), x, y, w, h);
+            }
         } else {
-            JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getInActiveColors(), x, y, w, h);
+            g.setColor(header.getBackground());
+            g.fillRect(x, y, w, h);
         }
     }
 
@@ -398,6 +400,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
                 setText("");
             }
             setOpaque(false);
+            setFont(UIManager.getFont("TableHeader.font"));
             setForeground(UIManager.getColor("TableHeader.foreground"));
             setHorizontalAlignment(JLabel.CENTER);
             setHorizontalTextPosition(SwingConstants.LEADING);
@@ -425,18 +428,30 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
             if ((header != null) && (header.getTable() != null) && header.getDraggedColumn() != null) {
                 draggedColumn = header.getColumnModel().getColumnIndex(header.getDraggedColumn().getIdentifier());
             }
+            int w = getWidth();
+            int h = getHeight();
             if ((table != null) && table.isEnabled() && (col == rolloverCol || col == draggedColumn)) {
-                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getRolloverColors(), 0, 0, getWidth(), getHeight());
+                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getRolloverColors(), 0, 0, w, h);
                 if (drawRolloverBar()) {
                     g.setColor(AbstractLookAndFeel.getFocusColor());
-                    g.drawLine(0, 0, getWidth() - 1, 0);
-                    g.drawLine(0, 1, getWidth() - 1, 1);
-                    g.drawLine(0, 2, getWidth() - 1, 2);
+                    g.drawLine(0, 0, w - 1, 0);
+                    g.drawLine(0, 1, w - 1, 1);
+                    g.drawLine(0, 2, w - 1, 2);
                 }
             } else if (drawAllwaysActive() || JTattooUtilities.isFrameActive(header)) {
-                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getColHeaderColors(), 0, 0, getWidth(), getHeight());
+                if (header.getBackground() instanceof ColorUIResource) {
+                    JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getColHeaderColors(), 0, 0, w, h);
+                } else {
+                    g.setColor(header.getBackground());
+                    g.fillRect(0, 0, w, h);
+                }
             } else {
-                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getInActiveColors(), 0, 0, getWidth(), getHeight());
+                if (header.getBackground() instanceof ColorUIResource) {
+                    JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getInActiveColors(), 0, 0, w, h);
+                } else {
+                    g.setColor(header.getBackground());
+                    g.fillRect(0, 0, w, h);
+                }
             }
         }
 
