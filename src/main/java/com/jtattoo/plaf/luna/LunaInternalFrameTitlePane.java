@@ -47,10 +47,6 @@ public class LunaInternalFrameTitlePane extends BaseInternalFrameTitlePane {
         return 5;
     }
 
-    protected boolean centerButtons() {
-        return false;
-    }
-
     public void paintText(Graphics g, int x, int y, String title) {
         if (isMacStyleWindowDecoration()) {
             x += paintIcon(g, x, y) + 5;

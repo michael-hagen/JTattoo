@@ -37,6 +37,10 @@ public class HiFiTitlePane extends BaseTitlePane {
         super(root, ui);
     }
 
+    protected boolean centerButtons() {
+        return false;
+    }
+    
     public void paintText(Graphics g, int x, int y, String title) {
         x += paintIcon(g, x, y);
         g.setColor(Color.black);

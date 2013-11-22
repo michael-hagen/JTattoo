@@ -26,6 +26,7 @@ package com.jtattoo.plaf;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicMenuItemUI;
 
 /**
@@ -61,8 +62,13 @@ public class BaseMenuItemUI extends BasicMenuItemUI {
     }
 
     protected void paintBackground(Graphics g, JComponent c, int x, int y, int w, int h) {
-        JMenuItem b = (JMenuItem) c;
-        ButtonModel model = b.getModel();
+        JMenuItem mi = (JMenuItem) c;
+        Color backColor = mi.getBackground();
+        if (backColor instanceof UIResource) {
+            backColor = AbstractLookAndFeel.getMenuBackgroundColor();
+        }
+        
+        ButtonModel model = mi.getModel();
         if (model.isArmed() || (c instanceof JMenu && model.isSelected())) {
             g.setColor(AbstractLookAndFeel.getMenuSelectionBackgroundColor());
             g.fillRect(x, y, w, h);
@@ -71,21 +77,22 @@ public class BaseMenuItemUI extends BasicMenuItemUI {
             Composite savedComposite = g2D.getComposite();
             AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, AbstractLookAndFeel.getTheme().getMenuAlpha());
             g2D.setComposite(alpha);
-            g.setColor(AbstractLookAndFeel.getMenuBackgroundColor());
-            g.fillRect(x, y, w, h);
+            g2D.setColor(backColor);
+            g2D.fillRect(x, y, w, h);
             g2D.setComposite(savedComposite);
         } else {
-            g.setColor(AbstractLookAndFeel.getMenuBackgroundColor());
+            g.setColor(backColor);
             g.fillRect(x, y, w, h);
-        }
-        if (menuItem.isSelected() && menuItem.isArmed()) {
-            g.setColor(AbstractLookAndFeel.getMenuSelectionForegroundColor());
-        } else {
-            g.setColor(AbstractLookAndFeel.getMenuForegroundColor());
         }
     }
 
     protected void paintText(Graphics g, JMenuItem menuItem, Rectangle textRect, String text) {
+        Color foreColor = menuItem.getForeground();
+        if (menuItem.isSelected() && menuItem.isArmed()) {
+            foreColor = AbstractLookAndFeel.getMenuSelectionForegroundColor();
+        } else if (foreColor instanceof UIResource) {
+            foreColor = AbstractLookAndFeel.getMenuForegroundColor();
+        }
         Graphics2D g2D = (Graphics2D) g;
         Object savedRenderingHint = null;
         if (AbstractLookAndFeel.getTheme().isTextAntiAliasingOn()) {
@@ -93,9 +100,9 @@ public class BaseMenuItemUI extends BasicMenuItemUI {
             g2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, AbstractLookAndFeel.getTheme().getTextAntiAliasingHint());
         }
         if (menuItem.isSelected() && menuItem.isArmed()) {
-            g.setColor(AbstractLookAndFeel.getMenuSelectionForegroundColor());
+            g2D.setColor(foreColor);
         } else {
-            g.setColor(AbstractLookAndFeel.getMenuForegroundColor());
+            g2D.setColor(foreColor);
         }
         super.paintText(g, menuItem, textRect, text);
         if (AbstractLookAndFeel.getTheme().isTextAntiAliasingOn()) {

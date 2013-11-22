@@ -77,7 +77,7 @@ public class AcrylDefaultTheme extends AbstractTheme {
         controlDarkShadowColor = darkGray;
 
         windowTitleForegroundColor = white;
-        windowTitleBackgroundColor = gray; // controlColorLight;
+        windowTitleBackgroundColor = controlColorLight;
         windowTitleColorLight = controlColorLight;
         windowTitleColorDark = controlColorDark;
         windowBorderColor = new ColorUIResource(0, 0, 0);

@@ -77,10 +77,12 @@ public class McWinLookAndFeel extends AbstractLookAndFeel {
         modernProps.setProperty("backgroundPattern", "off");
         modernProps.setProperty("drawSquareButtons", "on");
         modernProps.setProperty("windowTitleForegroundColor", "54 68 84");
+        modernProps.setProperty("windowTitleBackgroundColor", "172 179 185");
         modernProps.setProperty("windowTitleColorLight", "204 208 212");
         modernProps.setProperty("windowTitleColorDark", "172 179 185");
         modernProps.setProperty("windowBorderColor", "150 158 167");
         modernProps.setProperty("windowInactiveTitleForegroundColor", "67 84 103");
+        modernProps.setProperty("windowInactiveTitleBackgroundColor", "221 223 225");
         modernProps.setProperty("windowInactiveTitleColorLight", "232 234 236");
         modernProps.setProperty("windowInactiveTitleColorDark", "221 223 225");
         modernProps.setProperty("windowInactiveBorderColor", "172 179 185");
@@ -116,8 +118,8 @@ public class McWinLookAndFeel extends AbstractLookAndFeel {
         pinkProps.setProperty("menuSelectionBackgroundColor", "248 202 248");
         pinkProps.setProperty("desktopColor", "242 242 242");
 
-        String key = null;
-        String value = null;
+        String key;
+        String value;
         Iterator iter = smallFontProps.keySet().iterator();
         while (iter.hasNext()) {
             key = (String) iter.next();
@@ -216,6 +218,7 @@ public class McWinLookAndFeel extends AbstractLookAndFeel {
     }
 
     public static void setTheme(Properties themesProps) {
+        currentThemeName = "mcwinTheme";
         if (myTheme == null) {
             myTheme = new McWinDefaultTheme();
         }
@@ -267,6 +270,9 @@ public class McWinLookAndFeel extends AbstractLookAndFeel {
     }
 
     protected void initClassDefaults(UIDefaults table) {
+        if (!"mcwinTheme".equals(currentThemeName)) {
+            setTheme("Default");
+        }
         super.initClassDefaults(table);
         Object[] uiDefaults = {
             // BaseLookAndFeel classes

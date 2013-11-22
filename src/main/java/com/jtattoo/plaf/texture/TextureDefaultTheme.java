@@ -93,7 +93,7 @@ public class TextureDefaultTheme extends AbstractTheme {
         controlColorDark = new ColorUIResource(220, 207, 192);
 
         windowTitleForegroundColor = white;
-        windowTitleBackgroundColor = new ColorUIResource(200, 215, 240);
+        windowTitleBackgroundColor = new ColorUIResource(200, 215, 240);//new ColorUIResource(48, 48, 48);
         windowTitleColorLight = new ColorUIResource(96, 96, 96);
         windowTitleColorDark = new ColorUIResource(48, 48, 48);
         windowBorderColor = black;
@@ -102,7 +102,7 @@ public class TextureDefaultTheme extends AbstractTheme {
         windowIconRolloverColor = orange;
 
         windowInactiveTitleForegroundColor = white;
-        windowInactiveTitleBackgroundColor = new ColorUIResource(242, 232, 220);
+        windowInactiveTitleBackgroundColor = new ColorUIResource(240, 230, 217);//new ColorUIResource(48, 48, 48);
         windowInactiveTitleColorLight = new ColorUIResource(96, 96, 96);
         windowInactiveTitleColorDark = new ColorUIResource(48, 48, 48);
         windowInactiveBorderColor = black;

@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.jtattoo</groupId>
     <artifactId>JTattoo</artifactId>
-    <version>1.6.9</version>
+    <version>1.6.10</version>
     <packaging>jar</packaging>
     <name>JTattoo</name>
     <description>A LookAndFeel library for swing</description>
@@ -81,6 +81,20 @@
                     </execution>
                 </executions>                
             </plugin>
+            <!--plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin-->
         </plugins>
     </build>
     <properties>

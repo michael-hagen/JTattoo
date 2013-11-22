@@ -157,8 +157,8 @@ public class AcrylLookAndFeel extends AbstractLookAndFeel {
         redProps.setProperty("toolbarColorLight", "248 248 248");
         redProps.setProperty("toolbarColorDark", "236 236 236");
 
-        String key = null;
-        String value = null;
+        String key;
+        String value;
         Iterator iter = smallFontProps.keySet().iterator();
         while (iter.hasNext()) {
             key = (String) iter.next();
@@ -278,6 +278,7 @@ public class AcrylLookAndFeel extends AbstractLookAndFeel {
     }
 
     public static void setTheme(Properties themesProps) {
+        currentThemeName = "acrylTheme";
         if (myTheme == null) {
             myTheme = new AcrylDefaultTheme();
         }
@@ -329,6 +330,9 @@ public class AcrylLookAndFeel extends AbstractLookAndFeel {
     }
 
     protected void initClassDefaults(UIDefaults table) {
+        if (!"acrylTheme".equals(currentThemeName)) {
+            setTheme("Default");
+        }
         super.initClassDefaults(table);
         Object[] uiDefaults = {
             // BaseLookAndFeel classes

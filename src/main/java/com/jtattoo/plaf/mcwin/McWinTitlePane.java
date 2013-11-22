@@ -52,14 +52,24 @@ public class McWinTitlePane extends BaseTitlePane {
     public void paintText(Graphics g, int x, int y, String title) {
         x += paintIcon(g, x, y);
         if (isActive()) {
-            g.setColor(ColorHelper.brighter(AbstractLookAndFeel.getWindowTitleColorLight(), 40));
+            Color fc = AbstractLookAndFeel.getWindowTitleForegroundColor();
+            if (ColorHelper.getGrayValue(fc) > 128) {
+                g.setColor(ColorHelper.darker(AbstractLookAndFeel.getWindowTitleColorDark(), 40));
+            } else {
+                g.setColor(ColorHelper.brighter(AbstractLookAndFeel.getWindowTitleColorLight(), 40));
+            }
             JTattooUtilities.drawString(rootPane, g, title, x, y + 1);
-            g.setColor(AbstractLookAndFeel.getWindowTitleForegroundColor());
+            g.setColor(fc);
             JTattooUtilities.drawString(rootPane, g, title, x, y);
         } else {
-            g.setColor(ColorHelper.brighter(AbstractLookAndFeel.getWindowInactiveTitleColorLight(), 40));
+            Color fc = AbstractLookAndFeel.getWindowInactiveTitleForegroundColor();
+            if (ColorHelper.getGrayValue(fc) > 128) {
+                g.setColor(ColorHelper.darker(AbstractLookAndFeel.getWindowInactiveTitleColorDark(), 40));
+            } else {
+                g.setColor(ColorHelper.brighter(AbstractLookAndFeel.getWindowInactiveTitleColorLight(), 40));
+            }
             JTattooUtilities.drawString(rootPane, g, title, x, y + 1);
-            g.setColor(AbstractLookAndFeel.getWindowInactiveTitleForegroundColor());
+            g.setColor(fc);
             JTattooUtilities.drawString(rootPane, g, title, x, y);
         }
     }

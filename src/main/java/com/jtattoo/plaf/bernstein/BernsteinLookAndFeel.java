@@ -102,6 +102,7 @@ public class BernsteinLookAndFeel extends AbstractLookAndFeel {
     }
 
     public static void setTheme(Properties themesProps) {
+        currentThemeName = "bernsteinTheme";
         if (myTheme == null) {
             myTheme = new BernsteinDefaultTheme();
         }
@@ -153,6 +154,9 @@ public class BernsteinLookAndFeel extends AbstractLookAndFeel {
     }
 
     protected void initClassDefaults(UIDefaults table) {
+        if (!"bernsteinTheme".equals(currentThemeName)) {
+            setTheme("Default");
+        }
         super.initClassDefaults(table);
         Object[] uiDefaults = {
             // BaseLookAndFeel classes

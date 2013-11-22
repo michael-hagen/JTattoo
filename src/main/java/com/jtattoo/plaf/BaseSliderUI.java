@@ -23,9 +23,18 @@
 
 package com.jtattoo.plaf;
 
-import java.awt.*;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Composite;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
-import javax.swing.*;
+import javax.swing.Icon;
+import javax.swing.JComponent;
+import javax.swing.JSlider;
+import javax.swing.UIManager;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicSliderUI;
@@ -104,6 +113,11 @@ public class BaseSliderUI extends BasicSliderUI {
         recalculateIfInsetsChanged();
         recalculateIfOrientationChanged();
         Rectangle clip = g.getClipBounds();
+        
+        if ( !clip.intersects(trackRect) && slider.getPaintTrack()) {
+            calculateGeometry();
+        }
+        
         if (slider.getPaintTrack() && clip.intersects(trackRect)) {
             paintTrack(g);
         }
@@ -139,8 +153,8 @@ public class BaseSliderUI extends BasicSliderUI {
         int overhang = 4;
         int trackLeft = 0;
         int trackTop = 0;
-        int trackRight = 0;
-        int trackBottom = 0;
+        int trackRight;
+        int trackBottom;
 
         if (slider.getOrientation() == JSlider.HORIZONTAL) {
             trackBottom = (trackRect.height - 1) - overhang;
@@ -160,11 +174,11 @@ public class BaseSliderUI extends BasicSliderUI {
         g.setColor(AbstractLookAndFeel.getFrameColor());
         g.drawRect(trackLeft, trackTop, (trackRight - trackLeft) - 1, (trackBottom - trackTop) - 1);
 
-        int middleOfThumb = 0;
-        int fillTop = 0;
-        int fillLeft = 0;
-        int fillBottom = 0;
-        int fillRight = 0;
+        int middleOfThumb;
+        int fillTop;
+        int fillLeft;
+        int fillBottom;
+        int fillRight;
 
         if (slider.getOrientation() == JSlider.HORIZONTAL) {
             middleOfThumb = thumbRect.x + (thumbRect.width / 2);
@@ -179,7 +193,7 @@ public class BaseSliderUI extends BasicSliderUI {
                 fillLeft = middleOfThumb;
                 fillRight = trackRight - 2;
             }
-            Color colors[] = null;
+            Color colors[];
             if (!JTattooUtilities.isActive(slider)) {
                 colors = AbstractLookAndFeel.getTheme().getInActiveColors();
             } else {
@@ -206,7 +220,7 @@ public class BaseSliderUI extends BasicSliderUI {
                 fillTop = trackTop + 1;
                 fillBottom = middleOfThumb;
             }
-            Color colors[] = null;
+            Color colors[];
             if (!JTattooUtilities.isActive(slider)) {
                 colors = AbstractLookAndFeel.getTheme().getInActiveColors();
             } else {
@@ -232,7 +246,7 @@ public class BaseSliderUI extends BasicSliderUI {
             g.translate(0, tickBounds.y);
 
             int value = slider.getMinimum();
-            int xPos = 0;
+            int xPos;
 
             if (slider.getMinorTickSpacing() > 0) {
                 while (value <= slider.getMaximum()) {
@@ -256,7 +270,7 @@ public class BaseSliderUI extends BasicSliderUI {
             g.translate(tickBounds.x, 0);
 
             int value = slider.getMinimum();
-            int yPos = 0;
+            int yPos;
 
             if (slider.getMinorTickSpacing() > 0) {
                 int offset = 0;
@@ -296,15 +310,15 @@ public class BaseSliderUI extends BasicSliderUI {
     }
 
     public void paintThumb(Graphics g) {
-        Icon icon = null;
+        Icon icon;
         if (slider.getOrientation() == JSlider.HORIZONTAL) {
-            if (isRollover && slider.isEnabled()) {
+            if ((isRollover || isDragging()) && slider.isEnabled()) {
                 icon = getThumbHorIconRollover();
             } else {
                 icon = getThumbHorIcon();
             }
         } else {
-            if (isRollover && slider.isEnabled()) {
+            if ((isRollover || isDragging()) && slider.isEnabled()) {
                 icon = getThumbVerIconRollover();
             } else {
                 icon = getThumbVerIcon();
@@ -350,5 +364,6 @@ public class BaseSliderUI extends BasicSliderUI {
                 slider.repaint();
             }
         }
+
     }
 }

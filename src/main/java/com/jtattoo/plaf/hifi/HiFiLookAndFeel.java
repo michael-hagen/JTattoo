@@ -102,6 +102,7 @@ public class HiFiLookAndFeel extends AbstractLookAndFeel {
     }
 
     public static void setTheme(Properties themesProps) {
+        currentThemeName = "hifiTheme";
         if (myTheme == null) {
             myTheme = new HiFiDefaultTheme();
         }
@@ -159,6 +160,9 @@ public class HiFiLookAndFeel extends AbstractLookAndFeel {
     }
     
     protected void initClassDefaults(UIDefaults table) {
+        if (!"hifiTheme".equals(currentThemeName)) {
+            setTheme("Default");
+        }
         super.initClassDefaults(table);
         Object[] uiDefaults = {
             // BaseLookAndFeel classes

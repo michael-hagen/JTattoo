@@ -46,6 +46,8 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
         }
     }
 
+    protected static String currentThemeName = "abstractTheme";
+    
     private static AbstractTheme myTheme = null;
 
     abstract public AbstractBorderFactory getBorderFactory();
@@ -397,6 +399,7 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
             "FileView.floppyDriveIcon", getIconFactory().getTreeFloppyDriveIcon(),
             // File Chooser
             "FileChooser.detailsViewIcon", getIconFactory().getFileChooserDetailViewIcon(),
+            "FileChooser.viewMenuIcon", getIconFactory().getFileChooserDetailViewIcon(), 
             "FileChooser.homeFolderIcon", getIconFactory().getFileChooserHomeFolderIcon(),
             "FileChooser.listViewIcon", getIconFactory().getFileChooserListViewIcon(),
             "FileChooser.newFolderIcon", getIconFactory().getFileChooserNewFolderIcon(),
@@ -443,6 +446,9 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
             table.put("Spinner.arrowButtonBorder", BorderFactory.createEmptyBorder());
             table.put("Spinner.editorBorderPainted", Boolean.FALSE);
         }
+        if (getTheme().isMacStyleScrollBarOn()) {
+            table.put("ScrollBar.width", new Integer(8));
+        }
     }
 
     public static void setTheme(AbstractTheme theme) {
@@ -451,7 +457,7 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
         }
 
         MetalLookAndFeel.setCurrentTheme(theme);
-        myTheme = (AbstractTheme) theme;
+        myTheme = theme;
         if (isWindowDecorationOn()) {
             DecorationHelper.decorateWindows(Boolean.TRUE);
         } else {

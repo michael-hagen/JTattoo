@@ -111,8 +111,8 @@ public class FastLookAndFeel extends AbstractLookAndFeel {
         greenProps.setProperty("menuSelectionBackgroundColor", lightGreen);
         greenProps.setProperty("toolbarBackgroundColor", "244 244 244");
 
-        String key = null;
-        String value = null;
+        String key;
+        String value;
         Iterator iter = smallFontProps.keySet().iterator();
         while (iter.hasNext()) {
             key = (String) iter.next();
@@ -207,6 +207,7 @@ public class FastLookAndFeel extends AbstractLookAndFeel {
     }
 
     public static void setTheme(Properties themesProps) {
+        currentThemeName = "fastTheme";
         if (myTheme == null) {
             myTheme = new FastDefaultTheme();
         }
@@ -258,6 +259,9 @@ public class FastLookAndFeel extends AbstractLookAndFeel {
     }
 
     protected void initClassDefaults(UIDefaults table) {
+        if (!"fastTheme".equals(currentThemeName)) {
+            setTheme("Default");
+        }
         super.initClassDefaults(table);
         Object[] uiDefaults = {
             "PopupMenuUI", BasicPopupMenuUI.class.getName(),
@@ -274,6 +278,7 @@ public class FastLookAndFeel extends AbstractLookAndFeel {
             "ToolTipUI", BaseToolTipUI.class.getName(),
             "TreeUI", BaseTreeUI.class.getName(),
             "TableUI", BaseTableUI.class.getName(),
+            "TableHeaderUI", BaseTableHeaderUI.class.getName(),
             "PanelUI", BasePanelUI.class.getName(),
             "ScrollPaneUI", BaseScrollPaneUI.class.getName(),
             "ProgressBarUI", BasicProgressBarUI.class.getName(),

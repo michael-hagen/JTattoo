@@ -125,7 +125,7 @@ public class SmartInternalFrameTitlePane extends BaseInternalFrameTitlePane {
         }
         int dy = 3;
 
-        if (!AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn() && (dw > 0)) {
+        if (!AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn() && !AbstractLookAndFeel.getTheme().isCenterWindowTitleOn() && (dw > 0)) {
             Composite composite = g2D.getComposite();
             AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
             g2D.setComposite(alpha);

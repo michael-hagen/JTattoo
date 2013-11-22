@@ -100,6 +100,7 @@ public class NoireLookAndFeel extends AbstractLookAndFeel {
     }
 
     public static void setTheme(Properties themesProps) {
+        currentThemeName = "noireTheme";
         if (myTheme == null) {
             myTheme = new NoireDefaultTheme();
         }
@@ -151,6 +152,9 @@ public class NoireLookAndFeel extends AbstractLookAndFeel {
     }
 
     protected void initClassDefaults(UIDefaults table) {
+        if (!"noireTheme".equals(currentThemeName)) {
+            setTheme("Default");
+        }
         super.initClassDefaults(table);
         Object[] uiDefaults = {
             // BaseLookAndFeel classes

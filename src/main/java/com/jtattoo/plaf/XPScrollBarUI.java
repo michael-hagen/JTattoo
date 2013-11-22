@@ -23,7 +23,6 @@
 
 package com.jtattoo.plaf;
 
-import com.jtattoo.plaf.texture.TextureScrollButton;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
@@ -50,14 +49,6 @@ public class XPScrollBarUI extends BaseScrollBarUI {
             rolloverColors[i] = ColorHelper.brighter(colors[i], 16);
             dragColors[i] = ColorHelper.darker(colors[i], 8);
         }
-    }
-
-    protected JButton createDecreaseButton(int orientation) {
-        return new TextureScrollButton(orientation, scrollBarWidth);
-    }
-
-    protected JButton createIncreaseButton(int orientation) {
-        return new TextureScrollButton(orientation, scrollBarWidth);
     }
 
     protected Color getFrameColor() {
@@ -92,41 +83,44 @@ public class XPScrollBarUI extends BaseScrollBarUI {
         Color[] colors = getThumbColors();
         if (scrollbar.getOrientation() == JScrollBar.VERTICAL) {
             JTattooUtilities.fillVerGradient(g, colors, 0, 0, width, height);
-            AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
-            g2D.setComposite(alpha);
-            int dx = 6;
-            int dy = height / 2 - 3;
-            int dw = width - 13;
-            Color c1 = ColorHelper.brighter(colors[0], 60);
-            Color c2 = ColorHelper.darker(colors[0], 30);
-            for (int i = 0; i < 4; i++) {
-                g.setColor(c1);
-                g.drawLine(dx, dy, dx + dw, dy);
-                dy++;
-                g.setColor(c2);
-                g.drawLine(dx, dy, dx + dw, dy);
-                dy++;
+            if (!AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
+                int dx = 6;
+                int dy = height / 2 - 3;
+                int dw = width - 13;
+                Color c1 = ColorHelper.brighter(colors[0], 60);
+                Color c2 = ColorHelper.darker(colors[0], 30);
+                AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
+                g2D.setComposite(alpha);
+                for (int i = 0; i < 4; i++) {
+                    g.setColor(c1);
+                    g.drawLine(dx, dy, dx + dw, dy);
+                    dy++;
+                    g.setColor(c2);
+                    g.drawLine(dx, dy, dx + dw, dy);
+                    dy++;
+                }
             }
         } else {
             JTattooUtilities.fillHorGradient(g, colors, 0, 0, width, height);
-            int dx = width / 2 - 3;
-            int dy = 6;
-            int dh = height - 13;
-            AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f);
-            g2D.setComposite(alpha);
-            Color c1 = ColorHelper.brighter(colors[0], 60);
-            Color c2 = ColorHelper.darker(colors[0], 30);
-            for (int i = 0; i < 4; i++) {
-                g.setColor(c1);
-                g.drawLine(dx, dy, dx, dy + dh);
-                dx++;
-                g.setColor(c2);
-                g.drawLine(dx, dy, dx, dy + dh);
-                dx++;
+            if (!AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
+                int dx = width / 2 - 3;
+                int dy = 6;
+                int dh = height - 13;
+                Color c1 = ColorHelper.brighter(colors[0], 60);
+                Color c2 = ColorHelper.darker(colors[0], 30);
+                AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f);
+                g2D.setComposite(alpha);
+                for (int i = 0; i < 4; i++) {
+                    g.setColor(c1);
+                    g.drawLine(dx, dy, dx, dy + dh);
+                    dx++;
+                    g.setColor(c2);
+                    g.drawLine(dx, dy, dx, dy + dh);
+                    dx++;
+                }
             }
         }
 
-        g2D.setComposite(savedComposite);
         g.setColor(getFrameColor());
         g.drawLine(1, 1, width - 2, 1);
         g.drawLine(1, 2, 1, height - 3);

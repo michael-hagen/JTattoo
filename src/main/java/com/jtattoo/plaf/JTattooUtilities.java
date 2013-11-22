@@ -43,6 +43,7 @@ public class JTattooUtilities {
     private static final boolean isFreeBSD = System.getProperty("os.name").toLowerCase().indexOf("freebsd") != -1;
     private static final boolean isHiresScreen = Toolkit.getDefaultToolkit().getScreenSize().width > 1280;
     private static Double javaVersion = null;
+    private static Double osVersion = null;
     private static final String ELLIPSIS = "...";
 
     public static double getJavaVersion() {
@@ -69,6 +70,30 @@ public class JTattooUtilities {
         return javaVersion.doubleValue();
     }
 
+    public static double getOSVersion() {
+        if (osVersion == null) {
+            try {
+                String ver = System.getProperties().getProperty("os.version");
+                String version = "";
+                boolean firstPoint = true;
+                for (int i = 0; i < ver.length(); i++) {
+                    if (ver.charAt(i) == '.') {
+                        if (firstPoint) {
+                            version += ver.charAt(i);
+                        }
+                        firstPoint = false;
+                    } else if (Character.isDigit(ver.charAt(i))) {
+                        version += ver.charAt(i);
+                    }
+                }
+                osVersion = new Double(version);
+            } catch (Exception ex) {
+                osVersion = new Double(1.0);
+            }
+        }
+        return osVersion.doubleValue();
+    }
+    
     public static boolean isWindows() {
         return isWindows;
     }
@@ -287,118 +312,129 @@ public class JTattooUtilities {
     }
 
     public static void fillHorGradient(Graphics g, Color[] colors, int x, int y, int w, int h) {
-        int steps = colors.length;
-        double dy = (double) h / (double) (steps);
-        if (dy <= 3.001) {
-            int y1 = y;
-            for (int i = 0; i < steps; i++) {
-                int y2 = y + (int) Math.round((double) i * dy);
-                g.setColor(colors[i]);
-                if (i == (steps - 1)) {
-                    g.fillRect(x, y1, w, y + h - y1);
-                } else {
-                    g.fillRect(x, y1, w, y2 - y1);
+        if (colors != null) {
+            int steps = colors.length;
+            double dy = (double) h / (double) (steps);
+            if (dy <= 3.001) {
+                int y1 = y;
+                for (int i = 0; i < steps; i++) {
+                    int y2 = y + (int) Math.round((double) i * dy);
+                    g.setColor(colors[i]);
+                    if (i == (steps - 1)) {
+                        g.fillRect(x, y1, w, y + h - y1);
+                    } else {
+                        g.fillRect(x, y1, w, y2 - y1);
+                    }
+                    y1 = y2;
                 }
-                y1 = y2;
+            } else {
+                smoothFillHorGradient(g, colors, x, y, w, h);
             }
-        } else {
-            smoothFillHorGradient(g, colors, x, y, w, h);
         }
     }
 
     public static void smoothFillHorGradient(Graphics g, Color[] colors, int x, int y, int w, int h) {
-        Graphics2D g2D = (Graphics2D) g;
-        Paint savedPaint = g2D.getPaint();
-        int steps = colors.length;
-        double dy = (double) h / (double) (steps - 1);
-        int y1 = y;
-        for (int i = 0; i < steps; i++) {
-            int y2 = y + (int) Math.round((double) i * dy);
-            if (i == (steps - 1)) {
-                g2D.setPaint(null);
-                g2D.setColor(colors[i]);
-                g2D.fillRect(x, y1, w, y + h - y1);
-            } else {
-                g2D.setPaint(new GradientPaint(0, y1, colors[i], 0, y2, colors[i + 1]));
-                g2D.fillRect(x, y1, w, y2 - y1);
+        if (colors != null) {
+            Graphics2D g2D = (Graphics2D) g;
+            Paint savedPaint = g2D.getPaint();
+            int steps = colors.length;
+            double dy = (double) h / (double) (steps - 1);
+            int y1 = y;
+            for (int i = 0; i < steps; i++) {
+                int y2 = y + (int) Math.round((double) i * dy);
+                if (i == (steps - 1)) {
+                    g2D.setPaint(null);
+                    g2D.setColor(colors[i]);
+                    g2D.fillRect(x, y1, w, y + h - y1);
+                } else {
+                    g2D.setPaint(new GradientPaint(0, y1, colors[i], 0, y2, colors[i + 1]));
+                    g2D.fillRect(x, y1, w, y2 - y1);
+                }
+                y1 = y2;
             }
-            y1 = y2;
+            g2D.setPaint(savedPaint);
         }
-        g2D.setPaint(savedPaint);
     }
 
     public static void fillInverseHorGradient(Graphics g, Color[] colors, int x, int y, int w, int h) {
-        int steps = colors.length;
-        double dy = (double) h / (double) steps;
-        if (dy <= 3.001) {
+        if (colors != null) {
+            int steps = colors.length;
+            double dy = (double) h / (double) steps;
+            if (dy <= 3.001) {
+                int y1 = y;
+                for (int i = 0; i < steps; i++) {
+                    int y2 = y + (int) Math.round((double) i * dy);
+                    g.setColor(colors[colors.length - i - 1]);
+                    if (i == (steps - 1)) {
+                        g.fillRect(x, y1, w, y + h - y1);
+                    } else {
+                        g.fillRect(x, y1, w, y2 - y1);
+                    }
+                    y1 = y2;
+                }
+            } else {
+                smoothFillInverseHorGradient(g, colors, x, y, w, h);
+            }
+        }
+    }
+
+    public static void smoothFillInverseHorGradient(Graphics g, Color[] colors, int x, int y, int w, int h) {
+        if (colors != null) {
+            Graphics2D g2D = (Graphics2D) g;
+            Paint savedPaint = g2D.getPaint();
+            int steps = colors.length;
+            double dy = (double) h / (double) steps;
             int y1 = y;
             for (int i = 0; i < steps; i++) {
                 int y2 = y + (int) Math.round((double) i * dy);
                 g.setColor(colors[colors.length - i - 1]);
                 if (i == (steps - 1)) {
+                    g2D.setPaint(null);
+                    g2D.setColor(colors[colors.length - i - 1]);
                     g.fillRect(x, y1, w, y + h - y1);
                 } else {
+                    g2D.setPaint(new GradientPaint(0, y1, colors[colors.length - i - 1], 0, y2, colors[colors.length - i - 2]));
                     g.fillRect(x, y1, w, y2 - y1);
                 }
                 y1 = y2;
             }
-        } else {
-            smoothFillInverseHorGradient(g, colors, x, y, w, h);
+            g2D.setPaint(savedPaint);
         }
-
-    }
-
-    public static void smoothFillInverseHorGradient(Graphics g, Color[] colors, int x, int y, int w, int h) {
-        Graphics2D g2D = (Graphics2D) g;
-        Paint savedPaint = g2D.getPaint();
-        int steps = colors.length;
-        double dy = (double) h / (double) steps;
-        int y1 = y;
-        for (int i = 0; i < steps; i++) {
-            int y2 = y + (int) Math.round((double) i * dy);
-            g.setColor(colors[colors.length - i - 1]);
-            if (i == (steps - 1)) {
-                g2D.setPaint(null);
-                g2D.setColor(colors[colors.length - i - 1]);
-                g.fillRect(x, y1, w, y + h - y1);
-            } else {
-                g2D.setPaint(new GradientPaint(0, y1, colors[colors.length - i - 1], 0, y2, colors[colors.length - i - 2]));
-                g.fillRect(x, y1, w, y2 - y1);
-            }
-            y1 = y2;
-        }
-        g2D.setPaint(savedPaint);
     }
 
     public static void fillVerGradient(Graphics g, Color[] colors, int x, int y, int w, int h) {
-        int steps = colors.length;
-        double dx = (double) w / (double) steps;
-        int x1 = x;
-        for (int i = 0; i < steps; i++) {
-            int x2 = x + (int) Math.round((double) i * dx);
-            g.setColor(colors[i]);
-            if (i == (steps - 1)) {
-                g.fillRect(x1, y, x + w - x1, h);
-            } else {
-                g.fillRect(x1, y, x2 - x1, h);
+        if (colors != null) {
+            int steps = colors.length;
+            double dx = (double) w / (double) steps;
+            int x1 = x;
+            for (int i = 0; i < steps; i++) {
+                int x2 = x + (int) Math.round((double) i * dx);
+                g.setColor(colors[i]);
+                if (i == (steps - 1)) {
+                    g.fillRect(x1, y, x + w - x1, h);
+                } else {
+                    g.fillRect(x1, y, x2 - x1, h);
+                }
+                x1 = x2;
             }
-            x1 = x2;
         }
     }
 
     public static void fillInverseVerGradient(Graphics g, Color[] colors, int x, int y, int w, int h) {
-        int steps = colors.length;
-        double dx = (double) w / (double) steps;
-        int x1 = x;
-        for (int i = 0; i < steps; i++) {
-            int x2 = x + (int) Math.round((double) i * dx);
-            g.setColor(colors[colors.length - i - 1]);
-            if (i == (steps - 1)) {
-                g.fillRect(x1, y, x + w - x1, h);
-            } else {
-                g.fillRect(x1, y, x2 - x1, h);
+        if (colors != null) {
+            int steps = colors.length;
+            double dx = (double) w / (double) steps;
+            int x1 = x;
+            for (int i = 0; i < steps; i++) {
+                int x2 = x + (int) Math.round((double) i * dx);
+                g.setColor(colors[colors.length - i - 1]);
+                if (i == (steps - 1)) {
+                    g.fillRect(x1, y, x + w - x1, h);
+                } else {
+                    g.fillRect(x1, y, x2 - x1, h);
+                }
+                x1 = x2;
             }
-            x1 = x2;
         }
     }
 

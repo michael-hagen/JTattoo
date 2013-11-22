@@ -23,9 +23,19 @@
 
 package com.jtattoo.plaf;
 
-import java.awt.*;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Composite;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Insets;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JScrollBar;
+import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
@@ -73,11 +83,19 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
     }
 
     protected JButton createDecreaseButton(int orientation) {
-        return new BaseScrollButton(orientation, scrollBarWidth);
+        if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
+            return new InvisibleScrollButton();
+        } else {
+            return new BaseScrollButton(orientation, scrollBarWidth);
+        }
     }
 
     protected JButton createIncreaseButton(int orientation) {
-        return new BaseScrollButton(orientation, scrollBarWidth);
+        if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
+            return new InvisibleScrollButton();
+        } else {
+            return new BaseScrollButton(orientation, scrollBarWidth);
+        }
     }
 
     public TrackListener createTrackListener() {
@@ -85,10 +103,18 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
     }
 
     public Dimension getPreferredSize(JComponent c) {
-        if (scrollbar.getOrientation() == JScrollBar.VERTICAL) {
-            return new Dimension(scrollBarWidth, scrollBarWidth * 3 + 16);
+        if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
+            if (scrollbar.getOrientation() == JScrollBar.VERTICAL) {
+                return new Dimension(scrollBarWidth + 1, scrollBarWidth * 3);
+            } else {
+                return new Dimension(scrollBarWidth * 3, scrollBarWidth);
+            }
         } else {
-            return new Dimension(scrollBarWidth * 3 + 16, scrollBarWidth);
+            if (scrollbar.getOrientation() == JScrollBar.VERTICAL) {
+                return new Dimension(scrollBarWidth, scrollBarWidth * 3 + 16);
+            } else {
+                return new Dimension(scrollBarWidth * 3 + 16, scrollBarWidth);
+            }
         }
     }
 
@@ -99,10 +125,16 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
     protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
         int w = c.getWidth();
         int h = c.getHeight();
-        if (scrollbar.getOrientation() == JScrollBar.VERTICAL) {
-            JTattooUtilities.fillVerGradient(g, AbstractLookAndFeel.getTheme().getTrackColors(), 0, 0, w, h);
+        if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
+            Color bc = ColorHelper.darker(AbstractLookAndFeel.getTheme().getBackgroundColor(), 4);
+            g.setColor(bc);
+            g.fillRect(0, 0, w, h);
         } else {
-            JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getTrackColors(), 0, 0, w, h);
+            if (scrollbar.getOrientation() == JScrollBar.VERTICAL) {
+                JTattooUtilities.fillVerGradient(g, AbstractLookAndFeel.getTheme().getTrackColors(), 0, 0, w, h);
+            } else {
+                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getTrackColors(), 0, 0, w, h);
+            }
         }
     }
 
@@ -139,20 +171,22 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
             g.drawLine(1, 1, thumbBounds.width - 2, 1);
             g.drawLine(1, 1, 1, thumbBounds.height - 2);
 
-            int dx = 5;
-            int dy = thumbBounds.height / 2 - 3;
-            int dw = thumbBounds.width - 11;
+            if (!AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
+                int dx = 5;
+                int dy = thumbBounds.height / 2 - 3;
+                int dw = thumbBounds.width - 11;
 
-            Color c1 = Color.white;
-            Color c2 = Color.darkGray;
+                Color c1 = Color.white;
+                Color c2 = Color.darkGray;
 
-            for (int i = 0; i < 4; i++) {
-                g.setColor(c1);
-                g.drawLine(dx, dy, dx + dw, dy);
-                dy++;
-                g.setColor(c2);
-                g.drawLine(dx, dy, dx + dw, dy);
-                dy++;
+                for (int i = 0; i < 4; i++) {
+                    g.setColor(c1);
+                    g.drawLine(dx, dy, dx + dw, dy);
+                    dy++;
+                    g.setColor(c2);
+                    g.drawLine(dx, dy, dx + dw, dy);
+                    dy++;
+                }
             }
             g2D.setComposite(savedComposite);
         } else { // HORIZONTAL
@@ -164,20 +198,22 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
             g.drawLine(1, 1, thumbBounds.width - 2, 1);
             g.drawLine(1, 1, 1, thumbBounds.height - 2);
 
-            int dx = thumbBounds.width / 2 - 3;
-            int dy = 5;
-            int dh = thumbBounds.height - 11;
+            if (!AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
+                int dx = thumbBounds.width / 2 - 3;
+                int dy = 5;
+                int dh = thumbBounds.height - 11;
 
-            Color c1 = Color.white;
-            Color c2 = Color.darkGray;
+                Color c1 = Color.white;
+                Color c2 = Color.darkGray;
 
-            for (int i = 0; i < 4; i++) {
-                g.setColor(c1);
-                g.drawLine(dx, dy, dx, dy + dh);
-                dx++;
-                g.setColor(c2);
-                g.drawLine(dx, dy, dx, dy + dh);
-                dx++;
+                for (int i = 0; i < 4; i++) {
+                    g.setColor(c1);
+                    g.drawLine(dx, dy, dx, dy + dh);
+                    dx++;
+                    g.setColor(c2);
+                    g.drawLine(dx, dy, dx, dy + dh);
+                    dx++;
+                }
             }
         }
         g2D.setComposite(savedComposite);
@@ -186,7 +222,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
     }
 
     protected void layoutVScrollbar(JScrollBar sb) {
-        if (AbstractLookAndFeel.getTheme().isLinuxStyleScrollBarOn()) {
+        if (AbstractLookAndFeel.getTheme().isLinuxStyleScrollBarOn() && incrButton.isVisible() && decrButton.isVisible()) {
             Dimension sbSize = sb.getSize();
             Insets sbInsets = sb.getInsets();
             int sizeH = sbSize.height - sbInsets.top - sbInsets.bottom;
@@ -251,7 +287,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
     }
 
     protected void layoutHScrollbar(JScrollBar sb) {
-        if (AbstractLookAndFeel.getTheme().isLinuxStyleScrollBarOn()) {
+        if (AbstractLookAndFeel.getTheme().isLinuxStyleScrollBarOn() && incrButton.isVisible() && decrButton.isVisible()) {
             Dimension sbSize = sb.getSize();
             Insets sbInsets = sb.getInsets();
             int sizeW = sbSize.width - sbInsets.left - sbInsets.right;
@@ -303,7 +339,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
             } else {
                 setThumbBounds(thumbX, itemY, thumbW, itemH);
             }
-            decrButton.setBounds(decrButtonX, itemY,  itemW, itemH);
+            decrButton.setBounds(decrButtonX, itemY, itemW, itemH);
             incrButton.setBounds(incrButtonX, itemY, itemW, itemH);
             
             /* Update the trackRect field.
@@ -345,5 +381,19 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
             Rectangle r = getTrackBounds();
             scrollbar.repaint(r.x, r.y, r.width, r.height);
         }
+    }
+
+//-----------------------------------------------------------------------------    
+    private static class InvisibleScrollButton extends JButton {
+        
+        public InvisibleScrollButton() {
+            super();
+            setVisible(false);
+        }
+
+        public Dimension getPreferredSize() {
+            return new Dimension(0, 0);
+        }
+        
     }
 }

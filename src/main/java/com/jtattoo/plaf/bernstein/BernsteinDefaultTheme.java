@@ -86,11 +86,13 @@ public class BernsteinDefaultTheme extends AbstractTheme {
         menuBackgroundColor = backgroundColor;
         menuSelectionBackgroundColor = selectionBackgroundColor;
 
+        toolbarBackgroundColor = backgroundColor;
+        
         tabAreaBackgroundColor = backgroundColor;
         desktopColor = new ColorUIResource(253, 249, 204);
         
         tooltipForegroundColor = black;
-        tooltipBackgroundColor = new ColorUIResource(254, 240, 80);//new ColorUIResource(240, 240, 240);
+        tooltipBackgroundColor = new ColorUIResource(254, 240, 80);
     }
 
     public void setUpColorArrs() {

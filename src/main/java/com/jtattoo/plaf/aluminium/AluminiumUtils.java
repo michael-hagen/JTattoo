@@ -37,8 +37,7 @@ import javax.swing.Icon;
 public class AluminiumUtils {
 
     private static final Icon BG_IMAGE = new LazyImageIcon("aluminium/icons/background.jpg");
-    private static final int IMAGE_WIDTH = BG_IMAGE.getIconWidth();
-    private static final int IMAGE_HEIGHT = BG_IMAGE.getIconHeight();
+    private static final Icon ALTER_BG_IMAGE = new LazyImageIcon("aluminium/icons/alterBackground.jpg");
     private static Image backgroundImage = null;
     
     private AluminiumUtils() {
@@ -53,15 +52,17 @@ public class AluminiumUtils {
             Point p = JTattooUtilities.getRelLocation(c);
             Dimension d = JTattooUtilities.getFrameSize(c);
             int y = -p.y;
-            while (y < h) {
-                int x = -p.x;
-                while (x < w) {
-                    BG_IMAGE.paintIcon(c, g, x, y);
-                    x += IMAGE_WIDTH;
-                }
-                y += IMAGE_HEIGHT;
-            }
             if (JTattooUtilities.getJavaVersion() >= 1.6) {
+                int iw = BG_IMAGE.getIconWidth();
+                int ih = BG_IMAGE.getIconHeight();
+                while (y < h) {
+                    int x = -p.x;
+                    while (x < w) {
+                        BG_IMAGE.paintIcon(c, g, x, y);
+                        x += iw;
+                    }
+                    y += ih;
+                }
                 // higlight
                 if (backgroundImage == null 
                         || backgroundImage.getWidth(null) != d.width 
@@ -82,6 +83,17 @@ public class AluminiumUtils {
                 g2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));
                 g2D.drawImage(backgroundImage, -p.x, 0, null);
                 g2D.setComposite(savedComposite);
+            } else {
+                int iw = ALTER_BG_IMAGE.getIconWidth();
+                int ih = ALTER_BG_IMAGE.getIconHeight();
+                while (y < h) {
+                    int x = -p.x;
+                    while (x < w) {
+                        ALTER_BG_IMAGE.paintIcon(c, g, x, y);
+                        x += iw;
+                    }
+                    y += ih;
+                }
             }
         } else {
             g.setColor(c.getBackground());

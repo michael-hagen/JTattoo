@@ -23,7 +23,9 @@
 
 package com.jtattoo.plaf;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.RenderingHints;
 import java.io.FileInputStream;
 import java.util.Properties;
 import javax.swing.Icon;
@@ -61,7 +63,9 @@ public abstract class AbstractTheme extends MetalTheme {
     protected static String internalName = "Default";
     protected static boolean windowDecoration = false;
     protected static boolean macStyleWindowDecoration = false;
+    protected static boolean centerWindowTitle = false;
     protected static boolean linuxStyleScrollBar = false;
+    protected static boolean macStyleScrollBar = false;
     protected static boolean dynamicLayout = false;
     protected static boolean textShadow = false;
     protected static boolean textAntiAliasing = false;
@@ -211,7 +215,9 @@ public abstract class AbstractTheme extends MetalTheme {
     public void setUpColor() {
         windowDecoration = true;
         macStyleWindowDecoration = JTattooUtilities.isMac();
+        centerWindowTitle = JTattooUtilities.isWindows() && JTattooUtilities.getOSVersion() >= 6.2;
         linuxStyleScrollBar = !JTattooUtilities.isWindows();
+        macStyleScrollBar = JTattooUtilities.isMac();
         dynamicLayout = true;
         textShadow = false;
         textAntiAliasing = false;
@@ -350,8 +356,14 @@ public abstract class AbstractTheme extends MetalTheme {
             if (props.getProperty("macStyleWindowDecoration") != null) {
                 macStyleWindowDecoration = props.getProperty("macStyleWindowDecoration").trim().equalsIgnoreCase("on");
             }
+            if (props.getProperty("centerWindowTitle") != null) {
+                centerWindowTitle = props.getProperty("centerWindowTitle").trim().equalsIgnoreCase("on");
+            }
             if (props.getProperty("linuxStyleScrollBar") != null) {
                 linuxStyleScrollBar = props.getProperty("linuxStyleScrollBar").trim().equalsIgnoreCase("on");
+            }
+            if (props.getProperty("macStyleScrollBar") != null) {
+                macStyleScrollBar = props.getProperty("macStyleScrollBar").trim().equalsIgnoreCase("on");
             }
             if (props.getProperty("dynamicLayout") != null) {
                 dynamicLayout = props.getProperty("dynamicLayout").trim().equalsIgnoreCase("on");
@@ -920,12 +932,20 @@ public abstract class AbstractTheme extends MetalTheme {
         return windowDecoration;
     }
 
+    public boolean isCenterWindowTitleOn() {
+        return centerWindowTitle;
+    }
+    
     public boolean isMacStyleWindowDecorationOn() {
         return macStyleWindowDecoration;
     }
 
     public boolean isLinuxStyleScrollBarOn() {
         return linuxStyleScrollBar;
+    }
+    
+    public boolean isMacStyleScrollBarOn() {
+        return macStyleScrollBar;
     }
     
     public boolean isDynamicLayout() {

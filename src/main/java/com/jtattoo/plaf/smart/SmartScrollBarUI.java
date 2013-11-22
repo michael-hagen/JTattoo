@@ -41,11 +41,19 @@ public class SmartScrollBarUI extends BaseScrollBarUI {
     }
 
     protected JButton createDecreaseButton(int orientation) {
-        return new SmartScrollButton(orientation, scrollBarWidth);
+        if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
+            return super.createDecreaseButton(orientation);
+        } else {
+            return new SmartScrollButton(orientation, scrollBarWidth);
+        }
     }
 
     protected JButton createIncreaseButton(int orientation) {
-        return new SmartScrollButton(orientation, scrollBarWidth);
+        if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
+            return super.createIncreaseButton(orientation);
+        } else {
+            return new SmartScrollButton(orientation, scrollBarWidth);
+        }
     }
 
     protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {

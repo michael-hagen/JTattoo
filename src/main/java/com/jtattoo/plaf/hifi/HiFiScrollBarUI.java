@@ -51,11 +51,19 @@ public class HiFiScrollBarUI extends XPScrollBarUI {
     }
 
     protected JButton createDecreaseButton(int orientation) {
-        return new HiFiScrollButton(orientation, scrollBarWidth);
+        if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
+            return super.createDecreaseButton(orientation);
+        } else {
+            return new HiFiScrollButton(orientation, scrollBarWidth);
+        }
     }
 
     protected JButton createIncreaseButton(int orientation) {
-        return new HiFiScrollButton(orientation, scrollBarWidth);
+        if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
+            return super.createIncreaseButton(orientation);
+        } else {
+            return new HiFiScrollButton(orientation, scrollBarWidth);
+        }
     }
 
     protected Color getFrameColor() {

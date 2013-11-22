@@ -220,8 +220,8 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
         snowProps.setProperty("desktopColor", "240 240 240");
         snowProps.setProperty("tooltipBackgroundColor", "242 246 254");
 
-        String key = null;
-        String value = null;
+        String key;
+        String value;
         Iterator iter = smallFontProps.keySet().iterator();
         while (iter.hasNext()) {
             key = (String)iter.next();
@@ -348,6 +348,7 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
     }
 
     public static void setTheme(Properties themesProps) {
+        currentThemeName = "textureTheme";
         if (myTheme == null) {
             myTheme = new TextureDefaultTheme();
         }
@@ -412,6 +413,9 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
     }
     
     protected void initClassDefaults(UIDefaults table) {
+        if (!"textureTheme".equals(currentThemeName)) {
+            setTheme("Default");
+        }
         super.initClassDefaults(table);
         Object[] uiDefaults = {
             // BaseLookAndFeel classes

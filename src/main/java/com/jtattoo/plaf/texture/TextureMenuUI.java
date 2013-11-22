@@ -1,32 +1,33 @@
 /*
-* Copyright (c) 2002 and later by MH Software-Entwicklung. All Rights Reserved.
-*  
-* JTattoo is multiple licensed. If your are an open source developer you can use
-* it under the terms and conditions of the GNU General Public License version 2.0
-* or later as published by the Free Software Foundation.
-*  
-* see: gpl-2.0.txt
-* 
-* If you pay for a license you will become a registered user who could use the
-* software under the terms and conditions of the GNU Lesser General Public License
-* version 2.0 or later with classpath exception as published by the Free Software
-* Foundation.
-* 
-* see: lgpl-2.0.txt
-* see: classpath-exception.txt
-* 
-* Registered users could also use JTattoo under the terms and conditions of the 
-* Apache License, Version 2.0 as published by the Apache Software Foundation.
-*  
-* see: APACHE-LICENSE-2.0.txt
-*/
- 
+ * Copyright (c) 2002 and later by MH Software-Entwicklung. All Rights Reserved.
+ *  
+ * JTattoo is multiple licensed. If your are an open source developer you can use
+ * it under the terms and conditions of the GNU General Public License version 2.0
+ * or later as published by the Free Software Foundation.
+ *  
+ * see: gpl-2.0.txt
+ * 
+ * If you pay for a license you will become a registered user who could use the
+ * software under the terms and conditions of the GNU Lesser General Public License
+ * version 2.0 or later with classpath exception as published by the Free Software
+ * Foundation.
+ * 
+ * see: lgpl-2.0.txt
+ * see: classpath-exception.txt
+ * 
+ * Registered users could also use JTattoo under the terms and conditions of the 
+ * Apache License, Version 2.0 as published by the Apache Software Foundation.
+ *  
+ * see: APACHE-LICENSE-2.0.txt
+ */
 package com.jtattoo.plaf.texture;
 
 import com.jtattoo.plaf.*;
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.UIResource;
 
 /**
  * @author Michael Hagen
@@ -42,12 +43,8 @@ public class TextureMenuUI extends BaseMenuUI {
     }
 
     protected void paintBackground(Graphics g, JComponent c, int x, int y, int w, int h) {
-//        if (!AbstractLookAndFeel.getTheme().isDarkTexture()) {
-//            super.paintBackground(g, c, x, y, w, h);
-//            return;
-//        }
-        JMenuItem b = (JMenuItem) c;
-        ButtonModel model = b.getModel();
+        JMenuItem mi = (JMenuItem) c;
+        ButtonModel model = mi.getModel();
         if (c.getParent() instanceof JMenuBar) {
             if (model.isRollover() || model.isArmed() || (c instanceof JMenu && model.isSelected())) {
                 TextureUtils.fillComponent(g, c, TextureUtils.ROLLOVER_TEXTURE_TYPE);
@@ -56,7 +53,11 @@ public class TextureMenuUI extends BaseMenuUI {
             if (model.isArmed() || (c instanceof JMenu && model.isSelected())) {
                 TextureUtils.fillComponent(g, c, TextureUtils.ROLLOVER_TEXTURE_TYPE);
             } else {
-                TextureUtils.fillComponent(g, c, TextureUtils.MENUBAR_TEXTURE_TYPE);
+                if (!(mi.getBackground() instanceof ColorUIResource)) {
+                    super.paintBackground(g, c, x, y, w, h);
+                } else {
+                    TextureUtils.fillComponent(g, c, TextureUtils.MENUBAR_TEXTURE_TYPE);
+                }
             }
         }
     }
@@ -68,13 +69,13 @@ public class TextureMenuUI extends BaseMenuUI {
         }
         ButtonModel model = menuItem.getModel();
         FontMetrics fm = menuItem.getFontMetrics(menuItem.getFont());
-	int mnemIndex = menuItem.getDisplayedMnemonicIndex();
-	if (!model.isEnabled()) {
-	    // *** paint the text disabled
+        int mnemIndex = menuItem.getDisplayedMnemonicIndex();
+        if (!model.isEnabled()) {
+            // *** paint the text disabled
             g.setColor(Color.black);
             JTattooUtilities.drawStringUnderlineCharAt(menuItem, g, text, mnemIndex, textRect.x, textRect.y + fm.getAscent() - 1);
             g.setColor(ColorHelper.brighter(AbstractLookAndFeel.getDisabledForegroundColor(), 40));
-	} else {
+        } else {
             // *** paint the text normally
             g.setColor(AbstractLookAndFeel.getMenuForegroundColor());
             if (menuItem.getParent() instanceof JMenuBar) {
@@ -86,10 +87,14 @@ public class TextureMenuUI extends BaseMenuUI {
             } else {
                 g.setColor(Color.black);
                 JTattooUtilities.drawStringUnderlineCharAt(menuItem, g, text, mnemIndex, textRect.x, textRect.y + fm.getAscent() - 1);
-                g.setColor(AbstractLookAndFeel.getMenuForegroundColor());
+                Color foreColor = menuItem.getForeground();
+                if (foreColor instanceof UIResource) {
+                    foreColor = AbstractLookAndFeel.getMenuForegroundColor();
+                }
+                g.setColor(foreColor);
             }
-	}
-        JTattooUtilities.drawStringUnderlineCharAt(menuItem, g,text, mnemIndex, textRect.x, textRect.y + fm.getAscent());
+        }
+        JTattooUtilities.drawStringUnderlineCharAt(menuItem, g, text, mnemIndex, textRect.x, textRect.y + fm.getAscent());
     }
 
 }

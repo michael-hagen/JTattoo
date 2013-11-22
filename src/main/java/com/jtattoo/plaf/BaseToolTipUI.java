@@ -86,9 +86,21 @@ public class BaseToolTipUI extends MetalToolTipUI {
         int w = c.getWidth();
         int h = c.getHeight();
         Color backColor = AbstractLookAndFeel.getTheme().getTooltipBackgroundColor();
+
+        // We can't draw the fancyLayout if popup is medium weight
+        boolean mediumWeight = false;
+        Container parent = c.getParent();
+        while (parent != null) {
+            if ((parent.getClass().getName().indexOf("MediumWeight") > 0)) {
+                mediumWeight = true;
+                break;
+            }
+            parent = parent.getParent();
+        }
         
-        if (fancyLayout && shadowSize > 0) {
-            Container parent = c.getParent();
+        // Paint the tooltip with a shadow border
+        if (!mediumWeight && fancyLayout && shadowSize > 0) {
+            parent = c.getParent();
             while (parent != null) {
                 if ((parent.getClass().getName().indexOf("HeavyWeightWindow") > 0) && (parent instanceof Window)) {
                     // Make the popup transparent

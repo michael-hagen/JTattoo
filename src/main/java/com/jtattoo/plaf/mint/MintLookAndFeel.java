@@ -104,6 +104,7 @@ public class MintLookAndFeel extends AbstractLookAndFeel {
     }
 
     public static void setTheme(Properties themesProps) {
+        currentThemeName = "mintTheme";
         if (myTheme == null) {
             myTheme = new MintDefaultTheme();
         }
@@ -161,6 +162,9 @@ public class MintLookAndFeel extends AbstractLookAndFeel {
     }
     
     protected void initClassDefaults(UIDefaults table) {
+        if (!"mintTheme".equals(currentThemeName)) {
+            setTheme("Default");
+        }
         super.initClassDefaults(table);
         Object[] uiDefaults = {
             // BaseLookAndFeel classes

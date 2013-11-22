@@ -502,17 +502,17 @@ public class BaseTitlePane extends JComponent {
                 int ih = image.getHeight(null);
                 int iw = image.getWidth(null);
                 if (ih <= h) {
-                    g2D.drawImage(image, x, (h - ih) / 2, iw, ih, null);
+                    g2D.drawImage(image, 2, (h - ih) / 2, iw, ih, null);
                 } else {
                     double fac = (double)iw / (double)ih;
                     ih = h;
                     iw = (int)(fac * (double)ih);
-                    g2D.drawImage(image, x, 0, iw, ih, null);
+                    g2D.drawImage(image, 2, 0, iw, ih, null);
                 }
                 if (savedHint != null) {
                     g2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, savedHint);
                 }
-                return iw + 4;
+                return iw + 2;
             }
         }
         return 0;
@@ -540,10 +540,15 @@ public class BaseTitlePane extends JComponent {
         int height = getHeight();
         int titleWidth = width - buttonsWidth - 4;
         int xOffset = leftToRight ? 2 : width - 2;
+        int mw = 0;
         if (menuBar != null) {
-            int mw = menuBar.getWidth() + 2;
+            mw = menuBar.getWidth() + 2;
             xOffset += leftToRight ? mw : -mw;
             titleWidth -= height;
+        }
+        Image frameImage = getFrameIconImage();
+        if (frameImage != null) {
+            titleWidth -= frameImage.getWidth(null);
         }
 
         g.setFont(getFont());
@@ -556,6 +561,12 @@ public class BaseTitlePane extends JComponent {
         }
         if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
             xOffset = Math.max(buttonsWidth + 5, (width - titleLength) / 2);
+        } else if ( AbstractLookAndFeel.getTheme().isCenterWindowTitleOn()) {
+            if (leftToRight) {
+                xOffset += (titleWidth - titleLength) / 2;
+            } else {
+                xOffset -= (titleWidth - titleLength) / 2;
+            }
         }
         paintText(g, xOffset, yOffset, frameTitle);
     }

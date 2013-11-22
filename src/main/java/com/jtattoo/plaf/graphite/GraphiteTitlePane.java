@@ -47,7 +47,6 @@ public class GraphiteTitlePane extends BaseTitlePane {
     protected boolean centerButtons() {
         return false;
     }
-
     
     public void paintBorder(Graphics g) {
         if (isActive()) {

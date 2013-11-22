@@ -37,6 +37,10 @@ public class HiFiInternalFrameTitlePane extends BaseInternalFrameTitlePane {
         super(f);
     }
 
+    protected boolean centerButtons() {
+        return false;
+    }
+    
     public void paintText(Graphics g, int x, int y, String title) {
         if (isMacStyleWindowDecoration()) {
             x += paintIcon(g, x, y) + 5;

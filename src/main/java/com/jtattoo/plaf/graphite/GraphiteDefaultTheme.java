@@ -23,7 +23,8 @@
  
 package com.jtattoo.plaf.graphite;
 
-import com.jtattoo.plaf.*;
+import com.jtattoo.plaf.AbstractTheme;
+import com.jtattoo.plaf.ColorHelper;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.plaf.ColorUIResource;
@@ -87,7 +88,7 @@ public class GraphiteDefaultTheme extends AbstractTheme {
         controlColorDark = new ColorUIResource(40, 40, 40);
 
         windowTitleForegroundColor = white;
-        windowTitleBackgroundColor = gray;
+        windowTitleBackgroundColor = new ColorUIResource(88, 88, 88);
         windowTitleColorLight = new ColorUIResource(88, 88, 88);
         windowTitleColorDark = new ColorUIResource(24, 24, 24);
         windowBorderColor = black;

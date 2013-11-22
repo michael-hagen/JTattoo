@@ -307,6 +307,12 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
         }
         if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
             xOffset = Math.max(buttonsWidth + 5, (width - titleLength) / 2);
+        } else if (AbstractLookAndFeel.getTheme().isCenterWindowTitleOn()) {
+            if (leftToRight) {
+                xOffset += (titleWidth - titleLength) / 2;
+            } else {
+                xOffset -= (titleWidth - titleLength) / 2;
+            }
         }
         paintText(g, xOffset, yOffset, frameTitle);
         paintBorder(g);
@@ -455,7 +461,7 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
             int btnWidth = btnHeight;
 
             int x = 2;
-            int y = centerButtons() ? Math.max(0, ((h - btnHeight) / 2) - 1) : 0;
+            int y = centerButtons() ? Math.max(0, ((h - btnHeight) / 2)) : 0;
 
             if (frame.isClosable()) {
                 closeButton.setBounds(x, y, btnWidth, btnHeight);

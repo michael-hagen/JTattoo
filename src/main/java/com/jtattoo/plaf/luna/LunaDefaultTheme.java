@@ -71,13 +71,13 @@ public class LunaDefaultTheme extends AbstractTheme {
         controlColorDark = new ColorUIResource(214, 208, 197);
 
         windowTitleForegroundColor = white;
-        windowTitleBackgroundColor = new ColorUIResource(194, 208, 243); //new ColorUIResource(139, 185, 254);
+        windowTitleBackgroundColor = new ColorUIResource(2, 100, 247);
         windowTitleColorLight = new ColorUIResource(139, 185, 254);
         windowTitleColorDark = new ColorUIResource(2, 80, 196);
         windowBorderColor = new ColorUIResource(2, 80, 196);
 
         windowInactiveTitleForegroundColor = white;
-        windowInactiveTitleBackgroundColor = new ColorUIResource(240, 238, 225); // new ColorUIResource(141, 186, 253);
+        windowInactiveTitleBackgroundColor = new ColorUIResource(39, 106, 204); 
         windowInactiveTitleColorLight = new ColorUIResource(141, 186, 253);
         windowInactiveTitleColorDark = new ColorUIResource(39, 106, 204);
         windowInactiveBorderColor = new ColorUIResource(39, 106, 204);

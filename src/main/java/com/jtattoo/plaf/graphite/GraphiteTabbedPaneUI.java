@@ -23,8 +23,17 @@
  
 package com.jtattoo.plaf.graphite;
 
-import com.jtattoo.plaf.*;
-import java.awt.*;
+import com.jtattoo.plaf.AbstractLookAndFeel;
+import com.jtattoo.plaf.BaseTabbedPaneUI;
+import com.jtattoo.plaf.ColorHelper;
+import com.jtattoo.plaf.JTattooUtilities;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import javax.swing.JComponent;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
@@ -49,8 +58,8 @@ public class GraphiteTabbedPaneUI extends BaseTabbedPaneUI {
     }
 
     protected Color getLoBorderColor(int tabIndex) {
-        if (tabIndex == tabPane.getSelectedIndex() && tabPane.getBackgroundAt(tabIndex) instanceof ColorUIResource) {
-            return super.getLoBorderColor(tabIndex);
+        if ((tabIndex == tabPane.getSelectedIndex() || tabIndex == rolloverIndex) && tabPane.getBackgroundAt(tabIndex) instanceof ColorUIResource) {
+            return AbstractLookAndFeel.getControlColorDark();
         }
         return AbstractLookAndFeel.getControlShadow();
     }
@@ -117,7 +126,11 @@ public class GraphiteTabbedPaneUI extends BaseTabbedPaneUI {
                         g.setColor(titleColor);
                     }
                 } else {
-                    g.setColor(tabPane.getForegroundAt(tabIndex));
+                    if (tabIndex == rolloverIndex) {
+                        g.setColor(AbstractLookAndFeel.getTheme().getRolloverForegroundColor());
+                    } else {
+                        g.setColor(tabPane.getForegroundAt(tabIndex));
+                    }
                 }
                 JTattooUtilities.drawStringUnderlineCharAt(tabPane, g, title, mnemIndex, textRect.x, textRect.y + metrics.getAscent());
 

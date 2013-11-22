@@ -71,6 +71,7 @@ public class HiFiDefaultTheme extends AbstractTheme {
         inputBackgroundColor = new ColorUIResource(80, 80, 80);
         inputForegroundColor = foregroundColor;
 
+        rolloverForegroundColor = extraLightGray;
         rolloverColor = new ColorUIResource(112, 112, 112);
         rolloverColorLight = new ColorUIResource(128, 128, 128);
         rolloverColorDark = new ColorUIResource(96, 96, 96);
@@ -89,7 +90,7 @@ public class HiFiDefaultTheme extends AbstractTheme {
         controlDarkShadowColor = black;
 
         windowTitleForegroundColor = foregroundColor;
-        windowTitleBackgroundColor = new ColorUIResource(96, 96, 96);
+        windowTitleBackgroundColor = new ColorUIResource(32, 32, 32);
         windowTitleColorLight = new ColorUIResource(96, 96, 96);
         windowTitleColorDark = new ColorUIResource(32, 32, 32);//new ColorUIResource(16, 16, 16);
         windowBorderColor =  black;

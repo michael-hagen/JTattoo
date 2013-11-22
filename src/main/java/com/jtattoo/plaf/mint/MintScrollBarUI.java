@@ -23,6 +23,7 @@
  
 package com.jtattoo.plaf.mint;
 
+import com.jtattoo.plaf.AbstractLookAndFeel;
 import com.jtattoo.plaf.XPScrollBarUI;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -39,11 +40,19 @@ public class MintScrollBarUI extends XPScrollBarUI {
     }
 
     protected JButton createDecreaseButton(int orientation) {
-        return new MintScrollButton(orientation, scrollBarWidth);
+        if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
+            return super.createDecreaseButton(orientation);
+        } else {
+            return new MintScrollButton(orientation, scrollBarWidth);
+        }
     }
 
     protected JButton createIncreaseButton(int orientation) {
-        return new MintScrollButton(orientation, scrollBarWidth);
+        if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
+            return super.createIncreaseButton(orientation);
+        } else {
+            return new MintScrollButton(orientation, scrollBarWidth);
+        }
     }
 
 }

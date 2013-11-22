@@ -86,10 +86,12 @@ public class McWinDefaultTheme extends AbstractTheme {
         windowInactiveTitleColorDark = new ColorUIResource(236, 236, 236);
         windowInactiveBorderColor = lightGray;
 
-        menuBackgroundColor = white;
+        menuBackgroundColor = backgroundColor;
+        menuColorLight = white;
+        menuColorDark = backgroundColor;
         menuSelectionBackgroundColor = selectionBackgroundColor;
 
-        toolbarBackgroundColor = white;
+        toolbarBackgroundColor = backgroundColor;
 
         tabAreaBackgroundColor = backgroundColor;
         desktopColor = new ColorUIResource(232, 232, 232);

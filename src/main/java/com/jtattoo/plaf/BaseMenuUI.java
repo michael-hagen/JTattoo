@@ -28,6 +28,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.*;
 import javax.swing.event.MouseInputListener;
 import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicMenuUI;
 
 /**
@@ -74,10 +75,14 @@ public class BaseMenuUI extends BasicMenuUI {
 
     protected void paintBackground(Graphics g, JComponent c, int x, int y, int w, int h) {
         JMenuItem mi = (JMenuItem) c;
+        Color backColor = mi.getBackground();
+        if (backColor instanceof UIResource) {
+            backColor = AbstractLookAndFeel.getMenuBackgroundColor();
+        }
         ButtonModel model = mi.getModel();
         if (c.getParent() instanceof JMenuBar) {
            if (model.isRollover() || model.isArmed() || (c instanceof JMenu && model.isSelected())) {
-                Color backColor = AbstractLookAndFeel.getMenuSelectionBackgroundColor();
+                backColor = AbstractLookAndFeel.getMenuSelectionBackgroundColor();
                 if (model.isRollover()) {
                     backColor = ColorHelper.brighter(backColor, 10);
                 }
@@ -98,19 +103,19 @@ public class BaseMenuUI extends BasicMenuUI {
                 Composite savedComposite = g2D.getComposite();
                 AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, AbstractLookAndFeel.getTheme().getMenuAlpha());
                 g2D.setComposite(alpha);
-                g.setColor(AbstractLookAndFeel.getMenuBackgroundColor());
+                g.setColor(backColor);
                 g.fillRect(x, y, w, h);
                 g2D.setComposite(savedComposite);
             } else {
-                g.setColor(AbstractLookAndFeel.getMenuBackgroundColor());
+                g.setColor(backColor);
                 g.fillRect(x, y, w, h);
             }
         }
-        if (menuItem.isSelected() && menuItem.isArmed()) {
-            g.setColor(AbstractLookAndFeel.getMenuSelectionForegroundColor());
-        } else {
-            g.setColor(AbstractLookAndFeel.getMenuForegroundColor());
-        }
+//        if (menuItem.isSelected() && menuItem.isArmed()) {
+//            g.setColor(AbstractLookAndFeel.getMenuSelectionForegroundColor());
+//        } else {
+//            g.setColor(AbstractLookAndFeel.getMenuForegroundColor());
+//        }
     }
 
     protected void paintText(Graphics g, JMenuItem menuItem, Rectangle textRect, String text) {
@@ -121,13 +126,18 @@ public class BaseMenuUI extends BasicMenuUI {
             savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING);
             g2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, AbstractLookAndFeel.getTheme().getTextAntiAliasingHint());
         }
-        g.setColor(AbstractLookAndFeel.getMenuForegroundColor());
         if (menuItem.getParent() instanceof JMenuBar) {
             if (model.isRollover() || model.isArmed() || (menuItem instanceof JMenu && model.isSelected())) {
                 g.setColor(AbstractLookAndFeel.getMenuSelectionForegroundColor());
             }
         } else if(menuItem.isSelected() && menuItem.isArmed()) {
             g.setColor(AbstractLookAndFeel.getMenuSelectionForegroundColor());
+        } else {
+            Color foreColor = menuItem.getForeground();
+            if (foreColor instanceof UIResource) {
+                foreColor = AbstractLookAndFeel.getMenuForegroundColor();
+            }
+            g.setColor(foreColor);
         }
         super.paintText(g, menuItem, textRect, text);
         if (AbstractLookAndFeel.getTheme().isTextAntiAliasingOn()) {

@@ -388,7 +388,6 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 
         private JTable table = null;
         private int col = 0;
-        private int gv = 0;
 
         public MyRenderComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int col) {
             super();
@@ -400,8 +399,16 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
                 setText("");
             }
             setOpaque(false);
-            setFont(UIManager.getFont("TableHeader.font"));
-            setForeground(UIManager.getColor("TableHeader.foreground"));
+            if (table.getClientProperty("TableHeader.font") != null) {
+                setFont((Font)table.getClientProperty("TableHeader.font"));
+            } else {
+                setFont(UIManager.getFont("TableHeader.font"));
+            }
+            if (col == rolloverCol) {
+                setForeground(AbstractLookAndFeel.getTheme().getRolloverForegroundColor());
+            } else {
+                setForeground(UIManager.getColor("TableHeader.foreground"));
+            }
             setHorizontalAlignment(JLabel.CENTER);
             setHorizontalTextPosition(SwingConstants.LEADING);
             setBorder(UIManager.getBorder("TableHeader.cellBorder"));
@@ -420,7 +427,6 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
                     }
                 }
             }
-            gv = ColorHelper.getGrayValue(AbstractLookAndFeel.getTheme().getRolloverColor());
         }
 
         protected void paintBackground(Graphics g) {
@@ -457,13 +463,6 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 
         public void paint(Graphics g) {
             paintBackground(g);
-            if (rolloverCol == col) {
-                if (gv > 128) {
-                    setForeground(Color.black);
-                } else {
-                    setForeground(Color.white);
-                }
-            }
             super.paint(g);
         }
     }

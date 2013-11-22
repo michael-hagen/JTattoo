@@ -113,11 +113,11 @@ public class DecorationHelper {
         if (isTranslucentWindowSupported()) {
             if (JTattooUtilities.getJavaVersion() >= 1.7) {
                 if (translucent) {
-                    if (!wnd.getBackground().equals(new Color(0, 0, 0, 0))) {
+                    if (wnd.getBackground() == null || !wnd.getBackground().equals(new Color(0, 0, 0, 0))) {
                         wnd.setBackground(new Color(0, 0, 0, 0));
                     }
                 } else {
-                    if (!wnd.getBackground().equals(new Color(0, 0, 0, 0xff))) {
+                    if (wnd.getBackground() == null || !wnd.getBackground().equals(new Color(0, 0, 0, 0xff))) {
                         wnd.setBackground(new Color(0, 0, 0, 0xff));
                     }
                 }

@@ -23,6 +23,7 @@
  
 package com.jtattoo.plaf.texture;
 
+import com.jtattoo.plaf.AbstractLookAndFeel;
 import com.jtattoo.plaf.XPScrollBarUI;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -34,30 +35,24 @@ import javax.swing.plaf.ComponentUI;
  */
 public class TextureScrollBarUI extends XPScrollBarUI {
 
-//    private static Color rolloverColors[] = null;
-//    private static Color dragColors[] = null;
-
     public static ComponentUI createUI(JComponent c) {
         return new TextureScrollBarUI();
     }
 
-//    protected void installDefaults() {
-//        super.installDefaults();
-//        Color colors[] = AbstractLookAndFeel.getTheme().getThumbColors();
-//        rolloverColors = new Color[colors.length];
-//        dragColors = new Color[colors.length];
-//        for (int i = 0; i < colors.length; i++) {
-//            rolloverColors[i] = ColorHelper.darker(colors[i], 6);
-//            dragColors[i] = ColorHelper.darker(colors[i], 12);
-//        }
-//    }
-
     protected JButton createDecreaseButton(int orientation) {
-        return new TextureScrollButton(orientation, scrollBarWidth);
+        if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
+            return super.createDecreaseButton(orientation);
+        } else {
+            return new TextureScrollButton(orientation, scrollBarWidth);
+        }
     }
 
     protected JButton createIncreaseButton(int orientation) {
-        return new TextureScrollButton(orientation, scrollBarWidth);
+        if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
+            return super.createIncreaseButton(orientation);
+        } else {
+            return new TextureScrollButton(orientation, scrollBarWidth);
+        }
     }
 
 }

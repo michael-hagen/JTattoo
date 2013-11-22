@@ -99,8 +99,8 @@ public class AeroLookAndFeel extends AbstractLookAndFeel {
         greenProps.setProperty("menuSelectionBackgroundColor", "150 211 176");
         greenProps.setProperty("tabSelectionForegroundColor", "255 255 255");
         
-        String key = null;
-        String value = null;
+        String key;
+        String value;
         Iterator iter = smallFontProps.keySet().iterator();
         while (iter.hasNext()) {
             key = (String)iter.next();
@@ -200,6 +200,7 @@ public class AeroLookAndFeel extends AbstractLookAndFeel {
     }
 
     public static void setTheme(Properties themesProps) {
+        currentThemeName = "aeroTheme";
         if (myTheme == null) {
            myTheme = new AeroDefaultTheme();
         }
@@ -243,6 +244,9 @@ public class AeroLookAndFeel extends AbstractLookAndFeel {
     }
     
     protected void initClassDefaults(UIDefaults table) {
+        if (!"aeroTheme".equals(currentThemeName)) {
+            setTheme("Default");
+        }
         super.initClassDefaults(table);
         Object[] uiDefaults = {
             // BaseLookAndFeel classes

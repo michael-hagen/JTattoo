@@ -84,16 +84,25 @@ public class BasePopupMenuUI extends BasicPopupMenuUI {
     }
 
     public Popup getPopup(JPopupMenu popupMenu, int x, int y) {
+        Popup popup = super.getPopup(popupMenu, x, y);
         if (!isMenuOpaque()) {
             try {
                 Dimension size = popupMenu.getPreferredSize();
-                Rectangle screenRect = new Rectangle(x, y, size.width, size.height);
-                screenImage = getRobot().createScreenCapture(screenRect);
+                if (size.width > 0 && size.height > 0) {
+                    Rectangle screenRect = new Rectangle(x, y, size.width, size.height);
+                    screenImage = getRobot().createScreenCapture(screenRect);
+                }
+                for (int i = 0; i < popupMenu.getComponentCount(); i++) {
+                    if (popupMenu.getComponent(i) instanceof JPanel) {
+                        JPanel panel = (JPanel)popupMenu.getComponent(i);
+                        panel.setOpaque(true);
+                    }
+                }
             } catch (Exception ex) {
                 screenImage = null;
             }
         }
-        return super.getPopup(popupMenu, x, y);
+        return popup;
     }
 
     private void resetScreenImage() {
@@ -104,7 +113,7 @@ public class BasePopupMenuUI extends BasicPopupMenuUI {
         if (screenImage != null) {
             g.drawImage(screenImage, 0, 0, null);
         } else {
-            g.setColor(Color.white);
+            g.setColor(AbstractLookAndFeel.getMenuBackgroundColor());
             g.fillRect(0, 0, c.getWidth(), c.getHeight());
         }
     }

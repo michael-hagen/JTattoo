@@ -102,6 +102,7 @@ public class LunaLookAndFeel extends AbstractLookAndFeel {
     }
 
     public static void setTheme(Properties themesProps) {
+        currentThemeName = "lunaTheme";
         if (myTheme == null) {
             myTheme = new LunaDefaultTheme();
         }
@@ -159,6 +160,9 @@ public class LunaLookAndFeel extends AbstractLookAndFeel {
     }
     
     protected void initClassDefaults(UIDefaults table) {
+        if (!"lunaTheme".equals(currentThemeName)) {
+            setTheme("Default");
+        }
         super.initClassDefaults(table);
         Object[] uiDefaults = {
             // BaseLookAndFeel classes

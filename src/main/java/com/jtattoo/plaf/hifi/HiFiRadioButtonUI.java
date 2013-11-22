@@ -80,7 +80,7 @@ public class HiFiRadioButtonUI extends BaseRadioButtonUI {
 
     public void paintBackground(Graphics g, JComponent c) {
         if (c.isOpaque()) {
-            if ((c.getBackground().equals(AbstractLookAndFeel.getBackgroundColor())) && (c.getBackground() instanceof ColorUIResource)) {
+            if ((c.getBackground() instanceof ColorUIResource) && c.getBackground().equals(AbstractLookAndFeel.getBackgroundColor())) {
                 HiFiUtils.fillComponent(g, c);
             } else {
                 g.setColor(c.getBackground());

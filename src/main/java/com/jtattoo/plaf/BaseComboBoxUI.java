@@ -102,6 +102,10 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
 
     public Dimension getPreferredSize(JComponent c) {
         Dimension size = super.getPreferredSize(c);
+        if (comboBox.getGraphics() != null) {
+            FontMetrics fm = comboBox.getGraphics().getFontMetrics();
+            size.height = Math.max(BaseIcons.getComboBoxIcon().getIconHeight() + 2, fm.getHeight() + 2);
+        }
         return new Dimension(size.width + 2, size.height + 2);
     }
 
@@ -158,7 +162,7 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
             
             boolean inverse = ColorHelper.getGrayValue(colors) < 128;
             
-            Icon icon = inverse ? BaseIcons.getComboBoxInverseIcon() : BaseIcons.getComboBoxIcon();;
+            Icon icon = inverse ? BaseIcons.getComboBoxInverseIcon() : BaseIcons.getComboBoxIcon();
             int x = (size.width - icon.getIconWidth()) / 2;
             int y = (size.height - icon.getIconHeight()) / 2;
             

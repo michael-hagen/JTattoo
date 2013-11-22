@@ -550,7 +550,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         if ((tabIndex >= 0) && (tabIndex < tabPane.getTabCount())) {
             boolean isEnabled = tabPane.isEnabledAt(tabIndex);
             Color backColor = tabPane.getBackgroundAt(tabIndex);
-            if ((backColor instanceof UIResource)) {
+            if (backColor instanceof UIResource) {
                 if (isSelected) {
                     colorArr = AbstractLookAndFeel.getTheme().getSelectedColors();
                 } else if (isRollover && isEnabled) {
@@ -562,7 +562,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
                         colorArr = AbstractLookAndFeel.getTheme().getInActiveColors();
                     }
                 }
-            } else {
+            } else if (backColor != null) {
                 if (isSelected) {
                     colorArr = ColorHelper.createColorArr(ColorHelper.brighter(backColor, 60), backColor, 20);
                 } else if (isRollover && isEnabled) {
@@ -993,7 +993,11 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
                         g.setColor(tabPane.getForegroundAt(tabIndex));
                     }
                 } else {
-                    g.setColor(tabPane.getForegroundAt(tabIndex));
+                    if (tabIndex == rolloverIndex) {
+                        g.setColor(AbstractLookAndFeel.getTheme().getRolloverForegroundColor());
+                    } else {
+                        g.setColor(tabPane.getForegroundAt(tabIndex));
+                    }
                 }
                 JTattooUtilities.drawStringUnderlineCharAt(tabPane, g, title, mnemIndex, textRect.x, textRect.y + metrics.getAscent());
 

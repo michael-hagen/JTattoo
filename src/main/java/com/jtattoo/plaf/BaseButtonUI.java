@@ -147,8 +147,10 @@ public class BaseButtonUI extends BasicButtonUI {
             }
             JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + offs, textRect.y + offs + fm.getAscent());
         } else {
-            g.setColor(Color.white);
-            JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + 1, textRect.y + 1 + fm.getAscent());
+            if (ColorHelper.getGrayValue(b.getForeground()) < 128) {
+                g.setColor(Color.white);
+                JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + 1, textRect.y + 1 + fm.getAscent());
+            }
             g.setColor(AbstractLookAndFeel.getDisabledForegroundColor());
             JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x, textRect.y + fm.getAscent());
         }

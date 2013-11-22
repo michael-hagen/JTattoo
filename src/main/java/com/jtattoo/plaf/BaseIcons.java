@@ -679,7 +679,7 @@ public class BaseIcons {
             int h = c.getHeight();
             Icon closerIcon = null;
             Icon pearlIcon = null;
-            if (w <= 18) {
+            if (w <= 20) {
                 closerIcon = CLOSER_10x10;
                 pearlIcon = PEARL_RED_24x24;
                 if (!JTattooUtilities.isActive(btn)) {
@@ -727,7 +727,7 @@ public class BaseIcons {
             Icon iconizerIcon = null;
             Icon pearlIcon = null;
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
-                if (w <= 18) {
+                if (w <= 20) {
                     iconizerIcon = ICONIZER_10x10;
                     pearlIcon = PEARL_YELLOW_24x24;
                     if (!JTattooUtilities.isActive(btn)) {
@@ -748,7 +748,7 @@ public class BaseIcons {
                 }
                 
             } else {
-                if (w <= 18) {
+                if (w <= 20) {
                     iconizerIcon = ICONIZER_10x10;
                     pearlIcon = PEARL_GREEN_24x24;
                     if (!JTattooUtilities.isActive(btn)) {
@@ -797,7 +797,7 @@ public class BaseIcons {
             Icon maximizerIcon = null;
             Icon pearlIcon = null;
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
-                if (w <= 18) {
+                if (w <= 20) {
                     maximizerIcon = MAXIMIZER_10x10;
                     pearlIcon = PEARL_GREEN_24x24;
                     if (!JTattooUtilities.isActive(btn)) {
@@ -817,7 +817,7 @@ public class BaseIcons {
                     }
                 }
             } else {
-                if (w <= 18) {
+                if (w <= 20) {
                     maximizerIcon = MAXIMIZER_10x10;
                     pearlIcon = PEARL_YELLOW_24x24;
                     if (!JTattooUtilities.isActive(btn)) {
@@ -866,7 +866,7 @@ public class BaseIcons {
             Icon minimizerIcon = null;
             Icon pearlIcon = null;
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
-                if (w <= 18) {
+                if (w <= 20) {
                     minimizerIcon = MINIMIZER_10x10;
                     pearlIcon = PEARL_GREEN_24x24;
                     if (!JTattooUtilities.isActive(btn)) {
@@ -886,7 +886,7 @@ public class BaseIcons {
                     }
                 }
             } else {
-                if (w <= 18) {
+                if (w <= 20) {
                     minimizerIcon = MINIMIZER_10x10;
                     pearlIcon = PEARL_YELLOW_24x24;
                     if (!JTattooUtilities.isActive(btn)) {

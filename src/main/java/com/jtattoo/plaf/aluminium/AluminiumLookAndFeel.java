@@ -102,6 +102,7 @@ public class AluminiumLookAndFeel extends AbstractLookAndFeel {
     }
 
     public static void setTheme(Properties themesProps) {
+        currentThemeName = "aluminiumTheme";
         if (myTheme == null) {
             myTheme = new AluminiumDefaultTheme();
         }
@@ -153,6 +154,9 @@ public class AluminiumLookAndFeel extends AbstractLookAndFeel {
     }
 
     protected void initClassDefaults(UIDefaults table) {
+        if (!"aluminiumTheme".equals(currentThemeName)) {
+            setTheme("Default");
+        }
         super.initClassDefaults(table);
         Object[] uiDefaults = {
             // BaseLookAndFeel classes

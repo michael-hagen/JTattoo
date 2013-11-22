@@ -59,7 +59,7 @@ public class FastDefaultTheme extends AbstractTheme {
         focusColor = new ColorUIResource(160, 160, 200);
         focusCellColor = new ColorUIResource(160, 160, 200);
         buttonBackgroundColor = extraLightGray;
-        controlBackgroundColor = new ColorUIResource(220, 220, 220);
+        controlBackgroundColor = extraLightGray;
 
         windowTitleBackgroundColor = new ColorUIResource(210, 210, 210);
         windowBorderColor = new ColorUIResource(210, 210, 210);
@@ -85,14 +85,15 @@ public class FastDefaultTheme extends AbstractTheme {
         ACTIVE_COLORS = DEFAULT_COLORS;
         INACTIVE_COLORS = HIDEFAULT_COLORS;
 
-        ROLLOVER_COLORS = ColorHelper.createColorArr(buttonBackgroundColor, buttonBackgroundColor, 2);
+        //ROLLOVER_COLORS = ColorHelper.createColorArr(buttonBackgroundColor, buttonBackgroundColor, 2);
+        ROLLOVER_COLORS = ColorHelper.createColorArr(superLightGray, superLightGray, 2);
         SELECTED_COLORS = ColorHelper.createColorArr(backgroundColor, backgroundColor, 2);
         PRESSED_COLORS = ColorHelper.createColorArr(controlColorDark, controlColorDark, 2);
         DISABLED_COLORS = ColorHelper.createColorArr(controlColorLight, controlColorLight, 2);
 
         BUTTON_COLORS = ColorHelper.createColorArr(buttonBackgroundColor, buttonBackgroundColor, 2);
-        COL_HEADER_COLORS = ColorHelper.createColorArr(new Color(248, 248, 248), new Color(248, 248, 248), 2);
-        CHECKBOX_COLORS = COL_HEADER_COLORS;
+        COL_HEADER_COLORS = ColorHelper.createColorArr(superLightGray, superLightGray, 2);
+        CHECKBOX_COLORS = ColorHelper.createColorArr(superLightGray, superLightGray, 2);
 
         TAB_COLORS = DEFAULT_COLORS;
         

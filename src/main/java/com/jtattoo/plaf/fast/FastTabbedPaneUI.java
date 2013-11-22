@@ -63,7 +63,7 @@ public class FastTabbedPaneUI extends BaseTabbedPaneUI {
                         colorArr = AbstractLookAndFeel.getTheme().getInActiveColors();
                     }
                 }
-            } else {
+            } else if (backColor != null) {
                 colorArr = ColorHelper.createColorArr(backColor, backColor, 2);
             }
         }

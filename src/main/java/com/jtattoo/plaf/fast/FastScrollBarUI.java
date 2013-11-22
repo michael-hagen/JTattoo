@@ -39,11 +39,19 @@ public class FastScrollBarUI extends BaseScrollBarUI {
     }
 
     protected JButton createDecreaseButton(int orientation) {
-        return new FastScrollButton(orientation, scrollBarWidth);
+        if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
+            return super.createDecreaseButton(orientation);
+        } else {
+            return new FastScrollButton(orientation, scrollBarWidth);
+        }
     }
 
     protected JButton createIncreaseButton(int orientation) {
-        return new FastScrollButton(orientation, scrollBarWidth);
+        if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
+            return super.createDecreaseButton(orientation);
+        } else {
+            return new FastScrollButton(orientation, scrollBarWidth);
+        }
     }
 
     protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {

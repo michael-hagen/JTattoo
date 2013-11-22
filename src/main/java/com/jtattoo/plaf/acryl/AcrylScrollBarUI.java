@@ -38,14 +38,6 @@ public class AcrylScrollBarUI extends BaseScrollBarUI {
         return new AcrylScrollBarUI();
     }
 
-    protected JButton createDecreaseButton(int orientation) {
-        return new BaseScrollButton(orientation, scrollBarWidth);
-    }
-
-    protected JButton createIncreaseButton(int orientation) {
-        return new BaseScrollButton(orientation, scrollBarWidth);
-    }
-
     protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
         if (!c.isEnabled()) {
             return;
@@ -72,20 +64,22 @@ public class AcrylScrollBarUI extends BaseScrollBarUI {
             AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
             g2D.setComposite(alpha);
 
-            int dx = 5;
-            int dy = thumbBounds.height / 2 - 3;
-            int dw = thumbBounds.width - 11;
+            if (!AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
+                int dx = 5;
+                int dy = thumbBounds.height / 2 - 3;
+                int dw = thumbBounds.width - 11;
 
-            Color c1 = Color.white;
-            Color c2 = Color.darkGray;
+                Color c1 = Color.white;
+                Color c2 = Color.darkGray;
 
-            for (int i = 0; i < 4; i++) {
-                g.setColor(c1);
-                g.drawLine(dx, dy, dx + dw, dy);
-                dy++;
-                g.setColor(c2);
-                g.drawLine(dx, dy, dx + dw, dy);
-                dy++;
+                for (int i = 0; i < 4; i++) {
+                    g.setColor(c1);
+                    g.drawLine(dx, dy, dx + dw, dy);
+                    dy++;
+                    g.setColor(c2);
+                    g.drawLine(dx, dy, dx + dw, dy);
+                    dy++;
+                }
             }
             g2D.setComposite(composite);
         } else { // HORIZONTAL
@@ -101,16 +95,18 @@ public class AcrylScrollBarUI extends BaseScrollBarUI {
             AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
             g2D.setComposite(alpha);
 
-            Color c1 = Color.white;
-            Color c2 = Color.darkGray;
+            if (!AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
+                Color c1 = Color.white;
+                Color c2 = Color.darkGray;
 
-            for (int i = 0; i < 4; i++) {
-                g.setColor(c1);
-                g.drawLine(dx, dy, dx, dy + dh);
-                dx++;
-                g.setColor(c2);
-                g.drawLine(dx, dy, dx, dy + dh);
-                dx++;
+                for (int i = 0; i < 4; i++) {
+                    g.setColor(c1);
+                    g.drawLine(dx, dy, dx, dy + dh);
+                    dx++;
+                    g.setColor(c2);
+                    g.drawLine(dx, dy, dx, dy + dh);
+                    dx++;
+                }
             }
             g2D.setComposite(composite);
         }

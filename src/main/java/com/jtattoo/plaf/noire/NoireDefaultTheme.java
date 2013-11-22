@@ -72,6 +72,7 @@ public class NoireDefaultTheme extends AbstractTheme {
         inputBackgroundColor = new ColorUIResource(52, 55, 59);
         inputForegroundColor = foregroundColor;
 
+        rolloverForegroundColor = white;
         rolloverColor = new ColorUIResource(240, 168, 0);
         rolloverColorLight = new ColorUIResource(240, 168, 0);
         rolloverColorDark = new ColorUIResource(196, 137, 0);
@@ -90,7 +91,7 @@ public class NoireDefaultTheme extends AbstractTheme {
         controlDarkShadowColor = black;
 
         windowTitleForegroundColor = foregroundColor;
-        windowTitleBackgroundColor = new ColorUIResource(144, 148, 149);
+        windowTitleBackgroundColor = new ColorUIResource(16, 17, 15);
         windowTitleColorLight = new ColorUIResource(64, 67, 60);
         windowTitleColorDark = black;
         windowBorderColor = black;
@@ -99,7 +100,7 @@ public class NoireDefaultTheme extends AbstractTheme {
         windowIconRolloverColor = orange;
 
         windowInactiveTitleForegroundColor = new ColorUIResource(196, 196, 196);
-        windowInactiveTitleBackgroundColor = new ColorUIResource(64, 64, 64);
+        windowInactiveTitleBackgroundColor = new ColorUIResource(16, 16, 16);
         windowInactiveTitleColorLight = new ColorUIResource(64, 64, 64);
         windowInactiveTitleColorDark = new ColorUIResource(32, 32, 32);
         windowInactiveBorderColor = black;

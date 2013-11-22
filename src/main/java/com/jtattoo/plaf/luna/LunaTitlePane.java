@@ -44,10 +44,6 @@ public class LunaTitlePane extends BaseTitlePane {
         return 5;
     }
 
-    protected boolean centerButtons() {
-        return false;
-    }
-
     public void paintBorder(Graphics g) {
         if (isActive()) {
             g.setColor(AbstractLookAndFeel.getTheme().getFrameColor());
