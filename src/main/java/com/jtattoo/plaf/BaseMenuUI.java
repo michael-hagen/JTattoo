@@ -93,22 +93,26 @@ public class BaseMenuUI extends BasicMenuUI {
                     g.setColor(backColor);
                     g.drawRect(x, y, w - 1, h - 1);
                 }
+                g.setColor(AbstractLookAndFeel.getMenuSelectionForegroundColor());
             }
         } else {
             if (model.isArmed() || (c instanceof JMenu && model.isSelected())) {
                 g.setColor(AbstractLookAndFeel.getMenuSelectionBackgroundColor());
                 g.fillRect(x, y, w, h);
+                g.setColor(AbstractLookAndFeel.getMenuSelectionForegroundColor());
             } else if (!AbstractLookAndFeel.getTheme().isMenuOpaque()) {
                 Graphics2D g2D = (Graphics2D) g;
                 Composite savedComposite = g2D.getComposite();
                 AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, AbstractLookAndFeel.getTheme().getMenuAlpha());
                 g2D.setComposite(alpha);
-                g.setColor(backColor);
-                g.fillRect(x, y, w, h);
+                g2D.setColor(backColor);
+                g2D.fillRect(x, y, w, h);
+                g2D.setColor(AbstractLookAndFeel.getMenuForegroundColor());
                 g2D.setComposite(savedComposite);
             } else {
                 g.setColor(backColor);
                 g.fillRect(x, y, w, h);
+                g.setColor(AbstractLookAndFeel.getMenuForegroundColor());
             }
         }
 //        if (menuItem.isSelected() && menuItem.isArmed()) {

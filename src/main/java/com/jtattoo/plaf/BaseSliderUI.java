@@ -309,6 +309,14 @@ public class BaseSliderUI extends BasicSliderUI {
         }
     }
 
+    protected boolean isDragging() {
+        if (JTattooUtilities.getJavaVersion() >= 1.5) {
+            return super.isDragging();
+        } else {
+            return false;
+        }
+    }
+
     public void paintThumb(Graphics g) {
         Icon icon;
         if (slider.getOrientation() == JSlider.HORIZONTAL) {
