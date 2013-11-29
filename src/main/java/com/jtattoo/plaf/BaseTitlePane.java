@@ -100,7 +100,6 @@ public class BaseTitlePane extends JComponent {
         setLayout(createLayout());
     }
 
-
     protected void uninstall() {
         uninstallListeners();
         window = null;
@@ -397,9 +396,9 @@ public class BaseTitlePane extends JComponent {
                 return;
             }
 
-            Frame frame = getFrame();
+            final Frame frame = getFrame();
             if (frame != null) {
-
+                
                 if (((state & BaseRootPaneUI.MAXIMIZED_BOTH) != 0) && (rootPane.getBorder() == null || (rootPane.getBorder() instanceof UIResource)) && frame.isShowing()) {
                     rootPane.setBorder(null);
                 } else if ((state & BaseRootPaneUI.MAXIMIZED_BOTH) == 0) {
@@ -430,6 +429,38 @@ public class BaseTitlePane extends JComponent {
                         remove(maxButton);
                         revalidate();
                         repaint();
+                    }
+                }
+                // BUGFIX
+                // When programatically maximize a frame via setExtendedState in a multiscreen environment the width
+                // and height may not be set correctly. We fix this issue here.
+                if ((state & BaseRootPaneUI.MAXIMIZED_BOTH) != 0) {
+                    Point location = frame.getLocation();
+                    Dimension size = frame.getSize();
+                    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+                    GraphicsDevice gda[] = ge.getScreenDevices();
+                    for (int i = 0; i < gda.length; i++) {
+                        GraphicsDevice gd = gda[i];
+                        GraphicsConfiguration gc = gd.getDefaultConfiguration();
+                        Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(gc);
+                        Rectangle screenBounds = gc.getBounds();
+                        if (screenBounds.contains(location)) {
+                            int w = screenBounds.width - (screenInsets.left + screenInsets.right);
+                            int h = screenBounds.height - (screenInsets.top + screenInsets.bottom);
+                            if (size.width != w || size.height != h) {
+                                
+                                SwingUtilities.invokeLater(new Runnable() {
+
+                                    public void run() {
+                                        useMaximizedBounds = false;
+                                        frame.setMaximizedBounds(null);
+                                        restore();
+                                        maximize();
+                                    }
+                                });
+                            }
+                            break;
+                        }
                     }
                 }
             } else {
@@ -502,12 +533,12 @@ public class BaseTitlePane extends JComponent {
                 int ih = image.getHeight(null);
                 int iw = image.getWidth(null);
                 if (ih <= h) {
-                    g2D.drawImage(image, 2, (h - ih) / 2, iw, ih, null);
+                    g2D.drawImage(image, x, (h - ih) / 2, iw, ih, null);
                 } else {
                     double fac = (double)iw / (double)ih;
                     ih = h;
                     iw = (int)(fac * (double)ih);
-                    g2D.drawImage(image, 2, 0, iw, ih, null);
+                    g2D.drawImage(image, x, 0, iw, ih, null);
                 }
                 if (savedHint != null) {
                     g2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, savedHint);
