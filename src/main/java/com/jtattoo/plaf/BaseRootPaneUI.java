@@ -583,18 +583,15 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
         private ResizingPanel resizingPanel = null;
 
         public void mousePressed(MouseEvent ev) {
-            if (ev.getSource() instanceof Window) {
+            Window w = (Window) ev.getSource();
+            if (w instanceof Window) {
                 JRootPane root = getRootPane();
                 if (DecorationHelper.getWindowDecorationStyle(root) == NONE) {
                     return;
                 }
+                w.toFront();
 
                 Point dragWindowOffset = ev.getPoint();
-                Window w = (Window) ev.getSource();
-                if (w != null) {
-                    w.toFront();
-                }
-
                 Point convertedDragWindowOffset = SwingUtilities.convertPoint(w, dragWindowOffset, getTitlePane());
 
                 Frame f = null;
@@ -782,10 +779,19 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
                 Window w = (Window) ev.getSource();
                 int minScreenY = getMinScreenY();
                 if (isMovingWindow) {
-                    Point location = ev.getLocationOnScreen();
-                    location.x = location.x - dragOffsetX;
-                    location.y = Math.max(minScreenY, location.y - dragOffsetY);
-                    w.setLocation(location);        
+                    if (JTattooUtilities.getJavaVersion() < 1.6) {
+                        Point pt = ev.getPoint();
+                        Point location = w.getLocationOnScreen();
+                        location.x += pt.x - dragOffsetX;
+                        location.y += pt.y - dragOffsetY;
+                        location.y = Math.max(minScreenY, location.y);
+                        w.setLocation(location);
+                    } else {
+                        Point location = ev.getLocationOnScreen();
+                        location.x -= dragOffsetX;
+                        location.y = Math.max(minScreenY, location.y - dragOffsetY);
+                        w.setLocation(location);        
+                    }
                 } else if (dragCursor != 0) {
                     Point pt = ev.getPoint();
                     Rectangle bounds = w.getBounds();
