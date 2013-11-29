@@ -64,7 +64,7 @@ public class BaseMenuItemUI extends BasicMenuItemUI {
     protected void paintBackground(Graphics g, JComponent c, int x, int y, int w, int h) {
         JMenuItem mi = (JMenuItem) c;
         Color backColor = mi.getBackground();
-        if (backColor instanceof UIResource) {
+        if (backColor == null || backColor instanceof UIResource) {
             backColor = AbstractLookAndFeel.getMenuBackgroundColor();
         }
         
@@ -93,7 +93,7 @@ public class BaseMenuItemUI extends BasicMenuItemUI {
         Color foreColor = menuItem.getForeground();
         if (menuItem.isSelected() && menuItem.isArmed()) {
             foreColor = AbstractLookAndFeel.getMenuSelectionForegroundColor();
-        } else if (foreColor instanceof UIResource) {
+        } else if (foreColor == null || foreColor instanceof UIResource) {
             foreColor = AbstractLookAndFeel.getMenuForegroundColor();
         }
         Graphics2D g2D = (Graphics2D) g;

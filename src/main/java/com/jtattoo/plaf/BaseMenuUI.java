@@ -76,7 +76,7 @@ public class BaseMenuUI extends BasicMenuUI {
     protected void paintBackground(Graphics g, JComponent c, int x, int y, int w, int h) {
         JMenuItem mi = (JMenuItem) c;
         Color backColor = mi.getBackground();
-        if (backColor instanceof UIResource) {
+        if (backColor == null || backColor instanceof UIResource) {
             backColor = AbstractLookAndFeel.getMenuBackgroundColor();
         }
         ButtonModel model = mi.getModel();
