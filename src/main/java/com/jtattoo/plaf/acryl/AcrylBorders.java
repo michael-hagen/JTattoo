@@ -230,16 +230,23 @@ public class AcrylBorders extends BaseBorders {
             if (model.isRollover() && !model.isPressed() && !model.isArmed()) {
                 frameColor = AbstractLookAndFeel.getTheme().getRolloverColorDark();
             }
-            Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
-            g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            if (AbstractLookAndFeel.getTheme().doDrawSquareButtons()) {
+                g2D.setColor(Color.white);
+                g2D.drawRect(x, y, w - 1, h - 1);
+                g2D.setColor(frameColor);
+                g2D.drawRect(x, y, w - 2, h - 2);
+            } else {
+                Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
+                g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-            g2D.setColor(Color.white);
-            g2D.drawRoundRect(x, y, w - 1, h - 1, 6, 6);
+                g2D.setColor(Color.white);
+                g2D.drawRoundRect(x, y, w - 1, h - 1, 6, 6);
 
-            g2D.setColor(frameColor);
-            g2D.drawRoundRect(x, y, w - 2, h - 2, 6, 6);
+                g2D.setColor(frameColor);
+                g2D.drawRoundRect(x, y, w - 2, h - 2, 6, 6);
 
-            g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRederingHint);
+                g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRederingHint);
+            }
         }
 
         public Insets getBorderInsets(Component c) {

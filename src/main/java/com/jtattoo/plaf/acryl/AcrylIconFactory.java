@@ -59,24 +59,36 @@ public class AcrylIconFactory implements AbstractIconFactory {
         return AcrylIcons.getOptionPaneQuestionIcon();
     }
 
-    public Icon getFileChooserDetailViewIcon() {
-        return AcrylIcons.getFileChooserDetailViewIcon();
+    public Icon getFileChooserUpFolderIcon() {
+        return AcrylIcons.getFileChooserUpFolderIcon();
     }
 
     public Icon getFileChooserHomeFolderIcon() {
         return AcrylIcons.getFileChooserHomeFolderIcon();
     }
 
-    public Icon getFileChooserListViewIcon() {
-        return AcrylIcons.getFileChooserListViewIcon();
-    }
-
     public Icon getFileChooserNewFolderIcon() {
         return AcrylIcons.getFileChooserNewFolderIcon();
     }
 
-    public Icon getFileChooserUpFolderIcon() {
-        return AcrylIcons.getFileChooserUpFolderIcon();
+    public Icon getFileChooserListViewIcon() {
+        return AcrylIcons.getFileChooserListViewIcon();
+    }
+
+    public Icon getFileChooserDetailViewIcon() {
+        return AcrylIcons.getFileChooserDetailViewIcon();
+    }
+
+    public Icon getFileViewComputerIcon() {
+        return AcrylIcons.getFileViewComputerIcon();
+    }
+
+    public Icon getFileViewFloppyDriveIcon() {
+        return AcrylIcons.getFileViewFloppyDriveIcon();
+    }
+
+    public Icon getFileViewHardDriveIcon() {
+        return AcrylIcons.getFileViewHardDriveIcon();
     }
 
     public Icon getMenuIcon() {
@@ -115,32 +127,24 @@ public class AcrylIconFactory implements AbstractIconFactory {
         return AcrylIcons.getComboBoxIcon();
     }
 
-    public Icon getTreeComputerIcon() {
-        return AcrylIcons.getTreeComputerIcon();
+    public Icon getTreeOpenIcon() {
+        return AcrylIcons.getTreeOpenedIcon();
     }
 
-    public Icon getTreeFloppyDriveIcon() {
-        return AcrylIcons.getTreeFloppyDriveIcon();
+    public Icon getTreeCloseIcon() {
+        return AcrylIcons.getTreeClosedIcon();
     }
-
-    public Icon getTreeHardDriveIcon() {
-        return AcrylIcons.getTreeHardDriveIcon();
-    }
-
-    public Icon getTreeFolderIcon() {
-        return AcrylIcons.getTreeFolderIcon();
-    }
-
+    
     public Icon getTreeLeafIcon() {
         return AcrylIcons.getTreeLeafIcon();
     }
 
     public Icon getTreeCollapsedIcon() {
-        return AcrylIcons.getTreeControlIcon(true);
+        return AcrylIcons.getTreeCollapsedIcon();
     }
 
     public Icon getTreeExpandedIcon() {
-        return AcrylIcons.getTreeControlIcon(false);
+        return AcrylIcons.getTreeExpandedIcon();
     }
 
     public Icon getMenuArrowIcon() {

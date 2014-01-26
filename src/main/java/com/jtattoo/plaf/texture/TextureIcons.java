@@ -33,19 +33,58 @@ import javax.swing.Icon;
  */
 public class TextureIcons extends BaseIcons {
 
-    public static void setUp() {
-        iconIcon = null;
-        maxIcon = null;
-        minIcon = null;
-        closeIcon = null;
-        splitterHorBumpIcon = null;
-        splitterVerBumpIcon = null;
-        thumbHorIcon = null;
-        thumbVerIcon = null;
-        thumbHorIconRollover = null;
-        thumbVerIconRollover = null;
+    public static Icon getUpArrowIcon() {
+        if (upArrowIcon == null) {
+            if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
+                upArrowIcon = new LazyImageIcon("texture/icons/small/arrow_up_7x6.png");
+            } else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
+                upArrowIcon = new LazyImageIcon("texture/icons/medium/arrow_up_9x8.png");
+            } else {
+                upArrowIcon = new LazyImageIcon("texture/icons/large/arrow_up_11x10.png");
+            }
+        }
+        return upArrowIcon;
     }
 
+    public static Icon getDownArrowIcon() {
+        if (downArrowIcon == null) {
+            if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
+                downArrowIcon = new LazyImageIcon("texture/icons/small/arrow_down_7x6.png");
+            } else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
+                downArrowIcon = new LazyImageIcon("texture/icons/medium/arrow_down_9x8.png");
+            } else {
+                downArrowIcon = new LazyImageIcon("texture/icons/large/arrow_down_11x10.png");
+            }
+        }
+        return downArrowIcon;
+    }
+
+    public static Icon getLeftArrowIcon() {
+        if (leftArrowIcon == null) {
+            if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
+                leftArrowIcon = new LazyImageIcon("texture/icons/small/arrow_left_6x7.png");
+            } else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
+                leftArrowIcon = new LazyImageIcon("texture/icons/medium/arrow_left_8x9.png");
+            } else {
+                leftArrowIcon = new LazyImageIcon("texture/icons/large/arrow_left_10x11.png");
+            }
+        }
+        return leftArrowIcon;
+    }
+
+    public static Icon getRightArrowIcon() {
+        if (rightArrowIcon == null) {
+            if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
+                rightArrowIcon = new LazyImageIcon("texture/icons/small/arrow_right_6x7.png");
+            } else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
+                rightArrowIcon = new LazyImageIcon("texture/icons/medium/arrow_right_8x9.png");
+            } else {
+                rightArrowIcon = new LazyImageIcon("texture/icons/large/arrow_right_10x11.png");
+            }
+        }
+        return rightArrowIcon;
+    }
+    
     public static Icon getIconIcon() {
         if (iconIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {

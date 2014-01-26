@@ -49,7 +49,9 @@ public class SmartButtonUI extends BaseButtonUI {
         Shape savedClip = g.getClip();
         if ((b.getBorder() != null) && b.isBorderPainted() && (b.getBorder() instanceof UIResource)) {
             Area clipArea = new Area(new RoundRectangle2D.Double(0, 0, w - 1, h - 1, 6, 6));
-            clipArea.intersect(new Area(savedClip));
+            if (savedClip != null) {
+                clipArea.intersect(new Area(savedClip));
+            }
             g2D.setClip(clipArea);
         }
         super.paintBackground(g, b);

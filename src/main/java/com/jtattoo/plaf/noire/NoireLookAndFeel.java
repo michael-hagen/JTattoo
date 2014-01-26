@@ -141,7 +141,7 @@ public class NoireLookAndFeel extends AbstractLookAndFeel {
     }
 
     public AbstractIconFactory getIconFactory() {
-        return HiFiIconFactory.getInstance();
+        return NoireIconFactory.getInstance();
     }
 
     protected void createDefaultTheme() {

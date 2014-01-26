@@ -59,24 +59,36 @@ public class HiFiIconFactory implements AbstractIconFactory {
         return HiFiIcons.getOptionPaneQuestionIcon();
     }
 
-    public Icon getFileChooserDetailViewIcon() {
-        return HiFiIcons.getFileChooserDetailViewIcon();
+    public Icon getFileChooserUpFolderIcon() {
+        return HiFiIcons.getFileChooserUpFolderIcon();
     }
 
     public Icon getFileChooserHomeFolderIcon() {
         return HiFiIcons.getFileChooserHomeFolderIcon();
     }
 
-    public Icon getFileChooserListViewIcon() {
-        return HiFiIcons.getFileChooserListViewIcon();
-    }
-
     public Icon getFileChooserNewFolderIcon() {
         return HiFiIcons.getFileChooserNewFolderIcon();
     }
 
-    public Icon getFileChooserUpFolderIcon() {
-        return HiFiIcons.getFileChooserUpFolderIcon();
+    public Icon getFileChooserListViewIcon() {
+        return HiFiIcons.getFileChooserListViewIcon();
+    }
+
+    public Icon getFileChooserDetailViewIcon() {
+        return HiFiIcons.getFileChooserDetailViewIcon();
+    }
+
+    public Icon getFileViewComputerIcon() {
+        return HiFiIcons.getFileViewComputerIcon();
+    }
+
+    public Icon getFileViewFloppyDriveIcon() {
+        return HiFiIcons.getFileViewFloppyDriveIcon();
+    }
+
+    public Icon getFileViewHardDriveIcon() {
+        return HiFiIcons.getFileViewHardDriveIcon();
     }
 
     public Icon getMenuIcon() {
@@ -115,20 +127,12 @@ public class HiFiIconFactory implements AbstractIconFactory {
         return HiFiIcons.getComboBoxIcon();
     }
 
-    public Icon getTreeComputerIcon() {
-        return HiFiIcons.getTreeComputerIcon();
+    public Icon getTreeOpenIcon() {
+        return HiFiIcons.getTreeOpenedIcon();
     }
 
-    public Icon getTreeFloppyDriveIcon() {
-        return HiFiIcons.getTreeFloppyDriveIcon();
-    }
-
-    public Icon getTreeHardDriveIcon() {
-        return HiFiIcons.getTreeHardDriveIcon();
-    }
-
-    public Icon getTreeFolderIcon() {
-        return HiFiIcons.getTreeFolderIcon();
+    public Icon getTreeCloseIcon() {
+        return HiFiIcons.getTreeClosedIcon();
     }
 
     public Icon getTreeLeafIcon() {
@@ -136,11 +140,11 @@ public class HiFiIconFactory implements AbstractIconFactory {
     }
 
     public Icon getTreeCollapsedIcon() {
-        return HiFiIcons.getTreeControlIcon(true);
+        return HiFiIcons.getTreeCollapsedIcon();
     }
 
     public Icon getTreeExpandedIcon() {
-        return HiFiIcons.getTreeControlIcon(false);
+        return HiFiIcons.getTreeExpandedIcon();
     }
 
     public Icon getMenuArrowIcon() {

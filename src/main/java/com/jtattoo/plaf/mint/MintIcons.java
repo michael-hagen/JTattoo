@@ -35,6 +35,58 @@ import javax.swing.JButton;
  */
 public class MintIcons extends BaseIcons {
 
+    public static Icon getUpArrowIcon() {
+        if (upArrowIcon == null) {
+            if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
+                upArrowIcon = new LazyImageIcon("mint/icons/small/arrow_up_7x6.png");
+            } else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
+                upArrowIcon = new LazyImageIcon("mint/icons/medium/arrow_up_9x8.png");
+            } else {
+                upArrowIcon = new LazyImageIcon("mint/icons/large/arrow_up_11x10.png");
+            }
+        }
+        return upArrowIcon;
+    }
+
+    public static Icon getDownArrowIcon() {
+        if (downArrowIcon == null) {
+            if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
+                downArrowIcon = new LazyImageIcon("mint/icons/small/arrow_down_7x6.png");
+            } else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
+                downArrowIcon = new LazyImageIcon("mint/icons/medium/arrow_down_9x8.png");
+            } else {
+                downArrowIcon = new LazyImageIcon("mint/icons/large/arrow_down_11x10.png");
+            }
+        }
+        return downArrowIcon;
+    }
+
+    public static Icon getLeftArrowIcon() {
+        if (leftArrowIcon == null) {
+            if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
+                leftArrowIcon = new LazyImageIcon("mint/icons/small/arrow_left_6x7.png");
+            } else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
+                leftArrowIcon = new LazyImageIcon("mint/icons/medium/arrow_left_8x9.png");
+            } else {
+                leftArrowIcon = new LazyImageIcon("mint/icons/large/arrow_left_10x11.png");
+            }
+        }
+        return leftArrowIcon;
+    }
+
+    public static Icon getRightArrowIcon() {
+        if (rightArrowIcon == null) {
+            if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
+                rightArrowIcon = new LazyImageIcon("mint/icons/small/arrow_right_6x7.png");
+            } else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
+                rightArrowIcon = new LazyImageIcon("mint/icons/medium/arrow_right_8x9.png");
+            } else {
+                rightArrowIcon = new LazyImageIcon("mint/icons/large/arrow_right_10x11.png");
+            }
+        }
+        return rightArrowIcon;
+    }
+    
     public static Icon getIconIcon() {
         if (iconIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -82,12 +134,14 @@ public class MintIcons extends BaseIcons {
 //------------------------------------------------------------------------------    
     private static class TitleButtonIcon implements Icon {
 
-        private static Color closerColorLight = new Color(241, 172, 154);
-        private static Color closerColorDark = new Color(224, 56, 2);
-        public static final int ICON_ICON_TYP = 0;
-        public static final int MIN_ICON_TYP = 1;
-        public static final int MAX_ICON_TYP = 2;
-        public static final int CLOSE_ICON_TYP = 3;
+        private static final Color closerColorLight = new Color(241, 172, 154);
+        private static final Color closerColorDark = new Color(224, 56, 2);
+        
+        private static final int ICON_ICON_TYP = 0;
+        private static final int MIN_ICON_TYP = 1;
+        private static final int MAX_ICON_TYP = 2;
+        private static final int CLOSE_ICON_TYP = 3;
+        
         private int iconTyp = ICON_ICON_TYP;
 
         public TitleButtonIcon(int typ) {

@@ -38,11 +38,11 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
 
     private static final Border HANDY_EMPTY_BORDER = new EmptyBorder(0, 0, 0, 0);
     
-    private static String IS_PALETTE = "JInternalFrame.isPalette";
-    private static String FRAME_TYPE = "JInternalFrame.frameType";
-    private static String FRAME_BORDER = "InternalFrame.border";
-    private static String FRAME_PALETTE_BORDER = "InternalFrame.paletteBorder";
-    private static String PALETTE_FRAME = "palette";
+    private static final String IS_PALETTE = "JInternalFrame.isPalette";
+    private static final String FRAME_TYPE = "JInternalFrame.frameType";
+    private static final String FRAME_BORDER = "InternalFrame.border";
+    private static final String FRAME_PALETTE_BORDER = "InternalFrame.paletteBorder";
+    private static final String PALETTE_FRAME = "palette";
 
     public BaseInternalFrameUI(JInternalFrame b) {
         super(b);
@@ -72,6 +72,15 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
         super.uninstallUI(c);
     }
 
+    protected void installDefaults() {
+        super.installDefaults();
+        Icon frameIcon = frame.getFrameIcon();
+        if (frameIcon == null || frameIcon instanceof LazyImageIcon) {
+            frame.setFrameIcon(UIManager.getIcon("InternalFrame.icon"));
+        }
+    }
+
+    
     protected void installListeners() {
         super.installListeners();
         frame.addPropertyChangeListener(MY_PROPERTY_CHANGE_LISTENER);

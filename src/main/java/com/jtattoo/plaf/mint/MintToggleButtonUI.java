@@ -30,6 +30,7 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
+import javax.swing.plaf.basic.BasicGraphicsUtils;
 
 /**
  * @author Michael Hagen
@@ -45,10 +46,32 @@ public class MintToggleButtonUI extends BaseToggleButtonUI {
             return;
         }
 
-        if (!(b.isBorderPainted() && (b.getBorder() instanceof UIResource))) {
-            super.paintBackground(g, b);
+//        if (!(b.isBorderPainted() && (b.getBorder() instanceof UIResource))) {
+//            super.paintBackground(g, b);
+//            return;
+//        }
+
+        if ((b.getWidth() < 32) 
+                || (b.getHeight() < 16) 
+                || !(b.isBorderPainted() && (b.getBorder() instanceof UIResource))
+                || AbstractLookAndFeel.getTheme().doDrawSquareButtons()) {
+            ButtonModel model = b.getModel();
+            Color color = AbstractLookAndFeel.getTheme().getButtonBackgroundColor();
+            if ((model.isPressed() && model.isArmed()) || model.isSelected()) {
+                color = AbstractLookAndFeel.getTheme().getSelectionBackgroundColor();
+            } else if (b.isRolloverEnabled() && model.isRollover()) {
+                color = AbstractLookAndFeel.getTheme().getRolloverColor();
+            }
+            g.setColor(color);
+            g.fillRect(0, 0, b.getWidth(), b.getHeight());
+            if ((model.isPressed() && model.isArmed()) || model.isSelected()) {
+                JTattooUtilities.draw3DBorder(g, Color.lightGray, Color.white, 0, 0, b.getWidth(), b.getHeight());
+            } else {
+                JTattooUtilities.draw3DBorder(g, Color.white, Color.lightGray, 0, 0, b.getWidth(), b.getHeight());
+            }
             return;
         }
+        
         Graphics2D g2D = (Graphics2D) g;
         int width = b.getWidth() - 2;
         int height = b.getHeight() - 2;
@@ -119,11 +142,20 @@ public class MintToggleButtonUI extends BaseToggleButtonUI {
 
     protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect, Rectangle iconRect) {
         Graphics2D g2D = (Graphics2D) g;
-        Object savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
-        g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2D.setColor(AbstractLookAndFeel.getFocusColor());
-        int d = b.getHeight() - 6;
-        g2D.drawRoundRect(2, 2, b.getWidth() - 7, b.getHeight() - 7, d, d);
-        g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRenderingHint);
+        int width = b.getWidth();
+        int height = b.getHeight();
+        if (!b.isContentAreaFilled()
+                || AbstractLookAndFeel.getTheme().doDrawSquareButtons()
+                || ((width < 64) || (height < 16)) && ((b.getText() == null) || b.getText().length() == 0)) {
+            g.setColor(AbstractLookAndFeel.getFocusColor());
+            BasicGraphicsUtils.drawDashedRect(g, 4, 3, width - 8, height - 6);
+        } else {
+            Object savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
+            g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2D.setColor(AbstractLookAndFeel.getFocusColor());
+            int d = height - 6;
+            g2D.drawRoundRect(2, 2, width - 7, height - 7, d, d);
+            g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRenderingHint);
+        }
     }
 }

@@ -76,6 +76,8 @@ public class NoireDefaultTheme extends AbstractTheme {
         rolloverColor = new ColorUIResource(240, 168, 0);
         rolloverColorLight = new ColorUIResource(240, 168, 0);
         rolloverColorDark = new ColorUIResource(196, 137, 0);
+        
+        pressedForegroundColor = foregroundColor;
 
         buttonForegroundColor = black;
         buttonBackgroundColor = new ColorUIResource(120, 129, 148);
@@ -141,6 +143,7 @@ public class NoireDefaultTheme extends AbstractTheme {
         BUTTON_COLORS = new Color[22];
         System.arraycopy(topColors, 0, BUTTON_COLORS, 0, 10);
         System.arraycopy(bottomColors, 0, BUTTON_COLORS, 10, 12);
+        CHECKBOX_COLORS = BUTTON_COLORS;
 
         topHi = ColorHelper.brighter(controlColorLight, 40);
         topLo = ColorHelper.brighter(controlColorDark, 40);
@@ -154,8 +157,7 @@ public class NoireDefaultTheme extends AbstractTheme {
         
         HIDEFAULT_COLORS = ColorHelper.createColorArr(ColorHelper.brighter(controlColorLight, 15), ColorHelper.brighter(controlColorDark, 15), 20);
         ACTIVE_COLORS = ColorHelper.createColorArr(controlColorLight, controlColorDark, 20);
-        INACTIVE_COLORS = ColorHelper.createColorArr(new Color(64, 64, 64), new Color(32, 32, 32), 20);
-
+        INACTIVE_COLORS = ColorHelper.createColorArr(ColorHelper.brighter(controlColorLight, 5), ColorHelper.brighter(controlColorDark, 5), 20);
         SELECTED_COLORS = BUTTON_COLORS;
 
         topHi = ColorHelper.brighter(rolloverColorLight, 40);
@@ -167,8 +169,7 @@ public class NoireDefaultTheme extends AbstractTheme {
         ROLLOVER_COLORS = new Color[22];
         System.arraycopy(topColors, 0, ROLLOVER_COLORS, 0, 10);
         System.arraycopy(bottomColors, 0, ROLLOVER_COLORS, 10, 12);
-        
-        PRESSED_COLORS = ColorHelper.createColorArr(new Color(64, 64, 64), new Color(96, 96, 96), 20);
+        PRESSED_COLORS = ColorHelper.createColorArr(ColorHelper.darker(backgroundColor, 5), ColorHelper.brighter(backgroundColor, 5), 20);
         DISABLED_COLORS = ColorHelper.createColorArr(new Color(80, 80, 80), new Color(64, 64, 64), 20);
         topHi = ColorHelper.brighter(windowTitleColorLight, 40);
         topLo = ColorHelper.brighter(windowTitleColorDark, 40);
@@ -184,9 +185,7 @@ public class NoireDefaultTheme extends AbstractTheme {
         TOOLBAR_COLORS = MENUBAR_COLORS;
         SLIDER_COLORS = BUTTON_COLORS;
         PROGRESSBAR_COLORS = DEFAULT_COLORS;
-        //THUMB_COLORS = ColorHelper.createColorArr(controlColorLight, controlColorDark, 20);
         THUMB_COLORS = DEFAULT_COLORS;
-        //TRACK_COLORS = ColorHelper.createColorArr(ColorHelper.darker(backgroundColor, 10), ColorHelper.brighter(backgroundColor, 5), 20);
         TRACK_COLORS = ColorHelper.createColorArr(ColorHelper.darker(inputBackgroundColor, 5), ColorHelper.brighter(inputBackgroundColor, 10), 20);
 
         TAB_COLORS = DEFAULT_COLORS;

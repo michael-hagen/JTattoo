@@ -59,24 +59,36 @@ public class AeroIconFactory implements AbstractIconFactory {
         return AeroIcons.getOptionPaneQuestionIcon();
     }
 
-    public Icon getFileChooserDetailViewIcon() {
-        return AeroIcons.getFileChooserDetailViewIcon();
+    public Icon getFileChooserUpFolderIcon() {
+        return AeroIcons.getFileChooserUpFolderIcon();
     }
 
     public Icon getFileChooserHomeFolderIcon() {
         return AeroIcons.getFileChooserHomeFolderIcon();
     }
 
-    public Icon getFileChooserListViewIcon() {
-        return AeroIcons.getFileChooserListViewIcon();
-    }
-
     public Icon getFileChooserNewFolderIcon() {
         return AeroIcons.getFileChooserNewFolderIcon();
     }
 
-    public Icon getFileChooserUpFolderIcon() {
-        return AeroIcons.getFileChooserUpFolderIcon();
+    public Icon getFileChooserListViewIcon() {
+        return AeroIcons.getFileChooserListViewIcon();
+    }
+
+    public Icon getFileChooserDetailViewIcon() {
+        return AeroIcons.getFileChooserDetailViewIcon();
+    }
+
+    public Icon getFileViewComputerIcon() {
+        return AeroIcons.getFileViewComputerIcon();
+    }
+
+    public Icon getFileViewFloppyDriveIcon() {
+        return AeroIcons.getFileViewFloppyDriveIcon();
+    }
+
+    public Icon getFileViewHardDriveIcon() {
+        return AeroIcons.getFileViewHardDriveIcon();
     }
 
     public Icon getMenuIcon() {
@@ -115,20 +127,12 @@ public class AeroIconFactory implements AbstractIconFactory {
         return AeroIcons.getComboBoxIcon();
     }
 
-    public Icon getTreeComputerIcon() {
-        return AeroIcons.getTreeComputerIcon();
+    public Icon getTreeOpenIcon() {
+        return AeroIcons.getTreeOpenedIcon();
     }
 
-    public Icon getTreeFloppyDriveIcon() {
-        return AeroIcons.getTreeFloppyDriveIcon();
-    }
-
-    public Icon getTreeHardDriveIcon() {
-        return AeroIcons.getTreeHardDriveIcon();
-    }
-
-    public Icon getTreeFolderIcon() {
-        return AeroIcons.getTreeFolderIcon();
+    public Icon getTreeCloseIcon() {
+        return AeroIcons.getTreeClosedIcon();
     }
 
     public Icon getTreeLeafIcon() {
@@ -136,11 +140,11 @@ public class AeroIconFactory implements AbstractIconFactory {
     }
 
     public Icon getTreeCollapsedIcon() {
-        return AeroIcons.getTreeControlIcon(true);
+        return AeroIcons.getTreeCollapsedIcon();
     }
 
     public Icon getTreeExpandedIcon() {
-        return AeroIcons.getTreeControlIcon(false);
+        return AeroIcons.getTreeExpandedIcon();
     }
 
     public Icon getMenuArrowIcon() {

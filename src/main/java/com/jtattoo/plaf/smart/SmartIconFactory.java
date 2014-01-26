@@ -59,24 +59,36 @@ public class SmartIconFactory implements AbstractIconFactory {
         return SmartIcons.getOptionPaneQuestionIcon();
     }
 
-    public Icon getFileChooserDetailViewIcon() {
-        return SmartIcons.getFileChooserDetailViewIcon();
+    public Icon getFileChooserUpFolderIcon() {
+        return SmartIcons.getFileChooserUpFolderIcon();
     }
 
     public Icon getFileChooserHomeFolderIcon() {
         return SmartIcons.getFileChooserHomeFolderIcon();
     }
 
-    public Icon getFileChooserListViewIcon() {
-        return SmartIcons.getFileChooserListViewIcon();
-    }
-
     public Icon getFileChooserNewFolderIcon() {
         return SmartIcons.getFileChooserNewFolderIcon();
     }
 
-    public Icon getFileChooserUpFolderIcon() {
-        return SmartIcons.getFileChooserUpFolderIcon();
+    public Icon getFileChooserListViewIcon() {
+        return SmartIcons.getFileChooserListViewIcon();
+    }
+
+    public Icon getFileChooserDetailViewIcon() {
+        return SmartIcons.getFileChooserDetailViewIcon();
+    }
+
+    public Icon getFileViewComputerIcon() {
+        return SmartIcons.getFileViewComputerIcon();
+    }
+
+    public Icon getFileViewFloppyDriveIcon() {
+        return SmartIcons.getFileViewFloppyDriveIcon();
+    }
+
+    public Icon getFileViewHardDriveIcon() {
+        return SmartIcons.getFileViewHardDriveIcon();
     }
 
     public Icon getMenuIcon() {
@@ -115,20 +127,12 @@ public class SmartIconFactory implements AbstractIconFactory {
         return SmartIcons.getComboBoxIcon();
     }
 
-    public Icon getTreeComputerIcon() {
-        return SmartIcons.getTreeComputerIcon();
+    public Icon getTreeOpenIcon() {
+        return SmartIcons.getTreeOpenedIcon();
     }
 
-    public Icon getTreeFloppyDriveIcon() {
-        return SmartIcons.getTreeFloppyDriveIcon();
-    }
-
-    public Icon getTreeHardDriveIcon() {
-        return SmartIcons.getTreeHardDriveIcon();
-    }
-
-    public Icon getTreeFolderIcon() {
-        return SmartIcons.getTreeFolderIcon();
+    public Icon getTreeCloseIcon() {
+        return SmartIcons.getTreeClosedIcon();
     }
 
     public Icon getTreeLeafIcon() {
@@ -136,11 +140,11 @@ public class SmartIconFactory implements AbstractIconFactory {
     }
 
     public Icon getTreeCollapsedIcon() {
-        return SmartIcons.getTreeControlIcon(true);
+        return SmartIcons.getTreeCollapsedIcon();
     }
 
     public Icon getTreeExpandedIcon() {
-        return SmartIcons.getTreeControlIcon(false);
+        return SmartIcons.getTreeExpandedIcon();
     }
 
     public Icon getMenuArrowIcon() {

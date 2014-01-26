@@ -59,24 +59,36 @@ public class McWinIconFactory implements AbstractIconFactory {
         return McWinIcons.getOptionPaneQuestionIcon();
     }
 
-    public Icon getFileChooserDetailViewIcon() {
-        return McWinIcons.getFileChooserDetailViewIcon();
+    public Icon getFileChooserUpFolderIcon() {
+        return McWinIcons.getFileChooserUpFolderIcon();
     }
 
     public Icon getFileChooserHomeFolderIcon() {
         return McWinIcons.getFileChooserHomeFolderIcon();
     }
 
-    public Icon getFileChooserListViewIcon() {
-        return McWinIcons.getFileChooserListViewIcon();
-    }
-
     public Icon getFileChooserNewFolderIcon() {
         return McWinIcons.getFileChooserNewFolderIcon();
     }
 
-    public Icon getFileChooserUpFolderIcon() {
-        return McWinIcons.getFileChooserUpFolderIcon();
+    public Icon getFileChooserListViewIcon() {
+        return McWinIcons.getFileChooserListViewIcon();
+    }
+
+    public Icon getFileChooserDetailViewIcon() {
+        return McWinIcons.getFileChooserDetailViewIcon();
+    }
+
+    public Icon getFileViewComputerIcon() {
+        return McWinIcons.getFileViewComputerIcon();
+    }
+
+    public Icon getFileViewFloppyDriveIcon() {
+        return McWinIcons.getFileViewFloppyDriveIcon();
+    }
+
+    public Icon getFileViewHardDriveIcon() {
+        return McWinIcons.getFileViewHardDriveIcon();
     }
 
     public Icon getMenuIcon() {
@@ -115,20 +127,12 @@ public class McWinIconFactory implements AbstractIconFactory {
         return McWinIcons.getComboBoxIcon();
     }
 
-    public Icon getTreeComputerIcon() {
-        return McWinIcons.getTreeComputerIcon();
+    public Icon getTreeOpenIcon() {
+        return McWinIcons.getTreeOpenedIcon();
     }
 
-    public Icon getTreeFloppyDriveIcon() {
-        return McWinIcons.getTreeFloppyDriveIcon();
-    }
-
-    public Icon getTreeHardDriveIcon() {
-        return McWinIcons.getTreeHardDriveIcon();
-    }
-
-    public Icon getTreeFolderIcon() {
-        return McWinIcons.getTreeFolderIcon();
+    public Icon getTreeCloseIcon() {
+        return McWinIcons.getTreeClosedIcon();
     }
 
     public Icon getTreeLeafIcon() {
@@ -136,11 +140,11 @@ public class McWinIconFactory implements AbstractIconFactory {
     }
 
     public Icon getTreeCollapsedIcon() {
-        return McWinIcons.getTreeControlIcon(true);
+        return McWinIcons.getTreeCollapsedIcon();
     }
 
     public Icon getTreeExpandedIcon() {
-        return McWinIcons.getTreeControlIcon(false);
+        return McWinIcons.getTreeExpandedIcon();
     }
 
     public Icon getMenuArrowIcon() {

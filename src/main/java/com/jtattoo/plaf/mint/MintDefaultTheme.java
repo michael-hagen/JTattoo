@@ -63,7 +63,7 @@ public class MintDefaultTheme extends AbstractTheme {
         rolloverColorLight = new ColorUIResource(255, 230, 170);
         rolloverColorDark = new ColorUIResource(255, 191, 43);
 
-        buttonBackgroundColor = new ColorUIResource(240, 248, 248);
+        buttonBackgroundColor = new ColorUIResource(244, 248, 246);
         buttonColorLight = white;
         buttonColorDark = new ColorUIResource(220, 228, 228);
 

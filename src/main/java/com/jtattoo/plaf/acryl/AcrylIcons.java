@@ -79,24 +79,40 @@ public class AcrylIcons extends BaseIcons {
         return closeIcon;
     }
 
-    public static Icon getTreeControlIcon(boolean isCollapsed) {
+    public static Icon getTreeExpandedIcon() {
         if (!AbstractLookAndFeel.getControlColorLight().equals(new ColorUIResource(96, 98, 100))) {
-            return BaseIcons.getTreeControlIcon(isCollapsed);
-        }
-
-        if (isCollapsed) {
-            if (treeClosedIcon == null) {
-                treeClosedIcon = new LazyImageIcon("acryl/icons/TreeClosedButton.gif");
-            }
-            return treeClosedIcon;
+            return BaseIcons.getTreeExpandedIcon();
         } else {
-            if (treeOpenIcon == null) {
-                treeOpenIcon = new LazyImageIcon("acryl/icons/TreeOpenButton.gif");
+            if (treeExpandedIcon == null) {
+                if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
+                    treeExpandedIcon = new LazyImageIcon("acryl/icons/small/tree_expanded_11x11.png");
+                } else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
+                    treeExpandedIcon = new LazyImageIcon("acryl/icons/medium/tree_expanded_13x13.png");
+                } else {
+                    treeExpandedIcon = new LazyImageIcon("acryl/icons/large/tree_expanded_15x15.png");
+                }
             }
-            return treeOpenIcon;
+            return treeExpandedIcon;
         }
     }
-
+    
+    public static Icon getTreeCollapsedIcon() {
+        if (!AbstractLookAndFeel.getControlColorLight().equals(new ColorUIResource(96, 98, 100))) {
+            return BaseIcons.getTreeCollapsedIcon();
+        } else {
+            if (treeCollapsedIcon == null) {
+                if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
+                    treeCollapsedIcon = new LazyImageIcon("acryl/icons/small/tree_collapsed_11x11.png");
+                } else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
+                    treeCollapsedIcon = new LazyImageIcon("acryl/icons/medium/tree_collapsed_13x13.png");
+                } else {
+                    treeCollapsedIcon = new LazyImageIcon("acryl/icons/large/tree_collapsed_15x15.png");
+                }
+            }
+            return treeCollapsedIcon;
+        }
+    }
+    
     public static Icon getRadioButtonIcon() {
         if (radioButtonIcon == null) {
             radioButtonIcon = new RadioButtonIcon();
@@ -155,12 +171,14 @@ public class AcrylIcons extends BaseIcons {
         return thumbVerIconRollover;
     }
 
-//------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
+// inner classes    
+//----------------------------------------------------------------------------------------------------------------------
     private static class TitleButtonIcon implements Icon {
 
-        private static Color extraLightGray = new Color(240, 240, 240);
-        private static Color closerColorLight = new Color(241, 172, 154);
-        private static Color closerColorDark = new Color(224, 56, 2);
+        private static final Color extraLightGray = new Color(240, 240, 240);
+        private static final Color closerColorLight = new Color(241, 172, 154);
+        private static final Color closerColorDark = new Color(224, 56, 2);
         public static final int ICON_ICON_TYP = 0;
         public static final int MIN_ICON_TYP = 1;
         public static final int MAX_ICON_TYP = 2;
@@ -244,65 +262,93 @@ public class AcrylIcons extends BaseIcons {
         }
     }
 
-    //-----------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
     private static class CheckBoxIcon implements Icon {
 
-        private static Icon checkIcon = new LazyImageIcon("acryl/icons/CheckSymbol.gif");
-        private static Icon checkPressedIcon = new LazyImageIcon("acryl/icons/CheckPressedSymbol.gif");
-        private static Icon checkInactiveIcon = new LazyImageIcon("icons/CheckSymbol.gif");
-        private static Icon checkDisabledIcon = new LazyImageIcon("icons/CheckSymbolDisabled.gif");
-
-        private static final int WIDTH = 14;
-        private static final int HEIGHT = 14;
-
+        private static final int GAP = 2;
+        
+        private static final Icon SMALL_CHECK_ICON = new LazyImageIcon("acryl/icons/small/check_symbol_12x11.png");
+        private static final Icon SMALL_CHECK_INVERSE_ICON = new LazyImageIcon("icons/small/check_symbol_10x10.png");
+        private static final Icon SMALL_CHECK_PRESSED_ICON = new LazyImageIcon("acryl/icons/small/check_symbol_pressed_10x10.png");
+        private static final Icon SMALL_CHECK_DISABLED_ICON = new LazyImageIcon("icons/small/check_symbol_disabled_10x10.png");
+        private static final Icon MEDIUM_CHECK_ICON = new LazyImageIcon("acryl/icons/medium/check_symbol_14x13.png");
+        private static final Icon MEDIUM_CHECK_INVERSE_ICON = new LazyImageIcon("icons/medium/check_symbol_12x12.png");
+        private static final Icon MEDIUM_CHECK_PRESSED_ICON = new LazyImageIcon("acryl/icons/medium/check_symbol_pressed_12x12.png");
+        private static final Icon MEDIUM_CHECK_DISABLED_ICON = new LazyImageIcon("icons/medium/check_symbol_disabled_12x12.png");
+        private static final Icon LARGE_CHECK_ICON = new LazyImageIcon("acryl/icons/large/check_symbol_16x15.png");
+        private static final Icon LARGE_CHECK_INVERSE_ICON = new LazyImageIcon("icons/large/check_symbol_14x14.png");
+        private static final Icon LARGE_CHECK_PRESSED_ICON = new LazyImageIcon("acryl/icons/large/check_symbol_pressed_14x14.png");
+        private static final Icon LARGE_CHECK_DISABLED_ICON = new LazyImageIcon("icons/large/check_symbol_disabled_14x14.png");
+        
         public void paintIcon(Component c, Graphics g, int x, int y) {
             if (!JTattooUtilities.isLeftToRight(c)) {
-                x += 3;
+                x += GAP;
             }
-            AbstractButton b = (AbstractButton) c;
-            ButtonModel model = b.getModel();
+            int w = getIconWidth() - GAP;
+            int h = getIconHeight();
+            AbstractButton button = (AbstractButton) c;
+            ButtonModel model = button.getModel();
             Color frameColor = AbstractLookAndFeel.getFrameColor();
-
-            if (b.isEnabled()) {
-                if (b.isRolloverEnabled() && model.isRollover()) {
-                    JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getRolloverColors(), x + 1, y + 1, WIDTH - 2, HEIGHT - 2);
+            if (button.isEnabled()) {
+                if ((button.isRolloverEnabled() && model.isRollover()) || (model.isPressed() && model.isArmed())) {
+                    JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getRolloverColors(), x + 1, y + 1, w - 2, h - 2);
                     frameColor = ColorHelper.brighter(frameColor, 30);
                 } else {
-                    JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getDefaultColors(), x + 1, y + 1, WIDTH - 2, HEIGHT - 2);
+                    if (AbstractLookAndFeel.getTheme().doShowFocusFrame() && button.hasFocus()) {
+                        JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getFocusColors(), x + 1, y + 1, w - 2, h - 2);
+                    } else {
+                        JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getCheckBoxColors(), x + 1, y + 1, w - 2, h - 2);
+                    }
                 }
-
             } else {
-                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getDisabledColors(), x + 1, y + 1, WIDTH - 2, HEIGHT - 2);
+                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getDisabledColors(), x + 1, y + 1, w - 2, h - 2);
                 frameColor = ColorHelper.brighter(frameColor, 40);
             }
 
             g.setColor(AbstractLookAndFeel.getTheme().getControlShadowColor());
-            g.drawRect(x, y, WIDTH - 1, HEIGHT - 1);
+            g.drawRect(x, y, w - 1, h - 1);
             g.setColor(frameColor);
-            g.drawLine(x + 1, y, x + WIDTH - 2, y);
-            g.drawLine(x + 1, y + HEIGHT - 1, x + WIDTH - 2, y + HEIGHT - 1);
-            g.drawLine(x, y + 1, x, y + HEIGHT - 2);
-            g.drawLine(x + WIDTH - 1, y + 1, x + WIDTH - 1, y + HEIGHT - 2);
-            g.setColor(AbstractLookAndFeel.getTheme().getControlShadowColor());
-            g.drawLine(x + WIDTH, y + 2, x + WIDTH, y + HEIGHT - 1);
-            g.drawLine(x + 2, y + HEIGHT, x + WIDTH - 1, y + HEIGHT);
-
-            int xi = x + ((WIDTH - checkInactiveIcon.getIconWidth()) / 2) - 1;
-            int yi = y + ((HEIGHT - checkInactiveIcon.getIconHeight()) / 2) - 1;
+            g.drawLine(x + 1, y, x + w - 2, y);
+            g.drawLine(x + 1, y + h - 1, x + w - 2, y + h - 1);
+            g.drawLine(x, y + 1, x, y + h - 2);
+            g.drawLine(x + w - 1, y + 1, x + w - 1, y + h - 2);
+            
+            Icon checkIcon;
+            Icon checkPressedIcon;
+            Icon checkDisabledIcon;
+            Icon checkInverseIcon;
+            if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
+                checkIcon = SMALL_CHECK_ICON;
+                checkPressedIcon = SMALL_CHECK_PRESSED_ICON;
+                checkDisabledIcon = SMALL_CHECK_DISABLED_ICON;
+                checkInverseIcon = SMALL_CHECK_INVERSE_ICON;
+            } else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
+                checkIcon = MEDIUM_CHECK_ICON;
+                checkPressedIcon = MEDIUM_CHECK_PRESSED_ICON;
+                checkDisabledIcon = MEDIUM_CHECK_DISABLED_ICON;
+                checkInverseIcon = MEDIUM_CHECK_INVERSE_ICON;
+            } else {
+                checkIcon = LARGE_CHECK_ICON;
+                checkPressedIcon = LARGE_CHECK_PRESSED_ICON;
+                checkDisabledIcon = LARGE_CHECK_DISABLED_ICON;
+                checkInverseIcon = LARGE_CHECK_INVERSE_ICON;
+            }
+            int xi = x + ((w - checkIcon.getIconWidth()) / 2);
+            int yi = y + ((h - checkIcon.getIconHeight()) / 2);
             if (model.isPressed() && model.isArmed()) {
                 checkPressedIcon.paintIcon(c, g, xi + 1, yi + 1);
             } else if (model.isSelected()) {
                 if (!model.isEnabled()) {
                     checkDisabledIcon.paintIcon(c, g, xi + 1, yi + 1);
                 } else {
-                    int gv = 0;
+                    int gv;
                     if (model.isRollover()) {
                         gv = ColorHelper.getGrayValue(AbstractLookAndFeel.getTheme().getRolloverColorDark());
                     } else {
                         gv = ColorHelper.getGrayValue(AbstractLookAndFeel.getTheme().getControlColorDark());
                     }
                     if (gv > 128) {
-                        checkInactiveIcon.paintIcon(c, g, xi + 1, yi + 1);
+                        checkInverseIcon.paintIcon(c, g, xi + 1, yi + 1);
                     } else {
                         checkIcon.paintIcon(c, g, xi, yi);
                     }
@@ -311,60 +357,76 @@ public class AcrylIcons extends BaseIcons {
         }
 
         public int getIconWidth() {
-            return WIDTH + 4;
+            int w;
+            if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
+                w = 14;
+            } else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
+                w = 16;
+            } else {
+                w = 18;
+            }
+            return w + GAP;
         }
 
         public int getIconHeight() {
-            return HEIGHT;
+            if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
+                return 14;
+            } else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
+                return 16;
+            } else {
+                return 18;
+            }
         }
     }
 
-    //-----------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
     private static class RadioButtonIcon implements Icon {
 
-        private static Icon radioIcon = new LazyImageIcon("acryl/icons/RadioSymbol.gif");
-        private static final int WIDTH = 13;
-        private static final int HEIGHT = 13;
-
+        private static final int GAP = 2;
+        
         public void paintIcon(Component c, Graphics g, int x, int y) {
             if (!JTattooUtilities.isLeftToRight(c)) {
-                x += 3;
+                x += GAP;
             }
+            int w = getIconWidth() - GAP;
+            int h = getIconHeight();
             Graphics2D g2D = (Graphics2D) g;
-            AbstractButton b = (AbstractButton) c;
-            ButtonModel model = b.getModel();
+            AbstractButton button = (AbstractButton) c;
+            ButtonModel model = button.getModel();
             Color frameColor = AbstractLookAndFeel.getFrameColor();
             Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
             Shape savedClip = g.getClip();
             g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2D.setColor(AbstractLookAndFeel.getTheme().getControlShadowColor());
-            g2D.drawOval(x + 1, y + 1, WIDTH - 1, HEIGHT - 1);
-            Area clipArea = new Area(new Ellipse2D.Double(x, y, WIDTH, HEIGHT));
-            clipArea.intersect(new Area(savedClip));
+            
+            Area clipArea = new Area(new Ellipse2D.Double(x, y, w + 1, h + 1));
+            if (savedClip != null) {
+                clipArea.intersect(new Area(savedClip));
+            }
             g2D.setClip(clipArea);
-            if (b.isEnabled()) {
-                if (b.isRolloverEnabled() && model.isRollover()) {
-                    JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getRolloverColors(), x + 1, y + 1, WIDTH - 2, HEIGHT - 2);
+            if (button.isEnabled()) {
+                if ((button.isRolloverEnabled() && model.isRollover()) || (model.isPressed() && model.isArmed())) {
+                    JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getRolloverColors(), x, y, w, h);
                     frameColor = ColorHelper.brighter(frameColor, 30);
                 } else {
-                    JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getDefaultColors(), x + 1, y + 1, WIDTH - 2, HEIGHT - 2);
+                    if (AbstractLookAndFeel.getTheme().doShowFocusFrame() && button.hasFocus()) {
+                        JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getFocusColors(), x, y, w, h);
+                    } else {
+                        JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getCheckBoxColors(), x, y, w, h);
+                    }
                 }
-
             } else {
-                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getDisabledColors(), x + 1, y + 1, WIDTH - 2, HEIGHT - 2);
+                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getDisabledColors(), x, y, w, h);
                 frameColor = ColorHelper.brighter(frameColor, 40);
             }
             g2D.setClip(savedClip);
             g2D.setColor(frameColor);
-            g2D.drawOval(x, y, WIDTH - 1, HEIGHT - 1);
+            g2D.drawOval(x, y, w, h);
             if (model.isSelected()) {
-                int xi = x + ((WIDTH - radioIcon.getIconWidth()) / 2);
-                int yi = y + ((HEIGHT - radioIcon.getIconHeight()) / 2);
                 if (!model.isEnabled()) {
-                    g.setColor(Color.gray);
-                    g.fillOval(x + (WIDTH / 2) - 2, y + (HEIGHT / 2) - 2, 5, 5);
+                    g.setColor(AbstractLookAndFeel.getTheme().getDisabledForegroundColor());
+                    g.fillOval(x + (w / 2) - 2, y + (h / 2) - 2, 5, 5);
                 } else {
-                    int gv = 0;
+                    int gv;
                     if (model.isRollover()) {
                         gv = ColorHelper.getGrayValue(AbstractLookAndFeel.getTheme().getRolloverColorDark());
                     } else {
@@ -372,9 +434,15 @@ public class AcrylIcons extends BaseIcons {
                     }
                     if (gv > 128) {
                         g.setColor(Color.black);
-                        g.fillOval(x + (WIDTH / 2) - 2, y + (HEIGHT / 2) - 2, 5, 5);
                     } else {
-                        radioIcon.paintIcon(c, g, xi, yi);
+                        g.setColor(Color.white);
+                    }
+                    if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
+                        g2D.fillOval(x + 4, y + 4, w - 7, h - 7);
+                    } else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
+                        g2D.fillOval(x + 4, y + 4, w - 7, h - 7);
+                    } else {
+                        g2D.fillOval(x + 5, y + 5, w - 9, h - 9);
                     }
                 }
             }
@@ -382,11 +450,26 @@ public class AcrylIcons extends BaseIcons {
         }
 
         public int getIconWidth() {
-            return WIDTH + 4;
+            int w;
+            if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
+                w = 14;
+            } else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
+                w = 16;
+            } else {
+                w = 18;
+            }
+            return w + GAP;
         }
 
         public int getIconHeight() {
-            return HEIGHT;
+            if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
+                return 14;
+            } else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
+                return 16;
+            } else {
+                return 18;
+            }
         }
     }
+    
 }

@@ -59,24 +59,36 @@ public class FastIconFactory implements AbstractIconFactory {
         return FastIcons.getOptionPaneQuestionIcon();
     }
 
-    public Icon getFileChooserDetailViewIcon() {
-        return FastIcons.getFileChooserDetailViewIcon();
+    public Icon getFileChooserUpFolderIcon() {
+        return FastIcons.getFileChooserUpFolderIcon();
     }
 
     public Icon getFileChooserHomeFolderIcon() {
         return FastIcons.getFileChooserHomeFolderIcon();
     }
 
-    public Icon getFileChooserListViewIcon() {
-        return FastIcons.getFileChooserListViewIcon();
-    }
-
     public Icon getFileChooserNewFolderIcon() {
         return FastIcons.getFileChooserNewFolderIcon();
     }
 
-    public Icon getFileChooserUpFolderIcon() {
-        return FastIcons.getFileChooserUpFolderIcon();
+    public Icon getFileChooserListViewIcon() {
+        return FastIcons.getFileChooserListViewIcon();
+    }
+
+    public Icon getFileChooserDetailViewIcon() {
+        return FastIcons.getFileChooserDetailViewIcon();
+    }
+
+    public Icon getFileViewComputerIcon() {
+        return FastIcons.getFileViewComputerIcon();
+    }
+
+    public Icon getFileViewFloppyDriveIcon() {
+        return FastIcons.getFileViewFloppyDriveIcon();
+    }
+
+    public Icon getFileViewHardDriveIcon() {
+        return FastIcons.getFileViewHardDriveIcon();
     }
 
     public Icon getMenuIcon() {
@@ -115,20 +127,12 @@ public class FastIconFactory implements AbstractIconFactory {
         return FastIcons.getComboBoxIcon();
     }
 
-    public Icon getTreeComputerIcon() {
-        return FastIcons.getTreeComputerIcon();
+    public Icon getTreeOpenIcon() {
+        return FastIcons.getTreeOpenedIcon();
     }
 
-    public Icon getTreeFloppyDriveIcon() {
-        return FastIcons.getTreeFloppyDriveIcon();
-    }
-
-    public Icon getTreeHardDriveIcon() {
-        return FastIcons.getTreeHardDriveIcon();
-    }
-
-    public Icon getTreeFolderIcon() {
-        return FastIcons.getTreeFolderIcon();
+    public Icon getTreeCloseIcon() {
+        return FastIcons.getTreeClosedIcon();
     }
 
     public Icon getTreeLeafIcon() {
@@ -136,11 +140,11 @@ public class FastIconFactory implements AbstractIconFactory {
     }
 
     public Icon getTreeCollapsedIcon() {
-        return FastIcons.getTreeControlIcon(true);
+        return FastIcons.getTreeCollapsedIcon();
     }
 
     public Icon getTreeExpandedIcon() {
-        return FastIcons.getTreeControlIcon(false);
+        return FastIcons.getTreeExpandedIcon();
     }
 
     public Icon getMenuArrowIcon() {

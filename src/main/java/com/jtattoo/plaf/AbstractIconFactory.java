@@ -38,15 +38,21 @@ public interface AbstractIconFactory {
 
     public Icon getOptionPaneQuestionIcon();
 
-    public Icon getFileChooserDetailViewIcon();
+    public Icon getFileChooserUpFolderIcon();
 
     public Icon getFileChooserHomeFolderIcon();
 
-    public Icon getFileChooserListViewIcon();
-
     public Icon getFileChooserNewFolderIcon();
 
-    public Icon getFileChooserUpFolderIcon();
+    public Icon getFileChooserDetailViewIcon();
+
+    public Icon getFileChooserListViewIcon();
+    
+    public Icon getFileViewComputerIcon();
+
+    public Icon getFileViewFloppyDriveIcon();
+
+    public Icon getFileViewHardDriveIcon();
 
     public Icon getMenuIcon();
 
@@ -66,13 +72,9 @@ public interface AbstractIconFactory {
 
     public Icon getComboBoxIcon();
 
-    public Icon getTreeComputerIcon();
-
-    public Icon getTreeFloppyDriveIcon();
-
-    public Icon getTreeHardDriveIcon();
-
-    public Icon getTreeFolderIcon();
+    public Icon getTreeOpenIcon();
+    
+    public Icon getTreeCloseIcon();
 
     public Icon getTreeLeafIcon();
 

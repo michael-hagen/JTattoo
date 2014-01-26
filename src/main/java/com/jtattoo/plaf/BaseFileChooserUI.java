@@ -24,8 +24,11 @@
 package com.jtattoo.plaf;
 
 import java.awt.Dimension;
+import java.awt.Window;
 import java.io.File;
 import javax.swing.*;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 import javax.swing.filechooser.FileView;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.metal.MetalFileChooserUI;
@@ -40,7 +43,9 @@ public class BaseFileChooserUI extends MetalFileChooserUI {
     // Preferred and Minimum sizes for the dialog box
     private static final int PREF_WIDTH = 580;
     private static final int PREF_HEIGHT = 340;
-    private static Dimension PREF_SIZE = new Dimension(PREF_WIDTH, PREF_HEIGHT);
+    private static final Dimension PREF_SIZE = new Dimension(PREF_WIDTH, PREF_HEIGHT);
+    
+    private AncestorListener ancestorListener = null;
 
     public BaseFileChooserUI(JFileChooser fileChooser) {
         super(fileChooser);
@@ -49,6 +54,32 @@ public class BaseFileChooserUI extends MetalFileChooserUI {
 
     public static ComponentUI createUI(JComponent c) {
         return new BaseFileChooserUI((JFileChooser) c);
+    }
+
+    protected void installListeners(JFileChooser fc) {
+        super.installListeners(fc);
+        ancestorListener = new AncestorListener() {
+
+            public void ancestorAdded(AncestorEvent event) {
+                Window w = SwingUtilities.getWindowAncestor(getFileChooser());
+                if (w != null) {
+                    w.setMinimumSize(getPreferredSize(getFileChooser()));
+                }
+            }
+
+            public void ancestorRemoved(AncestorEvent event) {
+            }
+
+            public void ancestorMoved(AncestorEvent event) {
+            }
+        };
+                
+        fc.addAncestorListener(ancestorListener);
+    }
+
+    protected void uninstallListeners(JFileChooser fc) {
+        super.uninstallListeners(fc); 
+        fc.removeAncestorListener(ancestorListener);
     }
 
     /**

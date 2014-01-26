@@ -187,7 +187,9 @@ public class TextureUtils {
         Graphics2D g2D = (Graphics2D) g;
         Shape savedClip = g2D.getClip();
         Area clipArea = new Area(new Rectangle2D.Double(x, y, w, h));
-        clipArea.intersect(new Area(savedClip));
+        if (savedClip != null) {
+            clipArea.intersect(new Area(savedClip));
+        }
         g2D.setClip(clipArea);
         Icon texture = getTexture(textureType);
         if (texture != null) {
@@ -214,7 +216,9 @@ public class TextureUtils {
         Graphics2D g2D = (Graphics2D) g;
         Shape savedClip = g2D.getClip();
         Area clipArea = new Area(new Rectangle2D.Double(x, y, w, h));
-        clipArea.intersect(new Area(savedClip));
+        if (savedClip != null) {
+            clipArea.intersect(new Area(savedClip));
+        }
         g2D.setClip(clipArea);
         Icon texture = getTexture(textureType);
         if (texture != null) {

@@ -109,103 +109,141 @@ public class McWinIcons extends BaseIcons {
 
 //--------------------------------------------------------------------------------------------------------
     private static class CheckBoxIcon implements Icon, UIResource, Serializable {
-
-        private static Icon checkIcon = new LazyImageIcon("mcwin/icons/CheckSymbol.gif");
-        private static Icon checkDisabledIcon = new LazyImageIcon("mcwin/icons/CheckSymbolDisabled.gif");
-        private static Icon checkPressedIcon = new LazyImageIcon("mcwin/icons/CheckPressedSymbol.gif");
-
-        private final static int WIDTH = 13;
-        private final static int HEIGHT = 14;
+        
+        private static final int GAP = 4;
+        private static final Icon SMALL_CHECK_ICON = new LazyImageIcon("mcwin/icons/small/check_symbol_16x11.png");
+        private static final Icon SMALL_CHECK_PRESSED_ICON = new LazyImageIcon("icons/small/check_symbol_pressed_10x10.png");
+        private static final Icon SMALL_CHECK_DISABLED_ICON = new LazyImageIcon("mcwin/icons/small/check_symbol_disabled_16x11.png");
+        private static final Icon MEDIUM_CHECK_ICON = new LazyImageIcon("mcwin/icons/medium/check_symbol_18x13.png");
+        private static final Icon MEDIUM_CHECK_PRESSED_ICON = new LazyImageIcon("icons/medium/check_symbol_pressed_12x12.png");
+        private static final Icon MEDIUM_CHECK_DISABLED_ICON = new LazyImageIcon("mcwin/icons/medium/check_symbol_disabled_18x13.png");
+        private static final Icon LARGE_CHECK_ICON = new LazyImageIcon("mcwin/icons/large/check_symbol_20x15.png");
+        private static final Icon LARGE_CHECK_PRESSED_ICON = new LazyImageIcon("icons/large/check_symbol_pressed_14x14.png");
+        private static final Icon LARGE_CHECK_DISABLED_ICON = new LazyImageIcon("mcwin/icons/large/check_symbol_disabled_20x15.png");
 
         public void paintIcon(Component c, Graphics g, int x, int y) {
             if (!JTattooUtilities.isLeftToRight(c)) {
-                x += 3;
+                x += GAP;
             }
+            int w = getIconWidth() - GAP;
+            int h = getIconHeight();
             AbstractButton button = (AbstractButton) c;
             ButtonModel model = button.getModel();
-            Color colors[] = null;
+            Color colors[];
+            Color frameColor = AbstractLookAndFeel.getFrameColor();
             if (button.isEnabled()) {
-                if (button.isRolloverEnabled() && model.isRollover()) {
+                if ((button.isRolloverEnabled() && model.isRollover()) || (model.isPressed() && model.isArmed())) {
                     colors = AbstractLookAndFeel.getTheme().getRolloverColors();
                 } else if (!JTattooUtilities.isFrameActive(button)) {
                     colors = AbstractLookAndFeel.getTheme().getInActiveColors();
                 } else if (button.isSelected()) {
                     colors = AbstractLookAndFeel.getTheme().getDefaultColors();
                 } else {
-                    colors = AbstractLookAndFeel.getTheme().getButtonColors();
+                    colors = AbstractLookAndFeel.getTheme().getCheckBoxColors();
                 }
-                JTattooUtilities.fillHorGradient(g, colors, x + 1, y + 1, WIDTH - 1, HEIGHT - 1);
-                g.setColor(AbstractLookAndFeel.getFrameColor());
-                g.drawRect(x, y, WIDTH, HEIGHT);
             } else {
                 colors = AbstractLookAndFeel.getTheme().getDisabledColors();
-                JTattooUtilities.fillHorGradient(g, colors, x + 1, y + 1, WIDTH - 1, HEIGHT - 1);
-                g.setColor(ColorHelper.brighter(AbstractLookAndFeel.getFrameColor(), 20));
-                g.drawRect(x, y, WIDTH, HEIGHT);
+                frameColor = ColorHelper.brighter(AbstractLookAndFeel.getFrameColor(), 20);
             }
+            JTattooUtilities.fillHorGradient(g, colors, x + 1, y + 1, w - 1, h - 1);
+            g.setColor(frameColor);
+            g.drawRect(x, y, w, h);
+            
             if (button.isEnabled() && !model.isRollover() && !model.isPressed() && !model.isSelected()) {
                 g.setColor(Color.white);
-                g.drawLine(x + 1, y + 1, x + 1, y + HEIGHT - 2);
-                g.drawLine(x + WIDTH - 1, y + 1, x + WIDTH - 1, y + HEIGHT - 2);
+                g.drawLine(x + 1, y + 1, x + 1, y + h - 2);
+                g.drawLine(x + w - 1, y + 1, x + w - 1, y + h - 2);
             }
-            if (model.isPressed()) {
-                int xi = x + ((WIDTH - checkPressedIcon.getIconWidth()) / 2) + 1;
-                int yi = y + ((HEIGHT - checkPressedIcon.getIconHeight()) / 2) + 1;
+            
+            Icon checkIcon;
+            Icon checkPressedIcon;
+            Icon checkDisabledIcon;
+            if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
+                checkIcon = SMALL_CHECK_ICON;
+                checkPressedIcon = SMALL_CHECK_PRESSED_ICON;
+                checkDisabledIcon = SMALL_CHECK_DISABLED_ICON;
+            } else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
+                checkIcon = MEDIUM_CHECK_ICON;
+                checkPressedIcon = MEDIUM_CHECK_PRESSED_ICON;
+                checkDisabledIcon = MEDIUM_CHECK_DISABLED_ICON;
+            } else {
+                checkIcon = LARGE_CHECK_ICON;
+                checkPressedIcon = LARGE_CHECK_PRESSED_ICON;
+                checkDisabledIcon = LARGE_CHECK_DISABLED_ICON;
+            }
+            if (model.isPressed() && model.isArmed()) {
+                int xi = x + ((w - checkPressedIcon.getIconWidth()) / 2) + 1;
+                int yi = y + ((h - checkPressedIcon.getIconHeight()) / 2) + 1;
                 checkPressedIcon.paintIcon(c, g, xi, yi);
             } else if (model.isSelected()) {
-                int xi = x + ((WIDTH - checkIcon.getIconWidth()) / 2) + 1;
-                int yi = y + ((HEIGHT - checkIcon.getIconHeight()) / 2);
-                if (model.isEnabled())
-                    checkIcon.paintIcon(c, g, xi + 2, yi);
-                else
-                    checkDisabledIcon.paintIcon(c, g, xi + 2, yi);
+                int xi = x + ((w - checkIcon.getIconWidth()) / 2) + 4;
+                int yi = y + ((h - checkIcon.getIconHeight()) / 2);
+                if (model.isEnabled()) {
+                    checkIcon.paintIcon(c, g, xi, yi);
+                } else {
+                    checkDisabledIcon.paintIcon(c, g, xi, yi);
+                }
             }
         }
 
         public int getIconWidth() {
-            return WIDTH + 6;
+            int w;
+            if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
+                w = 13;
+            } else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
+                w = 15;
+            } else {
+                w = 17;
+            }
+            return w + GAP;
         }
 
         public int getIconHeight() {
-            return HEIGHT;
+            if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
+                return 13;
+            } else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
+                return 15;
+            } else {
+                return 17;
+            }
         }
     }
 
     private static class RadioButtonIcon implements Icon, UIResource, Serializable {
 
-        private static Icon radioIcon = new LazyImageIcon("mcwin/icons/RadioSymbol.gif");
-        private static Icon radioDisabledIcon = new LazyImageIcon("mcwin/icons/RadioSymbolDisabled.gif");
-
-        private final static int WIDTH = 14;
-        private final static int HEIGHT = 14;
+        private static final int GAP = 2;
 
         public void paintIcon(Component c, Graphics g, int x, int y) {
             if (!JTattooUtilities.isLeftToRight(c)) {
-                x += 3;
+                x += GAP;
             }
+            int w = getIconWidth() - GAP;
+            int h = getIconHeight();
             Graphics2D g2D = (Graphics2D) g;
             AbstractButton button = (AbstractButton) c;
             ButtonModel model = button.getModel();
-            Color colors[] = null;
+            Color colors[];
             if (button.isEnabled()) {
-                if (button.isRolloverEnabled() && model.isRollover() && !model.isArmed()) {
+                if ((button.isRolloverEnabled() && model.isRollover()) || (model.isPressed() && model.isArmed())) {
                     colors = AbstractLookAndFeel.getTheme().getRolloverColors();
                 } else if (!JTattooUtilities.isFrameActive(button)) {
                     colors = AbstractLookAndFeel.getTheme().getInActiveColors();
                 } else if (button.isSelected()) {
                     colors = AbstractLookAndFeel.getTheme().getDefaultColors();
                 } else {
-                    colors = AbstractLookAndFeel.getTheme().getButtonColors();
+                    colors = AbstractLookAndFeel.getTheme().getCheckBoxColors();
                 }
             } else {
                 colors = AbstractLookAndFeel.getTheme().getDisabledColors();
             }
 
             Shape savedClip = g.getClip();
-            Area clipArea = new Area(new Ellipse2D.Double(x, y, WIDTH + 1, HEIGHT + 1));
-            clipArea.intersect(new Area(savedClip));
+            Area clipArea = new Area(new Ellipse2D.Double(x, y, w + 1, h + 1));
+            if (savedClip != null) {
+                clipArea.intersect(new Area(savedClip));
+            }
             g2D.setClip(clipArea);
-            JTattooUtilities.fillHorGradient(g, colors, x, y, WIDTH, HEIGHT);
+            JTattooUtilities.fillHorGradient(g, colors, x, y, w, h);
             g2D.setClip(savedClip);
 
             if (button.isEnabled()) {
@@ -215,25 +253,50 @@ public class McWinIcons extends BaseIcons {
             }
             Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
             g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2D.drawOval(x, y, WIDTH, HEIGHT);
-            g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRederingHint);
-
+            g2D.drawOval(x, y, w, h);
+            
             if (model.isSelected()) {
-                int xi = x + ((WIDTH - radioIcon.getIconWidth()) / 2) + 1;
-                int yi = y + ((HEIGHT - radioIcon.getIconHeight()) / 2) + 1;
-                if (model.isEnabled())
-                    radioIcon.paintIcon(c, g, xi, yi);
-                else
-                    radioDisabledIcon.paintIcon(c, g, xi, yi);
+                if (model.isEnabled()) {
+                    int gv = ColorHelper.getGrayValue(colors[0]);
+                    if (gv > 128) {
+                        g.setColor(Color.black);
+                    } else {
+                        g.setColor(Color.white);
+                    }
+                } else {
+                    g.setColor(AbstractLookAndFeel.getTheme().getDisabledForegroundColor());
+                }
+                if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
+                    g2D.fillOval(x + 4, y + 4, w - 7, h - 7);
+                } else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
+                    g2D.fillOval(x + 4, y + 4, w - 7, h - 7);
+                } else {
+                    g2D.fillOval(x + 5, y + 5, w - 9, h - 9);
+                }
             }
+            g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRederingHint);
         }
 
         public int getIconWidth() {
-            return WIDTH + 4;
+            int w;
+            if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
+                w = 14;
+            } else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
+                w = 16;
+            } else {
+                w = 18;
+            }
+            return w + GAP;
         }
 
         public int getIconHeight() {
-            return HEIGHT;
+            if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
+                return 14;
+            } else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
+                return 16;
+            } else {
+                return 18;
+            }
         }
     }
 
@@ -263,7 +326,9 @@ public class McWinIcons extends BaseIcons {
             Shape savedClip = g2D.getClip();
             if (savedClip != null) {
                 Area clipArea = new Area(new Ellipse2D.Double(x + 1, y + 1, WIDTH, HEIGHT));
-                clipArea.intersect(new Area(savedClip));
+                if (savedClip != null) {
+                    clipArea.intersect(new Area(savedClip));
+                }
                 g2D.setClip(clipArea);
                 JTattooUtilities.fillHorGradient(g, colors, x + 1, y + 1, WIDTH, HEIGHT);
                 g2D.setClip(savedClip);

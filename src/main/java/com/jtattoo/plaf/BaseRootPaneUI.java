@@ -176,6 +176,8 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 
     /**
      * Removes any border that may have been installed.
+     * 
+     * @param root
      */
     public void uninstallBorder(JRootPane root) {
         LookAndFeel.uninstallBorder(root);
@@ -189,6 +191,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
      * <code>removeNotify</code>, at which point the parent hasn't been
      * reset yet.
      *
+     * @param root
      * @param parent The parent of the JRootPane
      */
     public void installWindowListeners(JRootPane root, Component parent) {
@@ -224,6 +227,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
     /**
      * Uninstalls the necessary Listeners on the <code>Window</code> the
      * Listeners were last installed on.
+     * @param root
      */
     public void uninstallWindowListeners(JRootPane root) {
         if (window != null) {
@@ -235,6 +239,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
     /**
      * Installs the appropriate LayoutManager on the <code>JRootPane</code>
      * to render the window decorations.
+     * @param root
      */
     public void installLayout(JRootPane root) {
         if (layoutManager == null) {
@@ -283,6 +288,8 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
     /**
      * Returns the <code>JComponent</code> to render the window decoration
      * style.
+     * @param root
+     * @return 
      */
     public BaseTitlePane createTitlePane(JRootPane root) {
         return new BaseTitlePane(root, this);
@@ -291,6 +298,8 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
     /**
      * Returns a <code>MouseListener</code> that will be added to the
      * <code>Window</code> containing the <code>JRootPane</code>.
+     * @param root
+     * @return 
      */
     public MouseInputListener createWindowMouseInputListener(JRootPane root) {
         return new MouseInputHandler();
@@ -299,6 +308,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
     /**
      * Returns a <code>LayoutManager</code> that will be set on the
      * <code>JRootPane</code>.
+     * @return 
      */
     public LayoutManager createLayoutManager() {
         return new BaseRootLayout();

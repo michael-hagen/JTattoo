@@ -58,7 +58,11 @@ public class GraphiteTitlePane extends BaseTitlePane {
     }
 
     public void paintText(Graphics g, int x, int y, String title) {
-        x += paintIcon(g, x, y);
+        if (isMacStyleWindowDecoration()) {
+            x += paintIcon(g, x, y);
+        } else {
+            x += paintIcon(g, 2, y);
+        }
         Graphics2D g2D = (Graphics2D)g;
         Color fc = AbstractLookAndFeel.getWindowTitleForegroundColor();
         if (fc.equals(Color.white)) {

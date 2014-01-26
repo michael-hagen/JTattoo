@@ -776,6 +776,18 @@ public abstract class AbstractTheme extends MetalTheme {
         return val;
     }
     
+    public boolean isSmallFontSize() {
+        return userFont.getSize() < 14;
+    }
+    
+    public boolean isMediumFontSize() {
+        return userFont.getSize() >= 14 && userFont.getSize() < 16;
+    }
+    
+    public boolean isLargeFontSize() {
+        return userFont.getSize() >= 16;
+    }
+    
     public FontUIResource getControlTextFont() {
         if (controlFont == null) {
             if (JTattooUtilities.isLinux() && JTattooUtilities.isHiresScreen()) {

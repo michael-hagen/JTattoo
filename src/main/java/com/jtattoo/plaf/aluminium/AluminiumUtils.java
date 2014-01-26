@@ -105,7 +105,9 @@ public class AluminiumUtils {
         Graphics2D g2D = (Graphics2D) g;
         Shape savedClip = g2D.getClip();
         Area clipArea = new Area(new Rectangle2D.Double(x, y, w, h));
-        clipArea.intersect(new Area(savedClip));
+        if (savedClip != null) {
+            clipArea.intersect(new Area(savedClip));
+        }
         g2D.setClip(clipArea);
         fillComponent(g, c);
         g2D.setClip(savedClip);

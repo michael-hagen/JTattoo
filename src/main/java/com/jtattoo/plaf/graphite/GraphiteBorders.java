@@ -87,45 +87,64 @@ public class GraphiteBorders extends BaseBorders {
     public static class ButtonBorder implements Border, UIResource {
 
         private static final Color defaultColorHi = new Color(220, 230, 245);
-        private static final Color defaultColorMed = new Color(212, 224, 243);
-        private static final Color defaultColorLo = new Color(200, 215, 240);
+        private static final Color defaultColorLo = new Color(212, 224, 243);
         private static final Insets insets = new Insets(3, 8, 3, 8);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             Graphics2D g2D = (Graphics2D) g;
-            AbstractButton b = (AbstractButton) c;
+            AbstractButton button = (AbstractButton) c;
             Color frameColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFrameColor(), 30);
-            if (AbstractLookAndFeel.getTheme().doShowFocusFrame() && b.hasFocus()) {
+            if (AbstractLookAndFeel.getTheme().doShowFocusFrame() && button.hasFocus()) {
                 frameColor = AbstractLookAndFeel.getTheme().getFocusFrameColor();
             }
-            Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
-            g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-            Composite savedComposite = g2D.getComposite();
-            AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
-            g2D.setComposite(alpha);
-            g2D.setColor(Color.white);
-            g2D.drawRoundRect(x, y, w - 1, h - 1, 6, 6);
-            g2D.setComposite(savedComposite);
-
-            if (b.getRootPane() != null && b.equals(b.getRootPane().getDefaultButton()) && !b.hasFocus()) {
-                g2D.setColor(ColorHelper.darker(frameColor, 20));
-                g2D.drawRoundRect(x, y, w - 1, h - 2, 6, 6);
-                if (!b.getModel().isRollover()) {
-                    g2D.setColor(defaultColorHi);
-                    g2D.drawRoundRect(x + 1, y + 1, w - 3, h - 4, 6, 6);
-                    g2D.setColor(defaultColorMed);
-                    g2D.drawRoundRect(x + 2, y + 2, w - 5, h - 6, 6, 6);
-                    g2D.setColor(defaultColorLo);
-                    g2D.drawLine(x + 3, h - 3, w - 3, h - 3);
-                    g2D.drawLine(w - 2, y + 4, w - 2, h - 4);
+            
+            if (AbstractLookAndFeel.getTheme().doDrawSquareButtons()) {
+                Composite savedComposite = g2D.getComposite();
+                AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
+                g2D.setComposite(alpha);
+                g2D.setColor(Color.white);
+                g2D.drawRect(x, y, w - 1, h - 1);
+                g2D.setComposite(savedComposite);
+                
+                if (button.getRootPane() != null && button.equals(button.getRootPane().getDefaultButton()) && !button.hasFocus()) {
+                    g2D.setColor(ColorHelper.darker(frameColor, 20));
+                    g2D.drawRect(x, y, w - 1, h - 2);
+                    if (!button.getModel().isRollover()) {
+                        g2D.setColor(defaultColorHi);
+                        g2D.drawRect(x + 1, y + 1, w - 3, h - 4);
+                        g2D.setColor(defaultColorLo);
+                        g2D.drawRect(x + 2, y + 2, w - 5, h - 6);
+                    }
+                } else {
+                    g2D.setColor(frameColor);
+                    g2D.drawRect(x, y, w - 2, h - 2);
                 }
             } else {
-                g2D.setColor(frameColor);
-                g2D.drawRoundRect(x, y, w - 1, h - 2, 6, 6);
-            }
+                Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
+                g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                Composite savedComposite = g2D.getComposite();
+                AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
+                g2D.setComposite(alpha);
+                g2D.setColor(Color.white);
+                g2D.drawRoundRect(x, y, w - 1, h - 1, 6, 6);
+                g2D.setComposite(savedComposite);
 
-            g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRederingHint);
+                if (button.getRootPane() != null && button.equals(button.getRootPane().getDefaultButton()) && !button.hasFocus()) {
+                    g2D.setColor(ColorHelper.darker(frameColor, 20));
+                    g2D.drawRoundRect(x, y, w - 1, h - 2, 6, 6);
+                    if (!button.getModel().isRollover()) {
+                        g2D.setColor(defaultColorHi);
+                        g2D.drawRoundRect(x + 1, y + 1, w - 3, h - 4, 6, 6);
+                        g2D.setColor(defaultColorLo);
+                        g2D.drawRoundRect(x + 2, y + 2, w - 5, h - 6, 6, 6);
+                    }
+                } else {
+                    g2D.setColor(frameColor);
+                    g2D.drawRoundRect(x, y, w - 1, h - 2, 6, 6);
+                }
+
+                g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRederingHint);
+            }
         }
 
         public Insets getBorderInsets(Component c) {

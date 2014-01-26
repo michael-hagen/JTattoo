@@ -58,7 +58,11 @@ public class TextureTitlePane extends BaseTitlePane {
     }
 
     public void paintText(Graphics g, int x, int y, String title) {
-        x += paintIcon(g, x, y);
+        if (isMacStyleWindowDecoration()) {
+            x += paintIcon(g, x, y);
+        } else {
+            x += paintIcon(g, 2, y);
+        }
         Graphics2D g2D = (Graphics2D)g;
         Shape savedClip = g2D.getClip();
         Color fc = AbstractLookAndFeel.getWindowTitleForegroundColor();
@@ -72,12 +76,16 @@ public class TextureTitlePane extends BaseTitlePane {
         g.setColor(fc);
 
         Area clipArea = new Area(new Rectangle2D.Double(x, 0, getWidth(), getHeight() / 2));
-        clipArea.intersect(new Area(savedClip));
+        if (savedClip != null) {
+            clipArea.intersect(new Area(savedClip));
+        }
         g2D.setClip(clipArea);
         JTattooUtilities.drawString(rootPane, g, title, x, y);
 
         clipArea = new Area(new Rectangle2D.Double(x, (getHeight() / 2), getWidth(), getHeight()));
-        clipArea.intersect(new Area(savedClip));
+        if (savedClip != null) {
+            clipArea.intersect(new Area(savedClip));
+        }
         g2D.setClip(clipArea);
         g.setColor(ColorHelper.darker(fc, 20));
         JTattooUtilities.drawString(rootPane, g, title, x, y);

@@ -104,7 +104,9 @@ public class AluminiumButtonUI extends BaseButtonUI {
             int d = height - 2;
             Shape savedClip = g.getClip();
             Area clipArea = new Area(new RoundRectangle2D.Double(0, 0, width - 1, height - 1, d, d));
-            clipArea.intersect(new Area(savedClip));
+            if (savedClip != null) {
+                clipArea.intersect(new Area(savedClip));
+            }
             g2D.setClip(clipArea);
             JTattooUtilities.fillHorGradient(g, colors, 0, 0, width - 1, height - 1);
             g2D.setClip(savedClip);

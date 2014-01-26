@@ -58,7 +58,7 @@ public class GraphiteTabbedPaneUI extends BaseTabbedPaneUI {
     }
 
     protected Color getLoBorderColor(int tabIndex) {
-        if ((tabIndex == tabPane.getSelectedIndex() || tabIndex == rolloverIndex) && tabPane.getBackgroundAt(tabIndex) instanceof ColorUIResource) {
+        if ((tabIndex == tabPane.getSelectedIndex()) && tabPane.getBackgroundAt(tabIndex) instanceof ColorUIResource) {
             return AbstractLookAndFeel.getControlColorDark();
         }
         return AbstractLookAndFeel.getControlShadow();

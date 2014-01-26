@@ -104,7 +104,11 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
         Dimension size = super.getPreferredSize(c);
         if (comboBox.getGraphics() != null) {
             FontMetrics fm = comboBox.getGraphics().getFontMetrics();
-            size.height = Math.max(BaseIcons.getComboBoxIcon().getIconHeight() + 2, fm.getHeight() + 2);
+            size.height = fm.getHeight() + 2;
+            if (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel) {
+                AbstractLookAndFeel laf = (AbstractLookAndFeel)UIManager.getLookAndFeel();
+                size.height = Math.max(size.height, laf.getIconFactory().getDownArrowIcon().getIconHeight() + 2);
+            }
         }
         return new Dimension(size.width + 2, size.height + 2);
     }
@@ -146,7 +150,7 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
 
         public void paint(Graphics g) {
             Dimension size = getSize();
-            Color colors[] = null;
+            Color colors[];
             if (isEnabled()) {
                 if (getModel().isArmed() && getModel().isPressed()) {
                     colors = AbstractLookAndFeel.getTheme().getPressedColors();

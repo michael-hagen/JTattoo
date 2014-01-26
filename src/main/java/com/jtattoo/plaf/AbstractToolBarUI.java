@@ -42,8 +42,8 @@ public abstract class AbstractToolBarUI extends BasicToolBarUI {
     private boolean rolloverEnabled = true;
     private MyPropertyChangeListener propertyChangeListener = null;
     private MyContainerListener containerListener = null;
-    private Hashtable orgBorders = new Hashtable();
-    private Hashtable orgMargins = new Hashtable();
+    private final Hashtable orgBorders = new Hashtable();
+    private final Hashtable orgMargins = new Hashtable();
 
     public abstract Border getRolloverBorder();
 

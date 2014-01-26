@@ -76,6 +76,8 @@ public class HiFiDefaultTheme extends AbstractTheme {
         rolloverColorLight = new ColorUIResource(128, 128, 128);
         rolloverColorDark = new ColorUIResource(96, 96, 96);
 
+        pressedForegroundColor = foregroundColor;
+        
         buttonForegroundColor = foregroundColor;
         buttonBackgroundColor = new ColorUIResource(96, 96, 96);
         buttonColorLight = new ColorUIResource(96, 96, 96);

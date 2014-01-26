@@ -25,6 +25,7 @@ package com.jtattoo.plaf;
 
 import java.awt.*;
 import javax.swing.Icon;
+import javax.swing.UIManager;
 
 /**
  * @author  Michael Hagen
@@ -35,11 +36,38 @@ public abstract class XPScrollButton extends BaseScrollButton {
         super(direction, width);
     }
 
-    public abstract Icon getUpArrowIcon();
-    public abstract Icon getDownArrowIcon();
-    public abstract Icon getLeftArrowIcon();
-    public abstract Icon getRightArrowIcon();
-
+    private Icon getUpArrowIcon() {
+        if (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel) {
+            AbstractLookAndFeel laf = (AbstractLookAndFeel)UIManager.getLookAndFeel();
+            return laf.getIconFactory().getUpArrowIcon();
+        }
+        return null;
+    }
+    
+    private Icon getDownArrowIcon() {
+        if (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel) {
+            AbstractLookAndFeel laf = (AbstractLookAndFeel)UIManager.getLookAndFeel();
+            return laf.getIconFactory().getDownArrowIcon();
+        }
+        return null;
+    }
+    
+    private Icon getLeftArrowIcon() {
+        if (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel) {
+            AbstractLookAndFeel laf = (AbstractLookAndFeel)UIManager.getLookAndFeel();
+            return laf.getIconFactory().getLeftArrowIcon();
+        }
+        return null;
+    }
+    
+    private Icon getRightArrowIcon() {
+        if (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel) {
+            AbstractLookAndFeel laf = (AbstractLookAndFeel)UIManager.getLookAndFeel();
+            return laf.getIconFactory().getRightArrowIcon();
+        }
+        return null;
+    }
+    
     public Color getFrameColor() {
         return Color.white;
     }
@@ -92,24 +120,28 @@ public abstract class XPScrollButton extends BaseScrollButton {
 
         g2D.setComposite(savedComposite);
 
+        int x;
+        int y;
+        Icon icon;
         // paint the icon
         if (getDirection() == NORTH) {
-            int x = (width / 2) - (getUpArrowIcon().getIconWidth() / 2);
-            int y = (height / 2) - (getUpArrowIcon().getIconHeight() / 2);
-            getUpArrowIcon().paintIcon(this, g, x, y);
+            icon = getUpArrowIcon();
+            x = (width / 2) - (icon.getIconWidth() / 2);
+            y = (height / 2) - (icon.getIconHeight() / 2);
         } else if (getDirection() == SOUTH) {
-            int x = (width / 2) - (getDownArrowIcon().getIconWidth() / 2);
-            int y = (height / 2) - (getDownArrowIcon().getIconHeight() / 2) + 1;
-            getDownArrowIcon().paintIcon(this, g, x, y);
+            icon = getDownArrowIcon();
+            x = (width / 2) - (icon.getIconWidth() / 2);
+            y = (height / 2) - (icon.getIconHeight() / 2) + 1;
         } else if (getDirection() == WEST) {
-            int x = (width / 2) - (getLeftArrowIcon().getIconWidth() / 2);
-            int y = (height / 2) - (getLeftArrowIcon().getIconHeight() / 2);
-            getLeftArrowIcon().paintIcon(this, g, x, y);
+            icon = getLeftArrowIcon();
+            x = (width / 2) - (icon.getIconWidth() / 2);
+            y = (height / 2) - (icon.getIconHeight() / 2);
         } else {
-            int x = (width / 2) - (getRightArrowIcon().getIconWidth() / 2) + 1;
-            int y = (height / 2) - (getRightArrowIcon().getIconHeight() / 2);
-            getRightArrowIcon().paintIcon(this, g, x, y);
+            icon = getRightArrowIcon();
+            x = (width / 2) - (icon.getIconWidth() / 2) + 1;
+            y = (height / 2) - (icon.getIconHeight() / 2);
         }
+        icon.paintIcon(this, g, x, y);
     }
 
     public Dimension getPreferredSize() {

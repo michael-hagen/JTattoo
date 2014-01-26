@@ -59,24 +59,36 @@ public class TextureIconFactory implements AbstractIconFactory {
         return TextureIcons.getOptionPaneQuestionIcon();
     }
 
-    public Icon getFileChooserDetailViewIcon() {
-        return TextureIcons.getFileChooserDetailViewIcon();
+    public Icon getFileChooserUpFolderIcon() {
+        return TextureIcons.getFileChooserUpFolderIcon();
     }
 
     public Icon getFileChooserHomeFolderIcon() {
         return TextureIcons.getFileChooserHomeFolderIcon();
     }
 
-    public Icon getFileChooserListViewIcon() {
-        return TextureIcons.getFileChooserListViewIcon();
-    }
-
     public Icon getFileChooserNewFolderIcon() {
         return TextureIcons.getFileChooserNewFolderIcon();
     }
 
-    public Icon getFileChooserUpFolderIcon() {
-        return TextureIcons.getFileChooserUpFolderIcon();
+    public Icon getFileChooserListViewIcon() {
+        return TextureIcons.getFileChooserListViewIcon();
+    }
+
+    public Icon getFileChooserDetailViewIcon() {
+        return TextureIcons.getFileChooserDetailViewIcon();
+    }
+
+    public Icon getFileViewComputerIcon() {
+        return TextureIcons.getFileViewComputerIcon();
+    }
+
+    public Icon getFileViewFloppyDriveIcon() {
+        return TextureIcons.getFileViewFloppyDriveIcon();
+    }
+
+    public Icon getFileViewHardDriveIcon() {
+        return TextureIcons.getFileViewHardDriveIcon();
     }
 
     public Icon getMenuIcon() {
@@ -115,20 +127,12 @@ public class TextureIconFactory implements AbstractIconFactory {
         return TextureIcons.getComboBoxIcon();
     }
 
-    public Icon getTreeComputerIcon() {
-        return TextureIcons.getTreeComputerIcon();
+    public Icon getTreeOpenIcon() {
+        return TextureIcons.getTreeOpenedIcon();
     }
 
-    public Icon getTreeFloppyDriveIcon() {
-        return TextureIcons.getTreeFloppyDriveIcon();
-    }
-
-    public Icon getTreeHardDriveIcon() {
-        return TextureIcons.getTreeHardDriveIcon();
-    }
-
-    public Icon getTreeFolderIcon() {
-        return TextureIcons.getTreeFolderIcon();
+    public Icon getTreeCloseIcon() {
+        return TextureIcons.getTreeClosedIcon();
     }
 
     public Icon getTreeLeafIcon() {
@@ -136,11 +140,11 @@ public class TextureIconFactory implements AbstractIconFactory {
     }
 
     public Icon getTreeCollapsedIcon() {
-        return TextureIcons.getTreeControlIcon(true);
+        return TextureIcons.getTreeCollapsedIcon();
     }
 
     public Icon getTreeExpandedIcon() {
-        return TextureIcons.getTreeControlIcon(false);
+        return TextureIcons.getTreeExpandedIcon();
     }
 
     public Icon getMenuArrowIcon() {

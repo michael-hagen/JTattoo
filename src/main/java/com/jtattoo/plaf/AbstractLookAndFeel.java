@@ -188,6 +188,7 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
             "Button.frame", getFrameColor(),
             "Button.focus", getFocusColor(),
             "Button.rolloverColor", getTheme().getRolloverColor(),
+            "Button.rolloverForeground", getTheme().getRolloverForegroundColor(),
             "CheckBox.font", getUserTextFont(),
             "CheckBox.background", getBackgroundColor(),
             "CheckBox.foreground", getForegroundColor(),
@@ -392,18 +393,18 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
             "OptionPane.messageAreaBorder", optionPaneMessageAreaBorder,
             "OptionPane.buttonAreaBorder", optionPaneButtonAreaBorder,
             // File View
-            "FileView.directoryIcon", getIconFactory().getTreeFolderIcon(),
+            "FileView.directoryIcon", getIconFactory().getTreeOpenIcon(),
             "FileView.fileIcon", getIconFactory().getTreeLeafIcon(),
-            "FileView.computerIcon", getIconFactory().getTreeComputerIcon(),
-            "FileView.hardDriveIcon", getIconFactory().getTreeHardDriveIcon(),
-            "FileView.floppyDriveIcon", getIconFactory().getTreeFloppyDriveIcon(),
+            "FileView.computerIcon", getIconFactory().getFileViewComputerIcon(),
+            "FileView.hardDriveIcon", getIconFactory().getFileViewHardDriveIcon(),
+            "FileView.floppyDriveIcon", getIconFactory().getFileViewFloppyDriveIcon(),
             // File Chooser
+            "FileChooser.upFolderIcon", getIconFactory().getFileChooserUpFolderIcon(),
+            "FileChooser.homeFolderIcon", getIconFactory().getFileChooserHomeFolderIcon(),
+            "FileChooser.newFolderIcon", getIconFactory().getFileChooserNewFolderIcon(),
+            "FileChooser.listViewIcon", getIconFactory().getFileChooserListViewIcon(),
             "FileChooser.detailsViewIcon", getIconFactory().getFileChooserDetailViewIcon(),
             "FileChooser.viewMenuIcon", getIconFactory().getFileChooserDetailViewIcon(), 
-            "FileChooser.homeFolderIcon", getIconFactory().getFileChooserHomeFolderIcon(),
-            "FileChooser.listViewIcon", getIconFactory().getFileChooserListViewIcon(),
-            "FileChooser.newFolderIcon", getIconFactory().getFileChooserNewFolderIcon(),
-            "FileChooser.upFolderIcon", getIconFactory().getFileChooserUpFolderIcon(),
             // Separator
             "Separator.background", getBackgroundColor(),
             "Separator.foreground", getControlForegroundColor(),
@@ -416,9 +417,13 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
             "Tree.foreground", getInputForegroundColor(),
             "Tree.textForeground", getInputForegroundColor(),
             "Tree.textBackground", getInputBackgroundColor(),
+            "Tree.selectionForeground", getSelectionForegroundColor(),
+            "Tree.selectionBackground", getSelectionBackgroundColor(),
+            "Tree.disabledForeground", getDisabledForegroundColor(),
+            "Tree.disabledBackground", getDisabledBackgroundColor(),
 
-            "Tree.openIcon", getIconFactory().getTreeFolderIcon(),
-            "Tree.closedIcon", getIconFactory().getTreeFolderIcon(),
+            "Tree.openIcon", getIconFactory().getTreeOpenIcon(),
+            "Tree.closedIcon", getIconFactory().getTreeCloseIcon(),
             "Tree.leafIcon", getIconFactory().getTreeLeafIcon(),
             "Tree.expandedIcon", getIconFactory().getTreeExpandedIcon(),
             "Tree.collapsedIcon", getIconFactory().getTreeCollapsedIcon(),
@@ -447,7 +452,27 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
             table.put("Spinner.editorBorderPainted", Boolean.FALSE);
         }
         if (getTheme().isMacStyleScrollBarOn()) {
-            table.put("ScrollBar.width", new Integer(8));
+            if (getTheme().isSmallFontSize()) {
+                table.put("ScrollBar.width", new Integer(8));
+                table.put("SplitPane.dividerSize", new Integer(7));
+            } else if (getTheme().isMediumFontSize()) { 
+                table.put("ScrollBar.width", new Integer(10));
+                table.put("SplitPane.dividerSize", new Integer(9));
+            } else {
+                table.put("ScrollBar.width", new Integer(12));
+                table.put("SplitPane.dividerSize", new Integer(11));
+            }
+        } else {
+            if (getTheme().isSmallFontSize()) {
+                table.put("ScrollBar.width", new Integer(17));
+                table.put("SplitPane.dividerSize", new Integer(7));
+            } else if (getTheme().isMediumFontSize()) { 
+                table.put("ScrollBar.width", new Integer(19));
+                table.put("SplitPane.dividerSize", new Integer(9));
+            } else {
+                table.put("ScrollBar.width", new Integer(21));
+                table.put("SplitPane.dividerSize", new Integer(11));
+            }
         }
     }
 
@@ -467,6 +492,8 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
 
     /**
      * Set a theme by name. Allowed themes may come from the list returned by getThemes
+     * 
+     * @param name the name of the theme
      */
     public static void setTheme(String name) {
         // Overwrite this in derived classes

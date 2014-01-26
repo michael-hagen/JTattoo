@@ -25,48 +25,14 @@ package com.jtattoo.plaf.hifi;
 
 import com.jtattoo.plaf.*;
 import java.awt.Color;
-import javax.swing.Icon;
 
 /**
  * @author  Michael Hagen
  */
 public class HiFiScrollButton extends XPScrollButton {
 
-    protected static Icon upArrowIcon = null;
-    protected static Icon downArrowIcon = null;
-    protected static Icon leftArrowIcon = null;
-    protected static Icon rightArrowIcon = null;
-
     public HiFiScrollButton(int direction, int width) {
         super(direction, width);
-    }
-
-    public Icon getUpArrowIcon() {
-        if (upArrowIcon == null) {
-            upArrowIcon = new LazyImageIcon("hifi/icons/UpArrow.gif");
-        }
-        return upArrowIcon;
-    }
-
-    public Icon getDownArrowIcon() {
-        if (downArrowIcon == null) {
-            downArrowIcon = new LazyImageIcon("hifi/icons/DownArrow.gif");
-        }
-        return downArrowIcon;
-    }
-
-    public Icon getLeftArrowIcon() {
-        if (leftArrowIcon == null) {
-            leftArrowIcon = new LazyImageIcon("hifi/icons/LeftArrow.gif");
-        }
-        return leftArrowIcon;
-    }
-
-    public Icon getRightArrowIcon() {
-        if (rightArrowIcon == null) {
-            rightArrowIcon = new LazyImageIcon("hifi/icons/RightArrow.gif");
-        }
-        return rightArrowIcon;
     }
 
     public Color getFrameColor() {

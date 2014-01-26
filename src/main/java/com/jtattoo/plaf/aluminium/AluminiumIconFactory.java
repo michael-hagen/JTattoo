@@ -59,24 +59,36 @@ public class AluminiumIconFactory implements AbstractIconFactory {
         return AluminiumIcons.getOptionPaneQuestionIcon();
     }
 
-    public Icon getFileChooserDetailViewIcon() {
-        return AluminiumIcons.getFileChooserDetailViewIcon();
+    public Icon getFileChooserUpFolderIcon() {
+        return AluminiumIcons.getFileChooserUpFolderIcon();
     }
 
     public Icon getFileChooserHomeFolderIcon() {
         return AluminiumIcons.getFileChooserHomeFolderIcon();
     }
 
-    public Icon getFileChooserListViewIcon() {
-        return AluminiumIcons.getFileChooserListViewIcon();
-    }
-
     public Icon getFileChooserNewFolderIcon() {
         return AluminiumIcons.getFileChooserNewFolderIcon();
     }
 
-    public Icon getFileChooserUpFolderIcon() {
-        return AluminiumIcons.getFileChooserUpFolderIcon();
+    public Icon getFileChooserListViewIcon() {
+        return AluminiumIcons.getFileChooserListViewIcon();
+    }
+
+    public Icon getFileChooserDetailViewIcon() {
+        return AluminiumIcons.getFileChooserDetailViewIcon();
+    }
+
+    public Icon getFileViewComputerIcon() {
+        return AluminiumIcons.getFileViewComputerIcon();
+    }
+
+    public Icon getFileViewFloppyDriveIcon() {
+        return AluminiumIcons.getFileViewFloppyDriveIcon();
+    }
+
+    public Icon getFileViewHardDriveIcon() {
+        return AluminiumIcons.getFileViewHardDriveIcon();
     }
 
     public Icon getMenuIcon() {
@@ -115,32 +127,24 @@ public class AluminiumIconFactory implements AbstractIconFactory {
         return AluminiumIcons.getComboBoxIcon();
     }
 
-    public Icon getTreeComputerIcon() {
-        return AluminiumIcons.getTreeComputerIcon();
+    public Icon getTreeOpenIcon() {
+        return AluminiumIcons.getTreeOpenedIcon();
     }
 
-    public Icon getTreeFloppyDriveIcon() {
-        return AluminiumIcons.getTreeFloppyDriveIcon();
+    public Icon getTreeCloseIcon() {
+        return AluminiumIcons.getTreeClosedIcon();
     }
-
-    public Icon getTreeHardDriveIcon() {
-        return AluminiumIcons.getTreeHardDriveIcon();
-    }
-
-    public Icon getTreeFolderIcon() {
-        return AluminiumIcons.getTreeFolderIcon();
-    }
-
+    
     public Icon getTreeLeafIcon() {
         return AluminiumIcons.getTreeLeafIcon();
     }
 
     public Icon getTreeCollapsedIcon() {
-        return AluminiumIcons.getTreeControlIcon(true);
+        return AluminiumIcons.getTreeCollapsedIcon();
     }
 
     public Icon getTreeExpandedIcon() {
-        return AluminiumIcons.getTreeControlIcon(false);
+        return AluminiumIcons.getTreeExpandedIcon();
     }
 
     public Icon getMenuArrowIcon() {

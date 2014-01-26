@@ -106,7 +106,7 @@ public class BaseSpinnerUI extends BasicSpinnerUI {
 //-----------------------------------------------------------------------------------------
     public static class SpinButton extends NoFocusButton {
 
-        private static Dimension minSize = new Dimension(14, 12);
+        private static final Dimension minSize = new Dimension(14, 12);
         private int direction = SwingConstants.NORTH;
 
         public SpinButton(int aDirection) {
@@ -123,9 +123,9 @@ public class BaseSpinnerUI extends BasicSpinnerUI {
         }
 
         public void paint(Graphics g) {
-            Color colors[] = null;
-            ButtonModel model = getModel();
+            Color colors[];
             if (isEnabled()) {
+                ButtonModel model = getModel();
                 if (model.isPressed() && model.isArmed()) {
                     colors = AbstractLookAndFeel.getTheme().getPressedColors();
                 } else {

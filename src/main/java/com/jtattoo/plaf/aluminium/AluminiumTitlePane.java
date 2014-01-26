@@ -50,7 +50,11 @@ public class AluminiumTitlePane extends BaseTitlePane {
     }
 
     public void paintText(Graphics g, int x, int y, String title) {
-        x += paintIcon(g, x, y);
+        if (isMacStyleWindowDecoration()) {
+            x += paintIcon(g, x, y);
+        } else {
+            x += paintIcon(g, 2, y);
+        }
         if (isActive()) {
             g.setColor(AbstractLookAndFeel.getWindowTitleBackgroundColor());
             JTattooUtilities.drawString(rootPane, g, title, x + 1, y);

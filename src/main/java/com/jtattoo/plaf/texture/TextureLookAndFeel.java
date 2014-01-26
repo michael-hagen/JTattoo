@@ -353,7 +353,6 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
             myTheme = new TextureDefaultTheme();
         }
         if ((myTheme != null) && (themesProps != null)) {
-            TextureIcons.setUp();
             myTheme.setUpColor();
             myTheme.setProperties(themesProps);
             myTheme.setUpColorArrs();

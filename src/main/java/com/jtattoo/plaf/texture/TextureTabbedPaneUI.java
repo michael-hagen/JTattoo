@@ -158,7 +158,10 @@ public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
             Graphics2D g2D = (Graphics2D) g;
             Composite savedComposite = g2D.getComposite();
             Shape savedClip = g.getClip();
-            Area orgClipArea = new Area(savedClip);
+            Area orgClipArea = new Area(new Rectangle2D.Double(x, y, w, h));
+            if (savedClip != null) {
+                orgClipArea = new Area(savedClip);
+            }
             int d = 2 * GAP;
             switch (tabPlacement) {
                 case TOP:
@@ -269,12 +272,16 @@ public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
                     Shape savedClip = g2D.getClip();
 
                     Area clipArea = new Area(new Rectangle2D.Double(textRect.x, textRect.y, textRect.width, textRect.height / 2 + 1));
-                    clipArea.intersect(new Area(savedClip));
+                    if (savedClip != null) {
+                        clipArea.intersect(new Area(savedClip));
+                    }
                     g2D.setClip(clipArea);
                     JTattooUtilities.drawStringUnderlineCharAt(tabPane, g, title, mnemIndex, textRect.x, textRect.y + metrics.getAscent());
 
                     clipArea = new Area(new Rectangle2D.Double(textRect.x, textRect.y + (textRect.height / 2) + 1, textRect.width, textRect.height));
-                    clipArea.intersect(new Area(savedClip));
+                    if (savedClip != null) {
+                        clipArea.intersect(new Area(savedClip));
+                    }
                     g2D.setClip(clipArea);
                     g2D.setColor(ColorHelper.darker(titleColor, 20));
                     JTattooUtilities.drawStringUnderlineCharAt(tabPane, g, title, mnemIndex, textRect.x, textRect.y + metrics.getAscent());

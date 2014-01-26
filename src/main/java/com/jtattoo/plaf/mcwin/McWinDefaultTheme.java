@@ -205,6 +205,7 @@ public class McWinDefaultTheme extends AbstractTheme {
         TOOLBAR_COLORS = MENUBAR_COLORS;
 
         BUTTON_COLORS = HIDEFAULT_COLORS;
+        CHECKBOX_COLORS = BUTTON_COLORS;
         TAB_COLORS = BUTTON_COLORS;
         if (isBrightMode()) {
             COL_HEADER_COLORS = HIDEFAULT_COLORS;
@@ -212,7 +213,20 @@ public class McWinDefaultTheme extends AbstractTheme {
             COL_HEADER_COLORS = DEFAULT_COLORS;
         }
         if (isBrightMode()) {
-            THUMB_COLORS = HIDEFAULT_COLORS;
+            if (controlColorLight.equals(new ColorUIResource(106, 150, 192))) {
+                THUMB_COLORS = HIDEFAULT_COLORS;
+            } else {
+                Color cHi = ColorHelper.brighter(controlColorLight, 10);
+                Color cLo = ColorHelper.brighter(controlColorDark, 10);
+                Color color1[] = ColorHelper.createColorArr(cHi, cLo, 6);
+                color1[0] = cLo;
+                Color color2[] = ColorHelper.createColorArr(ColorHelper.brighter(cLo, 10), cHi, 15);
+                System.arraycopy(color1, 0, THUMB_COLORS, 0, 6);
+                for (int i = 5; i < 20; i++) {
+                    THUMB_COLORS[i] = color2[i - 5];
+                }
+
+            }
         } else {
             THUMB_COLORS = DEFAULT_COLORS;
         }

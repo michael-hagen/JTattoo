@@ -130,20 +130,21 @@ public class BaseButtonUI extends BasicButtonUI {
 
         if (model.isEnabled()) {
             Color foreground = b.getForeground();
+            Color background = b.getBackground();
             int offs = 0;
             if (model.isArmed() && model.isPressed()) {
                 offs = 1;
             }
-            if (foreground instanceof ColorUIResource) {
-                if (model.isRollover()) {
-                    g.setColor(AbstractLookAndFeel.getTheme().getRolloverForegroundColor());
-                } else if (model.isPressed()) {
+            if (background instanceof ColorUIResource) {
+                if (model.isPressed() && model.isArmed()) {
                     g.setColor(AbstractLookAndFeel.getTheme().getPressedForegroundColor());
+                } else if (model.isRollover()) {
+                    g.setColor(AbstractLookAndFeel.getTheme().getRolloverForegroundColor());
                 } else {
-                    g.setColor(b.getForeground());
+                    g.setColor(foreground);
                 }
             } else {
-                g.setColor(b.getForeground());
+                g.setColor(foreground);
             }
             JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + offs, textRect.y + offs + fm.getAscent());
         } else {

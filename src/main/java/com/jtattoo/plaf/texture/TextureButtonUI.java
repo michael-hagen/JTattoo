@@ -90,22 +90,23 @@ public class TextureButtonUI extends BaseButtonUI {
             if (model.isArmed() && model.isPressed()) {
                 offs = 1;
             }
-            Color fc = b.getForeground();
-            if (fc instanceof ColorUIResource) {
-                if (model.isPressed()) {
-                    fc = AbstractLookAndFeel.getTheme().getPressedForegroundColor();
-                } else if (b.isRolloverEnabled() && model.isRollover()) {
-                    fc = AbstractLookAndFeel.getTheme().getRolloverForegroundColor();
+            Color foreground = b.getForeground();
+            Color background = b.getBackground();
+            if (background instanceof ColorUIResource) {
+                if (model.isPressed() && model.isArmed()) {
+                    foreground = AbstractLookAndFeel.getTheme().getPressedForegroundColor();
+                } else if (model.isRollover()) {
+                    foreground = AbstractLookAndFeel.getTheme().getRolloverForegroundColor();
                 }
             }
-            if (AbstractLookAndFeel.getTheme().isTextShadowOn() && ColorHelper.getGrayValue(fc) > 164) {
+            if (AbstractLookAndFeel.getTheme().isTextShadowOn() && ColorHelper.getGrayValue(foreground) > 164) {
                 AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
                 g2D.setComposite(alpha);
                 g.setColor(Color.black);
                 JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + offs, textRect.y + offs + fm.getAscent() + 1);
                 g2D.setComposite(savedComposite);
             }
-            g.setColor(fc);
+            g.setColor(foreground);
             JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + offs, textRect.y + offs + fm.getAscent());
         } else {
             AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f);

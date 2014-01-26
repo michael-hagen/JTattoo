@@ -59,24 +59,36 @@ public class BernsteinIconFactory implements AbstractIconFactory {
         return BernsteinIcons.getOptionPaneQuestionIcon();
     }
 
-    public Icon getFileChooserDetailViewIcon() {
-        return BernsteinIcons.getFileChooserDetailViewIcon();
+    public Icon getFileChooserUpFolderIcon() {
+        return BernsteinIcons.getFileChooserUpFolderIcon();
     }
 
     public Icon getFileChooserHomeFolderIcon() {
         return BernsteinIcons.getFileChooserHomeFolderIcon();
     }
 
-    public Icon getFileChooserListViewIcon() {
-        return BernsteinIcons.getFileChooserListViewIcon();
-    }
-
     public Icon getFileChooserNewFolderIcon() {
         return BernsteinIcons.getFileChooserNewFolderIcon();
     }
 
-    public Icon getFileChooserUpFolderIcon() {
-        return BernsteinIcons.getFileChooserUpFolderIcon();
+    public Icon getFileChooserListViewIcon() {
+        return BernsteinIcons.getFileChooserListViewIcon();
+    }
+
+    public Icon getFileChooserDetailViewIcon() {
+        return BernsteinIcons.getFileChooserDetailViewIcon();
+    }
+
+    public Icon getFileViewComputerIcon() {
+        return BernsteinIcons.getFileViewComputerIcon();
+    }
+
+    public Icon getFileViewFloppyDriveIcon() {
+        return BernsteinIcons.getFileViewFloppyDriveIcon();
+    }
+
+    public Icon getFileViewHardDriveIcon() {
+        return BernsteinIcons.getFileViewHardDriveIcon();
     }
 
     public Icon getMenuIcon() {
@@ -115,20 +127,12 @@ public class BernsteinIconFactory implements AbstractIconFactory {
         return BernsteinIcons.getComboBoxIcon();
     }
 
-    public Icon getTreeComputerIcon() {
-        return BernsteinIcons.getTreeComputerIcon();
+    public Icon getTreeOpenIcon() {
+        return BernsteinIcons.getTreeOpenedIcon();
     }
 
-    public Icon getTreeFloppyDriveIcon() {
-        return BernsteinIcons.getTreeFloppyDriveIcon();
-    }
-
-    public Icon getTreeHardDriveIcon() {
-        return BernsteinIcons.getTreeHardDriveIcon();
-    }
-
-    public Icon getTreeFolderIcon() {
-        return BernsteinIcons.getTreeFolderIcon();
+    public Icon getTreeCloseIcon() {
+        return BernsteinIcons.getTreeClosedIcon();
     }
 
     public Icon getTreeLeafIcon() {
@@ -136,11 +140,11 @@ public class BernsteinIconFactory implements AbstractIconFactory {
     }
 
     public Icon getTreeCollapsedIcon() {
-        return BernsteinIcons.getTreeControlIcon(true);
+        return BernsteinIcons.getTreeCollapsedIcon();
     }
 
     public Icon getTreeExpandedIcon() {
-        return BernsteinIcons.getTreeControlIcon(false);
+        return BernsteinIcons.getTreeExpandedIcon();
     }
 
     public Icon getMenuArrowIcon() {

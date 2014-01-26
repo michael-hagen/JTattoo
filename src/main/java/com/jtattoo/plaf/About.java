@@ -42,8 +42,8 @@ public class About extends JDialog {
     
     private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private static final Dimension dlgSize = new Dimension(440, 240);
-    private static int dlgPosX = (screenSize.width / 2) - (dlgSize.width / 2);
-    private static int dlgPosY = (screenSize.height / 2) - (dlgSize.height / 2);
+    private static final int dlgPosX = (screenSize.width / 2) - (dlgSize.width / 2);
+    private static final int dlgPosY = (screenSize.height / 2) - (dlgSize.height / 2);
 
     public About() {
         super((JFrame) null, "About JTattoo");

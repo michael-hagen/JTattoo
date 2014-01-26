@@ -1269,7 +1269,10 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         if (isTabOpaque() || isSelected) {
             Graphics2D g2D = (Graphics2D) g;
             Shape savedClip = g.getClip();
-            Area orgClipArea = new Area(savedClip);
+            Area orgClipArea = new Area(new Rectangle2D.Double(x, y, w, h));
+            if (savedClip != null) {
+                orgClipArea = new Area(savedClip);
+            }
             Color colorArr[] = getTabColors(tabIndex, isSelected, tabIndex == rolloverIndex);
             int d = 2 * GAP;
             switch (tabPlacement) {

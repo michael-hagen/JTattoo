@@ -20,6 +20,7 @@
  *  
  * see: APACHE-LICENSE-2.0.txt
  */
+
 package com.jtattoo.plaf;
 
 import java.awt.*;
@@ -230,6 +231,8 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
      * Return the preferred size of the header. The preferred height is the maximum of the preferred heights of all of
      * the components provided by the header renderers. The preferred width is the sum of the preferred widths of each
      * column (plus inter-cell spacing).
+     * 
+     * @return the preferredSize
      */
     public Dimension getPreferredSize(JComponent c) {
         if ((header == null) || (header.getTable() == null)) {
@@ -430,8 +433,15 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
         }
 
         protected void paintBackground(Graphics g) {
+            // BugFix: 12.12.2013
+            // Currently I don't know why header is sometimes null, but if it's null it's better to ignore
+            // the background instead of throwing a NPE.
+            if (header == null) {
+                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getColHeaderColors(), 0, 0, getWidth(), getHeight());
+                return;
+            }
             int draggedColumn = -1;
-            if ((header != null) && (header.getTable() != null) && header.getDraggedColumn() != null) {
+            if (header.getTable() != null && header.getDraggedColumn() != null) {
                 draggedColumn = header.getColumnModel().getColumnIndex(header.getDraggedColumn().getIdentifier());
             }
             int w = getWidth();

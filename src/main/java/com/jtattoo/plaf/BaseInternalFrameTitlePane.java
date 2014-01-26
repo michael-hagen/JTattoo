@@ -273,6 +273,9 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
             return;
         }
 
+        // Setting clipping area to null to solve a redrawing problem under windows 7
+        Shape savedClip = g.getClip();
+        g.setClip(null);
         paintBackground(g);
 
         boolean leftToRight = JTattooUtilities.isLeftToRight(frame);
@@ -316,6 +319,8 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
         }
         paintText(g, xOffset, yOffset, frameTitle);
         paintBorder(g);
+        // Restore the clipping area.
+        g.setClip(savedClip);
     }
 
     class BasePropertyChangeHandler extends BasicInternalFrameTitlePane.PropertyChangeHandler {

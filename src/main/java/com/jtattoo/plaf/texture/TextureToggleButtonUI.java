@@ -56,34 +56,28 @@ public class TextureToggleButtonUI extends BaseToggleButtonUI {
         Composite savedComposite = g2D.getComposite();
         ButtonModel model = b.getModel();
         FontMetrics fm = g.getFontMetrics();
-        int mnemIndex = -1;
-        if (JTattooUtilities.getJavaVersion() >= 1.4) {
-            mnemIndex = b.getDisplayedMnemonicIndex();
-        } else {
-            mnemIndex = JTattooUtilities.findDisplayedMnemonicIndex(b.getText(), model.getMnemonic());
-        }
-
+        int mnemIndex = (JTattooUtilities.getJavaVersion() >= 1.4) ? b.getDisplayedMnemonicIndex() : JTattooUtilities.findDisplayedMnemonicIndex(b.getText(), model.getMnemonic());
         if (model.isEnabled()) {
             int offs = 0;
             if (model.isArmed() && model.isPressed()) {
                 offs = 1;
             }
-            Color fc = b.getForeground();
-            if (fc instanceof ColorUIResource) {
-                if (model.isPressed() || model.isSelected()) {
-                    fc = AbstractLookAndFeel.getTheme().getPressedForegroundColor();
-                } else if (b.isRolloverEnabled() && model.isRollover()) {
-                    fc = AbstractLookAndFeel.getTheme().getRolloverForegroundColor();
+            Color foreground = b.getForeground();
+            if (foreground instanceof ColorUIResource) {
+                if ((model.isPressed() && model.isArmed()) || model.isSelected()) {
+                    foreground = AbstractLookAndFeel.getTheme().getPressedForegroundColor();
+                } else if (model.isRollover()) {
+                    foreground = AbstractLookAndFeel.getTheme().getRolloverForegroundColor();
                 }
             }
-            if (AbstractLookAndFeel.getTheme().isTextShadowOn() && ColorHelper.getGrayValue(fc) > 164) {
+            if (AbstractLookAndFeel.getTheme().isTextShadowOn() && ColorHelper.getGrayValue(foreground) > 164) {
                 AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f);
                 g2D.setComposite(alpha);
                 g.setColor(Color.black);
                 JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + offs, textRect.y + offs + fm.getAscent() + 1);
                 g2D.setComposite(savedComposite);
             }
-            g.setColor(fc);
+            g.setColor(foreground);
             JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + offs, textRect.y + offs + fm.getAscent());
         } else {
             AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f);

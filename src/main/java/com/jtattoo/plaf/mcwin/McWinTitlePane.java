@@ -50,7 +50,11 @@ public class McWinTitlePane extends BaseTitlePane {
     }
 
     public void paintText(Graphics g, int x, int y, String title) {
-        x += paintIcon(g, x, y);
+        if (isMacStyleWindowDecoration()) {
+            x += paintIcon(g, x, y);
+        } else {
+            x += paintIcon(g, 2, y);
+        }
         if (isActive()) {
             Color fc = AbstractLookAndFeel.getWindowTitleForegroundColor();
             if (ColorHelper.getGrayValue(fc) > 128) {

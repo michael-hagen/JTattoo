@@ -32,9 +32,9 @@ import javax.swing.text.View;
 
 public class BaseToggleButtonUI extends BasicToggleButtonUI {
 
-    private static Rectangle viewRect = new Rectangle();
-    private static Rectangle textRect = new Rectangle();
-    private static Rectangle iconRect = new Rectangle();
+    private static final Rectangle viewRect = new Rectangle();
+    private static final Rectangle textRect = new Rectangle();
+    private static final Rectangle iconRect = new Rectangle();
     protected static Color[] rolloverPressedColors = null;
 
     public static ComponentUI createUI(JComponent b) {
@@ -75,7 +75,7 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
         if (b.isEnabled()) {
             Color background = b.getBackground();
             if (background instanceof ColorUIResource) {
-                if (model.isPressed() && model.isArmed()) {
+                if ((model.isPressed() && model.isArmed()) || model.isSelected()) {
                     colors = AbstractLookAndFeel.getTheme().getPressedColors();
                 } else  if (b.isRolloverEnabled() && model.isRollover()) {
                     if (model.isSelected()) {
@@ -83,8 +83,6 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
                     } else {
                         colors = AbstractLookAndFeel.getTheme().getRolloverColors();
                     }
-                } else if (model.isSelected()) {
-                    colors = AbstractLookAndFeel.getTheme().getPressedColors();
                 } else {
                     if (AbstractLookAndFeel.getTheme().doShowFocusFrame() && b.hasFocus()) {
                         colors = AbstractLookAndFeel.getTheme().getFocusColors();
@@ -116,28 +114,23 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
     protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
         ButtonModel model = b.getModel();
         FontMetrics fm = g.getFontMetrics();
-        int mnemIndex;
-        if (JTattooUtilities.getJavaVersion() >= 1.4) {
-            mnemIndex = b.getDisplayedMnemonicIndex();
-        } else {
-            mnemIndex = JTattooUtilities.findDisplayedMnemonicIndex(b.getText(), model.getMnemonic());
-        }
-
+        int mnemIndex = (JTattooUtilities.getJavaVersion() >= 1.4) ? b.getDisplayedMnemonicIndex() : JTattooUtilities.findDisplayedMnemonicIndex(b.getText(), model.getMnemonic());
         if (model.isEnabled()) {
             Color foreground = b.getForeground();
+            Color background = b.getBackground();
             int offs = 0;
             if ((model.isArmed() && model.isPressed()) || model.isSelected()) {
                 offs = 1;
-            }
-            if (foreground instanceof ColorUIResource) {
-                if (model.isRollover()) {
-                    g.setColor(AbstractLookAndFeel.getTheme().getRolloverForegroundColor());
-                } else {
-                    g.setColor(b.getForeground());
+                if (foreground instanceof ColorUIResource && background instanceof ColorUIResource) {
+                    foreground = AbstractLookAndFeel.getTheme().getPressedForegroundColor();
                 }
-            } else {
-                g.setColor(b.getForeground());
             }
+            if (model.isRollover()) {
+                if (foreground instanceof ColorUIResource && background instanceof ColorUIResource) {
+                    foreground = AbstractLookAndFeel.getTheme().getRolloverForegroundColor();
+                }
+            }
+            g.setColor(foreground);
             JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + offs, textRect.y + offs + fm.getAscent());
         } else {
             g.setColor(Color.white);

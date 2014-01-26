@@ -166,9 +166,14 @@ public class JTattooUtilities {
         if (c == null) {
             return false;
         }
-
+        
         if (c.getTopLevelAncestor() instanceof Window) {
-            return isWindowActive((Window) c.getTopLevelAncestor());
+            Window w = (Window)c.getTopLevelAncestor();
+            if (w.getClass().getName().indexOf("Popup") >= 0) {
+                return true;
+            } else {
+                return isWindowActive(w);
+            }
         }
 
         return true;
@@ -315,7 +320,7 @@ public class JTattooUtilities {
         if (colors != null) {
             int steps = colors.length;
             double dy = (double) h / (double) (steps);
-            if (dy <= 3.001) {
+            if (dy <= 2.001) {
                 int y1 = y;
                 for (int i = 0; i < steps; i++) {
                     int y2 = y + (int) Math.round((double) i * dy);
@@ -360,7 +365,7 @@ public class JTattooUtilities {
         if (colors != null) {
             int steps = colors.length;
             double dy = (double) h / (double) steps;
-            if (dy <= 3.001) {
+            if (dy <= 2.001) {
                 int y1 = y;
                 for (int i = 0; i < steps; i++) {
                     int y2 = y + (int) Math.round((double) i * dy);

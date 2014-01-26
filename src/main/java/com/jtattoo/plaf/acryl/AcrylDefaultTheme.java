@@ -122,9 +122,6 @@ public class AcrylDefaultTheme extends AbstractTheme {
         }
 
         ACTIVE_COLORS = DEFAULT_COLORS;
-//        topHi = ColorHelper.brighter(backgroundColor, 15);
-//        topLo = ColorHelper.darker(backgroundColor, 5);
-//        INACTIVE_COLORS = ColorHelper.createColorArr(topHi, topLo, 20);
         if (controlColorLight.equals(new ColorUIResource(96, 98, 100))) {
             ROLLOVER_COLORS = new Color[]{
                         new Color(194, 207, 233),
@@ -210,6 +207,7 @@ public class AcrylDefaultTheme extends AbstractTheme {
             BUTTON_COLORS[i] = topColors[i];
             BUTTON_COLORS[i + 10] = bottomColors[i];
         }
+        CHECKBOX_COLORS = DEFAULT_COLORS;
         INACTIVE_COLORS = BUTTON_COLORS;
         TAB_COLORS = BUTTON_COLORS;
         COL_HEADER_COLORS = BUTTON_COLORS;

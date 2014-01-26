@@ -51,7 +51,9 @@ public class HiFiButtonUI extends BaseButtonUI {
         Shape savedClip = g.getClip();
         if ((b.getBorder() != null) && b.isBorderPainted() && (b.getBorder() instanceof UIResource)) {
             Area clipArea = new Area(new Rectangle2D.Double(1, 1, width - 2, height - 2));
-            clipArea.intersect(new Area(savedClip));
+            if (savedClip != null) {
+                clipArea.intersect(new Area(savedClip));
+            }
             g2D.setClip(clipArea);
         }
         super.paintBackground(g, b);
@@ -76,23 +78,26 @@ public class HiFiButtonUI extends BaseButtonUI {
         Composite composite = g2D.getComposite();
         AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.6f);
         g2D.setComposite(alpha);
-        Color fc = b.getForeground();
-        if (fc instanceof ColorUIResource) {
+        Color foreground = b.getForeground();
+        Color background = b.getBackground();
+        if (background instanceof ColorUIResource) {
             if (model.isPressed() && model.isArmed()) {
-                fc = AbstractLookAndFeel.getTheme().getSelectionForegroundColor();
+                foreground = AbstractLookAndFeel.getTheme().getSelectionForegroundColor();
+            } else if (model.isRollover()) {
+                foreground = AbstractLookAndFeel.getTheme().getRolloverForegroundColor();
             }
         }
         if (!model.isEnabled()) {
-            fc = AbstractLookAndFeel.getTheme().getDisabledForegroundColor();
+            foreground = AbstractLookAndFeel.getTheme().getDisabledForegroundColor();
         }
-        if (ColorHelper.getGrayValue(fc) > 64) {
+        if (ColorHelper.getGrayValue(foreground) > 64) {
             g2D.setColor(Color.black);
         } else {
             g2D.setColor(Color.white);
         }
         JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + offs + 1, textRect.y + offs + fm.getAscent() + 1);
         g2D.setComposite(composite);
-        g2D.setColor(fc);
+        g2D.setColor(foreground);
         JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + offs, textRect.y + offs + fm.getAscent());
     }
 }

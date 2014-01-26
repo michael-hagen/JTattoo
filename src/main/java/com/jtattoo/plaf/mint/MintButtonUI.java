@@ -44,12 +44,15 @@ public class MintButtonUI extends BaseButtonUI {
             return;
         }
 
-        if (!(b.isBorderPainted() && (b.getBorder() instanceof UIResource))) {
-            super.paintBackground(g, b);
-            return;
-        }
+//        if (!(b.isBorderPainted() && (b.getBorder() instanceof UIResource))) {
+//            super.paintBackground(g, b);
+//            return;
+//        }
 
-        if ((b.getWidth() < 32) || (b.getHeight() < 16)) {
+        if ((b.getWidth() < 32) 
+                || (b.getHeight() < 16) 
+                || !(b.isBorderPainted() && (b.getBorder() instanceof UIResource))
+                || AbstractLookAndFeel.getTheme().doDrawSquareButtons()) {
             ButtonModel model = b.getModel();
             Color color = AbstractLookAndFeel.getTheme().getButtonBackgroundColor();
             if (model.isPressed() && model.isArmed()) {
@@ -59,7 +62,11 @@ public class MintButtonUI extends BaseButtonUI {
             }
             g.setColor(color);
             g.fillRect(0, 0, b.getWidth(), b.getHeight());
-            JTattooUtilities.draw3DBorder(g, Color.white, Color.lightGray, 0, 0, b.getWidth(), b.getHeight());
+            if ((model.isPressed() && model.isArmed()) || model.isSelected()) {
+                JTattooUtilities.draw3DBorder(g, Color.lightGray, Color.white, 0, 0, b.getWidth(), b.getHeight());
+            } else {
+                JTattooUtilities.draw3DBorder(g, Color.white, Color.lightGray, 0, 0, b.getWidth(), b.getHeight());
+            }
             return;
         }
 
@@ -127,6 +134,7 @@ public class MintButtonUI extends BaseButtonUI {
         int width = b.getWidth();
         int height = b.getHeight();
         if (!b.isContentAreaFilled()
+                || AbstractLookAndFeel.getTheme().doDrawSquareButtons()
                 || ((width < 64) || (height < 16)) && ((b.getText() == null) || b.getText().length() == 0)) {
             g.setColor(AbstractLookAndFeel.getFocusColor());
             BasicGraphicsUtils.drawDashedRect(g, 4, 3, width - 8, height - 6);

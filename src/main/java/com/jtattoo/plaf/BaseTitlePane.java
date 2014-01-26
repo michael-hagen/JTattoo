@@ -529,7 +529,7 @@ public class BaseTitlePane extends JComponent {
                 if (JTattooUtilities.getJavaVersion() >= 1.6) {
                     g2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
                 }
-                int h = getHeight();
+                int h = getHeight() - 2;
                 int ih = image.getHeight(null);
                 int iw = image.getWidth(null);
                 if (ih <= h) {
@@ -543,14 +543,18 @@ public class BaseTitlePane extends JComponent {
                 if (savedHint != null) {
                     g2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, savedHint);
                 }
-                return iw + 2;
+                return iw + 4;
             }
         }
         return 0;
     }
     
     public void paintText(Graphics g, int x, int y, String title) {
-        x += paintIcon(g, x, y);
+        if (isMacStyleWindowDecoration()) {
+            x += paintIcon(g, x, y);
+        } else {
+            x += paintIcon(g, 2, y);
+        }
         if (isActive()) {
             g.setColor(AbstractLookAndFeel.getWindowTitleForegroundColor());
         } else {
@@ -571,9 +575,8 @@ public class BaseTitlePane extends JComponent {
         int height = getHeight();
         int titleWidth = width - buttonsWidth - 4;
         int xOffset = leftToRight ? 2 : width - 2;
-        int mw = 0;
         if (menuBar != null) {
-            mw = menuBar.getWidth() + 2;
+            int mw = menuBar.getWidth() + 2;
             xOffset += leftToRight ? mw : -mw;
             titleWidth -= height;
         }

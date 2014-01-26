@@ -55,7 +55,7 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
         super.uninstallUI(c);
     }
 
-    /**
+    /*
      * The "selectionForeground" is the color of the text when it is painted over a filled area of the progress bar.
      */
     protected Color getSelectionForeground() {
@@ -66,7 +66,7 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
         return super.getSelectionForeground();
     }
 
-    /**
+    /*
      * The "selectionBackground" is the color of the text when it is painted over an unfilled area of the progress bar.
      */
     protected Color getSelectionBackground() {
@@ -145,7 +145,7 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
         int barRectWidth = progressBar.getWidth() - (b.right + b.left);
         int barRectHeight = progressBar.getHeight() - (b.top + b.bottom);
 
-        Color colors[] = null;
+        Color colors[];
         if (progressBar.getForeground() instanceof UIResource) {
             if (!JTattooUtilities.isActive(c)) {
                 colors = AbstractLookAndFeel.getTheme().getInActiveColors();
@@ -205,7 +205,7 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
 
         // amount of progress to draw
         int amountFull = getAmountFull(b, w, h);
-        Color colors[] = null;
+        Color colors[];
         if (progressBar.getForeground() instanceof UIResource) {
             if (!JTattooUtilities.isActive(c)) {
                 colors = AbstractLookAndFeel.getTheme().getInActiveColors();

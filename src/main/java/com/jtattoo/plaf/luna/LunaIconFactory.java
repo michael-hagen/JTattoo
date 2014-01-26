@@ -59,24 +59,36 @@ public class LunaIconFactory implements AbstractIconFactory {
         return LunaIcons.getOptionPaneQuestionIcon();
     }
 
-    public Icon getFileChooserDetailViewIcon() {
-        return LunaIcons.getFileChooserDetailViewIcon();
+    public Icon getFileChooserUpFolderIcon() {
+        return LunaIcons.getFileChooserUpFolderIcon();
     }
 
     public Icon getFileChooserHomeFolderIcon() {
         return LunaIcons.getFileChooserHomeFolderIcon();
     }
 
-    public Icon getFileChooserListViewIcon() {
-        return LunaIcons.getFileChooserListViewIcon();
-    }
-
     public Icon getFileChooserNewFolderIcon() {
         return LunaIcons.getFileChooserNewFolderIcon();
     }
 
-    public Icon getFileChooserUpFolderIcon() {
-        return LunaIcons.getFileChooserUpFolderIcon();
+    public Icon getFileChooserListViewIcon() {
+        return LunaIcons.getFileChooserListViewIcon();
+    }
+
+    public Icon getFileChooserDetailViewIcon() {
+        return LunaIcons.getFileChooserDetailViewIcon();
+    }
+
+    public Icon getFileViewComputerIcon() {
+        return LunaIcons.getFileViewComputerIcon();
+    }
+
+    public Icon getFileViewFloppyDriveIcon() {
+        return LunaIcons.getFileViewFloppyDriveIcon();
+    }
+
+    public Icon getFileViewHardDriveIcon() {
+        return LunaIcons.getFileViewHardDriveIcon();
     }
 
     public Icon getMenuIcon() {
@@ -115,20 +127,12 @@ public class LunaIconFactory implements AbstractIconFactory {
         return LunaIcons.getComboBoxIcon();
     }
 
-    public Icon getTreeComputerIcon() {
-        return LunaIcons.getTreeComputerIcon();
+    public Icon getTreeOpenIcon() {
+        return LunaIcons.getTreeOpenedIcon();
     }
 
-    public Icon getTreeFloppyDriveIcon() {
-        return LunaIcons.getTreeFloppyDriveIcon();
-    }
-
-    public Icon getTreeHardDriveIcon() {
-        return LunaIcons.getTreeHardDriveIcon();
-    }
-
-    public Icon getTreeFolderIcon() {
-        return LunaIcons.getTreeFolderIcon();
+    public Icon getTreeCloseIcon() {
+        return LunaIcons.getTreeClosedIcon();
     }
 
     public Icon getTreeLeafIcon() {
@@ -136,11 +140,11 @@ public class LunaIconFactory implements AbstractIconFactory {
     }
 
     public Icon getTreeCollapsedIcon() {
-        return LunaIcons.getTreeControlIcon(true);
+        return LunaIcons.getTreeCollapsedIcon();
     }
 
     public Icon getTreeExpandedIcon() {
-        return LunaIcons.getTreeControlIcon(false);
+        return LunaIcons.getTreeExpandedIcon();
     }
 
     public Icon getMenuArrowIcon() {
