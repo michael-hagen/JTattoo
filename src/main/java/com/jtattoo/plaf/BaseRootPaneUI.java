@@ -1,26 +1,25 @@
 /*
-* Copyright (c) 2002 and later by MH Software-Entwicklung. All Rights Reserved.
-*  
-* JTattoo is multiple licensed. If your are an open source developer you can use
-* it under the terms and conditions of the GNU General Public License version 2.0
-* or later as published by the Free Software Foundation.
-*  
-* see: gpl-2.0.txt
-* 
-* If you pay for a license you will become a registered user who could use the
-* software under the terms and conditions of the GNU Lesser General Public License
-* version 2.0 or later with classpath exception as published by the Free Software
-* Foundation.
-* 
-* see: lgpl-2.0.txt
-* see: classpath-exception.txt
-* 
-* Registered users could also use JTattoo under the terms and conditions of the 
-* Apache License, Version 2.0 as published by the Apache Software Foundation.
-*  
-* see: APACHE-LICENSE-2.0.txt
-*/
-
+ * Copyright (c) 2002 and later by MH Software-Entwicklung. All Rights Reserved.
+ *  
+ * JTattoo is multiple licensed. If your are an open source developer you can use
+ * it under the terms and conditions of the GNU General Public License version 2.0
+ * or later as published by the Free Software Foundation.
+ *  
+ * see: gpl-2.0.txt
+ * 
+ * If you pay for a license you will become a registered user who could use the
+ * software under the terms and conditions of the GNU Lesser General Public License
+ * version 2.0 or later with classpath exception as published by the Free Software
+ * Foundation.
+ * 
+ * see: lgpl-2.0.txt
+ * see: classpath-exception.txt
+ * 
+ * Registered users could also use JTattoo under the terms and conditions of the 
+ * Apache License, Version 2.0 as published by the Apache Software Foundation.
+ *  
+ * see: APACHE-LICENSE-2.0.txt
+ */
 package com.jtattoo.plaf;
 
 import java.awt.*;
@@ -35,28 +34,21 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicRootPaneUI;
 
 /**
- * This source is a modified copy of javax.swing.plaf.metal.MetalRootPaneUI
- * Provides the base look and feel implementation of <code>RootPaneUI</code>.
+ * This source is a modified copy of javax.swing.plaf.metal.MetalRootPaneUI Provides the base look and feel
+ * implementation of <code>RootPaneUI</code>.
  * <p>
- * <code>BaseRootPaneUI</code> provides support for the
- * <code>windowDecorationStyle</code> property of <code>JRootPane</code>.
- * <code>BaseRootPaneUI</code> does this by way of installing a custom
- * <code>LayoutManager</code>, a private <code>Component</code> to render
- * the appropriate widgets, and a private <code>Border</code>. The
- * <code>LayoutManager</code> is always installed, regardless of the value of
- * the <code>windowDecorationStyle</code> property, but the
- * <code>Border</code> and <code>Component</code> are only installed/added if
- * the <code>windowDecorationStyle</code> is other than
- * <code>JRootPane.NONE</code>.
+ * <code>BaseRootPaneUI</code> provides support for the <code>windowDecorationStyle</code> property of
+ * <code>JRootPane</code>. <code>BaseRootPaneUI</code> does this by way of installing a custom
+ * <code>LayoutManager</code>, a private <code>Component</code> to render the appropriate widgets, and a private
+ * <code>Border</code>. The <code>LayoutManager</code> is always installed, regardless of the value of the
+ * <code>windowDecorationStyle</code> property, but the <code>Border</code> and <code>Component</code> are only
+ * installed/added if the <code>windowDecorationStyle</code> is other than <code>JRootPane.NONE</code>.
  * <p>
  * <strong>Warning:</strong>
- * Serialized objects of this class will not be compatible with
- * future Swing releases. The current serialization support is
- * appropriate for short term storage or RMI between applications running
- * the same version of Swing.  As of 1.4, support for long term storage
- * of all JavaBeans<sup><font size="-2">TM</font></sup>
- * has been added to the <code>java.beans</code> package.
- * Please see {@link java.beans.XMLEncoder}.
+ * Serialized objects of this class will not be compatible with future Swing releases. The current serialization support
+ * is appropriate for short term storage or RMI between applications running the same version of Swing. As of 1.4,
+ * support for long term storage of all JavaBeans<sup><font size="-2">TM</font></sup>
+ * has been added to the <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @version 1.20 04/27/04
  * @author Terry Kellerman
@@ -65,7 +57,6 @@ import javax.swing.plaf.basic.BasicRootPaneUI;
  */
 public class BaseRootPaneUI extends BasicRootPaneUI {
     // Konstanten aus javax.swing.JRootPane damit Attribute aus Java 1.4 sich mit Java 1.3 uebersetzen lassen
-
     public static final int NONE = 0;
     public static final int FRAME = 1;
     public static final int PLAIN_DIALOG = 2;
@@ -108,23 +99,20 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
      */
     private Window window;
     /**
-     * <code>JComponent</code> providing window decorations. This will be
-     * null if not providing window decorations.
+     * <code>JComponent</code> providing window decorations. This will be null if not providing window decorations.
      */
     private BaseTitlePane titlePane;
     /**
-     * <code>MouseInputListener</code> that is added to the parent
-     * <code>Window</code> the <code>JRootPane</code> is contained in.
+     * <code>MouseInputListener</code> that is added to the parent <code>Window</code> the <code>JRootPane</code> is
+     * contained in.
      */
     private MouseInputListener mouseInputListener;
     /**
-     * The <code>LayoutManager</code> that is set on the
-     * <code>JRootPane</code>.
+     * The <code>LayoutManager</code> that is set on the <code>JRootPane</code>.
      */
     private LayoutManager layoutManager;
     /**
-     * <code>LayoutManager</code> of the <code>JRootPane</code> before we
-     * replaced it.
+     * <code>LayoutManager</code> of the <code>JRootPane</code> before we replaced it.
      */
     private LayoutManager savedOldLayout;
     /**
@@ -133,10 +121,10 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
     private JRootPane root;
 
     private Cursor savedCursor = null;
-    
+
     /**
-     * <code>Cursor</code> used to track the cursor set by the user.
-     * This is initially <code>Cursor.DEFAULT_CURSOR</code>.
+     * <code>Cursor</code> used to track the cursor set by the user. This is initially
+     * <code>Cursor.DEFAULT_CURSOR</code>.
      */
     /**
      * Creates a UI for a <code>JRootPane</code>.
@@ -159,7 +147,6 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
     public void uninstallUI(JComponent c) {
         super.uninstallUI(c);
         uninstallClientDecorations(root);
-
         layoutManager = null;
         mouseInputListener = null;
         root = null;
@@ -176,7 +163,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 
     /**
      * Removes any border that may have been installed.
-     * 
+     *
      * @param root
      */
     public void uninstallBorder(JRootPane root) {
@@ -184,12 +171,10 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
     }
 
     /**
-     * Installs the necessary Listeners on the parent <code>Window</code>,
-     * if there is one.
+     * Installs the necessary Listeners on the parent <code>Window</code>, if there is one.
      * <p>
-     * This takes the parent so that cleanup can be done from
-     * <code>removeNotify</code>, at which point the parent hasn't been
-     * reset yet.
+     * This takes the parent so that cleanup can be done from <code>removeNotify</code>, at which point the parent
+     * hasn't been reset yet.
      *
      * @param root
      * @param parent The parent of the JRootPane
@@ -225,8 +210,8 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
     }
 
     /**
-     * Uninstalls the necessary Listeners on the <code>Window</code> the
-     * Listeners were last installed on.
+     * Uninstalls the necessary Listeners on the <code>Window</code> the Listeners were last installed on.
+     *
      * @param root
      */
     public void uninstallWindowListeners(JRootPane root) {
@@ -237,8 +222,8 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
     }
 
     /**
-     * Installs the appropriate LayoutManager on the <code>JRootPane</code>
-     * to render the window decorations.
+     * Installs the appropriate LayoutManager on the <code>JRootPane</code> to render the window decorations.
+     *
      * @param root
      */
     public void installLayout(JRootPane root) {
@@ -286,40 +271,39 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
     }
 
     /**
-     * Returns the <code>JComponent</code> to render the window decoration
-     * style.
+     * Returns the <code>JComponent</code> to render the window decoration style.
+     *
      * @param root
-     * @return 
+     * @return
      */
     public BaseTitlePane createTitlePane(JRootPane root) {
         return new BaseTitlePane(root, this);
     }
 
     /**
-     * Returns a <code>MouseListener</code> that will be added to the
-     * <code>Window</code> containing the <code>JRootPane</code>.
+     * Returns a <code>MouseListener</code> that will be added to the <code>Window</code> containing the
+     * <code>JRootPane</code>.
+     *
      * @param root
-     * @return 
+     * @return
      */
     public MouseInputListener createWindowMouseInputListener(JRootPane root) {
         return new MouseInputHandler();
     }
 
     /**
-     * Returns a <code>LayoutManager</code> that will be set on the
-     * <code>JRootPane</code>.
-     * @return 
+     * Returns a <code>LayoutManager</code> that will be set on the <code>JRootPane</code>.
+     *
+     * @return
      */
     public LayoutManager createLayoutManager() {
         return new BaseRootLayout();
     }
 
     /**
-     * Sets the window title pane -- the JComponent used to provide a plaf a
-     * way to override the native operating system's window title pane with
-     * one whose look and feel are controlled by the plaf.  The plaf creates
-     * and sets this value; the default is null, implying a native operating
-     * system window title pane.
+     * Sets the window title pane -- the JComponent used to provide a plaf a way to override the native operating
+     * system's window title pane with one whose look and feel are controlled by the plaf. The plaf creates and sets
+     * this value; the default is null, implying a native operating system window title pane.
      *
      * @param root the <code>JRootPane</code> where to set the title pane
      * @param titlePane the <code>BaseTitlePane</code> to use for the window title pane.
@@ -340,8 +324,8 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
     }
 
     /**
-     * Returns the <code>JComponent</code> rendering the title pane. If this
-     * returns null, it implies there is no need to render window decorations.
+     * Returns the <code>JComponent</code> rendering the title pane. If this returns null, it implies there is no need
+     * to render window decorations.
      *
      * @return the current window title pane, or null
      * @see #setTitlePane
@@ -370,20 +354,20 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
             if (style != NONE) {
                 installClientDecorations(root);
             }
-            if (!JTattooUtilities.isMac() && (window instanceof Frame)) {
-                Frame frame = (Frame)window;
-                if (frame != null) {
-                    GraphicsConfiguration gc = frame.getGraphicsConfiguration();
-                    Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(gc);
-                    Rectangle screenBounds = gc.getBounds();
-                    int x = Math.max(0, screenInsets.left);
-                    int y = Math.max(0, screenInsets.top);
-                    int w = screenBounds.width - (screenInsets.left + screenInsets.right);
-                    int h = screenBounds.height - (screenInsets.top + screenInsets.bottom);
-                    // Keep taskbar visible
-                    frame.setMaximizedBounds(new Rectangle(x, y, w, h));
-                }
-            }
+//            if (!JTattooUtilities.isMac() && (window instanceof Frame)) {
+//                Frame frame = (Frame) window;
+//                if (frame != null) {
+//                    GraphicsConfiguration gc = frame.getGraphicsConfiguration();
+//                    Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(gc);
+//                    Rectangle screenBounds = gc.getBounds();
+//                    int x = Math.max(0, screenInsets.left);
+//                    int y = Math.max(0, screenInsets.top);
+//                    int w = screenBounds.width - (screenInsets.left + screenInsets.right);
+//                    int h = screenBounds.height - (screenInsets.top + screenInsets.bottom);
+//                    // Keep taskbar visible
+//                    frame.setMaximizedBounds(new Rectangle(x, y, w, h));
+//                }
+//            }
         } else if ("ancestor".equals(propertyName)) {
             uninstallWindowListeners(root);
             if (DecorationHelper.getWindowDecorationStyle(root) != NONE) {
@@ -467,8 +451,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
         }
 
         /**
-         * Instructs the layout manager to perform the layout for the specified
-         * container.
+         * Instructs the layout manager to perform the layout for the specified container.
          *
          * @param the Container for which this layout manager is being used
          */
@@ -491,8 +474,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
                         titleHeight = titlePane.getSize().height;
                     }
                     root.getGlassPane().setBounds(i.left, i.top + titleHeight, w, h - titleHeight);
-                }
-                else {
+                } else {
                     root.getGlassPane().setBounds(i.left, i.top, w, h);
                 }
             }
@@ -540,8 +522,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
         }
     }
     /**
-     * Maps from positions to cursor type. Refer to calculateCorner and
-     * calculatePosition for details of this.
+     * Maps from positions to cursor type. Refer to calculateCorner and calculatePosition for details of this.
      */
     private static final int[] cursorMapping = new int[]{
         Cursor.NW_RESIZE_CURSOR, Cursor.NW_RESIZE_CURSOR, Cursor.N_RESIZE_CURSOR,
@@ -555,9 +536,8 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 
 //------------------------------------------------------------------------------    
     /**
-     * MouseInputHandler is responsible for handling resize/moving of
-     * the Window. It sets the cursor directly on the Window when then
-     * mouse moves over a hot spot.
+     * MouseInputHandler is responsible for handling resize/moving of the Window. It sets the cursor directly on the
+     * Window when then mouse moves over a hot spot.
      */
     private class MouseInputHandler implements MouseInputListener {
 
@@ -783,7 +763,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
             }
             return minScreenY;
         }
-    
+
         public void mouseDragged(MouseEvent ev) {
             if (ev.getSource() instanceof Window) {
                 Window w = (Window) ev.getSource();
@@ -800,7 +780,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
                         Point location = ev.getLocationOnScreen();
                         location.x -= dragOffsetX;
                         location.y = Math.max(minScreenY, location.y - dragOffsetY);
-                        w.setLocation(location);        
+                        w.setLocation(location);
                     }
                 } else if (dragCursor != 0) {
                     Point pt = ev.getPoint();
@@ -843,7 +823,6 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
                         }
                         w.setBounds(bounds);
                         w.validate();
-                        //getRootPane().repaint();
                     }
                 }
             }
@@ -884,8 +863,8 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
         }
 
         /**
-         * Returns the corner that contains the point <code>x</code>,
-         * <code>y</code>, or -1 if the position doesn't match a corner.
+         * Returns the corner that contains the point <code>x</code>, <code>y</code>, or -1 if the position doesn't
+         * match a corner.
          */
         private int calculateCorner(Component c, int x, int y) {
             int xPosition = calculatePosition(x, c.getWidth());
@@ -898,8 +877,8 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
         }
 
         /**
-         * Returns the Cursor to render for the specified corner. This returns
-         * 0 if the corner doesn't map to a valid Cursor
+         * Returns the Cursor to render for the specified corner. This returns 0 if the corner doesn't map to a valid
+         * Cursor
          */
         private int getCursor(int corner) {
             if (corner == -1) {
@@ -909,14 +888,10 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
         }
 
         /**
-         * Returns an integer indicating the position of <code>spot</code>
-         * in <code>width</code>. The return value will be:
-         * 0 if < BORDER_DRAG_THICKNESS
-         * 1 if < CORNER_DRAG_WIDTH
-         * 2 if >= CORNER_DRAG_WIDTH && < width - BORDER_DRAG_THICKNESS
-         * 3 if >= width - CORNER_DRAG_WIDTH
-         * 4 if >= width - BORDER_DRAG_THICKNESS
-         * 5 otherwise
+         * Returns an integer indicating the position of <code>spot</code> in <code>width</code>. The return value will
+         * be: 0 if < BORDER_DRAG_THICKNESS 1 if < CORNER_DRAG_WIDTH 2 if >= CORNER_DRAG_WIDTH &&
+         * < width - BORDER_DRAG_THICKNESS 3 if >= width - CORNER_DRAG_WIDTH 4 if >= width - BORDER_DRAG_THICKNESS 5
+         * otherwise
          */
         private int calculatePosition(int spot, int width) {
             if (spot < BORDER_DRAG_THICKNESS) {
