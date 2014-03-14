@@ -811,26 +811,11 @@ public class BaseBorders {
         }
 
         public boolean isActive(Component c) {
-            boolean active = true;
-            if (c instanceof JDialog) {
-                JDialog dlg = (JDialog) c;
-                if (dlg.getParent() instanceof JComponent) {
-                    return JTattooUtilities.isActive((JComponent) (dlg.getParent()));
-                }
-            } else if (c instanceof JInternalFrame) {
-                JInternalFrame frame = (JInternalFrame) c;
-                active = frame.isSelected();
-                if (active) {
-                    return JTattooUtilities.isActive(frame);
-                }
-            } else if (c instanceof JRootPane) {
-                JRootPane jp = (JRootPane) c;
-                if (jp.getTopLevelAncestor() instanceof Window) {
-                    Window window = (Window) jp.getTopLevelAncestor();
-                    return JTattooUtilities.isWindowActive(window);
-                }
+            if (c instanceof JComponent) {
+                return JTattooUtilities.isActive((JComponent)c);
+            } else {
+                return true;
             }
-            return active;
         }
 
         public int getTitleHeight(Component c) {
