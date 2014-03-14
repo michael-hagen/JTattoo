@@ -35,7 +35,6 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
     private static final Rectangle viewRect = new Rectangle();
     private static final Rectangle textRect = new Rectangle();
     private static final Rectangle iconRect = new Rectangle();
-    protected static Color[] rolloverPressedColors = null;
 
     public static ComponentUI createUI(JComponent b) {
         return new BaseToggleButtonUI();
@@ -45,11 +44,6 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
         super.installDefaults(b);
         b.setOpaque(false);
         b.setRolloverEnabled(true);
-        Color cArr[] = AbstractLookAndFeel.getTheme().getPressedColors();
-        rolloverPressedColors = new Color[cArr.length];
-        for (int i = 0; i < cArr.length; i++) {
-            rolloverPressedColors[i] = ColorHelper.brighter(cArr[i], 20);
-        }
     }
 
     public void uninstallDefaults(AbstractButton b) {
@@ -75,14 +69,10 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
         if (b.isEnabled()) {
             Color background = b.getBackground();
             if (background instanceof ColorUIResource) {
-                if ((model.isPressed() && model.isArmed()) || model.isSelected()) {
+                if (b.isRolloverEnabled() && model.isRollover()) {
+                    colors = AbstractLookAndFeel.getTheme().getRolloverColors();
+                } else if ((model.isPressed() && model.isArmed()) || model.isSelected()) {
                     colors = AbstractLookAndFeel.getTheme().getPressedColors();
-                } else  if (b.isRolloverEnabled() && model.isRollover()) {
-                    if (model.isSelected()) {
-                        colors = rolloverPressedColors;
-                    } else {
-                        colors = AbstractLookAndFeel.getTheme().getRolloverColors();
-                    }
                 } else {
                     if (AbstractLookAndFeel.getTheme().doShowFocusFrame() && b.hasFocus()) {
                         colors = AbstractLookAndFeel.getTheme().getFocusColors();
@@ -162,12 +152,17 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
         textRect.x = textRect.y = textRect.width = textRect.height = 0;
         iconRect.x = iconRect.y = iconRect.width = iconRect.height = 0;
 
+        int iconTextGap = defaultTextIconGap;
+        if (JTattooUtilities.getJavaVersion() >= 1.4) {
+            iconTextGap = b.getIconTextGap();
+        }
+        
         String text = SwingUtilities.layoutCompoundLabel(
                 c, fm, b.getText(), b.getIcon(),
                 b.getVerticalAlignment(), b.getHorizontalAlignment(),
                 b.getVerticalTextPosition(), b.getHorizontalTextPosition(),
                 viewRect, iconRect, textRect,
-                b.getText() == null ? 0 : defaultTextIconGap);
+                b.getText() == null ? 0 : iconTextGap);
 
         paintBackground(g, b);
 

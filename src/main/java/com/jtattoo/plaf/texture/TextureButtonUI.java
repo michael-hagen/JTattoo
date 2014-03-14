@@ -43,17 +43,21 @@ public class TextureButtonUI extends BaseButtonUI {
     }
 
     protected void paintBackground(Graphics g, AbstractButton b) {
-        Graphics2D g2D = (Graphics2D) g;
-        Shape savedClip = g.getClip();
-        if ((b.getBorder() != null) && b.isBorderPainted() && (b.getBorder() instanceof UIResource)) {
-            int w = b.getWidth();
-            int h = b.getHeight();
-            Area clipArea = new Area(new RoundRectangle2D.Double(0, 0, w - 1, h - 1, 6, 6));
-            clipArea.intersect(new Area(savedClip));
-            g2D.setClip(clipArea);
+        if (AbstractLookAndFeel.getTheme().doDrawSquareButtons()) {
+            super.paintBackground(g, b);
+        } else {
+            Graphics2D g2D = (Graphics2D) g;
+            Shape savedClip = g.getClip();
+            if ((b.getBorder() != null) && b.isBorderPainted() && (b.getBorder() instanceof UIResource)) {
+                int w = b.getWidth();
+                int h = b.getHeight();
+                Area clipArea = new Area(new RoundRectangle2D.Double(0, 0, w - 1, h - 1, 6, 6));
+                clipArea.intersect(new Area(savedClip));
+                g2D.setClip(clipArea);
+            }
+            super.paintBackground(g, b);
+            g2D.setClip(savedClip);
         }
-        super.paintBackground(g, b);
-        g2D.setClip(savedClip);
     }
 
     protected void paintIcon(Graphics g, JComponent c, Rectangle iconRect) {

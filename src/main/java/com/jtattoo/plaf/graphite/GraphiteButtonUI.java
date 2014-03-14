@@ -44,19 +44,23 @@ public class GraphiteButtonUI extends BaseButtonUI {
     }
 
     protected void paintBackground(Graphics g, AbstractButton b) {
-        int w = b.getWidth();
-        int h = b.getHeight();
-        Graphics2D g2D = (Graphics2D) g;
-        Shape savedClip = g.getClip();
-        if ((b.getBorder() != null) && b.isBorderPainted() && (b.getBorder() instanceof UIResource)) {
-            Area clipArea = new Area(new RoundRectangle2D.Double(0, 0, w - 1, h - 1, 6, 6));
-            if (savedClip != null) {
-                clipArea.intersect(new Area(savedClip));
+        if (AbstractLookAndFeel.getTheme().doDrawSquareButtons()) {
+            super.paintBackground(g, b);
+        } else {
+            int w = b.getWidth();
+            int h = b.getHeight();
+            Graphics2D g2D = (Graphics2D) g;
+            Shape savedClip = g.getClip();
+            if ((b.getBorder() != null) && b.isBorderPainted() && (b.getBorder() instanceof UIResource)) {
+                Area clipArea = new Area(new RoundRectangle2D.Double(0, 0, w - 1, h - 1, 6, 6));
+                if (savedClip != null) {
+                    clipArea.intersect(new Area(savedClip));
+                }
+                g2D.setClip(clipArea);
             }
-            g2D.setClip(clipArea);
+            super.paintBackground(g, b);
+            g2D.setClip(savedClip);
         }
-        super.paintBackground(g, b);
-        g2D.setClip(savedClip);
     }
 
     protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect, Rectangle iconRect) {

@@ -62,15 +62,9 @@ public class AluminiumToggleButtonUI extends BaseToggleButtonUI {
         if (b.isEnabled()) {
             Color background = b.getBackground();
             if (background instanceof ColorUIResource) {
-                if (model.isPressed() && model.isArmed()) {
-                    colors = AbstractLookAndFeel.getTheme().getPressedColors();
-                } else  if (b.isRolloverEnabled() && model.isRollover()) {
-                    if (model.isSelected()) {
-                        colors = rolloverPressedColors;
-                    } else {
-                        colors = AbstractLookAndFeel.getTheme().getRolloverColors();
-                    }
-                } else if (model.isSelected()) {
+                if (b.isRolloverEnabled() && model.isRollover()) {
+                    colors = AbstractLookAndFeel.getTheme().getRolloverColors();
+                } else if ((model.isPressed() && model.isArmed()) || model.isSelected()) {
                     colors = AbstractLookAndFeel.getTheme().getPressedColors();
                 } else {
                     if (AbstractLookAndFeel.getTheme().doShowFocusFrame() && b.hasFocus()) {
@@ -142,7 +136,10 @@ public class AluminiumToggleButtonUI extends BaseToggleButtonUI {
         Graphics2D g2D = (Graphics2D) g;
         int width = b.getWidth();
         int height = b.getHeight();
-        if (((width < 64) || (height < 16)) && ((b.getText() == null) || b.getText().length() == 0)) {
+        if (AbstractLookAndFeel.getTheme().doDrawSquareButtons()
+                || !b.isContentAreaFilled()
+                || !(b.getBorder() instanceof UIResource)
+                || ((width < 64) || (height < 16)) && ((b.getText() == null) || b.getText().length() == 0)) {
             g.setColor(AbstractLookAndFeel.getFocusColor());
             BasicGraphicsUtils.drawDashedRect(g, 4, 3, width - 8, height - 6);
         } else {

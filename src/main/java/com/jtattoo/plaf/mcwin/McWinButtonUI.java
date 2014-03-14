@@ -51,8 +51,7 @@ public class McWinButtonUI extends BaseButtonUI {
         int width = b.getWidth();
         int height = b.getHeight();
 
-        if (!(b.isBorderPainted() && (b.getBorder() instanceof UIResource))
-                || (b.getParent() instanceof JToolBar)) {
+        if (!(b.isBorderPainted() && (b.getBorder() instanceof UIResource)) || (b.getParent() instanceof JToolBar)) {
             super.paintBackground(g, b);
             if ((b.getParent() instanceof JToolBar)) {
                 g.setColor(Color.lightGray);
@@ -156,6 +155,7 @@ public class McWinButtonUI extends BaseButtonUI {
         int height = b.getHeight();
         if (AbstractLookAndFeel.getTheme().doDrawSquareButtons()
                 || !b.isContentAreaFilled()
+                || !(b.getBorder() instanceof UIResource)
                 || ((width < 64) || (height < 16)) && ((b.getText() == null) || b.getText().length() == 0)) {
             g.setColor(AbstractLookAndFeel.getFocusColor());
             BasicGraphicsUtils.drawDashedRect(g, 4, 3, width - 8, height - 6);

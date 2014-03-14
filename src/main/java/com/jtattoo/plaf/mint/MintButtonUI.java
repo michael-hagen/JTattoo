@@ -133,8 +133,9 @@ public class MintButtonUI extends BaseButtonUI {
         Graphics2D g2D = (Graphics2D) g;
         int width = b.getWidth();
         int height = b.getHeight();
-        if (!b.isContentAreaFilled()
-                || AbstractLookAndFeel.getTheme().doDrawSquareButtons()
+        if (AbstractLookAndFeel.getTheme().doDrawSquareButtons()
+                || !b.isContentAreaFilled()
+                || !(b.getBorder() instanceof UIResource)
                 || ((width < 64) || (height < 16)) && ((b.getText() == null) || b.getText().length() == 0)) {
             g.setColor(AbstractLookAndFeel.getFocusColor());
             BasicGraphicsUtils.drawDashedRect(g, 4, 3, width - 8, height - 6);

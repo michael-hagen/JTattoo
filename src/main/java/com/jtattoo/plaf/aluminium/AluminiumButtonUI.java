@@ -134,6 +134,7 @@ public class AluminiumButtonUI extends BaseButtonUI {
         int height = b.getHeight();
         if (AbstractLookAndFeel.getTheme().doDrawSquareButtons()
                 || !b.isContentAreaFilled()
+                || !(b.getBorder() instanceof UIResource)
                 || ((width < 64) || (height < 16)) && ((b.getText() == null) || b.getText().length() == 0)) {
             g.setColor(AbstractLookAndFeel.getFocusColor());
             BasicGraphicsUtils.drawDashedRect(g, 4, 3, width - 8, height - 6);

@@ -20,6 +20,7 @@ package com.jtattoo.plaf;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.*;
@@ -106,7 +107,7 @@ public class BaseButtonUI extends BasicButtonUI {
             colors = AbstractLookAndFeel.getTheme().getDisabledColors();
         }
         
-        if (b.isBorderPainted() && (b.getBorder() != null)) {
+        if (b.isBorderPainted() && (b.getBorder() != null) && !(b.getBorder() instanceof EmptyBorder)) {
             Insets insets = b.getBorder().getBorderInsets(b);
             int x = insets.left > 0 ? 1 : 0;
             int y = insets.top > 0 ? 1 : 0;
