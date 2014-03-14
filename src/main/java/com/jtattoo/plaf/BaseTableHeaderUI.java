@@ -71,6 +71,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
     public void installListeners() {
         super.installListeners();
         myMouseAdapter = new MouseAdapter() {
+            
             public void mouseReleased(MouseEvent e) {
                 if ((header == null) || (header.getTable() == null)) {
                     return;
@@ -83,7 +84,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
                 if (rolloverEnabled || sortingAllowed || header.getReorderingAllowed()) {
                     if (header.getBounds().contains(e.getPoint())) {
                         int oldRolloverCol = rolloverCol;
-                        rolloverCol = header.getColumnModel().getColumnIndexAtX(e.getX());
+                        rolloverCol = header.getTable().columnAtPoint(e.getPoint());
                         updateRolloverColumn(oldRolloverCol, rolloverCol);
                     } else {
                         int oldRolloverCol = rolloverCol;
@@ -104,7 +105,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
                 }
                 if (rolloverEnabled || sortingAllowed || header.getReorderingAllowed()) {
                     int oldRolloverCol = rolloverCol;
-                    rolloverCol = header.getColumnModel().getColumnIndexAtX(e.getX());
+                    rolloverCol = header.getTable().columnAtPoint(e.getPoint());
                     updateRolloverColumn(oldRolloverCol, rolloverCol);
                 }
             }
@@ -126,6 +127,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
             }
         };
         myMouseMotionAdapter = new MouseMotionAdapter() {
+            
             public void mouseMoved(MouseEvent e) {
                 if ((header == null) || (header.getTable() == null)) {
                     return;
@@ -138,7 +140,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
                 if (rolloverEnabled || sortingAllowed || header.getReorderingAllowed()) {
                     if (header.getDraggedColumn() == null) {
                         int oldRolloverCol = rolloverCol;
-                        rolloverCol = header.getColumnModel().getColumnIndexAtX(e.getX());
+                        rolloverCol = header.getTable().columnAtPoint(e.getPoint());
                         updateRolloverColumn(oldRolloverCol, rolloverCol);
                     }
                 }
