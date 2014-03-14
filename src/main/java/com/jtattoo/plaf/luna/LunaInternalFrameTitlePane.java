@@ -48,9 +48,6 @@ public class LunaInternalFrameTitlePane extends BaseInternalFrameTitlePane {
     }
 
     public void paintText(Graphics g, int x, int y, String title) {
-        if (isMacStyleWindowDecoration()) {
-            x += paintIcon(g, x, y) + 5;
-        }
         if (isActive()) {
             g.setColor(ColorHelper.brighter(AbstractLookAndFeel.getTheme().getWindowBorderColor(), 10));
             JTattooUtilities.drawString(frame, g, title, x - 1, y - 2);

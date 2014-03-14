@@ -58,11 +58,6 @@ public class AcrylTitlePane extends BaseTitlePane {
     }
 
     public void paintText(Graphics g, int x, int y, String title) {
-        if (isMacStyleWindowDecoration()) {
-            x += paintIcon(g, x, y);
-        } else {
-            x += paintIcon(g, 2, y);
-        }
         Color shadowColor = AbstractLookAndFeel.getWindowTitleColorDark();
         if (isActive()) {
             shadowColor = ColorHelper.darker(shadowColor, 30);

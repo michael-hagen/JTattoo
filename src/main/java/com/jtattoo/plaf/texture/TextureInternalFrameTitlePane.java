@@ -62,9 +62,6 @@ public class TextureInternalFrameTitlePane extends BaseInternalFrameTitlePane {
     }
 
     public void paintText(Graphics g, int x, int y, String title) {
-        if (isMacStyleWindowDecoration()) {
-            x += paintIcon(g, x, y) + 5;
-        }
         Graphics2D g2D = (Graphics2D)g;
         Shape savedClip = g2D.getClip();
         Color fc = AbstractLookAndFeel.getWindowTitleForegroundColor();

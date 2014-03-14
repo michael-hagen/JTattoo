@@ -81,9 +81,14 @@ public class BaseTitlePane extends JComponent {
     // have to switch off the MAXIMIZED_BOTH flag in the iconify() method. If frame is deiconified
     // we use the wasMaximized flag to restore the maximized state.
     protected boolean wasMaximized;
+    // This flag indicates a maximize error. This occurs on multiscreen environments where the first
+    // screen does not have the same resolution as the second screen. In this case we only simulate the
+    // maximize/restore behaviour. It's not a perfect simulation (frame border will stay visible, 
+    // and we have to restore the bounds if look and feel changes in maximized state)
+    protected boolean wasMaximizeError = false;
+    
     protected BufferedImage backgroundImage = null;
     protected float alphaValue = 0.85f;
-    protected boolean useMaximizedBounds = true;
 
     public BaseTitlePane(JRootPane root, BaseRootPaneUI ui) {
         rootPane = root;
@@ -100,11 +105,11 @@ public class BaseTitlePane extends JComponent {
         setLayout(createLayout());
     }
 
-    protected void uninstall() {
-        uninstallListeners();
-        window = null;
-        removeAll();
-    }
+//    protected void uninstall() {
+//        uninstallListeners();
+//        window = null;
+//        removeAll();
+//    }
 
     protected void installListeners() {
         if (window != null) {
@@ -307,9 +312,24 @@ public class BaseTitlePane extends JComponent {
         }
     }
 
+    protected void validateMaximizedBounds() {
+        Frame frame = getFrame();
+        if (frame != null && !wasMaximizeError) {
+            GraphicsConfiguration gc = frame.getGraphicsConfiguration();
+            Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(gc);
+            Rectangle maxBounds = gc.getBounds();
+            maxBounds.x = Math.max(0, screenInsets.left);
+            maxBounds.y = Math.max(0, screenInsets.top);
+            maxBounds.width -= (screenInsets.left + screenInsets.right);
+            maxBounds.height -= (screenInsets.top + screenInsets.bottom);
+            frame.setMaximizedBounds(maxBounds);
+        }
+    }
+    
     protected void maximize() {
         Frame frame = getFrame();
         if (frame != null) {
+            validateMaximizedBounds();
             PropertyChangeListener[] pcl = frame.getPropertyChangeListeners();
             for (int i = 0; i < pcl.length; i++) {
                 pcl[i].propertyChange(new PropertyChangeEvent(this, "windowMaximize", Boolean.FALSE, Boolean.FALSE));
@@ -318,12 +338,14 @@ public class BaseTitlePane extends JComponent {
             for (int i = 0; i < pcl.length; i++) {
                 pcl[i].propertyChange(new PropertyChangeEvent(this, "windowMaximized", Boolean.FALSE, Boolean.FALSE));
             }
+        
         }
     }
 
     protected void restore() {
         Frame frame = getFrame();
         if (frame != null) {
+            wasMaximizeError = false;
             PropertyChangeListener[] pcl = frame.getPropertyChangeListeners();
             for (int i = 0; i < pcl.length; i++) {
                 pcl[i].propertyChange(new PropertyChangeEvent(this, "windowRestore", Boolean.FALSE, Boolean.FALSE));
@@ -435,33 +457,23 @@ public class BaseTitlePane extends JComponent {
                 // When programatically maximize a frame via setExtendedState in a multiscreen environment the width
                 // and height may not be set correctly. We fix this issue here.
                 if ((state & BaseRootPaneUI.MAXIMIZED_BOTH) != 0) {
-                    Point location = frame.getLocation();
-                    Dimension size = frame.getSize();
-                    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-                    GraphicsDevice gda[] = ge.getScreenDevices();
-                    for (int i = 0; i < gda.length; i++) {
-                        GraphicsDevice gd = gda[i];
-                        GraphicsConfiguration gc = gd.getDefaultConfiguration();
-                        Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(gc);
-                        Rectangle screenBounds = gc.getBounds();
-                        if (screenBounds.contains(location)) {
-                            int w = screenBounds.width - (screenInsets.left + screenInsets.right);
-                            int h = screenBounds.height - (screenInsets.top + screenInsets.bottom);
-                            if (size.width != w || size.height != h) {
-                                
-                                SwingUtilities.invokeLater(new Runnable() {
-
-                                    public void run() {
-                                        useMaximizedBounds = false;
-                                        frame.setMaximizedBounds(null);
-                                        restore();
-                                        maximize();
-                                    }
-                                });
+                    validateMaximizedBounds();
+                    rootPane.setBorder(null);
+                    SwingUtilities.invokeLater(new Runnable() {
+                        public void run() {
+                            GraphicsConfiguration gc = frame.getGraphicsConfiguration();
+                            Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(gc);
+                            Rectangle maxBounds = gc.getBounds();
+                            maxBounds.width -= (screenInsets.left + screenInsets.right);
+                            maxBounds.height -= (screenInsets.top + screenInsets.bottom);
+                            if ((frame.getWidth() != maxBounds.width) || (frame.getHeight() != maxBounds.height)) {
+                                restore();
+                                wasMaximizeError = true;
+                                frame.setMaximizedBounds(null);
+                                maximize();
                             }
-                            break;
                         }
-                    }
+                    });
                 }
             } else {
                 // Not contained in a Frame
@@ -520,41 +532,50 @@ public class BaseTitlePane extends JComponent {
         }
     }
 
-    protected int paintIcon(Graphics g, int x, int y) {
-        if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn() || (getWindow() instanceof JDialog)) {
-            Image image = getFrameIconImage();
-            if (image != null) {
-                Graphics2D g2D = (Graphics2D)g;
-                Object savedHint = g2D.getRenderingHint(RenderingHints.KEY_INTERPOLATION);
-                if (JTattooUtilities.getJavaVersion() >= 1.6) {
-                    g2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-                }
-                int h = getHeight() - 2;
-                int ih = image.getHeight(null);
-                int iw = image.getWidth(null);
-                if (ih <= h) {
-                    g2D.drawImage(image, x, (h - ih) / 2, iw, ih, null);
-                } else {
-                    double fac = (double)iw / (double)ih;
-                    ih = h;
-                    iw = (int)(fac * (double)ih);
-                    g2D.drawImage(image, x, 0, iw, ih, null);
-                }
-                if (savedHint != null) {
-                    g2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, savedHint);
-                }
-                return iw + 4;
+    protected int getIconWidth() {
+        Image image = getFrameIconImage();
+        if (image != null) {
+            int h = getHeight();
+            int ih = image.getHeight(null);
+            int iw = image.getWidth(null);
+            if (ih > h) {
+                double fac = (double) iw / (double) ih;
+                ih = h;
+                iw = (int) (fac * (double) ih);
             }
+            return iw;
+        }
+        return 0;
+    }
+    
+    protected int paintIcon(Graphics g, int x) {
+        Image image = getFrameIconImage();
+        if (image != null) {
+            Graphics2D g2D = (Graphics2D)g;
+            Object savedHint = g2D.getRenderingHint(RenderingHints.KEY_INTERPOLATION);
+            if (JTattooUtilities.getJavaVersion() >= 1.6) {
+                g2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            }
+            int h = getHeight() - 2;
+            int ih = image.getHeight(null);
+            int iw = image.getWidth(null);
+            if (ih <= h) {
+                g2D.drawImage(image, x, (h - ih) / 2, iw, ih, null);
+            } else {
+                double fac = (double)iw / (double)ih;
+                ih = h;
+                iw = (int)(fac * (double)ih);
+                g2D.drawImage(image, x, 0, iw, ih, null);
+            }
+            if (savedHint != null) {
+                g2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, savedHint);
+            }
+            return iw;
         }
         return 0;
     }
     
     public void paintText(Graphics g, int x, int y, String title) {
-        if (isMacStyleWindowDecoration()) {
-            x += paintIcon(g, x, y);
-        } else {
-            x += paintIcon(g, 2, y);
-        }
         if (isActive()) {
             g.setColor(AbstractLookAndFeel.getWindowTitleForegroundColor());
         } else {
@@ -570,39 +591,82 @@ public class BaseTitlePane extends JComponent {
 
         paintBackground(g);
 
-        boolean leftToRight = isLeftToRight();
-        int width = getWidth();
-        int height = getHeight();
-        int titleWidth = width - buttonsWidth - 4;
-        int xOffset = leftToRight ? 2 : width - 2;
-        if (menuBar != null) {
-            int mw = menuBar.getWidth() + 2;
-            xOffset += leftToRight ? mw : -mw;
-            titleWidth -= height;
-        }
-        Image frameImage = getFrameIconImage();
-        if (frameImage != null) {
-            titleWidth -= frameImage.getWidth(null);
-        }
-
         g.setFont(getFont());
         FontMetrics fm = g.getFontMetrics();
-        String frameTitle = JTattooUtilities.getClippedText(getTitle(), fm, titleWidth);
-        int titleLength = fm.stringWidth(frameTitle);
-        int yOffset = ((height - fm.getHeight()) / 2) + fm.getAscent() - 1;
-        if (!leftToRight) {
-            xOffset -= titleLength;
-        }
-        if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
-            xOffset = Math.max(buttonsWidth + 5, (width - titleLength) / 2);
-        } else if ( AbstractLookAndFeel.getTheme().isCenterWindowTitleOn()) {
-            if (leftToRight) {
-                xOffset += (titleWidth - titleLength) / 2;
+        int width = getWidth();
+        int height = getHeight();
+        int x = 0;
+        int y = ((height - fm.getHeight()) / 2) + fm.getAscent();
+        int titleWidth = width - buttonsWidth - 4;
+        String frameTitle = getTitle();
+        if (isLeftToRight()) {
+            if (isMacStyleWindowDecoration()) {
+                int iconWidth = getIconWidth();
+                titleWidth -= iconWidth + 4;
+                frameTitle = JTattooUtilities.getClippedText(frameTitle, fm, titleWidth);
+                int titleLength = fm.stringWidth(frameTitle);
+                x += buttonsWidth + ((titleWidth - titleLength) / 2);
+                paintIcon(g, x);
+                x += iconWidth + 4;
             } else {
-                xOffset -= (titleWidth - titleLength) / 2;
+                if (getWindow() instanceof JDialog) {
+                    int iconWidth = paintIcon(g, x);
+                    titleWidth -= iconWidth + 4;
+                    frameTitle = JTattooUtilities.getClippedText(frameTitle, fm, titleWidth);
+                    if (AbstractLookAndFeel.getTheme().isCenterWindowTitleOn()) {
+                        int titleLength = fm.stringWidth(frameTitle);
+                        x += iconWidth + 4;
+                        x += (titleWidth - titleLength) / 2;
+                    } else {
+                        x += iconWidth + 4;
+                    }
+                } else {
+                    int menuBarWidth = menuBar == null ? 0 : menuBar.getWidth();
+                    titleWidth -= menuBarWidth + 4;
+                    frameTitle = JTattooUtilities.getClippedText(frameTitle, fm, titleWidth);
+                    if (AbstractLookAndFeel.getTheme().isCenterWindowTitleOn()) {
+                        int titleLength = fm.stringWidth(frameTitle);
+                        x += menuBarWidth + 4;
+                        x += (titleWidth - titleLength) / 2;
+                    } else {
+                        x += menuBarWidth + 4;
+                    }
+                }
+            }
+        } else {
+            int iconWidth = getIconWidth();
+            if (isMacStyleWindowDecoration()) {
+                titleWidth -= iconWidth + 4;
+                frameTitle = JTattooUtilities.getClippedText(frameTitle, fm, titleWidth);
+                int titleLength = fm.stringWidth(frameTitle);
+                x = buttonsWidth + 4 + ((titleWidth - titleLength) / 2);
+                paintIcon(g, x + titleLength + 4);
+            } else {
+                if (getWindow() instanceof JDialog) {
+                    x = width - iconWidth;
+                    paintIcon(g, x);
+                    titleWidth -= iconWidth + 4;
+                    frameTitle = JTattooUtilities.getClippedText(frameTitle, fm, titleWidth);
+                    int titleLength = fm.stringWidth(frameTitle);
+                    if (AbstractLookAndFeel.getTheme().isCenterWindowTitleOn()) {
+                        x = buttonsWidth + 4 + ((titleWidth - titleLength) / 2);
+                    } else {
+                        x = width - iconWidth - 4 - titleLength;
+                    }
+                } else {
+                    int menuBarWidth = menuBar == null ? 0 : menuBar.getWidth();
+                    titleWidth -= menuBarWidth + 4;
+                    frameTitle = JTattooUtilities.getClippedText(frameTitle, fm, titleWidth);
+                    int titleLength = fm.stringWidth(frameTitle);
+                    if (AbstractLookAndFeel.getTheme().isCenterWindowTitleOn()) {
+                        x = buttonsWidth + 4 + ((titleWidth - titleLength) / 2);
+                    } else {
+                        x = width - menuBarWidth - 4 - titleLength;
+                    }
+                }
             }
         }
-        paintText(g, xOffset, yOffset, frameTitle);
+        paintText(g, x, y, frameTitle);
     }
 
     protected class CloseAction extends AbstractAction {
@@ -871,44 +935,42 @@ public class BaseTitlePane extends JComponent {
             } else if ("componentOrientation".equals(name)) {
                 revalidate();
                 repaint();
-            // a call to setMaximizedBounds may cause an invalid frame size on multi screen environments
-            // see: http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6699851
-            // try and error to avoid the setMaximizedBounds bug
-            } else if (!JTattooUtilities.isMac() && useMaximizedBounds && "windowMaximize".equals(name)) {
-                Frame frame = getFrame();
-                if (frame != null) {
-                    GraphicsConfiguration gc = frame.getGraphicsConfiguration();
-                    Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(gc);
-                    Rectangle screenBounds = gc.getBounds();
-                    int x = Math.max(0, screenInsets.left);
-                    int y = Math.max(0, screenInsets.top);
-                    int w = screenBounds.width - (screenInsets.left + screenInsets.right);
-                    int h = screenBounds.height - (screenInsets.top + screenInsets.bottom);
-                    // Keep taskbar visible
-                    frame.setMaximizedBounds(new Rectangle(x, y, w, h));
-                }
-            } else if (!JTattooUtilities.isMac() && useMaximizedBounds && "windowMaximized".equals(name)) {
-                Frame frame = getFrame();
-                if (frame != null) {
-                    GraphicsConfiguration gc = frame.getGraphicsConfiguration();
-                    Rectangle screenBounds = gc.getBounds();
-                    if (frame.getSize().width > screenBounds.width || frame.getSize().height > screenBounds.height) {
-                        useMaximizedBounds = false;
-                        frame.setMaximizedBounds(null);
-                        restore();
-                        maximize();
-                    }
-                }
-            } else if (!JTattooUtilities.isMac() && "windowMoved".equals(name)) {
-                useMaximizedBounds = true;
+//            // a call to setMaximizedBounds may cause an invalid frame size on multi screen environments
+//            // see: http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6699851
+//            // try and error to avoid the setMaximizedBounds bug
+//            } else if (!JTattooUtilities.isMac() && useMaximizedBounds && "windowMaximize".equals(name)) {
+//                Frame frame = getFrame();
+//                if (frame != null) {
+//                    GraphicsConfiguration gc = frame.getGraphicsConfiguration();
+//                    Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(gc);
+//                    Rectangle screenBounds = gc.getBounds();
+//                    int x = Math.max(0, screenInsets.left);
+//                    int y = Math.max(0, screenInsets.top);
+//                    int w = screenBounds.width - (screenInsets.left + screenInsets.right);
+//                    int h = screenBounds.height - (screenInsets.top + screenInsets.bottom);
+//                    // Keep taskbar visible
+//                    frame.setMaximizedBounds(new Rectangle(x, y, w, h));
+//                }
+//            } else if (!JTattooUtilities.isMac() && useMaximizedBounds && "windowMaximized".equals(name)) {
+//                Frame frame = getFrame();
+//                if (frame != null) {
+//                    GraphicsConfiguration gc = frame.getGraphicsConfiguration();
+//                    Rectangle screenBounds = gc.getBounds();
+//                    if (frame.getSize().width > screenBounds.width || frame.getSize().height > screenBounds.height) {
+//                        useMaximizedBounds = false;
+//                        frame.setMaximizedBounds(null);
+//                        restore();
+//                        maximize();
+//                    }
+//                }
+//            } else if (!JTattooUtilities.isMac() && "windowMoved".equals(name)) {
+//                useMaximizedBounds = true;
             }
 
-            if (JTattooUtilities.isMac() && JTattooUtilities.getJavaVersion() >= 1.7) {
-                if ("windowRestored".equals(name)) {
-                    wasMaximized = false;
-                } else if ("windowMaximized".equals(name)) {
-                    wasMaximized = true;
-                }
+            if ("windowRestored".equals(name)) {
+                wasMaximized = false;
+            } else if ("windowMaximized".equals(name)) {
+                wasMaximized = true;
             }
         }
     }

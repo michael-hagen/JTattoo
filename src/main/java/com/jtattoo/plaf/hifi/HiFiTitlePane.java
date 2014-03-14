@@ -42,11 +42,6 @@ public class HiFiTitlePane extends BaseTitlePane {
     }
     
     public void paintText(Graphics g, int x, int y, String title) {
-        if (isMacStyleWindowDecoration()) {
-            x += paintIcon(g, x, y);
-        } else {
-            x += paintIcon(g, 2, y);
-        }
         g.setColor(Color.black);
         JTattooUtilities.drawString(rootPane, g, title, x + 1, y + 1);
         if (isActive()) {

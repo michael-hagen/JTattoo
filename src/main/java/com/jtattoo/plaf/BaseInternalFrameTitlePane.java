@@ -220,7 +220,23 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
         return null;
     }
 
-    protected int paintIcon(Graphics g, int x, int y) {
+    protected int getIconWidth() {
+        Image image = iconToImage(frame.getFrameIcon());
+        if (image != null) {
+            int h = getHeight();
+            int ih = image.getHeight(null);
+            int iw = image.getWidth(null);
+            if (ih > h) {
+                double fac = (double) iw / (double) ih;
+                ih = h - 1;
+                iw = (int) (fac * (double) ih);
+            }
+            return iw;
+        }
+        return 0;
+    }
+    
+    protected int paintIcon(Graphics g, int x) {
         Image image = iconToImage(frame.getFrameIcon());
         if (image != null) {
             Graphics2D g2D = (Graphics2D)g;
@@ -235,7 +251,7 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
                 g2D.drawImage(image, x, (h - ih) / 2, iw, ih, null);
             } else {
                 double fac = (double) iw / (double) ih;
-                ih = h - 1;
+                ih = h;
                 iw = (int) (fac * (double) ih);
                 g2D.drawImage(image, x, 0, iw, ih, null);
             }
@@ -248,9 +264,6 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
     }
 
     public void paintText(Graphics g, int x, int y, String title) {
-        if (isMacStyleWindowDecoration()) {
-            x += paintIcon(g, x, y) + 5;
-        }
         if (isActive()) {
             g.setColor(AbstractLookAndFeel.getWindowTitleForegroundColor());
         } else {
@@ -273,54 +286,61 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
             return;
         }
 
-        // Setting clipping area to null to solve a redrawing problem under windows 7
-        Shape savedClip = g.getClip();
-        g.setClip(null);
         paintBackground(g);
-
-        boolean leftToRight = JTattooUtilities.isLeftToRight(frame);
-
-        int width = getWidth();
-        int height = getHeight();
-        int xOffset = leftToRight ? 5 : width - 5;
-        int titleWidth = width - buttonsWidth - 10;
-
-        Icon icon = frame.getFrameIcon();
-        if (icon != null) {
-            if (!isMacStyleWindowDecoration()) {
-                if (!leftToRight) {
-                    xOffset -= icon.getIconWidth();
-                }
-                int iconY = (height / 2) - (icon.getIconHeight() / 2) - 1;
-                int iconWidth = paintIcon(g, xOffset, iconY);
-                xOffset += leftToRight ? iconWidth + 5 : -5;
-                titleWidth -= iconWidth + 5;
-            } else {
-                titleWidth -= icon.getIconWidth() + 5;
-            }
-        }
 
         g.setFont(getFont());
         FontMetrics fm = g.getFontMetrics();
-        String frameTitle = JTattooUtilities.getClippedText(frame.getTitle(), fm, titleWidth);
-        int titleLength = fm.stringWidth(frameTitle);
-        int yOffset = ((height - fm.getHeight()) / 2) + fm.getAscent();
-        if (!leftToRight) {
-            xOffset -= titleLength;
-        }
-        if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
-            xOffset = Math.max(buttonsWidth + 5, (width - titleLength) / 2);
-        } else if (AbstractLookAndFeel.getTheme().isCenterWindowTitleOn()) {
-            if (leftToRight) {
-                xOffset += (titleWidth - titleLength) / 2;
+        int width = getWidth();
+        int height = getHeight();
+        int x = 0;
+        int y = ((height - fm.getHeight()) / 2) + fm.getAscent();
+        int titleWidth = width - buttonsWidth - 4;
+        String frameTitle = frame.getTitle();
+        if (JTattooUtilities.isLeftToRight(frame)) {
+            if (isMacStyleWindowDecoration()) {
+                int iconWidth = getIconWidth();
+                titleWidth -= iconWidth + 4;
+                frameTitle = JTattooUtilities.getClippedText(frameTitle, fm, titleWidth);
+                int titleLength = fm.stringWidth(frameTitle);
+                x += buttonsWidth + ((titleWidth - titleLength) / 2);
+                paintIcon(g, x);
+                x += iconWidth + 4;
             } else {
-                xOffset -= (titleWidth - titleLength) / 2;
+                int iconWidth = paintIcon(g, x);
+                titleWidth -= iconWidth + 4;
+                frameTitle = JTattooUtilities.getClippedText(frameTitle, fm, titleWidth);
+                if (AbstractLookAndFeel.getTheme().isCenterWindowTitleOn()) {
+                    int titleLength = fm.stringWidth(frameTitle);
+                    x += iconWidth + 4;
+                    x += (titleWidth - titleLength) / 2;
+                } else {
+                    x += iconWidth + 4;
+                }
+            }
+        } else {
+            int iconWidth = getIconWidth();
+            if (isMacStyleWindowDecoration()) {
+                titleWidth -= iconWidth + 4;
+                frameTitle = JTattooUtilities.getClippedText(frameTitle, fm, titleWidth);
+                int titleLength = fm.stringWidth(frameTitle);
+                x = buttonsWidth + 4 + ((titleWidth - titleLength) / 2);
+                paintIcon(g, x + titleLength + 4);
+            } else {
+                x = width - iconWidth;
+                paintIcon(g, x);
+                titleWidth -= iconWidth + 4;
+                frameTitle = JTattooUtilities.getClippedText(frameTitle, fm, titleWidth);
+                int titleLength = fm.stringWidth(frameTitle);
+                if (AbstractLookAndFeel.getTheme().isCenterWindowTitleOn()) {
+                    x = buttonsWidth + 4 + ((titleWidth - titleLength) / 2);
+                } else {
+                    x = width - iconWidth - 4 - titleLength;
+                }
             }
         }
-        paintText(g, xOffset, yOffset, frameTitle);
+        paintText(g, x, y, frameTitle);
+        
         paintBorder(g);
-        // Restore the clipping area.
-        g.setClip(savedClip);
     }
 
     class BasePropertyChangeHandler extends BasicInternalFrameTitlePane.PropertyChangeHandler {

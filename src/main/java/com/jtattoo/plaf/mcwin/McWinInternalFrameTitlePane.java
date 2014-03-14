@@ -51,9 +51,6 @@ public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
     }
 
     public void paintText(Graphics g, int x, int y, String title) {
-        if (isMacStyleWindowDecoration()) {
-            x += paintIcon(g, x, y) + 5;
-        }
         if (isActive()) {
             g.setColor(ColorHelper.brighter(AbstractLookAndFeel.getWindowTitleColorLight(), 40));
             JTattooUtilities.drawString(frame, g, title, x, y - 1);

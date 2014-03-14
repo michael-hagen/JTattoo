@@ -58,11 +58,8 @@ public class GraphiteInternalFrameTitlePane extends BaseInternalFrameTitlePane {
     }
 
     public void paintText(Graphics g, int x, int y, String title) {
-        if (isMacStyleWindowDecoration()) {
-            x += paintIcon(g, x, y) + 5;
-        }
         Graphics2D g2D = (Graphics2D)g;
-        Color fc = AbstractLookAndFeel.getWindowTitleForegroundColor();
+        Color fc = isActive() ? AbstractLookAndFeel.getWindowTitleForegroundColor() : AbstractLookAndFeel.getWindowInactiveTitleForegroundColor();
         if (fc.equals(Color.white)) {
             Color bc = AbstractLookAndFeel.getWindowTitleColorDark();
             g2D.setColor(bc);
