@@ -366,5 +366,6 @@ public class GraphiteBorders extends BaseBorders {
             g.drawLine(x + dw - 1, y + h - dw, x + w - dw, y + h - dw);
         }
     } // class InternalFrameBorder
+    
 } // class GraphiteBorders
 
