@@ -112,13 +112,10 @@ public class McWinIcons extends BaseIcons {
         
         private static final int GAP = 4;
         private static final Icon SMALL_CHECK_ICON = new LazyImageIcon("mcwin/icons/small/check_symbol_16x11.png");
-        private static final Icon SMALL_CHECK_PRESSED_ICON = new LazyImageIcon("icons/small/check_symbol_pressed_10x10.png");
         private static final Icon SMALL_CHECK_DISABLED_ICON = new LazyImageIcon("mcwin/icons/small/check_symbol_disabled_16x11.png");
         private static final Icon MEDIUM_CHECK_ICON = new LazyImageIcon("mcwin/icons/medium/check_symbol_18x13.png");
-        private static final Icon MEDIUM_CHECK_PRESSED_ICON = new LazyImageIcon("icons/medium/check_symbol_pressed_12x12.png");
         private static final Icon MEDIUM_CHECK_DISABLED_ICON = new LazyImageIcon("mcwin/icons/medium/check_symbol_disabled_18x13.png");
         private static final Icon LARGE_CHECK_ICON = new LazyImageIcon("mcwin/icons/large/check_symbol_20x15.png");
-        private static final Icon LARGE_CHECK_PRESSED_ICON = new LazyImageIcon("icons/large/check_symbol_pressed_14x14.png");
         private static final Icon LARGE_CHECK_DISABLED_ICON = new LazyImageIcon("mcwin/icons/large/check_symbol_disabled_20x15.png");
 
         public void paintIcon(Component c, Graphics g, int x, int y) {
@@ -132,7 +129,7 @@ public class McWinIcons extends BaseIcons {
             Color colors[];
             Color frameColor = AbstractLookAndFeel.getFrameColor();
             if (button.isEnabled()) {
-                if ((button.isRolloverEnabled() && model.isRollover()) || (model.isPressed() && model.isArmed())) {
+                if ((button.isRolloverEnabled() && model.isRollover())) {
                     colors = AbstractLookAndFeel.getTheme().getRolloverColors();
                 } else if (!JTattooUtilities.isFrameActive(button)) {
                     colors = AbstractLookAndFeel.getTheme().getInActiveColors();
@@ -156,25 +153,24 @@ public class McWinIcons extends BaseIcons {
             }
             
             Icon checkIcon;
-            Icon checkPressedIcon;
             Icon checkDisabledIcon;
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
                 checkIcon = SMALL_CHECK_ICON;
-                checkPressedIcon = SMALL_CHECK_PRESSED_ICON;
                 checkDisabledIcon = SMALL_CHECK_DISABLED_ICON;
             } else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
                 checkIcon = MEDIUM_CHECK_ICON;
-                checkPressedIcon = MEDIUM_CHECK_PRESSED_ICON;
                 checkDisabledIcon = MEDIUM_CHECK_DISABLED_ICON;
             } else {
                 checkIcon = LARGE_CHECK_ICON;
-                checkPressedIcon = LARGE_CHECK_PRESSED_ICON;
                 checkDisabledIcon = LARGE_CHECK_DISABLED_ICON;
             }
             if (model.isPressed() && model.isArmed()) {
-                int xi = x + ((w - checkPressedIcon.getIconWidth()) / 2) + 1;
-                int yi = y + ((h - checkPressedIcon.getIconHeight()) / 2) + 1;
-                checkPressedIcon.paintIcon(c, g, xi, yi);
+                Color bc = AbstractLookAndFeel.getTheme().getSelectionBackgroundColor();
+                Color fc = ColorHelper.darker(bc, 40);
+                g.setColor(fc);
+                g.drawRect(x + 3, y + 3, w - 6, h - 6);
+                g.setColor(bc);
+                g.fillRect(x + 4, y + 4, w - 7, h - 7);
             } else if (model.isSelected()) {
                 int xi = x + ((w - checkIcon.getIconWidth()) / 2) + 4;
                 int yi = y + ((h - checkIcon.getIconHeight()) / 2);

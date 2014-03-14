@@ -269,15 +269,15 @@ public class AcrylIcons extends BaseIcons {
         
         private static final Icon SMALL_CHECK_ICON = new LazyImageIcon("acryl/icons/small/check_symbol_12x11.png");
         private static final Icon SMALL_CHECK_INVERSE_ICON = new LazyImageIcon("icons/small/check_symbol_10x10.png");
-        private static final Icon SMALL_CHECK_PRESSED_ICON = new LazyImageIcon("acryl/icons/small/check_symbol_pressed_10x10.png");
+        //private static final Icon SMALL_CHECK_PRESSED_ICON = new LazyImageIcon("acryl/icons/small/check_symbol_pressed_10x10.png");
         private static final Icon SMALL_CHECK_DISABLED_ICON = new LazyImageIcon("icons/small/check_symbol_disabled_10x10.png");
         private static final Icon MEDIUM_CHECK_ICON = new LazyImageIcon("acryl/icons/medium/check_symbol_14x13.png");
         private static final Icon MEDIUM_CHECK_INVERSE_ICON = new LazyImageIcon("icons/medium/check_symbol_12x12.png");
-        private static final Icon MEDIUM_CHECK_PRESSED_ICON = new LazyImageIcon("acryl/icons/medium/check_symbol_pressed_12x12.png");
+        //private static final Icon MEDIUM_CHECK_PRESSED_ICON = new LazyImageIcon("acryl/icons/medium/check_symbol_pressed_12x12.png");
         private static final Icon MEDIUM_CHECK_DISABLED_ICON = new LazyImageIcon("icons/medium/check_symbol_disabled_12x12.png");
         private static final Icon LARGE_CHECK_ICON = new LazyImageIcon("acryl/icons/large/check_symbol_16x15.png");
         private static final Icon LARGE_CHECK_INVERSE_ICON = new LazyImageIcon("icons/large/check_symbol_14x14.png");
-        private static final Icon LARGE_CHECK_PRESSED_ICON = new LazyImageIcon("acryl/icons/large/check_symbol_pressed_14x14.png");
+        //private static final Icon LARGE_CHECK_PRESSED_ICON = new LazyImageIcon("acryl/icons/large/check_symbol_pressed_14x14.png");
         private static final Icon LARGE_CHECK_DISABLED_ICON = new LazyImageIcon("icons/large/check_symbol_disabled_14x14.png");
         
         public void paintIcon(Component c, Graphics g, int x, int y) {
@@ -290,7 +290,7 @@ public class AcrylIcons extends BaseIcons {
             ButtonModel model = button.getModel();
             Color frameColor = AbstractLookAndFeel.getFrameColor();
             if (button.isEnabled()) {
-                if ((button.isRolloverEnabled() && model.isRollover()) || (model.isPressed() && model.isArmed())) {
+                if ((button.isRolloverEnabled() && model.isRollover())) {
                     JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getRolloverColors(), x + 1, y + 1, w - 2, h - 2);
                     frameColor = ColorHelper.brighter(frameColor, 30);
                 } else {
@@ -314,39 +314,35 @@ public class AcrylIcons extends BaseIcons {
             g.drawLine(x + w - 1, y + 1, x + w - 1, y + h - 2);
             
             Icon checkIcon;
-            Icon checkPressedIcon;
             Icon checkDisabledIcon;
             Icon checkInverseIcon;
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
                 checkIcon = SMALL_CHECK_ICON;
-                checkPressedIcon = SMALL_CHECK_PRESSED_ICON;
                 checkDisabledIcon = SMALL_CHECK_DISABLED_ICON;
                 checkInverseIcon = SMALL_CHECK_INVERSE_ICON;
             } else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
                 checkIcon = MEDIUM_CHECK_ICON;
-                checkPressedIcon = MEDIUM_CHECK_PRESSED_ICON;
                 checkDisabledIcon = MEDIUM_CHECK_DISABLED_ICON;
                 checkInverseIcon = MEDIUM_CHECK_INVERSE_ICON;
             } else {
                 checkIcon = LARGE_CHECK_ICON;
-                checkPressedIcon = LARGE_CHECK_PRESSED_ICON;
                 checkDisabledIcon = LARGE_CHECK_DISABLED_ICON;
                 checkInverseIcon = LARGE_CHECK_INVERSE_ICON;
             }
+            int gv = (model.isRollover() ? ColorHelper.getGrayValue(AbstractLookAndFeel.getTheme().getRolloverColorDark()) : ColorHelper.getGrayValue(AbstractLookAndFeel.getTheme().getControlColorDark()));
             int xi = x + ((w - checkIcon.getIconWidth()) / 2);
             int yi = y + ((h - checkIcon.getIconHeight()) / 2);
             if (model.isPressed() && model.isArmed()) {
-                checkPressedIcon.paintIcon(c, g, xi + 1, yi + 1);
+                Color bc = gv > 128 ? AbstractLookAndFeel.getTheme().getSelectionBackgroundColor() : AbstractLookAndFeel.getTheme().getSelectionForegroundColor();
+                Color fc = gv > 128 ? ColorHelper.darker(bc, 40) : ColorHelper.brighter(bc, 20);
+                g.setColor(fc);
+                g.drawRect(x + 4, y + 4, w - 9, h - 9);
+                g.setColor(bc);
+                g.fillRect(x + 5, y + 5, w - 10, h - 10);
             } else if (model.isSelected()) {
                 if (!model.isEnabled()) {
                     checkDisabledIcon.paintIcon(c, g, xi + 1, yi + 1);
                 } else {
-                    int gv;
-                    if (model.isRollover()) {
-                        gv = ColorHelper.getGrayValue(AbstractLookAndFeel.getTheme().getRolloverColorDark());
-                    } else {
-                        gv = ColorHelper.getGrayValue(AbstractLookAndFeel.getTheme().getControlColorDark());
-                    }
                     if (gv > 128) {
                         checkInverseIcon.paintIcon(c, g, xi + 1, yi + 1);
                     } else {

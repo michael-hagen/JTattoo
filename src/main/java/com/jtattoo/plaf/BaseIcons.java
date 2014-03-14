@@ -638,13 +638,10 @@ public class BaseIcons {
 
         private static int GAP = 2;
         private static final Icon SMALL_CHECK_ICON = new LazyImageIcon("icons/small/check_symbol_10x10.png");
-        private static final Icon SMALL_CHECK_PRESSED_ICON = new LazyImageIcon("icons/small/check_symbol_pressed_10x10.png");
         private static final Icon SMALL_CHECK_DISABLED_ICON = new LazyImageIcon("icons/small/check_symbol_disabled_10x10.png");
         private static final Icon MEDIUM_CHECK_ICON = new LazyImageIcon("icons/medium/check_symbol_12x12.png");
-        private static final Icon MEDIUM_CHECK_PRESSED_ICON = new LazyImageIcon("icons/medium/check_symbol_pressed_12x12.png");
         private static final Icon MEDIUM_CHECK_DISABLED_ICON = new LazyImageIcon("icons/medium/check_symbol_disabled_12x12.png");
         private static final Icon LARGE_CHECK_ICON = new LazyImageIcon("icons/large/check_symbol_14x14.png");
-        private static final Icon LARGE_CHECK_PRESSED_ICON = new LazyImageIcon("icons/large/check_symbol_pressed_14x14.png");
         private static final Icon LARGE_CHECK_DISABLED_ICON = new LazyImageIcon("icons/large/check_symbol_disabled_14x14.png");
 
         public void paintIcon(Component c, Graphics g, int x, int y) {
@@ -666,7 +663,7 @@ public class BaseIcons {
                 g.drawRect(x, y, w, h);
             } else {
                 if (button.isEnabled()) {
-                    if ((button.isRolloverEnabled() && model.isRollover()) || (model.isPressed() && model.isArmed())) {
+                    if ((button.isRolloverEnabled() && model.isRollover())) {
                         JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getRolloverColors(), x, y, w, h);
                     } else {
                         if (AbstractLookAndFeel.getTheme().doShowFocusFrame() && button.hasFocus()) {
@@ -699,25 +696,26 @@ public class BaseIcons {
             }
             
             Icon checkIcon;
-            Icon checkPressedIcon;
             Icon checkDisabledIcon;
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
                 checkIcon = SMALL_CHECK_ICON;
-                checkPressedIcon = SMALL_CHECK_PRESSED_ICON;
                 checkDisabledIcon = SMALL_CHECK_DISABLED_ICON;
             } else if (AbstractLookAndFeel.getTheme().isMediumFontSize()) {
                 checkIcon = MEDIUM_CHECK_ICON;
-                checkPressedIcon = MEDIUM_CHECK_PRESSED_ICON;
                 checkDisabledIcon = MEDIUM_CHECK_DISABLED_ICON;
             } else {
                 checkIcon = LARGE_CHECK_ICON;
-                checkPressedIcon = LARGE_CHECK_PRESSED_ICON;
                 checkDisabledIcon = LARGE_CHECK_DISABLED_ICON;
             }
             int xi = x + ((w - checkIcon.getIconWidth()) / 2) + 1;
             int yi = y + ((h - checkIcon.getIconHeight()) / 2) + 1;
             if (model.isPressed() && model.isArmed()) {
-                checkPressedIcon.paintIcon(c, g, xi, yi);
+                Color bc = AbstractLookAndFeel.getTheme().getSelectionBackgroundColor();
+                Color fc = ColorHelper.darker(bc, 40);
+                g.setColor(fc);
+                g.drawRect(x + 3, y + 3, w - 6, h - 6);
+                g.setColor(bc);
+                g.fillRect(x + 4, y + 4, w - 7, h - 7);
             } else if (model.isSelected()) {
                 if (button.isEnabled()) {
                     checkIcon.paintIcon(c, g, xi, yi);
