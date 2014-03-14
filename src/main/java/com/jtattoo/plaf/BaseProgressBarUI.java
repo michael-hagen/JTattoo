@@ -82,35 +82,29 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
             return;
         }
 
-        Graphics2D g2 = (Graphics2D) g;
+        Graphics2D g2D = (Graphics2D) g;
         String progressString = progressBar.getString();
-        g2.setFont(progressBar.getFont());
-        Point renderLocation = getStringPlacement(g2, progressString, x, y, width, height);
-        Rectangle oldClip = g2.getClipBounds();
+        g2D.setFont(progressBar.getFont());
+        Point renderLocation = getStringPlacement(g2D, progressString, x, y, width, height);
+        Rectangle savedClip = g2D.getClipBounds();
         
         if (progressBar.getOrientation() == JProgressBar.HORIZONTAL) {
-            FontMetrics fm = Toolkit.getDefaultToolkit().getFontMetrics(progressBar.getFont());
-            int stringWidth = SwingUtilities.computeStringWidth(fm, progressString);
-            if (amountFull < renderLocation.x + stringWidth) {
-                g2.setColor(getSelectionBackground());
-                JTattooUtilities.drawString(progressBar, g2, progressString, renderLocation.x, renderLocation.y);
-            }
-            if (amountFull > renderLocation.x) {
-                g2.setColor(getSelectionForeground());
-                g2.clipRect(fillStart, y, amountFull, height);
-                JTattooUtilities.drawString(progressBar, g2, progressString, renderLocation.x, renderLocation.y);
-            }
+            g2D.setColor(getSelectionBackground());
+            JTattooUtilities.drawString(progressBar, g2D, progressString, renderLocation.x, renderLocation.y);
+            g2D.setColor(getSelectionForeground());
+            g2D.clipRect(fillStart, y, amountFull, height);
+            JTattooUtilities.drawString(progressBar, g2D, progressString, renderLocation.x, renderLocation.y);
         } else { // VERTICAL
-            g2.setColor(getSelectionBackground());
+            g2D.setColor(getSelectionBackground());
             AffineTransform rotate = AffineTransform.getRotateInstance(Math.PI / 2);
-            g2.setFont(progressBar.getFont().deriveFont(rotate));
-            renderLocation = getStringPlacement(g2, progressString, x, y, width, height);
-            JTattooUtilities.drawString(progressBar, g2, progressString, renderLocation.x, renderLocation.y);
-            g2.setColor(getSelectionForeground());
-            g2.clipRect(x, fillStart, width, amountFull);
-            JTattooUtilities.drawString(progressBar, g2, progressString, renderLocation.x, renderLocation.y);
+            g2D.setFont(progressBar.getFont().deriveFont(rotate));
+            renderLocation = getStringPlacement(g2D, progressString, x, y, width, height);
+            JTattooUtilities.drawString(progressBar, g2D, progressString, renderLocation.x, renderLocation.y);
+            g2D.setColor(getSelectionForeground());
+            g2D.clipRect(x, fillStart, width, amountFull);
+            JTattooUtilities.drawString(progressBar, g2D, progressString, renderLocation.x, renderLocation.y);
         }
-        g2.setClip(oldClip);
+        g2D.setClip(savedClip);
     }
 
     protected void paintString(Graphics g, int x, int y, int width, int height, int amountFull, Insets b) {
@@ -223,11 +217,11 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
         Color cLo = ColorHelper.darker(colors[colors.length - 1], 10);
         if (progressBar.getOrientation() == JProgressBar.HORIZONTAL) {
             if (JTattooUtilities.isLeftToRight(progressBar)) {
-                JTattooUtilities.draw3DBorder(g, cHi, cLo, 2, 2, amountFull - 2, h - 2);
-                JTattooUtilities.fillHorGradient(g, colors, 3, 3, amountFull - 4, h - 4);
+                JTattooUtilities.draw3DBorder(g, cHi, cLo, 1 + b.left, 2, amountFull - 2, h - 2);
+                JTattooUtilities.fillHorGradient(g, colors, 2 + b.left, 3, amountFull - 4, h - 4);
             } else {
-                JTattooUtilities.draw3DBorder(g, cHi, cLo, w - amountFull + 2, 2, w - 2, h - 2);
-                JTattooUtilities.fillHorGradient(g, colors, w - amountFull + 3, 3, w - 4, h - 4);
+                JTattooUtilities.draw3DBorder(g, cHi, cLo, progressBar.getWidth() - amountFull - b.right + 2, 2, amountFull - 2, h - 2);
+                JTattooUtilities.fillHorGradient(g, colors, progressBar.getWidth() - amountFull - b.right + 3, 3, amountFull - 4, h - 4);
             }
         } else { // VERTICAL
             JTattooUtilities.draw3DBorder(g, cHi, cLo, 2, h - amountFull + 2, w - 2, amountFull - 2);
