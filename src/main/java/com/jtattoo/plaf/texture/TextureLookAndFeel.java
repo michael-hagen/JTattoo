@@ -87,7 +87,7 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
         rockProps.setProperty("disabledForegroundColor", "96 96 96");
         rockProps.setProperty("disabledBackgroundColor", "240 240 240");
 
-        rockProps.setProperty("rolloverColor", "160 160 160");
+        rockProps.setProperty("rolloverColor", "190 190 190");
         rockProps.setProperty("rolloverColorLight", "230 230 230");
         rockProps.setProperty("rolloverColorDark", "210 210 210");
 
