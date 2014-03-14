@@ -23,6 +23,10 @@
 package com.jtattoo.plaf;
 
 import java.awt.Container;
+import java.awt.Window;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import javax.swing.*;
@@ -34,7 +38,8 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 public class BaseInternalFrameUI extends BasicInternalFrameUI {
 
-    private static final PropertyChangeListener MY_PROPERTY_CHANGE_LISTENER = new MyPropertyChangeHandler();
+    private static final PropertyChangeListener MY_PROPERTY_CHANGE_HANDLER = new MyPropertyChangeHandler();
+    private static final WindowAdapter MY_WINDOW_HANDLER = new MyWindowHandler();
 
     private static final Border HANDY_EMPTY_BORDER = new EmptyBorder(0, 0, 0, 0);
     
@@ -79,15 +84,14 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
             frame.setFrameIcon(UIManager.getIcon("InternalFrame.icon"));
         }
     }
-
     
     protected void installListeners() {
         super.installListeners();
-        frame.addPropertyChangeListener(MY_PROPERTY_CHANGE_LISTENER);
+        frame.addPropertyChangeListener(MY_PROPERTY_CHANGE_HANDLER);
     }
 
     protected void uninstallListeners() {
-        frame.removePropertyChangeListener(MY_PROPERTY_CHANGE_LISTENER);
+        frame.removePropertyChangeListener(MY_PROPERTY_CHANGE_HANDLER);
         super.uninstallListeners();
     }
 
@@ -155,7 +159,45 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
                 }
             } else if (name.equals(JInternalFrame.CONTENT_PANE_PROPERTY)) {
                 ui.stripContentBorder();
+            } else if (name.equals("ancestor") && !AbstractLookAndFeel.isWindowDecorationOn()) {
+                if (e.getNewValue() instanceof JDesktopPane) {
+                    JDesktopPane jp = (JDesktopPane)e.getNewValue();
+                    Window window = SwingUtilities.getWindowAncestor(jp);
+                    if (window != null) {
+                        WindowListener wl[] = window.getWindowListeners();
+                        boolean doAdd = true;
+                        for (int i = 0; i < wl.length; i++) {
+                            if (wl[i].equals(MY_WINDOW_HANDLER)) {
+                                doAdd = false;
+                                break;
+                            }
+                        }
+                        if (doAdd) {
+                            window.addWindowListener(MY_WINDOW_HANDLER);
+                        }
+                    }
+                } else if (e.getOldValue() instanceof JDesktopPane) {
+                    JDesktopPane jp = (JDesktopPane)e.getOldValue();
+                    Window window = SwingUtilities.getWindowAncestor(jp);
+                    if (window != null) {
+                        window.removeWindowListener(MY_WINDOW_HANDLER);
+                    }
+                }
             }
         }
     } // end class MyPropertyChangeHandler
+    
+//-----------------------------------------------------------------------------
+    private static class MyWindowHandler extends WindowAdapter {
+
+        public void windowActivated(WindowEvent e) {
+            e.getWindow().invalidate();
+            e.getWindow().repaint();
+        }
+        
+        public void windowDeactivated(WindowEvent e) {
+            e.getWindow().invalidate();
+            e.getWindow().repaint();
+        }
+    } // end class MyWindowHandler
 }
