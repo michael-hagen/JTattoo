@@ -141,7 +141,6 @@ public class JTattooUtilities {
         if (c == null) {
             return false;
         }
-
         boolean active = true;
         if (c instanceof JInternalFrame) {
             active = ((JInternalFrame) c).isSelected();
@@ -162,13 +161,12 @@ public class JTattooUtilities {
         return active;
     }
 
-    public static boolean isFrameActive(JComponent c) {
+    public static boolean isFrameActive(Component c) {
         if (c == null) {
             return false;
         }
-        
-        if (c.getTopLevelAncestor() instanceof Window) {
-            Window w = (Window)c.getTopLevelAncestor();
+        Window w = SwingUtilities.getWindowAncestor(c);
+        if (w != null) {
             if (w.getClass().getName().indexOf("Popup") >= 0) {
                 return true;
             } else {
