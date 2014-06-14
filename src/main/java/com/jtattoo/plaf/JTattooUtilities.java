@@ -49,7 +49,7 @@ public class JTattooUtilities {
     public static double getJavaVersion() {
         if (javaVersion == null) {
             try {
-                String ver = System.getProperties().getProperty("java.version");
+                String ver = System.getProperty("java.version");
                 String version = "";
                 boolean firstPoint = true;
                 for (int i = 0; i < ver.length(); i++) {
