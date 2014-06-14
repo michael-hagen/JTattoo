@@ -142,45 +142,4 @@ public class MintDefaultTheme extends AbstractTheme {
         INACTIVE_COLORS = ColorHelper.createColorArr(buttonColorLight, buttonColorDark, 20);
     }
 
-    public FontUIResource getControlTextFont() {
-        if (controlFont == null) {
-            controlFont = new FontUIResource("Dialog", Font.PLAIN, 12);
-        }
-        return controlFont;
-    }
-
-    public FontUIResource getSystemTextFont() {
-        if (systemFont == null) {
-            systemFont = new FontUIResource("Dialog", Font.PLAIN, 12);
-        }
-        return systemFont;
-    }
-
-    public FontUIResource getUserTextFont() {
-        if (userFont == null) {
-            userFont = new FontUIResource("Dialog", Font.PLAIN, 12);
-        }
-        return userFont;
-    }
-
-    public FontUIResource getMenuTextFont() {
-        if (menuFont == null) {
-            menuFont = new FontUIResource("Dialog", Font.PLAIN, 12);
-        }
-        return menuFont;
-    }
-
-    public FontUIResource getWindowTitleFont() {
-        if (windowTitleFont == null) {
-            windowTitleFont = new FontUIResource("Dialog", Font.BOLD, 12);
-        }
-        return windowTitleFont;
-    }
-
-    public FontUIResource getSubTextFont() {
-        if (smallFont == null) {
-            smallFont = new FontUIResource("Dialog", Font.PLAIN, 10);
-        }
-        return smallFont;
-    }
 }
