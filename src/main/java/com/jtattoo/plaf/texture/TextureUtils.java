@@ -75,23 +75,18 @@ public class TextureUtils {
             windowTexture = new LazyImageIcon("texture/patterns/rock/window_texture.jpg");
             backgroundTexture = new LazyImageIcon("texture/patterns/rock/background_texture.jpg");
             alterBackgroundTexture = new LazyImageIcon("texture/patterns/rock/alter_background_texture.jpg");
-            //selectedTexture = new LazyImageIcon("texture/patterns/rock/selected_texture.jpg");
             selectedTexture = new LazyImageIcon("texture/patterns/rock/window_texture.jpg");
             rolloverTexture = new LazyImageIcon("texture/patterns/rock/rollover_texture.jpg");
             pressedTexture = new LazyImageIcon("texture/patterns/rock/pressed_texture.jpg");
-            //disabledTexture = new LazyImageIcon("texture/patterns/rock/disabled_texture.jpg");
             disabledTexture = new LazyImageIcon("texture/patterns/rock/background_texture.jpg");
             menubarTexture = new LazyImageIcon("texture/patterns/rock/menubar_texture.jpg");
         } else if (textureSet.startsWith("Textile")) {
             windowTexture = new LazyImageIcon("texture/patterns/textile/window_texture.jpg");
             backgroundTexture = new LazyImageIcon("texture/patterns/textile/background_texture.jpg");
             alterBackgroundTexture = new LazyImageIcon("texture/patterns/textile/alter_background_texture.jpg");
-            //selectedTexture = new LazyImageIcon("texture/patterns/textile/selected_texture.jpg");
             selectedTexture = new LazyImageIcon("texture/patterns/textile/window_texture.jpg");
             rolloverTexture = new LazyImageIcon("texture/patterns/textile/rollover_texture.jpg");
-            //pressedTexture = new LazyImageIcon("texture/patterns/textile/pressed_texture.jpg");
             pressedTexture = new LazyImageIcon("texture/patterns/textile/rollover_texture.jpg");
-            //disabledTexture = new LazyImageIcon("texture/patterns/textile/disabled_texture.jpg");
             disabledTexture = new LazyImageIcon("texture/patterns/textile/background_texture.jpg");
             menubarTexture = new LazyImageIcon("texture/patterns/textile/menubar_texture.jpg");
         } else if (textureSet.startsWith("Snow")) {
@@ -101,19 +96,15 @@ public class TextureUtils {
             selectedTexture = new LazyImageIcon("texture/patterns/snow/selected_texture.jpg");
             rolloverTexture = new LazyImageIcon("texture/patterns/snow/rollover_texture.jpg");
             pressedTexture = new LazyImageIcon("texture/patterns/snow/pressed_texture.jpg");
-            //disabledTexture = new LazyImageIcon("texture/patterns/snow/disabled_texture.jpg");
             disabledTexture = new LazyImageIcon("texture/patterns/snow/background_texture.jpg");
-            //menubarTexture = new LazyImageIcon("texture/patterns/snow/menubar_texture.jpg");
             menubarTexture = new LazyImageIcon("texture/patterns/snow/window_texture.jpg");
         } else {
             windowTexture = new LazyImageIcon("texture/patterns/leather/window_texture.jpg");
             backgroundTexture = new LazyImageIcon("texture/patterns/leather/background_texture.jpg");
             alterBackgroundTexture = new LazyImageIcon("texture/patterns/leather/alter_background_texture.jpg");
-            //selectedTexture = new LazyImageIcon("texture/patterns/leather/selected_texture.jpg");
             selectedTexture = new LazyImageIcon("texture/patterns/leather/window_texture.jpg");
             rolloverTexture = new LazyImageIcon("texture/patterns/leather/rollover_texture.jpg");
             pressedTexture = new LazyImageIcon("texture/patterns/leather/pressed_texture.jpg");
-            //disabledTexture = new LazyImageIcon("texture/patterns/leather/disabled_texture.jpg");
             disabledTexture = new LazyImageIcon("texture/patterns/leather/background_texture.jpg");
             menubarTexture = new LazyImageIcon("texture/patterns/leather/menubar_texture.jpg");
         }
@@ -164,7 +155,7 @@ public class TextureUtils {
         return textureType;
     }
     
-    private static Icon getTexture(int textureType) {
+    public static Icon getTexture(int textureType) {
         Icon texture = null;
         switch (textureType) {
             case WINDOW_TEXTURE_TYPE: texture = windowTexture; break;
