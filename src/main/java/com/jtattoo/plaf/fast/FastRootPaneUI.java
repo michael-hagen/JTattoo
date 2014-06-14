@@ -24,7 +24,6 @@
 package com.jtattoo.plaf.fast;
 
 import com.jtattoo.plaf.BaseRootPaneUI;
-import com.jtattoo.plaf.BaseTitlePane;
 import javax.swing.JComponent;
 import javax.swing.JRootPane;
 import javax.swing.plaf.ComponentUI;
@@ -38,7 +37,7 @@ public class FastRootPaneUI extends BaseRootPaneUI {
         return new FastRootPaneUI();
     }
 
-    public BaseTitlePane createTitlePane(JRootPane root) {
+    public JComponent createTitlePane(JRootPane root) {
         return new FastTitlePane(root, this);
     }
 }
