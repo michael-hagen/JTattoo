@@ -24,7 +24,6 @@
 package com.jtattoo.plaf.smart;
 
 import com.jtattoo.plaf.BaseRootPaneUI;
-import com.jtattoo.plaf.BaseTitlePane;
 import javax.swing.JComponent;
 import javax.swing.JRootPane;
 import javax.swing.plaf.ComponentUI;
@@ -38,7 +37,8 @@ public class SmartRootPaneUI extends BaseRootPaneUI {
         return new SmartRootPaneUI();
     }
 
-    public BaseTitlePane createTitlePane(JRootPane root) {
+    public JComponent createTitlePane(JRootPane root) {
         return new SmartTitlePane(root, this);
     }
+    
 }
