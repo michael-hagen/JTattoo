@@ -50,7 +50,7 @@ import javax.swing.plaf.UIResource;
  *
  * @since 1.4
  */
-public class BaseTitlePane extends JComponent {
+public class BaseTitlePane extends JComponent implements TitlePane {
 
     public static final String PAINT_ACTIVE = "paintActive";
     public static final String ICONIFY = "Iconify";
@@ -104,12 +104,6 @@ public class BaseTitlePane extends JComponent {
         installDefaults();
         setLayout(createLayout());
     }
-
-//    protected void uninstall() {
-//        uninstallListeners();
-//        window = null;
-//        removeAll();
-//    }
 
     protected void installListeners() {
         if (window != null) {
@@ -294,13 +288,7 @@ public class BaseTitlePane extends JComponent {
         return new TitlePaneLayout();
     }
 
-    protected void close() {
-        if (window != null) {
-            window.dispatchEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSING));
-        }
-    }
-
-    protected void iconify() {
+    public void iconify() {
         Frame frame = getFrame();
         if (frame != null) {
             if (JTattooUtilities.isMac() && JTattooUtilities.getJavaVersion() >= 1.7) {
@@ -312,21 +300,7 @@ public class BaseTitlePane extends JComponent {
         }
     }
 
-    protected void validateMaximizedBounds() {
-        Frame frame = getFrame();
-        if (frame != null && !wasMaximizeError) {
-            GraphicsConfiguration gc = frame.getGraphicsConfiguration();
-            Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(gc);
-            Rectangle maxBounds = gc.getBounds();
-            maxBounds.x = Math.max(0, screenInsets.left);
-            maxBounds.y = Math.max(0, screenInsets.top);
-            maxBounds.width -= (screenInsets.left + screenInsets.right);
-            maxBounds.height -= (screenInsets.top + screenInsets.bottom);
-            frame.setMaximizedBounds(maxBounds);
-        }
-    }
-    
-    protected void maximize() {
+    public void maximize() {
         Frame frame = getFrame();
         if (frame != null) {
             validateMaximizedBounds();
@@ -342,7 +316,7 @@ public class BaseTitlePane extends JComponent {
         }
     }
 
-    protected void restore() {
+    public void restore() {
         Frame frame = getFrame();
         if (frame != null) {
             wasMaximizeError = false;
@@ -361,6 +335,26 @@ public class BaseTitlePane extends JComponent {
         }
     }
 
+    public void close() {
+        if (window != null) {
+            window.dispatchEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSING));
+        }
+    }
+
+    protected void validateMaximizedBounds() {
+        Frame frame = getFrame();
+        if (frame != null && !wasMaximizeError) {
+            GraphicsConfiguration gc = frame.getGraphicsConfiguration();
+            Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(gc);
+            Rectangle maxBounds = gc.getBounds();
+            maxBounds.x = Math.max(0, screenInsets.left);
+            maxBounds.y = Math.max(0, screenInsets.top);
+            maxBounds.width -= (screenInsets.left + screenInsets.right);
+            maxBounds.height -= (screenInsets.top + screenInsets.bottom);
+            frame.setMaximizedBounds(maxBounds);
+        }
+    }
+    
     protected void createActions() {
         closeAction = new CloseAction();
         iconifyAction = new IconifyAction();
