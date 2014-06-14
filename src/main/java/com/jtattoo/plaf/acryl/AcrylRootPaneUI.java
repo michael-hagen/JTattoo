@@ -24,7 +24,6 @@
 package com.jtattoo.plaf.acryl;
 
 import com.jtattoo.plaf.BaseRootPaneUI;
-import com.jtattoo.plaf.BaseTitlePane;
 import javax.swing.JComponent;
 import javax.swing.JRootPane;
 import javax.swing.plaf.ComponentUI;
@@ -38,7 +37,7 @@ public class AcrylRootPaneUI extends BaseRootPaneUI {
         return new AcrylRootPaneUI();
     }
 
-    public BaseTitlePane createTitlePane(JRootPane root) {
+    public JComponent createTitlePane(JRootPane root) {
         return new AcrylTitlePane(root, this);
     }
 }
