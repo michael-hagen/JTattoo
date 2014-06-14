@@ -393,8 +393,11 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
      * @return the current window title pane, or null
      * @see #setTitlePane
      */
-    public JComponent getTitlePane() {
-        return titlePane;
+    public BaseTitlePane getTitlePane() {
+        if (titlePane instanceof BaseTitlePane) {
+            return (BaseTitlePane)titlePane;
+        }
+        return null;
     }
 
     public JRootPane getRootPane() {
