@@ -179,16 +179,20 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 
                 public void propertyChange(PropertyChangeEvent evt) {
                     if ("ancestor".equals(evt.getPropertyName())) {
-                        if (getRootPane().getParent() instanceof Window) {
+                        if (getRootPane() != null && getRootPane().getParent() instanceof Window) {
                             window = (Window) getRootPane().getParent();
                             windowListener = new WindowAdapter() {
                                 
                                 public void windowActivated(WindowEvent e) {
-                                    getRootPane().repaint();
+                                    if (getRootPane() != null) {
+                                        getRootPane().repaint();
+                                    }
                                 }
 
                                 public void windowDeactivated(WindowEvent e) {
-                                    getRootPane().repaint();
+                                    if (getRootPane() != null) {
+                                        getRootPane().repaint();
+                                    }
                                 }
                             };
                             window.addWindowListener(windowListener);
