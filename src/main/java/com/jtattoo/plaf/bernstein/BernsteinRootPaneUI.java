@@ -24,7 +24,6 @@
 package com.jtattoo.plaf.bernstein;
 
 import com.jtattoo.plaf.BaseRootPaneUI;
-import com.jtattoo.plaf.BaseTitlePane;
 import javax.swing.JComponent;
 import javax.swing.JRootPane;
 import javax.swing.plaf.ComponentUI;
@@ -38,7 +37,7 @@ public class BernsteinRootPaneUI extends BaseRootPaneUI {
         return new BernsteinRootPaneUI();
     }
 
-    public BaseTitlePane createTitlePane(JRootPane root) {
+    public JComponent createTitlePane(JRootPane root) {
         return new BernsteinTitlePane(root, this);
     }
 }
