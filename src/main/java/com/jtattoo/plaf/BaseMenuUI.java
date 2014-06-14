@@ -96,7 +96,7 @@ public class BaseMenuUI extends BasicMenuUI {
                 g.setColor(AbstractLookAndFeel.getMenuSelectionForegroundColor());
             }
         } else {
-            if (model.isArmed() || (c instanceof JMenu && model.isSelected())) {
+            if (model.isArmed() || model.isRollover() || (c instanceof JMenu && model.isSelected())) {
                 g.setColor(AbstractLookAndFeel.getMenuSelectionBackgroundColor());
                 g.fillRect(x, y, w, h);
                 g.setColor(AbstractLookAndFeel.getMenuSelectionForegroundColor());
@@ -107,19 +107,14 @@ public class BaseMenuUI extends BasicMenuUI {
                 g2D.setComposite(alpha);
                 g2D.setColor(backColor);
                 g2D.fillRect(x, y, w, h);
-                g2D.setColor(AbstractLookAndFeel.getMenuForegroundColor());
                 g2D.setComposite(savedComposite);
+                g2D.setColor(AbstractLookAndFeel.getMenuForegroundColor());
             } else {
                 g.setColor(backColor);
                 g.fillRect(x, y, w, h);
                 g.setColor(AbstractLookAndFeel.getMenuForegroundColor());
             }
         }
-//        if (menuItem.isSelected() && menuItem.isArmed()) {
-//            g.setColor(AbstractLookAndFeel.getMenuSelectionForegroundColor());
-//        } else {
-//            g.setColor(AbstractLookAndFeel.getMenuForegroundColor());
-//        }
     }
 
     protected void paintText(Graphics g, JMenuItem menuItem, Rectangle textRect, String text) {
@@ -134,7 +129,7 @@ public class BaseMenuUI extends BasicMenuUI {
             if (model.isRollover() || model.isArmed() || (menuItem instanceof JMenu && model.isSelected())) {
                 g.setColor(AbstractLookAndFeel.getMenuSelectionForegroundColor());
             }
-        } else if(menuItem.isSelected() && menuItem.isArmed()) {
+        } else if (model.isArmed() || model.isRollover()) {
             g.setColor(AbstractLookAndFeel.getMenuSelectionForegroundColor());
         } else {
             Color foreColor = menuItem.getForeground();

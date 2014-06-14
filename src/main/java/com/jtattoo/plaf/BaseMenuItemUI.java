@@ -69,7 +69,7 @@ public class BaseMenuItemUI extends BasicMenuItemUI {
         }
         
         ButtonModel model = mi.getModel();
-        if (model.isArmed() || (c instanceof JMenu && model.isSelected())) {
+        if (model.isArmed() || model.isRollover() || (c instanceof JMenu && model.isSelected())) {
             g.setColor(AbstractLookAndFeel.getMenuSelectionBackgroundColor());
             g.fillRect(x, y, w, h);
             g.setColor(AbstractLookAndFeel.getMenuSelectionForegroundColor());
@@ -80,8 +80,8 @@ public class BaseMenuItemUI extends BasicMenuItemUI {
             g2D.setComposite(alpha);
             g2D.setColor(backColor);
             g2D.fillRect(x, y, w, h);
-            g.setColor(AbstractLookAndFeel.getMenuForegroundColor());
             g2D.setComposite(savedComposite);
+            g.setColor(AbstractLookAndFeel.getMenuForegroundColor());
         } else {
             g.setColor(backColor);
             g.fillRect(x, y, w, h);
@@ -90,8 +90,9 @@ public class BaseMenuItemUI extends BasicMenuItemUI {
     }
 
     protected void paintText(Graphics g, JMenuItem menuItem, Rectangle textRect, String text) {
+        ButtonModel model = menuItem.getModel();
         Color foreColor = menuItem.getForeground();
-        if (menuItem.isSelected() && menuItem.isArmed()) {
+        if (model.isArmed() || model.isRollover()) {
             foreColor = AbstractLookAndFeel.getMenuSelectionForegroundColor();
         } else if (foreColor == null || foreColor instanceof UIResource) {
             foreColor = AbstractLookAndFeel.getMenuForegroundColor();
@@ -102,11 +103,7 @@ public class BaseMenuItemUI extends BasicMenuItemUI {
             savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING);
             g2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, AbstractLookAndFeel.getTheme().getTextAntiAliasingHint());
         }
-        if (menuItem.isSelected() && menuItem.isArmed()) {
-            g2D.setColor(foreColor);
-        } else {
-            g2D.setColor(foreColor);
-        }
+        g2D.setColor(foreColor);
         super.paintText(g, menuItem, textRect, text);
         if (AbstractLookAndFeel.getTheme().isTextAntiAliasingOn()) {
             g2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, savedRenderingHint);
