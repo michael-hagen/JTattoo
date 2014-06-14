@@ -473,6 +473,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         SwingUtilities.replaceUIActionMap(tabPane, null);
         SwingUtilities.replaceUIInputMap(tabPane, JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT, null);
         SwingUtilities.replaceUIInputMap(tabPane, JComponent.WHEN_FOCUSED, null);
+        SwingUtilities.replaceUIInputMap(tabPane, JComponent.WHEN_IN_FOCUSED_WINDOW, null);
     }
 
     /**
@@ -517,9 +518,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
      */
     private void initMnemonics() {
         mnemonicToIndexMap = new HashMap();
-        mnemonicInputMap = new InputMapUIResource();
-        mnemonicInputMap.setParent(SwingUtilities.getUIInputMap(tabPane, JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT));
-        SwingUtilities.replaceUIInputMap(tabPane, JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT, mnemonicInputMap);
+//        mnemonicInputMap = new InputMapUIResource();
+//        mnemonicInputMap.setParent(SwingUtilities.getUIInputMap(tabPane, JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT));
+//        SwingUtilities.replaceUIInputMap(tabPane, JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT, mnemonicInputMap);
+        mnemonicInputMap = new ComponentInputMapUIResource(tabPane);
+        mnemonicInputMap.setParent(SwingUtilities.getUIInputMap(tabPane, JComponent.WHEN_IN_FOCUSED_WINDOW));
+        SwingUtilities.replaceUIInputMap(tabPane, JComponent.WHEN_IN_FOCUSED_WINDOW, mnemonicInputMap);
     }
 
     protected boolean isContentOpaque() {
@@ -3294,7 +3298,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
                 }
             }
             setLeadingTabIndex(tabPlacement, leadingTabIndex + 1);
-            tabPane.doLayout();
+            if (tabPane != null) {
+                tabPane.doLayout();
+            }
         }
 
         public void scrollBackward(int tabPlacement) {
@@ -3302,7 +3308,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
                 return; // no room left to scroll
             }
             setLeadingTabIndex(tabPlacement, leadingTabIndex - 1);
-            tabPane.doLayout();
+            if (tabPane != null) {
+                tabPane.doLayout();
+            }
         }
 
         public void scrollTabToVisible(int tabPlacement, int index) {
@@ -3684,7 +3692,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
             SwingUtilities.invokeLater(new Runnable() {
 
                 public void run() {
-                    tabPane.doLayout();
+                    if (tabPane != null) {
+                        tabPane.doLayout();
+                    }
                 }
             });
         }
