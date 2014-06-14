@@ -15,7 +15,7 @@ JTattoo is a look and feel library for swing based applications. JTattoo consist
         <dependency>
             <groupId>com.jtattoo</groupId>
             <artifactId>JTattoo</artifactId>
-            <version>1.6.10</version>
+            <version>1.6.11</version>
         </dependency>
 ```
 
