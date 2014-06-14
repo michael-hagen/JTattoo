@@ -23,8 +23,15 @@
 package com.jtattoo.plaf;
 
 import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.ContainerEvent;
+import java.awt.event.ContainerListener;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -56,7 +63,9 @@ import javax.swing.plaf.basic.BasicRootPaneUI;
  * @since 1.4
  */
 public class BaseRootPaneUI extends BasicRootPaneUI {
+
     // Konstanten aus javax.swing.JRootPane damit Attribute aus Java 1.4 sich mit Java 1.3 uebersetzen lassen
+
     public static final int NONE = 0;
     public static final int FRAME = 1;
     public static final int PLAIN_DIALOG = 2;
@@ -101,12 +110,22 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
     /**
      * <code>JComponent</code> providing window decorations. This will be null if not providing window decorations.
      */
-    private BaseTitlePane titlePane;
+    private JComponent titlePane;
     /**
      * <code>MouseInputListener</code> that is added to the parent <code>Window</code> the <code>JRootPane</code> is
      * contained in.
      */
     private MouseInputListener mouseInputListener;
+    /**
+     * <code>WindowListener</code> that is added to the parent <code>Window</code> the <code>JRootPane</code> is
+     * contained in.
+     */
+    private WindowListener windowListener;
+    /**
+     * <code>WindowListener</code> that is added to the parent <code>Window</code> the <code>JRootPane</code> is
+     * contained in.
+     */
+    private PropertyChangeListener propertyChangeListener;
     /**
      * The <code>LayoutManager</code> that is set on the <code>JRootPane</code>.
      */
@@ -150,6 +169,46 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
         layoutManager = null;
         mouseInputListener = null;
         root = null;
+    }
+
+    protected void installListeners(JRootPane root) {
+        super.installListeners(root);
+        
+        if (DecorationHelper.getWindowDecorationStyle(root) == NONE) {
+            propertyChangeListener = new PropertyChangeListener() {
+
+                public void propertyChange(PropertyChangeEvent evt) {
+                    if ("ancestor".equals(evt.getPropertyName())) {
+                        if (getRootPane().getParent() instanceof Window) {
+                            window = (Window) getRootPane().getParent();
+                            windowListener = new WindowAdapter() {
+                                
+                                public void windowActivated(WindowEvent e) {
+                                    getRootPane().repaint();
+                                }
+
+                                public void windowDeactivated(WindowEvent e) {
+                                    getRootPane().repaint();
+                                }
+                            };
+                            window.addWindowListener(windowListener);
+                        }
+                    }
+                }
+            };
+            root.addPropertyChangeListener(propertyChangeListener);
+        }
+    }
+
+    protected void uninstallListeners(JRootPane root) {
+        super.uninstallListeners(root);
+        if (DecorationHelper.getWindowDecorationStyle(root) == NONE) {
+            if (root.getParent() instanceof Window && windowListener != null) {
+                window = (Window) root.getParent();
+                window.removeWindowListener(windowListener);
+            }
+            root.removePropertyChangeListener(propertyChangeListener);
+        }
     }
 
     public void installBorder(JRootPane root) {
@@ -276,7 +335,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
      * @param root
      * @return
      */
-    public BaseTitlePane createTitlePane(JRootPane root) {
+    public JComponent createTitlePane(JRootPane root) {
         return new BaseTitlePane(root, this);
     }
 
@@ -306,11 +365,11 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
      * this value; the default is null, implying a native operating system window title pane.
      *
      * @param root the <code>JRootPane</code> where to set the title pane
-     * @param titlePane the <code>BaseTitlePane</code> to use for the window title pane.
+     * @param titlePane the <code>JComponent</code> to use for the window title pane.
      */
-    public void setTitlePane(JRootPane root, BaseTitlePane titlePane) {
+    public void setTitlePane(JRootPane root, JComponent titlePane) {
         JLayeredPane layeredPane = root.getLayeredPane();
-        BaseTitlePane oldTitlePane = getTitlePane();
+        JComponent oldTitlePane = getTitlePane();
 
         if (oldTitlePane != null) {
             oldTitlePane.setVisible(false);
@@ -330,7 +389,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
      * @return the current window title pane, or null
      * @see #setTitlePane
      */
-    public BaseTitlePane getTitlePane() {
+    public JComponent getTitlePane() {
         return titlePane;
     }
 
@@ -418,7 +477,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
             }
 
             if (DecorationHelper.getWindowDecorationStyle(root) != NONE && (root.getUI() instanceof BaseRootPaneUI)) {
-                BaseTitlePane titlePane = ((BaseRootPaneUI) root.getUI()).getTitlePane();
+                JComponent titlePane = ((BaseRootPaneUI) root.getUI()).getTitlePane();
                 if (titlePane != null) {
                     tpd = titlePane.getPreferredSize();
                     if (tpd != null) {
@@ -468,7 +527,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
             }
             if (root.getGlassPane() != null) {
                 if (DecorationHelper.getWindowDecorationStyle(root) != NONE && (root.getUI() instanceof BaseRootPaneUI)) {
-                    BaseTitlePane titlePane = ((BaseRootPaneUI) root.getUI()).getTitlePane();
+                    JComponent titlePane = ((BaseRootPaneUI) root.getUI()).getTitlePane();
                     int titleHeight = 0;
                     if (titlePane != null) {
                         titleHeight = titlePane.getSize().height;
@@ -481,7 +540,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
             // Note: This is laying out the children in the layeredPane,
             // technically, these are not our children.
             if (DecorationHelper.getWindowDecorationStyle(root) != NONE && (root.getUI() instanceof BaseRootPaneUI)) {
-                BaseTitlePane titlePane = ((BaseRootPaneUI) root.getUI()).getTitlePane();
+                JComponent titlePane = ((BaseRootPaneUI) root.getUI()).getTitlePane();
                 if (titlePane != null) {
                     Dimension tpd = titlePane.getPreferredSize();
                     if (tpd != null) {
@@ -848,14 +907,12 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
                 Frame frame = (Frame) window;
                 Point convertedPoint = SwingUtilities.convertPoint(window, ev.getPoint(), getTitlePane());
                 int state = DecorationHelper.getExtendedState(frame);
-                if (getTitlePane() != null && getTitlePane().contains(convertedPoint)) {
+                if (titlePane != null && titlePane instanceof TitlePane && titlePane.contains(convertedPoint) && frame.isResizable()) {
                     if ((ev.getClickCount() % 2) == 0 && ((ev.getModifiers() & InputEvent.BUTTON1_MASK) != 0)) {
-                        if (frame.isResizable()) {
-                            if ((state & BaseRootPaneUI.MAXIMIZED_BOTH) != 0) {
-                                titlePane.restore();
-                            } else {
-                                titlePane.maximize();
-                            }
+                        if ((state & BaseRootPaneUI.MAXIMIZED_BOTH) != 0) {
+                            ((TitlePane) titlePane).restore();
+                        } else {
+                            ((TitlePane) titlePane).maximize();
                         }
                     }
                 }
