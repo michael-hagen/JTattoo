@@ -24,7 +24,6 @@
 package com.jtattoo.plaf.aero;
 
 import com.jtattoo.plaf.BaseRootPaneUI;
-import com.jtattoo.plaf.BaseTitlePane;
 import javax.swing.JComponent;
 import javax.swing.JRootPane;
 import javax.swing.plaf.ComponentUI;
@@ -38,7 +37,7 @@ public class AeroRootPaneUI extends BaseRootPaneUI
        return new AeroRootPaneUI(); 
    }
    
-   public BaseTitlePane createTitlePane(JRootPane root) { 
+   public JComponent createTitlePane(JRootPane root) { 
        return new AeroTitlePane(root, this); 
    }   
 }
