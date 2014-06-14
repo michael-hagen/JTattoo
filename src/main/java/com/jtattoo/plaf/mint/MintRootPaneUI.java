@@ -24,7 +24,6 @@
 package com.jtattoo.plaf.mint;
 
 import com.jtattoo.plaf.BaseRootPaneUI;
-import com.jtattoo.plaf.BaseTitlePane;
 import javax.swing.JComponent;
 import javax.swing.JRootPane;
 import javax.swing.plaf.ComponentUI;
@@ -38,7 +37,8 @@ public class MintRootPaneUI extends BaseRootPaneUI {
         return new MintRootPaneUI();
     }
 
-    public BaseTitlePane createTitlePane(JRootPane root) {
+    public JComponent createTitlePane(JRootPane root) {
         return new MintTitlePane(root, this);
     }
+    
 }
