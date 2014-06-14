@@ -59,9 +59,9 @@ public class GraphiteTitlePane extends BaseTitlePane {
 
     public void paintText(Graphics g, int x, int y, String title) {
         Graphics2D g2D = (Graphics2D)g;
-        Color fc = AbstractLookAndFeel.getWindowTitleForegroundColor();
+        Color fc = isActive() ? AbstractLookAndFeel.getWindowTitleForegroundColor() : AbstractLookAndFeel.getWindowInactiveTitleForegroundColor();
         if (fc.equals(Color.white)) {
-            Color bc = AbstractLookAndFeel.getWindowTitleColorDark();
+            Color bc = isActive() ? AbstractLookAndFeel.getWindowTitleColorDark() : AbstractLookAndFeel.getWindowInactiveTitleColorDark();
             g2D.setColor(bc);
             JTattooUtilities.drawString(rootPane, g, title, x-1, y-1);
             g2D.setColor(ColorHelper.darker(bc, 30));
