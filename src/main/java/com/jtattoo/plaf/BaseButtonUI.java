@@ -54,14 +54,7 @@ public class BaseButtonUI extends BasicButtonUI {
 
     public void installDefaults(AbstractButton b) {
         super.installDefaults(b);
-        b.setOpaque(false);
         b.setRolloverEnabled(true);
-    }
-
-    public void uninstallDefaults(AbstractButton b) {
-        super.uninstallDefaults(b);
-        b.setOpaque(true);
-        b.setRolloverEnabled(false);
     }
 
     protected BasicButtonListener createButtonListener(AbstractButton b) {
