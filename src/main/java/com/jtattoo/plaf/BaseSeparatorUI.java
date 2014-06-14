@@ -23,9 +23,11 @@
 
 package com.jtattoo.plaf;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.JComponent;
+import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicSeparatorUI;
@@ -46,19 +48,20 @@ public class BaseSeparatorUI extends BasicSeparatorUI {
         if (c instanceof JSeparator) {
             horizontal = (((JSeparator) c).getOrientation() == JSeparator.HORIZONTAL);
         }
+        Color background = (c instanceof JPopupMenu.Separator) ? AbstractLookAndFeel.getMenuBackgroundColor() : AbstractLookAndFeel.getBackgroundColor();
         if (horizontal) {
             int w = c.getWidth();
-            g.setColor(AbstractLookAndFeel.getBackgroundColor());
+            g.setColor(background);
             g.drawLine(0, 0, w, 0);
-            g.setColor(ColorHelper.darker(AbstractLookAndFeel.getBackgroundColor(), 30));
+            g.setColor(ColorHelper.darker(background, 30));
             g.drawLine(0, 1, w, 1);
-            g.setColor(ColorHelper.brighter(AbstractLookAndFeel.getBackgroundColor(), 50));
+            g.setColor(ColorHelper.brighter(background, 50));
             g.drawLine(0, 2, w, 2);
         } else {
             int h = c.getHeight();
-            g.setColor(ColorHelper.darker(AbstractLookAndFeel.getBackgroundColor(), 30));
+            g.setColor(ColorHelper.darker(background, 30));
             g.drawLine(0, 0, 0, h);
-            g.setColor(ColorHelper.brighter(AbstractLookAndFeel.getBackgroundColor(), 50));
+            g.setColor(ColorHelper.brighter(background, 50));
             g.drawLine(1, 0, 1, h);
         }
     }
