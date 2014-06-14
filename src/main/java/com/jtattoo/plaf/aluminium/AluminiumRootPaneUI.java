@@ -24,7 +24,6 @@
 package com.jtattoo.plaf.aluminium;
 
 import com.jtattoo.plaf.BaseRootPaneUI;
-import com.jtattoo.plaf.BaseTitlePane;
 import javax.swing.JComponent;
 import javax.swing.JRootPane;
 import javax.swing.plaf.ComponentUI;
@@ -38,7 +37,7 @@ public class AluminiumRootPaneUI extends BaseRootPaneUI {
         return new AluminiumRootPaneUI();
     }
 
-    public BaseTitlePane createTitlePane(JRootPane root) {
+    public JComponent createTitlePane(JRootPane root) {
         return new AluminiumTitlePane(root, this);
     }
 }
