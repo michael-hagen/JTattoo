@@ -174,7 +174,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
         super.uninstallListeners();
     }
 
-    protected boolean drawAllwaysActive() {
+    protected boolean drawAlwaysActive() {
         return false;
     }
 
@@ -340,7 +340,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
         if (header.getBackground() instanceof ColorUIResource) {
             if ((col == rolloverCol) && (component != null) && component.isEnabled()) {
                 JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getRolloverColors(), x, y, w, h);
-            } else if (drawAllwaysActive() || JTattooUtilities.isFrameActive(header)) {
+            } else if (drawAlwaysActive() || JTattooUtilities.isFrameActive(header)) {
                 JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getColHeaderColors(), x, y, w, h);
             } else {
                 JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getInActiveColors(), x, y, w, h);
@@ -418,7 +418,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
             setHorizontalTextPosition(SwingConstants.LEADING);
             setBorder(UIManager.getBorder("TableHeader.cellBorder"));
             if ((JTattooUtilities.getJavaVersion() >= 1.6) && (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel)) {
-                RowSorter rowSorter = table == null ? null : table.getRowSorter();
+                RowSorter rowSorter = table.getRowSorter();
                 List keyList = rowSorter == null ? null : rowSorter.getSortKeys();
                 if ((keyList != null) && (keyList.size() > 0)) {
                     RowSorter.SortKey sortKey = (RowSorter.SortKey) keyList.get(0);
@@ -456,7 +456,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
                     g.drawLine(0, 1, w - 1, 1);
                     g.drawLine(0, 2, w - 1, 2);
                 }
-            } else if (drawAllwaysActive() || JTattooUtilities.isFrameActive(header)) {
+            } else if (drawAlwaysActive() || JTattooUtilities.isFrameActive(header)) {
                 if (header.getBackground() instanceof ColorUIResource) {
                     JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getColHeaderColors(), 0, 0, w, h);
                 } else {
