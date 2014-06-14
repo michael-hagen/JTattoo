@@ -270,6 +270,7 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
             "InternalFrame.icon", getIconFactory().getMenuIcon(),
             "InternalFrame.iconifyIcon", getIconFactory().getIconIcon(),
             "InternalFrame.maximizeIcon", getIconFactory().getMaxIcon(),
+            "InternalFrame.altMaximizeIcon", getIconFactory().getMinIcon(),
             "InternalFrame.minimizeIcon", getIconFactory().getMinIcon(),
             "InternalFrame.closeIcon", getIconFactory().getCloseIcon(),
 
