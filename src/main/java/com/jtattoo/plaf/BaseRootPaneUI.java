@@ -23,10 +23,6 @@
 package com.jtattoo.plaf;
 
 import java.awt.*;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.ContainerEvent;
-import java.awt.event.ContainerListener;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -373,7 +369,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
      */
     public void setTitlePane(JRootPane root, JComponent titlePane) {
         JLayeredPane layeredPane = root.getLayeredPane();
-        JComponent oldTitlePane = getTitlePane();
+        JComponent oldTitlePane = internalGetTitlePane();
 
         if (oldTitlePane != null) {
             oldTitlePane.setVisible(false);
@@ -387,7 +383,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
     }
 
     /**
-     * Returns the <code>JComponent</code> rendering the title pane. If this returns null, it implies there is no need
+     * Returns the <code>BaseTitlePane</code> rendering the title pane. If this returns null, it implies there is no need
      * to render window decorations.
      *
      * @return the current window title pane, or null
@@ -400,6 +396,10 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
         return null;
     }
 
+    private JComponent internalGetTitlePane() {
+        return titlePane;
+    }
+    
     public JRootPane getRootPane() {
         return root;
     }
@@ -484,7 +484,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
             }
 
             if (DecorationHelper.getWindowDecorationStyle(root) != NONE && (root.getUI() instanceof BaseRootPaneUI)) {
-                JComponent titlePane = ((BaseRootPaneUI) root.getUI()).getTitlePane();
+                JComponent titlePane = ((BaseRootPaneUI) root.getUI()).internalGetTitlePane();
                 if (titlePane != null) {
                     tpd = titlePane.getPreferredSize();
                     if (tpd != null) {
@@ -534,7 +534,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
             }
             if (root.getGlassPane() != null) {
                 if (DecorationHelper.getWindowDecorationStyle(root) != NONE && (root.getUI() instanceof BaseRootPaneUI)) {
-                    JComponent titlePane = ((BaseRootPaneUI) root.getUI()).getTitlePane();
+                    JComponent titlePane = ((BaseRootPaneUI) root.getUI()).internalGetTitlePane();
                     int titleHeight = 0;
                     if (titlePane != null) {
                         titleHeight = titlePane.getSize().height;
@@ -547,7 +547,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
             // Note: This is laying out the children in the layeredPane,
             // technically, these are not our children.
             if (DecorationHelper.getWindowDecorationStyle(root) != NONE && (root.getUI() instanceof BaseRootPaneUI)) {
-                JComponent titlePane = ((BaseRootPaneUI) root.getUI()).getTitlePane();
+                JComponent titlePane = ((BaseRootPaneUI) root.getUI()).internalGetTitlePane();
                 if (titlePane != null) {
                     Dimension tpd = titlePane.getPreferredSize();
                     if (tpd != null) {
@@ -648,7 +648,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
                 w.toFront();
 
                 Point dragWindowOffset = ev.getPoint();
-                Point convertedDragWindowOffset = SwingUtilities.convertPoint(w, dragWindowOffset, getTitlePane());
+                Point convertedDragWindowOffset = SwingUtilities.convertPoint(w, dragWindowOffset, internalGetTitlePane());
 
                 Frame f = null;
                 Dialog d = null;
@@ -661,7 +661,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 
                 int frameState = (f != null) ? DecorationHelper.getExtendedState(f) : 0;
 
-                if (getTitlePane() != null && getTitlePane().contains(convertedDragWindowOffset)) {
+                if (internalGetTitlePane() != null && internalGetTitlePane().contains(convertedDragWindowOffset)) {
                     if ((f != null && ((frameState & BaseRootPaneUI.MAXIMIZED_BOTH) == 0) || (d != null))
                             && dragWindowOffset.y >= BORDER_DRAG_THICKNESS
                             && dragWindowOffset.x >= BORDER_DRAG_THICKNESS
@@ -912,7 +912,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
                     return;
                 }
                 Frame frame = (Frame) window;
-                Point convertedPoint = SwingUtilities.convertPoint(window, ev.getPoint(), getTitlePane());
+                Point convertedPoint = SwingUtilities.convertPoint(window, ev.getPoint(), internalGetTitlePane());
                 int state = DecorationHelper.getExtendedState(frame);
                 if (titlePane != null && titlePane instanceof TitlePane && titlePane.contains(convertedPoint) && frame.isResizable()) {
                     if ((ev.getClickCount() % 2) == 0 && ((ev.getModifiers() & InputEvent.BUTTON1_MASK) != 0)) {
