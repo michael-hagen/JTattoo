@@ -58,7 +58,7 @@ public class TextureCheckBoxMenuItemUI extends BaseCheckBoxMenuItemUI {
             return;
         }
         ButtonModel model = menuItem.getModel();
-        FontMetrics fm = menuItem.getFontMetrics(menuItem.getFont());
+        FontMetrics fm = JTattooUtilities.getFontMetrics(menuItem, g, menuItem.getFont());
         int mnemIndex = menuItem.getDisplayedMnemonicIndex();
         if (!menuItem.isArmed()) {
             g.setColor(Color.black);

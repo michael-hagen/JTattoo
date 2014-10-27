@@ -103,7 +103,7 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
     public Dimension getPreferredSize(JComponent c) {
         Dimension size = super.getPreferredSize(c);
         if (comboBox.getGraphics() != null) {
-            FontMetrics fm = comboBox.getGraphics().getFontMetrics();
+            FontMetrics fm = JTattooUtilities.getFontMetrics(comboBox, comboBox.getGraphics(), comboBox.getFont());
             size.height = fm.getHeight() + 2;
             if (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel) {
                 AbstractLookAndFeel laf = (AbstractLookAndFeel)UIManager.getLookAndFeel();

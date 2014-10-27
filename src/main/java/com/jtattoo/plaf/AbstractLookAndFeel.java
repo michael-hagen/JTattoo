@@ -1,26 +1,25 @@
 /*
-* Copyright (c) 2002 and later by MH Software-Entwicklung. All Rights Reserved.
-*  
-* JTattoo is multiple licensed. If your are an open source developer you can use
-* it under the terms and conditions of the GNU General Public License version 2.0
-* or later as published by the Free Software Foundation.
-*  
-* see: gpl-2.0.txt
-* 
-* If you pay for a license you will become a registered user who could use the
-* software under the terms and conditions of the GNU Lesser General Public License
-* version 2.0 or later with classpath exception as published by the Free Software
-* Foundation.
-* 
-* see: lgpl-2.0.txt
-* see: classpath-exception.txt
-* 
-* Registered users could also use JTattoo under the terms and conditions of the 
-* Apache License, Version 2.0 as published by the Apache Software Foundation.
-*  
-* see: APACHE-LICENSE-2.0.txt
-*/
-
+ * Copyright (c) 2002 and later by MH Software-Entwicklung. All Rights Reserved.
+ *  
+ * JTattoo is multiple licensed. If your are an open source developer you can use
+ * it under the terms and conditions of the GNU General Public License version 2.0
+ * or later as published by the Free Software Foundation.
+ *  
+ * see: gpl-2.0.txt
+ * 
+ * If you pay for a license you will become a registered user who could use the
+ * software under the terms and conditions of the GNU Lesser General Public License
+ * version 2.0 or later with classpath exception as published by the Free Software
+ * Foundation.
+ * 
+ * see: lgpl-2.0.txt
+ * see: classpath-exception.txt
+ * 
+ * Registered users could also use JTattoo under the terms and conditions of the 
+ * Apache License, Version 2.0 as published by the Apache Software Foundation.
+ *  
+ * see: APACHE-LICENSE-2.0.txt
+ */
 package com.jtattoo.plaf;
 
 import java.awt.Color;
@@ -47,7 +46,7 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
     }
 
     protected static String currentThemeName = "abstractTheme";
-    
+
     private static AbstractTheme myTheme = null;
 
     abstract public AbstractBorderFactory getBorderFactory();
@@ -77,7 +76,6 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
             "menu", getMenuBackgroundColor(), // Background color for menus
             "menuText", getMenuForegroundColor(), // Text color for menus
             "MenuBar.rolloverEnabled", Boolean.TRUE,
-
             "text", getBackgroundColor(), // Text background color
             "textText", getControlForegroundColor(), // Text foreground color
             "textHighlight", getSelectionBackgroundColor(), // Text background color when selected
@@ -138,7 +136,6 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
             "menuTextFont", getMenuTextFont(),
             "windowTitleFont", getWindowTitleFont(),
             "subTextFont", getSubTextFont(),
-
             "Label.font", getUserTextFont(),
             "Label.background", getBackgroundColor(),
             "Label.foreground", getForegroundColor(),
@@ -273,7 +270,6 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
             "InternalFrame.altMaximizeIcon", getIconFactory().getMinIcon(),
             "InternalFrame.minimizeIcon", getIconFactory().getMinIcon(),
             "InternalFrame.closeIcon", getIconFactory().getCloseIcon(),
-
             // Titled Border
             "TitledBorder.titleColor", getForegroundColor(),
             "TitledBorder.border", titledBorderBorder,
@@ -304,7 +300,6 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
             "Viewport.foreground", getForegroundColor(),
             "Viewport.background", getBackgroundColor(),
             "Viewport.font", getUserTextFont(),
-
             // Tabbed Pane
             "TabbedPane.boder", tabbedPaneBorder,
             "TabbedPane.background", getBackgroundColor(),
@@ -405,7 +400,7 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
             "FileChooser.newFolderIcon", getIconFactory().getFileChooserNewFolderIcon(),
             "FileChooser.listViewIcon", getIconFactory().getFileChooserListViewIcon(),
             "FileChooser.detailsViewIcon", getIconFactory().getFileChooserDetailViewIcon(),
-            "FileChooser.viewMenuIcon", getIconFactory().getFileChooserDetailViewIcon(), 
+            "FileChooser.viewMenuIcon", getIconFactory().getFileChooserDetailViewIcon(),
             // Separator
             "Separator.background", getBackgroundColor(),
             "Separator.foreground", getControlForegroundColor(),
@@ -422,7 +417,6 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
             "Tree.selectionBackground", getSelectionBackgroundColor(),
             "Tree.disabledForeground", getDisabledForegroundColor(),
             "Tree.disabledBackground", getDisabledBackgroundColor(),
-
             "Tree.openIcon", getIconFactory().getTreeOpenIcon(),
             "Tree.closedIcon", getIconFactory().getTreeCloseIcon(),
             "Tree.leafIcon", getIconFactory().getTreeLeafIcon(),
@@ -456,7 +450,7 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
             if (getTheme().isSmallFontSize()) {
                 table.put("ScrollBar.width", new Integer(8));
                 table.put("SplitPane.dividerSize", new Integer(7));
-            } else if (getTheme().isMediumFontSize()) { 
+            } else if (getTheme().isMediumFontSize()) {
                 table.put("ScrollBar.width", new Integer(10));
                 table.put("SplitPane.dividerSize", new Integer(9));
             } else {
@@ -467,7 +461,7 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
             if (getTheme().isSmallFontSize()) {
                 table.put("ScrollBar.width", new Integer(17));
                 table.put("SplitPane.dividerSize", new Integer(7));
-            } else if (getTheme().isMediumFontSize()) { 
+            } else if (getTheme().isMediumFontSize()) {
                 table.put("ScrollBar.width", new Integer(19));
                 table.put("SplitPane.dividerSize", new Integer(9));
             } else {
@@ -493,7 +487,7 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
 
     /**
      * Set a theme by name. Allowed themes may come from the list returned by getThemes
-     * 
+     *
      * @param name the name of the theme
      */
     public static void setTheme(String name) {
@@ -717,4 +711,5 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
     public static ColorUIResource getTooltipBackgroundColor() {
         return getTheme().getTooltipBackgroundColor();
     }
+
 }

@@ -94,7 +94,7 @@ public class McWinTitlePane extends BaseTitlePane {
         }
 
         protected int computeHeight() {
-            FontMetrics fm = Toolkit.getDefaultToolkit().getFontMetrics(getFont());
+            FontMetrics fm = JTattooUtilities.getFontMetrics(McWinTitlePane.this, null, getFont());
             return fm.getHeight() + 5;
         }
 

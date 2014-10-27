@@ -62,7 +62,7 @@ public class HiFiButtonUI extends BaseButtonUI {
 
     protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
         ButtonModel model = b.getModel();
-        FontMetrics fm = g.getFontMetrics();
+        FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
         int mnemIndex;
         if (JTattooUtilities.getJavaVersion() >= 1.4) {
             mnemIndex = b.getDisplayedMnemonicIndex();

@@ -586,7 +586,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
         paintBackground(g);
 
         g.setFont(getFont());
-        FontMetrics fm = g.getFontMetrics();
+        FontMetrics fm = JTattooUtilities.getFontMetrics(this, g, getFont());
         int width = getWidth();
         int height = getHeight();
         int x = 0;
@@ -748,7 +748,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
         }
 
         protected int computeHeight() {
-            FontMetrics fm = Toolkit.getDefaultToolkit().getFontMetrics(getFont());
+            FontMetrics fm = JTattooUtilities.getFontMetrics(this, null, getFont());
             return fm.getHeight() + 6;
         }
 
@@ -790,7 +790,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
         }
 
         protected int computeHeight() {
-            FontMetrics fm = Toolkit.getDefaultToolkit().getFontMetrics(getFont());
+            FontMetrics fm = JTattooUtilities.getFontMetrics(BaseTitlePane.this, null, getFont());
             return fm.getHeight() + 6;
         }
 

@@ -85,64 +85,23 @@ public class GraphiteTabbedPaneUI extends BaseTabbedPaneUI {
     }
 
     protected void paintText(Graphics g, int tabPlacement, Font font, FontMetrics metrics, int tabIndex, String title, Rectangle textRect, boolean isSelected) {
-        Color backColor = tabPane.getBackgroundAt(tabIndex);
-        if (!(backColor instanceof UIResource)) {
-            super.paintText(g, tabPlacement, font, metrics, tabIndex, title, textRect, isSelected);
-            return;
-        }
-        g.setFont(font);
-        View v = getTextViewForTab(tabIndex);
-        if (v != null) {
-            // html
-            Graphics2D g2D = (Graphics2D)g;
-            Object savedRenderingHint = null;
-            if (AbstractLookAndFeel.getTheme().isTextAntiAliasingOn()) {
-                savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING);
-                g2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, AbstractLookAndFeel.getTheme().getTextAntiAliasingHint());
+        if (isSelected && tabPane.isEnabledAt(tabIndex) && (tabPane.getBackgroundAt(tabIndex) instanceof ColorUIResource) && (getTextViewForTab(tabIndex) == null)) {
+            g.setFont(font);
+            Color selColor = AbstractLookAndFeel.getTabSelectionForegroundColor();
+            if (ColorHelper.getGrayValue(selColor) > 164) {
+                g.setColor(Color.black);
+            } else {
+                g.setColor(Color.white);
             }
-            v.paint(g, textRect);
-            if (AbstractLookAndFeel.getTheme().isTextAntiAliasingOn()) {
-                g2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, savedRenderingHint);
-            }
-        } else {
-            // plain text
             int mnemIndex = -1;
             if (JTattooUtilities.getJavaVersion() >= 1.4) {
                 mnemIndex = tabPane.getDisplayedMnemonicIndexAt(tabIndex);
             }
-
-            if (tabPane.isEnabled() && tabPane.isEnabledAt(tabIndex)) {
-                if (isSelected) {
-                    if (ColorHelper.getGrayValue(AbstractLookAndFeel.getControlColorDark()) > 128) {
-                        g.setColor(tabPane.getForegroundAt(tabIndex));
-                    } else {
-                        Color titleColor = AbstractLookAndFeel.getWindowTitleForegroundColor();
-                        if (ColorHelper.getGrayValue(titleColor) > 164) {
-                            g.setColor(Color.black);
-                        } else {
-                            g.setColor(Color.white);
-                        }
-                        JTattooUtilities.drawStringUnderlineCharAt(tabPane, g, title, mnemIndex, textRect.x + 1, textRect.y + 1 + metrics.getAscent());
-                        g.setColor(titleColor);
-                    }
-                } else {
-                    if (tabIndex == rolloverIndex) {
-                        g.setColor(AbstractLookAndFeel.getTheme().getRolloverForegroundColor());
-                    } else {
-                        g.setColor(tabPane.getForegroundAt(tabIndex));
-                    }
-                }
-                JTattooUtilities.drawStringUnderlineCharAt(tabPane, g, title, mnemIndex, textRect.x, textRect.y + metrics.getAscent());
-
-            } else { // tab disabled
-                g.setColor(Color.white);
-                JTattooUtilities.drawStringUnderlineCharAt(tabPane, g, title, mnemIndex, textRect.x + 1, textRect.y + metrics.getAscent() + 1);
-                g.setColor(AbstractLookAndFeel.getDisabledForegroundColor());
-                JTattooUtilities.drawStringUnderlineCharAt(tabPane, g, title, mnemIndex, textRect.x, textRect.y + metrics.getAscent());
-            }
+            JTattooUtilities.drawStringUnderlineCharAt(tabPane, g, title, mnemIndex, textRect.x, textRect.y + 1 + metrics.getAscent());
         }
+        super.paintText(g, tabPlacement, font, metrics, tabIndex, title, textRect, isSelected);
     }
-
+    
     protected void paintFocusIndicator(Graphics g, int tabPlacement, Rectangle[] rects, int tabIndex, Rectangle iconRect, Rectangle textRect, boolean isSelected) {
         if (tabPane.isRequestFocusEnabled() && tabPane.hasFocus() && isSelected && tabIndex >= 0 && textRect.width > 8) {
             g.setColor(AbstractLookAndFeel.getTheme().getFocusColor());

@@ -289,7 +289,7 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
         paintBackground(g);
 
         g.setFont(getFont());
-        FontMetrics fm = g.getFontMetrics();
+        FontMetrics fm = JTattooUtilities.getFontMetrics(this, g, getFont());
         int width = getWidth();
         int height = getHeight();
         int x = 0;
@@ -389,7 +389,7 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
             if (frame.isIconifiable()) {
                 width += 16 + (frame.isMaximizable() ? 2 : (frame.isClosable() ? 10 : 4));
             }
-            FontMetrics fm = getFontMetrics(getFont());
+            FontMetrics fm = JTattooUtilities.getFontMetrics(BaseInternalFrameTitlePane.this, null, getFont());
             String frameTitle = frame.getTitle();
             int title_w = frameTitle != null ? fm.stringWidth(frameTitle) : 0;
             int title_length = frameTitle != null ? frameTitle.length() : 0;

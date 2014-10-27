@@ -409,8 +409,7 @@ public class BaseBorders {
                 
                 Font savedFont = g2D.getFont();
                 g.setFont(logoFont);
-                
-                FontMetrics fm = g2D.getFontMetrics();
+                FontMetrics fm = JTattooUtilities.getFontMetrics((JComponent)c, g, c.getFont());
                 String logo = JTattooUtilities.getClippedText(AbstractLookAndFeel.getTheme().getLogoString(), fm, h - 16);
 
                 AffineTransform savedTransform = g2D.getTransform();

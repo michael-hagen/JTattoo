@@ -1209,7 +1209,9 @@ public class BaseIcons {
                     color = rolloverColor;
                 }
             }
-            int lw = (w / 12) + 1;
+            //int lw = (w / 12) + 1;
+            int lw = (h > 22) ? 3 : 2;
+            
             int dx = (w / 5) + 2;
             int dy = dx;
 
@@ -1289,7 +1291,8 @@ public class BaseIcons {
                     color = rolloverColor;
                 }
             }
-            int lw = (w / 12);
+            int lw = (h > 22) ? 2 : 1;
+            
             int dx = (w / 5) + 1;
             int dy = (h / 5) + 2;
 
@@ -1375,7 +1378,7 @@ public class BaseIcons {
             int h1 = h - delta;
 
             int x2 = delta + 2;
-            int y2 = delta + 2;
+            int y2 = Math.max(delta + 2, y1 + (2 * lw) + 1);
             int w2 = w - delta;
             int h2 = h - delta;
 
@@ -1480,7 +1483,8 @@ public class BaseIcons {
                     color = rolloverColor;
                 }
             }
-            int lw = (w / 12) + 1;
+            //int lw = (w / 12) + 1;
+            int lw = (h > 22) ? 3 : 2;
             int dx = (w / 5) + 2;
             int dy = dx;
 

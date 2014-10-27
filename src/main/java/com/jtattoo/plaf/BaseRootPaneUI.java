@@ -302,7 +302,9 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 
     public void installClientDecorations(JRootPane root) {
         installBorder(root);
-        setTitlePane(root, createTitlePane(root));
+        if (titlePane == null) {
+            setTitlePane(root, createTitlePane(root));
+        }
         installWindowListeners(root, root.getParent());
         installLayout(root);
         if (window != null) {
@@ -368,9 +370,11 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
      * @param titlePane the <code>JComponent</code> to use for the window title pane.
      */
     public void setTitlePane(JRootPane root, JComponent titlePane) {
-        JLayeredPane layeredPane = root.getLayeredPane();
         JComponent oldTitlePane = internalGetTitlePane();
-
+        if ((oldTitlePane == null && titlePane == null) || (oldTitlePane != null && oldTitlePane.equals(titlePane))) {
+            return;
+        }
+        JLayeredPane layeredPane = root.getLayeredPane();
         if (oldTitlePane != null) {
             oldTitlePane.setVisible(false);
             layeredPane.remove(oldTitlePane);

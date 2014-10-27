@@ -58,9 +58,8 @@ public class HiFiRadioButtonUI extends BaseRadioButtonUI {
             } else {
                 mnemIndex = JTattooUtilities.findDisplayedMnemonicIndex(b.getText(), model.getMnemonic());
             }
-            Font f = c.getFont();
-            g.setFont(f);
-            FontMetrics fm = g.getFontMetrics();
+            g.setFont(b.getFont());
+            FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
             if (model.isEnabled()) {
                 Color fc = b.getForeground();
                 if (AbstractLookAndFeel.getTheme().isTextShadowOn() && ColorHelper.getGrayValue(fc) > 128) {

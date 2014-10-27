@@ -108,9 +108,13 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
     }
 
     protected void paintString(Graphics g, int x, int y, int width, int height, int amountFull, Insets b) {
+        boolean indeterminate = false;
+        if (JTattooUtilities.getJavaVersion() >= 1.6) {
+            indeterminate = progressBar.isIndeterminate();
+        }
         if (progressBar.getOrientation() == JProgressBar.HORIZONTAL) {
             if (JTattooUtilities.isLeftToRight(progressBar)) {
-                if (progressBar.isIndeterminate()) {
+                if (indeterminate) {
                     boxRect = getBox(boxRect);
                     paintString(g, x, y, width, height, boxRect.x, boxRect.width, b);
                 } else {
@@ -120,7 +124,7 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
                 paintString(g, x, y, width, height, x + width - amountFull, amountFull, b);
             }
         } else {
-            if (progressBar.isIndeterminate()) {
+            if (indeterminate) {
                 boxRect = getBox(boxRect);
                 paintString(g, x, y, width, height, boxRect.y, boxRect.height, b);
             } else {

@@ -776,6 +776,10 @@ public abstract class AbstractTheme extends MetalTheme {
         return val;
     }
     
+    public boolean isTinyFontSize() {
+        return userFont.getSize() < 12;
+    }
+    
     public boolean isSmallFontSize() {
         return userFont.getSize() < 14;
     }

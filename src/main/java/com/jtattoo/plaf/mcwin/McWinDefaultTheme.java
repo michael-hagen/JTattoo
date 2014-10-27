@@ -94,6 +94,7 @@ public class McWinDefaultTheme extends AbstractTheme {
         toolbarBackgroundColor = backgroundColor;
 
         tabAreaBackgroundColor = backgroundColor;
+        tabSelectionForegroundColor = black;
         desktopColor = new ColorUIResource(232, 232, 232);
     }
 

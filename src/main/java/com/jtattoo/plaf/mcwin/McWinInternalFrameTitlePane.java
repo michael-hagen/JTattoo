@@ -90,7 +90,7 @@ public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
             if (frame.isIconifiable()) {
                 width += 16 + (frame.isMaximizable() ? 2 : (frame.isClosable() ? 10 : 4));
             }
-            FontMetrics fm = getFontMetrics(getFont());
+            FontMetrics fm = JTattooUtilities.getFontMetrics(McWinInternalFrameTitlePane.this, null, getFont());
             String frameTitle = frame.getTitle();
             int title_w = frameTitle != null ? fm.stringWidth(frameTitle) : 0;
             int title_length = frameTitle != null ? frameTitle.length() : 0;

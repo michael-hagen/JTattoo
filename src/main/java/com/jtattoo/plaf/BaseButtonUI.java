@@ -122,7 +122,7 @@ public class BaseButtonUI extends BasicButtonUI {
 
     protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
         ButtonModel model = b.getModel();
-        FontMetrics fm = g.getFontMetrics();
+        FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
         int mnemIndex;
         if (JTattooUtilities.getJavaVersion() >= 1.4) {
             mnemIndex = b.getDisplayedMnemonicIndex();
@@ -136,6 +136,13 @@ public class BaseButtonUI extends BasicButtonUI {
             int offs = 0;
             if (model.isArmed() && model.isPressed()) {
                 offs = 1;
+            }
+            if (!(model.isPressed() && model.isArmed())) {
+                Object sc = b.getClientProperty("shadowColor");
+                if (sc instanceof Color) {
+                    g.setColor((Color)sc);
+                    JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + 1, textRect.y + 1 + fm.getAscent());
+                }
             }
             if (background instanceof ColorUIResource) {
                 if (model.isPressed() && model.isArmed()) {
@@ -170,7 +177,7 @@ public class BaseButtonUI extends BasicButtonUI {
         AbstractButton b = (AbstractButton) c;
         Font f = c.getFont();
         g.setFont(f);
-        FontMetrics fm = g.getFontMetrics();
+        FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
         Insets insets = c.getInsets();
 
         viewRect.x = insets.left;

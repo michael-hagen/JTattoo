@@ -40,7 +40,7 @@ public class HiFiToggleButtonUI extends BaseToggleButtonUI {
 
     protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
         ButtonModel model = b.getModel();
-        FontMetrics fm = g.getFontMetrics();
+        FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
         int mnemIndex = (JTattooUtilities.getJavaVersion() >= 1.4) ? b.getDisplayedMnemonicIndex() : JTattooUtilities.findDisplayedMnemonicIndex(b.getText(), model.getMnemonic());
         int offs = 0;
         if (model.isArmed() && model.isPressed()) {

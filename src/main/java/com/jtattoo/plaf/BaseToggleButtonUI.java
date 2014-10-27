@@ -103,7 +103,7 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
 
     protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
         ButtonModel model = b.getModel();
-        FontMetrics fm = g.getFontMetrics();
+        FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
         int mnemIndex = (JTattooUtilities.getJavaVersion() >= 1.4) ? b.getDisplayedMnemonicIndex() : JTattooUtilities.findDisplayedMnemonicIndex(b.getText(), model.getMnemonic());
         if (model.isEnabled()) {
             Color foreground = b.getForeground();
@@ -120,11 +120,16 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
                     foreground = AbstractLookAndFeel.getTheme().getRolloverForegroundColor();
                 }
             }
+            Object sc = b.getClientProperty("shadowColor");
+            if (sc instanceof Color) {
+                g.setColor((Color)sc);
+                JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + offs, textRect.y + fm.getAscent() * offs + 1);
+            }
             g.setColor(foreground);
-            JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + offs, textRect.y + offs + fm.getAscent());
+            JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + offs, textRect.y + fm.getAscent() + offs);
         } else {
             g.setColor(Color.white);
-            JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + 1, textRect.y + 1 + fm.getAscent());
+            JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + 1, textRect.y + fm.getAscent() + 1);
             g.setColor(AbstractLookAndFeel.getDisabledForegroundColor());
             JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x, textRect.y + fm.getAscent());
         }
@@ -139,9 +144,8 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
         Graphics2D g2D = (Graphics2D) g;
 
         AbstractButton b = (AbstractButton) c;
-        Font f = c.getFont();
-        g.setFont(f);
-        FontMetrics fm = g.getFontMetrics();
+        g.setFont(b.getFont());
+        FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
         Insets insets = c.getInsets();
 
         viewRect.x = insets.left;

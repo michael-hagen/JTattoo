@@ -262,6 +262,42 @@ public class JTattooUtilities {
         }
     }
 
+    public static FontMetrics getFontMetrics(JComponent c, Graphics g, Font f) {
+        FontMetrics fm = null;
+        if (getJavaVersion() >= 1.6) {
+            try {
+                Class swingUtilities2Class = Class.forName("sun.swing.SwingUtilities2");
+                Class classParams[] = {JComponent.class, Graphics.class, Font.class};
+                Method m = swingUtilities2Class.getMethod("getFontMetrics", classParams);
+                Object methodParams[] = {c, g, f};
+                fm = (FontMetrics)m.invoke(null, methodParams);
+            } catch (Exception ex) {
+                // Nothing to do
+            }
+        } 
+        if (fm == null) {
+            if (g == null) {
+                if (c != null) {
+                    g = c.getGraphics();
+                }
+            }
+            if (g != null) {
+                if (f != null) {
+                    fm = g.getFontMetrics(f);
+                } else {
+                    fm = g.getFontMetrics();
+                }
+            } else if (c != null) {
+                if (f != null) {
+                    fm = c.getFontMetrics(f);
+                } else {
+                    fm = c.getFontMetrics(c.getFont());
+                }
+            }
+        }
+        return fm;
+    }
+    
     public static void drawString(JComponent c, Graphics g, String text, int x, int y) {
         Graphics2D g2D = (Graphics2D) g;
         Object savedRenderingHint = null;

@@ -51,6 +51,11 @@ public class BaseLabelUI extends BasicLabelUI {
         } else {
             mnemIndex = JTattooUtilities.findDisplayedMnemonicIndex(l.getText(), l.getDisplayedMnemonic());
         }
+        Object sc = l.getClientProperty("shadowColor");
+        if (sc instanceof Color) {
+            g.setColor((Color)sc);
+            JTattooUtilities.drawStringUnderlineCharAt(l, g, s, mnemIndex, textX, textY + 1);
+        }
         g.setColor(l.getForeground());
         JTattooUtilities.drawStringUnderlineCharAt(l, g, s, mnemIndex, textX, textY);
     }

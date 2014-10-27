@@ -787,11 +787,11 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
             if (doPaintContent) {
                 String title = tabPane.getTitleAt(tabIndex);
                 Font font = getTabFont(isSelected);
-                FontMetrics metrics = g.getFontMetrics(font);
+                FontMetrics fm = JTattooUtilities.getFontMetrics(tabPane, g, font);
                 Icon icon = getIconForTab(tabIndex);
 
-                layoutLabel(tabPlacement, metrics, tabIndex, title, icon, tabRect, iconRect, textRect, isSelected);
-                paintText(g, tabPlacement, font, metrics, tabIndex, title, textRect, isSelected);
+                layoutLabel(tabPlacement, fm, tabIndex, title, icon, tabRect, iconRect, textRect, isSelected);
+                paintText(g, tabPlacement, font, fm, tabIndex, title, textRect, isSelected);
                 paintIcon(g, tabPlacement, tabIndex, icon, iconRect, isSelected);
             }
             paintFocusIndicator(g, tabPlacement, rects, tabIndex, iconRect, textRect, isSelected);
@@ -1771,10 +1771,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
     }
 
     protected int calculateMaxTabHeight(int tabPlacement) {
-        FontMetrics metrics = getFontMetrics();
         int tc = tabPane.getTabCount();
         int result = 0;
-        int fontHeight = metrics.getHeight();
+        int fontHeight = getFontMetrics().getHeight();
         for (int i = 0; i < tc; i++) {
             result = Math.max(calculateTabHeight(tabPlacement, i, fontHeight), result);
         }
@@ -1807,11 +1806,10 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
     }
 
     protected int calculateMaxTabWidth(int tabPlacement) {
-        FontMetrics metrics = getFontMetrics();
         int tc = tabPane.getTabCount();
         int result = 0;
         for (int i = 0; i < tc; i++) {
-            result = Math.max(calculateTabWidth(tabPlacement, i, metrics), result);
+            result = Math.max(calculateTabWidth(tabPlacement, i, getFontMetrics()), result);
         }
         return result;
     }
@@ -1859,7 +1857,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     protected FontMetrics getFontMetrics() {
         Font font = tabPane.getFont().deriveFont(Font.BOLD);
-        return Toolkit.getDefaultToolkit().getFontMetrics(font);
+        return JTattooUtilities.getFontMetrics(tabPane, null, font);
     }
 
     // Tab Navigation methods
@@ -2413,7 +2411,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         }
 
         protected int preferredTabAreaHeight(int tabPlacement, int width) {
-            FontMetrics metrics = getFontMetrics();
+            FontMetrics fm = getFontMetrics();
             int tc = tabPane.getTabCount();
             int total = 0;
             if (tc > 0) {
@@ -2422,7 +2420,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
                 int maxTabHeight = calculateMaxTabHeight(tabPlacement);
 
                 for (int i = 0; i < tc; i++) {
-                    int tabWidth = calculateTabWidth(tabPlacement, i, metrics);
+                    int tabWidth = calculateTabWidth(tabPlacement, i, fm);
 
                     if (x != 0 && x + tabWidth > width) {
                         rows++;
@@ -2436,13 +2434,13 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         }
 
         protected int preferredTabAreaWidth(int tabPlacement, int height) {
-            FontMetrics metrics = getFontMetrics();
+            FontMetrics fm = getFontMetrics();
             int tc = tabPane.getTabCount();
             int total = 0;
             if (tc > 0) {
                 int columns = 1;
                 int y = 0;
-                int fontHeight = metrics.getHeight();
+                int fontHeight = fm.getHeight();
 
                 maxTabWidth = calculateMaxTabWidth(tabPlacement);
 
@@ -2616,11 +2614,11 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         }
 
         protected void calculateTabRects(int tabPlacement, int tabCount) {
-            FontMetrics metrics = getFontMetrics();
+            FontMetrics fm = getFontMetrics();
             Dimension size = tabPane.getSize();
             Insets insets = tabPane.getInsets();
             Insets tabAreaInsets = getTabAreaInsets(tabPlacement);
-            int fontHeight = metrics.getHeight();
+            int fontHeight = fm.getHeight();
             int selectedIndex = tabPane.getSelectedIndex();
             int tabRunOverlay;
             int i, j;
@@ -2684,7 +2682,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
                         maxTabWidth = 0;
                         rect.x = x;
                     }
-                    rect.width = calculateTabWidth(tabPlacement, i, metrics);
+                    rect.width = calculateTabWidth(tabPlacement, i, fm);
                     maxTabWidth = Math.max(maxTabWidth, rect.width);
 
                     // Never move a TAB down a run if it is in the first column.
@@ -3164,11 +3162,11 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         }
 
         protected void calculateTabRects(int tabPlacement, int tabCount) {
-            FontMetrics metrics = getFontMetrics();
+            FontMetrics fm = getFontMetrics();
             Dimension size = tabPane.getSize();
             Insets insets = tabPane.getInsets();
             Insets tabAreaInsets = getTabAreaInsets(tabPlacement);
-            int fontHeight = metrics.getHeight();
+            int fontHeight = fm.getHeight();
             boolean verticalTabRuns = (tabPlacement == LEFT || tabPlacement == RIGHT);
             boolean leftToRight = JTattooUtilities.isLeftToRight(tabPane);
             int x = tabAreaInsets.left;
@@ -3215,7 +3213,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
                         totalHeight += maxTabHeight;
                         rect.x = x;
                     }
-                    rect.width = calculateTabWidth(tabPlacement, i, metrics);
+                    rect.width = calculateTabWidth(tabPlacement, i, fm);
                     totalWidth = rect.x + rect.width;
                     maxTabWidth = Math.max(maxTabWidth, rect.width);
 

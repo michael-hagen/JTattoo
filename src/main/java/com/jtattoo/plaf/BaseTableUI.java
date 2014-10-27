@@ -40,7 +40,7 @@ public class BaseTableUI extends BasicTableUI {
     public void installDefaults() {
         super.installDefaults();
         // Setup the rowheight. The font may change if UI switches
-        FontMetrics fm = table.getFontMetrics(table.getFont());
+        FontMetrics fm = JTattooUtilities.getFontMetrics(table, null, table.getFont());
         table.setRowHeight(fm.getHeight() + (fm.getHeight() / 4));
     }
 

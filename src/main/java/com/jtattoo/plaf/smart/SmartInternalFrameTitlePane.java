@@ -105,9 +105,8 @@ public class SmartInternalFrameTitlePane extends BaseInternalFrameTitlePane {
         int titleWidth = 0;
         String frameTitle = frame.getTitle();
         if (frameTitle != null) {
-            Font f = getFont();
-            g.setFont(f);
-            FontMetrics fm = g.getFontMetrics();
+            g.setFont(getFont());
+            FontMetrics fm = JTattooUtilities.getFontMetrics(this, g, getFont());
             titleWidth = fm.stringWidth(JTattooUtilities.getClippedText(frame.getTitle(), fm, getWidth() - iconWidth - buttonsWidth - 15)) + 10;
         }
 

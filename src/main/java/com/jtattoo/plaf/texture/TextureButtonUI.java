@@ -81,7 +81,7 @@ public class TextureButtonUI extends BaseButtonUI {
         Graphics2D g2D = (Graphics2D) g;
         Composite savedComposite = g2D.getComposite();
         ButtonModel model = b.getModel();
-        FontMetrics fm = g.getFontMetrics();
+        FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
         int mnemIndex;
         if (JTattooUtilities.getJavaVersion() >= 1.4) {
             mnemIndex = b.getDisplayedMnemonicIndex();
@@ -109,6 +109,14 @@ public class TextureButtonUI extends BaseButtonUI {
                 g.setColor(Color.black);
                 JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + offs, textRect.y + offs + fm.getAscent() + 1);
                 g2D.setComposite(savedComposite);
+            } else {
+                if (!(model.isPressed() && model.isArmed())) {
+                    Object sc = b.getClientProperty("shadowColor");
+                    if (sc instanceof Color) {
+                        g.setColor((Color)sc);
+                        JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + 1, textRect.y + 1 + fm.getAscent());
+                    }
+                }
             }
             g.setColor(foreground);
             JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + offs, textRect.y + offs + fm.getAscent());

@@ -68,7 +68,7 @@ public class TextureMenuUI extends BaseMenuUI {
             return;
         }
         ButtonModel model = menuItem.getModel();
-        FontMetrics fm = menuItem.getFontMetrics(menuItem.getFont());
+        FontMetrics fm = JTattooUtilities.getFontMetrics(menuItem, g, menuItem.getFont());
         int mnemIndex = menuItem.getDisplayedMnemonicIndex();
         if (!model.isEnabled()) {
             // *** paint the text disabled

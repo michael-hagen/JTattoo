@@ -61,9 +61,8 @@ public class BaseRadioButtonUI extends BasicRadioButtonUI {
 
     public void paint(Graphics g, JComponent c) {
         AbstractButton b = (AbstractButton) c;
-        Font f = c.getFont();
-        g.setFont(f);
-        FontMetrics fm = g.getFontMetrics();
+        g.setFont(c.getFont());
+        FontMetrics fm = JTattooUtilities.getFontMetrics(c, g, c.getFont());
 
         Insets i = c.getInsets();
         size = b.getSize(size);
@@ -170,9 +169,8 @@ public class BaseRadioButtonUI extends BasicRadioButtonUI {
         } else {
             AbstractButton b = (AbstractButton) c;
             ButtonModel model = b.getModel();
-            Font f = c.getFont();
-            g.setFont(f);
-            FontMetrics fm = g.getFontMetrics();
+            g.setFont(b.getFont());
+            FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
             int mnemIndex;
             if (JTattooUtilities.getJavaVersion() >= 1.4) {
                 mnemIndex = b.getDisplayedMnemonicIndex();

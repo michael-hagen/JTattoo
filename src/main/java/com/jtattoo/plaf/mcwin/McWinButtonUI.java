@@ -85,7 +85,7 @@ public class McWinButtonUI extends BaseButtonUI {
                                 if (AbstractLookAndFeel.getTheme().isBrightMode()) {
                                     colors = new Color[AbstractLookAndFeel.getTheme().getSelectedColors().length];
                                     for (int i = 0; i < colors.length; i++) {
-                                        colors[i] = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getSelectedColors()[i], 30);
+                                        colors[i] = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getSelectedColors()[i], 50);
                                     }
                                 } else {
                                     colors = AbstractLookAndFeel.getTheme().getSelectedColors();

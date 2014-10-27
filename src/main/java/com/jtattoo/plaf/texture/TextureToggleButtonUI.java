@@ -55,7 +55,7 @@ public class TextureToggleButtonUI extends BaseToggleButtonUI {
         Graphics2D g2D = (Graphics2D) g;
         Composite savedComposite = g2D.getComposite();
         ButtonModel model = b.getModel();
-        FontMetrics fm = g.getFontMetrics();
+        FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
         int mnemIndex = (JTattooUtilities.getJavaVersion() >= 1.4) ? b.getDisplayedMnemonicIndex() : JTattooUtilities.findDisplayedMnemonicIndex(b.getText(), model.getMnemonic());
         if (model.isEnabled()) {
             int offs = 0;

@@ -55,6 +55,12 @@ public class TextureLabelUI extends BasicLabelUI {
         if (AbstractLookAndFeel.getTheme().isTextShadowOn() && ColorHelper.getGrayValue(fc) > 164) {
             g.setColor(Color.black);
             JTattooUtilities.drawStringUnderlineCharAt(l, g, s, mnemIndex, textX, textY + 1);
+        } else {
+            Object sc = l.getClientProperty("shadowColor");
+            if (sc instanceof Color) {
+                g.setColor((Color)sc);
+                JTattooUtilities.drawStringUnderlineCharAt(l, g, s, mnemIndex, textX, textY + 1);
+            }
         }
         g.setColor(fc);
         JTattooUtilities.drawStringUnderlineCharAt(l, g, s, mnemIndex, textX, textY);
