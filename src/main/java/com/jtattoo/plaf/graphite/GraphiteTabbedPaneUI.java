@@ -31,15 +31,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.RenderingHints;
 import javax.swing.JComponent;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
-import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
-import javax.swing.text.View;
 
 /**
  * @author Michael Hagen
@@ -85,19 +81,21 @@ public class GraphiteTabbedPaneUI extends BaseTabbedPaneUI {
     }
 
     protected void paintText(Graphics g, int tabPlacement, Font font, FontMetrics metrics, int tabIndex, String title, Rectangle textRect, boolean isSelected) {
-        if (isSelected && tabPane.isEnabledAt(tabIndex) && (tabPane.getBackgroundAt(tabIndex) instanceof ColorUIResource) && (getTextViewForTab(tabIndex) == null)) {
-            g.setFont(font);
-            Color selColor = AbstractLookAndFeel.getTabSelectionForegroundColor();
-            if (ColorHelper.getGrayValue(selColor) > 164) {
-                g.setColor(Color.black);
-            } else {
-                g.setColor(Color.white);
+        if (AbstractLookAndFeel.getTheme().isTextShadowOn()) {
+            if (isSelected && tabPane.isEnabledAt(tabIndex) && (tabPane.getBackgroundAt(tabIndex) instanceof ColorUIResource) && (getTextViewForTab(tabIndex) == null)) {
+                g.setFont(font);
+                Color selColor = AbstractLookAndFeel.getTabSelectionForegroundColor();
+                if (ColorHelper.getGrayValue(selColor) > 164) {
+                    g.setColor(Color.black);
+                } else {
+                    g.setColor(Color.white);
+                }
+                int mnemIndex = -1;
+                if (JTattooUtilities.getJavaVersion() >= 1.4) {
+                    mnemIndex = tabPane.getDisplayedMnemonicIndexAt(tabIndex);
+                }
+                JTattooUtilities.drawStringUnderlineCharAt(tabPane, g, title, mnemIndex, textRect.x, textRect.y + 1 + metrics.getAscent());
             }
-            int mnemIndex = -1;
-            if (JTattooUtilities.getJavaVersion() >= 1.4) {
-                mnemIndex = tabPane.getDisplayedMnemonicIndexAt(tabIndex);
-            }
-            JTattooUtilities.drawStringUnderlineCharAt(tabPane, g, title, mnemIndex, textRect.x, textRect.y + 1 + metrics.getAscent());
         }
         super.paintText(g, tabPlacement, font, metrics, tabIndex, title, textRect, isSelected);
     }
