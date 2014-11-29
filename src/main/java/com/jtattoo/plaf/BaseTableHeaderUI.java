@@ -50,7 +50,8 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 
     public void installUI(JComponent c) {
         super.installUI(c);
-        if ((header != null) && header.getTable() != null) {
+//        if ((header != null) && header.getTable() != null) {
+        if (header != null) {
             originalHeaderRenderer = header.getDefaultRenderer();
             if ((originalHeaderRenderer != null)
                     && "sun.swing.table.DefaultTableCellHeaderRenderer".equals(originalHeaderRenderer.getClass().getName())) {
@@ -60,7 +61,8 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
     }
 
     public void uninstallUI(JComponent c) {
-        if ((header != null) && (header.getTable() != null)) {
+//        if ((header != null) && (header.getTable() != null)) {
+        if (header != null) {
             if (header.getDefaultRenderer() instanceof BaseDefaultHeaderRenderer) {
                 header.setDefaultRenderer(originalHeaderRenderer);
             }
@@ -183,7 +185,8 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
     }
 
     protected Component getHeaderRenderer(int col) {
-        if ((header == null) || (header.getTable() == null)) {
+//        if ((header == null) || (header.getTable() == null)) {
+        if (header == null) {
             return null;
         }
         TableColumn tabCol = header.getColumnModel().getColumn(col);
@@ -195,7 +198,8 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
     }
 
     private int getHeaderHeight() {
-        if ((header == null) || (header.getTable() == null)) {
+//        if ((header == null) || (header.getTable() == null)) {
+        if (header == null) {
             return 0;
         }
         int height = 0;
@@ -237,7 +241,8 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
      * @return the preferredSize
      */
     public Dimension getPreferredSize(JComponent c) {
-        if ((header == null) || (header.getTable() == null)) {
+//        if ((header == null) || (header.getTable() == null)) {
+        if (header == null) {
             return new Dimension(0, 0);
         }
         long width = 0;
@@ -253,7 +258,8 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
     }
 
     protected void updateRolloverColumn(int oldColumn, int newColumn) {
-        if ((header == null) || (header.getTable() == null)) {
+//        if ((header == null) || (header.getTable() == null)) {
+        if (header == null) {
             return;
         }
         header.repaint(header.getHeaderRect(oldColumn));
@@ -265,7 +271,8 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
     }
 
     public void paint(Graphics g, JComponent c) {
-        if ((header == null) || (header.getTable() == null) || header.getColumnModel().getColumnCount() <= 0) {
+//        if ((header == null) || (header.getTable() == null) || header.getColumnModel().getColumnCount() <= 0) {
+        if ((header == null) || header.getColumnModel().getColumnCount() <= 0) {
             return;
         }
         
@@ -352,7 +359,8 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
     }
 
     protected void paintCell(Graphics g, Rectangle cellRect, int col) {
-        if ((header == null) || (header.getTable() == null)) {
+//        if ((header == null) || (header.getTable() == null)) {
+        if (header == null) {
             return;
         }
         Component component = getHeaderRenderer(col);
@@ -363,7 +371,8 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
     }
 
     private int viewIndexForColumn(TableColumn aColumn) {
-        if ((header == null) || (header.getTable() == null)) {
+//        if ((header == null) || (header.getTable() == null)) {
+        if (header == null) {
             return -1;
         }
         TableColumnModel cm = header.getColumnModel();
@@ -404,7 +413,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
                 setText("");
             }
             setOpaque(false);
-            if (table.getClientProperty("TableHeader.font") != null) {
+            if (table != null && table.getClientProperty("TableHeader.font") != null) {
                 setFont((Font)table.getClientProperty("TableHeader.font"));
             } else {
                 setFont(UIManager.getFont("TableHeader.font"));
@@ -417,7 +426,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
             setHorizontalAlignment(JLabel.CENTER);
             setHorizontalTextPosition(SwingConstants.LEADING);
             setBorder(UIManager.getBorder("TableHeader.cellBorder"));
-            if ((JTattooUtilities.getJavaVersion() >= 1.6) && (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel)) {
+            if (table != null && (JTattooUtilities.getJavaVersion() >= 1.6) && (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel)) {
                 RowSorter rowSorter = table.getRowSorter();
                 List keyList = rowSorter == null ? null : rowSorter.getSortKeys();
                 if ((keyList != null) && (keyList.size() > 0)) {
