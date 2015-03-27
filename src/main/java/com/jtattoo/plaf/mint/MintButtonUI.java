@@ -44,11 +44,6 @@ public class MintButtonUI extends BaseButtonUI {
             return;
         }
 
-//        if (!(b.isBorderPainted() && (b.getBorder() instanceof UIResource))) {
-//            super.paintBackground(g, b);
-//            return;
-//        }
-
         if ((b.getWidth() < 32) 
                 || (b.getHeight() < 16) 
                 || !(b.isBorderPainted() && (b.getBorder() instanceof UIResource))
@@ -76,7 +71,7 @@ public class MintButtonUI extends BaseButtonUI {
         ButtonModel model = b.getModel();
         
         if (model.isPressed() && model.isArmed()) {
-            Color color = AbstractLookAndFeel.getTheme().getSelectionBackgroundColor();
+            Color color = AbstractLookAndFeel.getTheme().getPressedBackgroundColor();
             g2D.setColor(color);
             g2D.fillRoundRect(0, 0, width, height, height, height);
             g2D.setColor(ColorHelper.darker(color, 40));

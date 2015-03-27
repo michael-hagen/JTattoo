@@ -341,16 +341,29 @@ public class BaseTitlePane extends JComponent implements TitlePane {
         }
     }
 
+    protected Rectangle calculateMaxBounds(Frame frame) {
+        GraphicsConfiguration gc = frame.getGraphicsConfiguration();
+        Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(gc);
+        Rectangle maxBounds = gc.getBounds();
+        maxBounds.x = Math.max(0, screenInsets.left);
+        maxBounds.y = Math.max(0, screenInsets.top);
+        maxBounds.width -= (screenInsets.left + screenInsets.right);
+        maxBounds.height -= (screenInsets.top + screenInsets.bottom);
+        // If Taskbar is in auto hide mode the maximum bounds are not correct, currently I don't now
+        // how to fix this issue, so I just let one pixel space arround the window.
+        if (screenInsets.top == 0 && screenInsets.left == 0 && screenInsets.bottom == 0 && screenInsets.right == 0) {
+            maxBounds.x += 1;
+            maxBounds.y += 1;
+            maxBounds.width -= 2;
+            maxBounds.height -= 2;
+        }
+        return maxBounds;
+    }
+    
     protected void validateMaximizedBounds() {
         Frame frame = getFrame();
         if (frame != null && !wasMaximizeError) {
-            GraphicsConfiguration gc = frame.getGraphicsConfiguration();
-            Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(gc);
-            Rectangle maxBounds = gc.getBounds();
-            maxBounds.x = Math.max(0, screenInsets.left);
-            maxBounds.y = Math.max(0, screenInsets.top);
-            maxBounds.width -= (screenInsets.left + screenInsets.right);
-            maxBounds.height -= (screenInsets.top + screenInsets.bottom);
+            Rectangle maxBounds = calculateMaxBounds(frame);
             frame.setMaximizedBounds(maxBounds);
         }
     }
@@ -455,11 +468,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
                     rootPane.setBorder(null);
                     SwingUtilities.invokeLater(new Runnable() {
                         public void run() {
-                            GraphicsConfiguration gc = frame.getGraphicsConfiguration();
-                            Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(gc);
-                            Rectangle maxBounds = gc.getBounds();
-                            maxBounds.width -= (screenInsets.left + screenInsets.right);
-                            maxBounds.height -= (screenInsets.top + screenInsets.bottom);
+                            Rectangle maxBounds = calculateMaxBounds(frame);
                             if ((frame.getWidth() != maxBounds.width) || (frame.getHeight() != maxBounds.height)) {
                                 restore();
                                 wasMaximizeError = true;

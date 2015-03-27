@@ -67,6 +67,10 @@ public class SmartDefaultTheme extends AbstractTheme {
         rolloverColorLight = new ColorUIResource(236, 242, 255);
         rolloverColorDark = new ColorUIResource(191, 211, 253);
 
+        pressedBackgroundColor = new ColorUIResource(180, 197, 240);
+        pressedBackgroundColorLight = new ColorUIResource(218, 230, 254);
+        pressedBackgroundColorDark = new ColorUIResource(180, 197, 240);
+        
         controlForegroundColor = black;
         controlBackgroundColor = backgroundColor;
         controlColorLight = new ColorUIResource(218, 230, 254);
@@ -110,7 +114,6 @@ public class SmartDefaultTheme extends AbstractTheme {
 
         ROLLOVER_COLORS = ColorHelper.createColorArr(rolloverColorLight, rolloverColorDark, 20);
         SELECTED_COLORS = DEFAULT_COLORS;
-        PRESSED_COLORS = ColorHelper.createColorArr(controlColorDark, controlColorLight, 20);
         DISABLED_COLORS = ColorHelper.createColorArr(Color.white, new Color(230, 230, 230), 20);
 
         WINDOW_TITLE_COLORS = ColorHelper.createColorArr(windowTitleColorLight, windowTitleColorDark, 20);

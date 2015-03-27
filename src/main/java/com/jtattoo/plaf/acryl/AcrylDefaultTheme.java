@@ -68,6 +68,10 @@ public class AcrylDefaultTheme extends AbstractTheme {
         rolloverColorLight = new ColorUIResource(188, 252, 255);
         rolloverColorDark = new ColorUIResource(61, 134, 209);
 
+        pressedBackgroundColor = new ColorUIResource(210, 210, 210);
+        pressedBackgroundColorLight = new ColorUIResource(ColorHelper.brighter(pressedBackgroundColor, 28));
+        pressedBackgroundColorDark = new ColorUIResource(ColorHelper.darker(pressedBackgroundColor, 4));
+        
         controlForegroundColor = black;
         controlBackgroundColor = backgroundColor;
         controlColorLight = new ColorUIResource(96, 98, 100);
@@ -166,7 +170,6 @@ public class AcrylDefaultTheme extends AbstractTheme {
         }
 
         SELECTED_COLORS = ColorHelper.createColorArr(new Color(200, 200, 200), new Color(240, 240, 240), 20);
-        PRESSED_COLORS = SELECTED_COLORS;
         DISABLED_COLORS = ColorHelper.createColorArr(Color.white, new Color(230, 230, 230), 20);
 
         topHi = windowTitleColorLight;

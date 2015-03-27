@@ -77,6 +77,9 @@ public class HiFiDefaultTheme extends AbstractTheme {
         rolloverColorDark = new ColorUIResource(96, 96, 96);
 
         pressedForegroundColor = foregroundColor;
+        pressedBackgroundColor = new ColorUIResource(24, 24, 24);
+        pressedBackgroundColorLight = new ColorUIResource(ColorHelper.brighter(pressedBackgroundColor, 4));
+        pressedBackgroundColorDark = new ColorUIResource(ColorHelper.darker(pressedBackgroundColor, 40));
         
         buttonForegroundColor = foregroundColor;
         buttonBackgroundColor = new ColorUIResource(96, 96, 96);
@@ -142,9 +145,6 @@ public class HiFiDefaultTheme extends AbstractTheme {
         SELECTED_COLORS = HIDEFAULT_COLORS;
         BUTTON_COLORS = ColorHelper.createColorArr(buttonColorLight, buttonColorDark, 20);
         ROLLOVER_COLORS = HIDEFAULT_COLORS;
-        PRESSED_COLORS = ColorHelper.createColorArr(black, controlColorDark, 20);
-        
-        //DISABLED_COLORS = ColorHelper.createColorArr(ColorHelper.darker(controlColorLight, 10), ColorHelper.darker(controlColorDark, 10), 20);
         DISABLED_COLORS = ColorHelper.createColorArr(ColorHelper.brighter(controlColorDark, 5), ColorHelper.darker(controlColorDark, 10), 20);
         
         WINDOW_TITLE_COLORS = ColorHelper.createColorArr(windowTitleColorLight, windowTitleColorDark, 20);

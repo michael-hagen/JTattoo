@@ -88,7 +88,6 @@ public class FastDefaultTheme extends AbstractTheme {
         //ROLLOVER_COLORS = ColorHelper.createColorArr(buttonBackgroundColor, buttonBackgroundColor, 2);
         ROLLOVER_COLORS = ColorHelper.createColorArr(superLightGray, superLightGray, 2);
         SELECTED_COLORS = ColorHelper.createColorArr(backgroundColor, backgroundColor, 2);
-        PRESSED_COLORS = ColorHelper.createColorArr(controlColorDark, controlColorDark, 2);
         DISABLED_COLORS = ColorHelper.createColorArr(controlColorLight, controlColorLight, 2);
 
         BUTTON_COLORS = ColorHelper.createColorArr(buttonBackgroundColor, buttonBackgroundColor, 2);

@@ -55,6 +55,10 @@ public class AeroDefaultTheme extends AbstractTheme {
         selectionForegroundColor = black;
         selectionBackgroundColor = new ColorUIResource(176, 196, 222);
         rolloverColor = new ColorUIResource(192, 212, 230);
+
+        pressedBackgroundColor = new ColorUIResource(176, 196, 222);
+        pressedBackgroundColorLight = new ColorUIResource(ColorHelper.brighter(pressedBackgroundColor, 20));
+        pressedBackgroundColorDark = new ColorUIResource(ColorHelper.darker(pressedBackgroundColor, 5));
         
         buttonBackgroundColor = new ColorUIResource(220, 220, 220);
         buttonColorLight = new ColorUIResource(240, 240, 240);
@@ -111,11 +115,6 @@ public class AeroDefaultTheme extends AbstractTheme {
         ROLLOVER_COLORS = HIDEFAULT_COLORS;
         ACTIVE_COLORS = DEFAULT_COLORS;
         
-        PRESSED_COLORS = new Color[20];
-        for (int i = 0; i < 20; i++) {
-            PRESSED_COLORS[i] = ColorHelper.brighter(DEFAULT_COLORS[i], 40);
-        }
-
         DISABLED_COLORS = ColorHelper.createColorArr(new Color(240,240,240), new Color(220, 220, 220), 20);
         
         color1 = ColorHelper.createColorArr(windowTitleColorLight, windowTitleColorDark, 6);

@@ -787,7 +787,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 
                 // Update the cursor
                 int cursor = getCursor(calculateCorner(w, ev.getX(), ev.getY()));
-                if (cursor != 0 && ((f != null && (f.isResizable() && (DecorationHelper.getExtendedState(f) & BaseRootPaneUI.MAXIMIZED_BOTH) == 0)) || (d != null && d.isResizable()))) {
+                if (!isMovingWindow && cursor != 0 && ((f != null && (f.isResizable() && (DecorationHelper.getExtendedState(f) & BaseRootPaneUI.MAXIMIZED_BOTH) == 0)) || (d != null && d.isResizable()))) {
                     w.setCursor(Cursor.getPredefinedCursor(cursor));
                 } else {
                     w.setCursor(savedCursor);
@@ -837,6 +837,34 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
         public void mouseDragged(MouseEvent ev) {
             if (ev.getSource() instanceof Window) {
                 Window w = (Window) ev.getSource();
+                
+                if (w instanceof Frame) {
+                    Frame frame = (Frame) w;
+                    int frameState = DecorationHelper.getExtendedState(frame);
+                    if ((frameState & BaseRootPaneUI.MAXIMIZED_BOTH) != 0) {
+                        if (internalGetTitlePane() instanceof TitlePane) {
+                            Point pt = ev.getPoint();
+                            Point dragWindowOffset = ev.getPoint();
+                            Point convertedDragWindowOffset = SwingUtilities.convertPoint(w, dragWindowOffset, internalGetTitlePane());
+                            if (internalGetTitlePane().contains(convertedDragWindowOffset)) {
+                                int ow = w.getWidth();
+                                ((TitlePane)internalGetTitlePane()).restore();
+                                int nw = w.getWidth();
+                                int nx = pt.x * nw / ow;
+                                int ny = pt.y;
+                                w.setLocation(nx, ny);
+                                dragOffsetX = nx;
+                                dragOffsetY = ny;
+                                isMovingWindow = true;
+                                PropertyChangeListener[] pcl = frame.getPropertyChangeListeners();
+                                for (int i = 0; i < pcl.length; i++) {
+                                    pcl[i].propertyChange(new PropertyChangeEvent(window, "windowMoving", Boolean.FALSE, Boolean.FALSE));
+                                }
+                            }
+                        }
+                    }
+                }
+                
                 int minScreenY = getMinScreenY();
                 if (isMovingWindow) {
                     if (JTattooUtilities.getJavaVersion() < 1.6) {

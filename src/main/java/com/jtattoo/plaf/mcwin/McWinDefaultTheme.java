@@ -74,6 +74,10 @@ public class McWinDefaultTheme extends AbstractTheme {
         rolloverColorLight = new ColorUIResource(182, 224, 203);
         rolloverColorDark = new ColorUIResource(106, 192, 150);
 
+        pressedBackgroundColor = new ColorUIResource(220, 220, 220);
+        pressedBackgroundColorLight = new ColorUIResource(ColorHelper.brighter(pressedBackgroundColor, 20));
+        pressedBackgroundColorDark = new ColorUIResource(ColorHelper.darker(pressedBackgroundColor, 4));
+        
         windowTitleForegroundColor = new ColorUIResource(22, 34, 44);
         windowTitleBackgroundColor = new ColorUIResource(212, 224, 243);
         windowTitleColorLight = new ColorUIResource(231, 235, 248);
@@ -194,7 +198,7 @@ public class McWinDefaultTheme extends AbstractTheme {
         INACTIVE_COLORS = HIDEFAULT_COLORS;
         SELECTED_COLORS = DEFAULT_COLORS;
 
-        PRESSED_COLORS = ColorHelper.createColorArr(lightGray, extraLightGray, 20);
+        //PRESSED_COLORS = ColorHelper.createColorArr(lightGray, extraLightGray, 20);
         DISABLED_COLORS = new Color[HIDEFAULT_COLORS.length];
         for (int i = 0; i < HIDEFAULT_COLORS.length; i++) {
             DISABLED_COLORS[i] = ColorHelper.brighter(HIDEFAULT_COLORS[i], 40.0);

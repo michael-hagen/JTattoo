@@ -76,6 +76,8 @@ public class AeroLookAndFeel extends AbstractLookAndFeel {
         goldProps.setProperty("rolloverColor", "225 225 159");
         goldProps.setProperty("controlColorLight", "248 248 180");
         goldProps.setProperty("controlColorDark", "200 200 120");
+        goldProps.setProperty("pressedBackgroundColorLight", "249 249 195");
+        goldProps.setProperty("pressedBackgroundColorDark", "232 232 180");
         goldProps.setProperty("windowTitleForegroundColor", "0 0 0");
         goldProps.setProperty("windowTitleBackgroundColor", "248 248 180");
         goldProps.setProperty("windowTitleColorLight", "249 249 195");
@@ -90,6 +92,8 @@ public class AeroLookAndFeel extends AbstractLookAndFeel {
         greenProps.setProperty("rolloverColor", "190 228 206");
         greenProps.setProperty("controlColorLight", "150 211 176");
         greenProps.setProperty("controlColorDark", "60 142 95");
+        greenProps.setProperty("pressedBackgroundColorLight", "171 219 191");
+        greenProps.setProperty("pressedBackgroundColorDark", "150 211 176");
         greenProps.setProperty("windowTitleForegroundColor", "255 255 255");
         greenProps.setProperty("windowTitleBackgroundColor", "80 120 100");
         greenProps.setProperty("windowTitleColorLight", "171 219 191");

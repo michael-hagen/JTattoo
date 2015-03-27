@@ -84,6 +84,10 @@ public class TextureDefaultTheme extends AbstractTheme {
         buttonColorLight = new ColorUIResource(247, 244, 239);
         buttonColorDark = new ColorUIResource(219, 216, 211);
 
+        pressedBackgroundColor = buttonColorDark;
+        pressedBackgroundColorLight = new ColorUIResource(ColorHelper.brighter(pressedBackgroundColor, 20));
+        pressedBackgroundColorDark = new ColorUIResource(ColorHelper.darker(pressedBackgroundColor, 4));
+        
         controlForegroundColor = black;
         controlBackgroundColor = new ColorUIResource(240, 230, 217);
         controlHighlightColor = white;
@@ -168,7 +172,7 @@ public class TextureDefaultTheme extends AbstractTheme {
         ROLLOVER_COLORS = new Color[24];
         System.arraycopy(topColors, 0, ROLLOVER_COLORS, 0, 11);
         System.arraycopy(bottomColors, 0, ROLLOVER_COLORS, 11, 13);
-        PRESSED_COLORS = ColorHelper.createColorArr(buttonColorDark, buttonColorLight, 24);
+        //PRESSED_COLORS = ColorHelper.createColorArr(buttonColorDark, buttonColorLight, 24);
         DISABLED_COLORS = ColorHelper.createColorArr(superLightGray, extraLightGray, 24);
         ACTIVE_COLORS = DEFAULT_COLORS;
         INACTIVE_COLORS = BUTTON_COLORS;

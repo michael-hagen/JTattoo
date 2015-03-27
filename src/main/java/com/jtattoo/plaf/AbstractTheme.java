@@ -103,6 +103,9 @@ public abstract class AbstractTheme extends MetalTheme {
     protected static ColorUIResource rolloverColorLight = null;
     protected static ColorUIResource rolloverColorDark = null;
     protected static ColorUIResource pressedForegroundColor = null;
+    protected static ColorUIResource pressedBackgroundColor = null;
+    protected static ColorUIResource pressedBackgroundColorLight = null;
+    protected static ColorUIResource pressedBackgroundColorDark = null;
     protected static ColorUIResource focusColor = null;
     protected static ColorUIResource focusCellColor = null;
     protected static ColorUIResource focusFrameColor = null;
@@ -266,6 +269,12 @@ public abstract class AbstractTheme extends MetalTheme {
         rolloverColorDark = extraLightGray;
 
         pressedForegroundColor = black;
+//        pressedBackgroundColor = lightGray;
+//        pressedBackgroundColorLight = new ColorUIResource(ColorHelper.brighter(pressedBackgroundColor, 20));
+//        pressedBackgroundColorDark = new ColorUIResource(ColorHelper.darker(pressedBackgroundColor, 4));
+        pressedBackgroundColor = red;
+        pressedBackgroundColorLight = red;
+        pressedBackgroundColorDark = blue;
 
         buttonForegroundColor = black;
         buttonBackgroundColor = lightGray;
@@ -332,7 +341,8 @@ public abstract class AbstractTheme extends MetalTheme {
         SELECTION_COLORS = ColorHelper.createColorArr(selectionBackgroundColorLight, selectionBackgroundColorDark, 20);
         FOCUS_COLORS = ColorHelper.createColorArr(ColorHelper.brighter(focusBackgroundColor, 20), ColorHelper.darker(focusBackgroundColor, 10), 20);
         MENU_SELECTION_COLORS = ColorHelper.createColorArr(menuSelectionBackgroundColorLight, menuSelectionBackgroundColorDark, 20);
-        PRESSED_COLORS = DEFAULT_COLORS;
+        //PRESSED_COLORS = DEFAULT_COLORS;
+        PRESSED_COLORS = ColorHelper.createColorArr(pressedBackgroundColorDark, pressedBackgroundColorLight, 20);
         DISABLED_COLORS = HIDEFAULT_COLORS;
         WINDOW_TITLE_COLORS = ColorHelper.createColorArr(windowTitleColorLight, windowTitleColorDark, 20);
         WINDOW_INACTIVE_TITLE_COLORS = ColorHelper.createColorArr(windowInactiveTitleColorLight, windowInactiveTitleColorDark, 20);
@@ -513,6 +523,15 @@ public abstract class AbstractTheme extends MetalTheme {
             }
             if (props.getProperty("pressedForegroundColor") != null) {
                 pressedForegroundColor = createColor(props.getProperty("pressedForegroundColor"), pressedForegroundColor);
+            }
+            if (props.getProperty("pressedBackgroundColor") != null) {
+                pressedBackgroundColor = createColor(props.getProperty("pressedBackgroundColor"), pressedBackgroundColor);
+            }
+            if (props.getProperty("pressedBackgroundColorLight") != null) {
+                pressedBackgroundColorLight = createColor(props.getProperty("pressedBackgroundColorLight"), pressedBackgroundColorDark);
+            }
+            if (props.getProperty("pressedBackgroundColorDark") != null) {
+                pressedBackgroundColorDark = createColor(props.getProperty("pressedBackgroundColorDark"), pressedBackgroundColorDark);
             }
 
             if (props.getProperty("buttonForegroundColor") != null) {
@@ -1136,6 +1155,10 @@ public abstract class AbstractTheme extends MetalTheme {
 
     public ColorUIResource getPressedForegroundColor() {
         return pressedForegroundColor;
+    }
+
+    public ColorUIResource getPressedBackgroundColor() {
+        return pressedBackgroundColor;
     }
 
     public ColorUIResource getButtonForegroundColor() {

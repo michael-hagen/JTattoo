@@ -46,11 +46,6 @@ public class MintToggleButtonUI extends BaseToggleButtonUI {
             return;
         }
 
-//        if (!(b.isBorderPainted() && (b.getBorder() instanceof UIResource))) {
-//            super.paintBackground(g, b);
-//            return;
-//        }
-
         if ((b.getWidth() < 32) 
                 || (b.getHeight() < 16) 
                 || !(b.isBorderPainted() && (b.getBorder() instanceof UIResource))
@@ -58,7 +53,7 @@ public class MintToggleButtonUI extends BaseToggleButtonUI {
             ButtonModel model = b.getModel();
             Color color = AbstractLookAndFeel.getTheme().getButtonBackgroundColor();
             if ((model.isPressed() && model.isArmed()) || model.isSelected()) {
-                color = AbstractLookAndFeel.getTheme().getSelectionBackgroundColor();
+                color = AbstractLookAndFeel.getTheme().getPressedBackgroundColor();
             } else if (b.isRolloverEnabled() && model.isRollover()) {
                 color = AbstractLookAndFeel.getTheme().getRolloverColor();
             }
@@ -77,7 +72,7 @@ public class MintToggleButtonUI extends BaseToggleButtonUI {
         int height = b.getHeight() - 2;
         ButtonModel model = b.getModel();
         if (model.isPressed() && model.isArmed()) {
-            Color color = AbstractLookAndFeel.getTheme().getSelectionBackgroundColor();
+            Color color = AbstractLookAndFeel.getTheme().getPressedBackgroundColor();
             g2D.setColor(color);
             g2D.fillRoundRect(0, 0, width, height, height, height);
             g2D.setColor(AbstractLookAndFeel.getTheme().getFrameColor());
@@ -87,15 +82,16 @@ public class MintToggleButtonUI extends BaseToggleButtonUI {
             g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRederingHint);
             return;
         } else if (model.isSelected()) {
-            Color frameColor = b.getParent().getBackground();
-            Color[] colors = ColorHelper.createColorArr(AbstractLookAndFeel.getTheme().getBackgroundColor(), Color.white, 20);
             Shape savedClip = g2D.getClip();
             Area area = new Area(new Area(new RoundRectangle2D.Double(0, 0, width, height, height, height)));
             g2D.setClip(area);
-            JTattooUtilities.fillHorGradient(g, colors, 0, 0, width, height);
+            JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getPressedColors(), 0, 0, width, height);
             g2D.setClip(savedClip);
-            JTattooUtilities.drawRound3DBorder(g, ColorHelper.darker(frameColor, 5), ColorHelper.brighter(frameColor, 80), 0, 0, width, height);
-            JTattooUtilities.drawRound3DBorder(g, ColorHelper.darker(frameColor, 20), ColorHelper.brighter(frameColor, 10), 1, 1, width - 2, height - 2);
+            g2D.setColor(ColorHelper.darker(AbstractLookAndFeel.getTheme().getPressedBackgroundColor(), 10));
+            Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
+            g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2D.drawRoundRect(0, 0, width - 1, height - 1, height, height);
+            g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRederingHint);
             return;
         }
 

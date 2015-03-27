@@ -75,6 +75,10 @@ public class GraphiteDefaultTheme extends AbstractTheme {
         rolloverColorLight = new ColorUIResource(255, 213, 113);
         rolloverColorDark = new ColorUIResource(240, 168, 0);
 
+        pressedBackgroundColor = new ColorUIResource(230, 230, 230);
+        pressedBackgroundColorLight = new ColorUIResource(240, 240, 240);
+        pressedBackgroundColorDark = new ColorUIResource(220, 220, 220);
+        
         buttonForegroundColor = black;
         buttonBackgroundColor = extraLightGray;
         buttonColorLight = white;
@@ -143,7 +147,7 @@ public class GraphiteDefaultTheme extends AbstractTheme {
         SELECTION_COLORS = ColorHelper.createColorArr(selectionBackgroundColorLight, selectionBackgroundColorDark, 20);
         MENU_SELECTION_COLORS = ColorHelper.createColorArr(menuSelectionBackgroundColorLight, menuSelectionBackgroundColorDark, 20);
         ROLLOVER_COLORS = ColorHelper.createColorArr(rolloverColorLight, rolloverColorDark, 24);
-        PRESSED_COLORS = ColorHelper.createColorArr(menuColorDark, menuColorLight, 24);
+        //PRESSED_COLORS = ColorHelper.createColorArr(menuColorDark, menuColorLight, 24);
         DISABLED_COLORS = ColorHelper.createColorArr(superLightGray, extraLightGray, 24);
         ACTIVE_COLORS = DEFAULT_COLORS;
         INACTIVE_COLORS = BUTTON_COLORS;

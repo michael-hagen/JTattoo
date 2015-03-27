@@ -78,6 +78,9 @@ public class NoireDefaultTheme extends AbstractTheme {
         rolloverColorDark = new ColorUIResource(196, 137, 0);
         
         pressedForegroundColor = foregroundColor;
+        pressedBackgroundColor = new ColorUIResource(12, 12, 12);
+        pressedBackgroundColorLight = new ColorUIResource(ColorHelper.brighter(pressedBackgroundColor, 2));
+        pressedBackgroundColorDark = new ColorUIResource(ColorHelper.darker(pressedBackgroundColor, 40));
 
         buttonForegroundColor = black;
         buttonBackgroundColor = new ColorUIResource(120, 129, 148);
@@ -169,7 +172,6 @@ public class NoireDefaultTheme extends AbstractTheme {
         ROLLOVER_COLORS = new Color[22];
         System.arraycopy(topColors, 0, ROLLOVER_COLORS, 0, 10);
         System.arraycopy(bottomColors, 0, ROLLOVER_COLORS, 10, 12);
-        PRESSED_COLORS = ColorHelper.createColorArr(ColorHelper.darker(backgroundColor, 5), ColorHelper.brighter(backgroundColor, 5), 20);
         DISABLED_COLORS = ColorHelper.createColorArr(new Color(80, 80, 80), new Color(64, 64, 64), 20);
         topHi = ColorHelper.brighter(windowTitleColorLight, 40);
         topLo = ColorHelper.brighter(windowTitleColorDark, 40);

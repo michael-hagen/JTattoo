@@ -92,6 +92,8 @@ public class SmartLookAndFeel extends AbstractLookAndFeel {
         goldProps.setProperty("controlBackgroundColor", "240 240 240");
         goldProps.setProperty("controlColorLight", "248 248 180");
         goldProps.setProperty("controlColorDark", "200 200 120");
+        goldProps.setProperty("pressedBackgroundColorLight", "249 249 195");
+        goldProps.setProperty("pressedBackgroundColorDark", "232 232 180");
         goldProps.setProperty("buttonColorLight", "255 255 255");
         goldProps.setProperty("buttonColorDark", "230 230 230");
         goldProps.setProperty("rolloverColor", "220 220 169");
@@ -122,6 +124,8 @@ public class SmartLookAndFeel extends AbstractLookAndFeel {
         greenProps.setProperty("controlBackgroundColor", "240 240 240");
         greenProps.setProperty("controlColorLight", "120 199 153");
         greenProps.setProperty("controlColorDark", "60 142 95");
+        greenProps.setProperty("pressedBackgroundColorLight", "171 219 191");
+        greenProps.setProperty("pressedBackgroundColorDark", "150 211 176");
         greenProps.setProperty("buttonColorLight", "255 255 255");
         greenProps.setProperty("buttonColorDark", "230 230 230");
         greenProps.setProperty("rolloverColor", "150 211 176");
@@ -154,6 +158,8 @@ public class SmartLookAndFeel extends AbstractLookAndFeel {
         brownProps.setProperty("controlBackgroundColor", "236 233 216");
         brownProps.setProperty("controlColorLight", "242 240 230");
         brownProps.setProperty("controlColorDark", "215 208 172");
+        brownProps.setProperty("pressedBackgroundColorLight", "236 233 216");
+        brownProps.setProperty("pressedBackgroundColorDark", "224 220 192");
         brownProps.setProperty("buttonColorLight", "255 255 255");
         brownProps.setProperty("buttonColorDark", "244 242 232");
         brownProps.setProperty("rolloverColor", "210 203 164");
@@ -193,6 +199,8 @@ public class SmartLookAndFeel extends AbstractLookAndFeel {
         lemmonProps.setProperty("controlBackgroundColor", "227 231 230");
         lemmonProps.setProperty("controlColorLight", "236 253 138");
         lemmonProps.setProperty("controlColorDark", "170 229 23");
+        lemmonProps.setProperty("pressedBackgroundColorLight", "232 232 232");
+        lemmonProps.setProperty("pressedBackgroundColorDark", "220 220 220");
         lemmonProps.setProperty("buttonColorLight", "236 253 138");
         lemmonProps.setProperty("buttonColorDark", "170 229 23");
         lemmonProps.setProperty("menuBackgroundColor", "227 231 230");
@@ -214,6 +222,8 @@ public class SmartLookAndFeel extends AbstractLookAndFeel {
         grayProps.setProperty("controlBackgroundColor", "244 244 244");
         grayProps.setProperty("controlColorLight", "192 192 192");
         grayProps.setProperty("controlColorDark", "128 128 128");
+        grayProps.setProperty("pressedBackgroundColorLight", "236 236 236");
+        grayProps.setProperty("pressedBackgroundColorDark", "224 224 224");
         grayProps.setProperty("buttonColorLight", "255 255 255");
         grayProps.setProperty("buttonColorDark", "232 232 232");
         grayProps.setProperty("rolloverColor", "212 212 212");

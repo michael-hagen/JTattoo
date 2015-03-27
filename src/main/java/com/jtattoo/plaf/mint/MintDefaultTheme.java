@@ -26,9 +26,7 @@ package com.jtattoo.plaf.mint;
 import com.jtattoo.plaf.AbstractTheme;
 import com.jtattoo.plaf.ColorHelper;
 import java.awt.Color;
-import java.awt.Font;
 import javax.swing.plaf.ColorUIResource;
-import javax.swing.plaf.FontUIResource;
 
 public class MintDefaultTheme extends AbstractTheme {
 
@@ -63,6 +61,10 @@ public class MintDefaultTheme extends AbstractTheme {
         rolloverColorLight = new ColorUIResource(255, 230, 170);
         rolloverColorDark = new ColorUIResource(255, 191, 43);
 
+        pressedBackgroundColor = new ColorUIResource(192, 211, 211);
+        pressedBackgroundColorLight = new ColorUIResource(ColorHelper.brighter(pressedBackgroundColor, 20));
+        pressedBackgroundColorDark = new ColorUIResource(ColorHelper.darker(pressedBackgroundColor, 4));
+        
         buttonBackgroundColor = new ColorUIResource(244, 248, 246);
         buttonColorLight = white;
         buttonColorDark = new ColorUIResource(220, 228, 228);
@@ -108,7 +110,6 @@ public class MintDefaultTheme extends AbstractTheme {
         ACTIVE_COLORS = DEFAULT_COLORS;
         ROLLOVER_COLORS = ColorHelper.createColorArr(rolloverColorLight, rolloverColorDark, 20);
         SELECTED_COLORS = DEFAULT_COLORS;
-        PRESSED_COLORS = ColorHelper.createColorArr(ColorHelper.darker(controlColorLight, 10), ColorHelper.darker(controlColorDark, 10), 20);
         DISABLED_COLORS = ColorHelper.createColorArr(new Color(248, 248, 248), new Color(224, 224, 224), 20);
         WINDOW_TITLE_COLORS = ColorHelper.createColorArr(windowTitleColorLight, windowTitleColorDark, 20);
         WINDOW_INACTIVE_TITLE_COLORS = ColorHelper.createColorArr(windowInactiveTitleColorLight, windowInactiveTitleColorDark, 20);

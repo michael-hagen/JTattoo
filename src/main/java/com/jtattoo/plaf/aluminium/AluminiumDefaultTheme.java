@@ -57,6 +57,10 @@ public class AluminiumDefaultTheme extends AbstractTheme {
         selectionForegroundColor = black;
         selectionBackgroundColor = new ColorUIResource(224, 227, 206);
 
+        pressedBackgroundColor = selectionBackgroundColor;
+        pressedBackgroundColorLight = new ColorUIResource(ColorHelper.brighter(pressedBackgroundColor, 20));
+        pressedBackgroundColorDark = new ColorUIResource(ColorHelper.darker(pressedBackgroundColor, 5));
+        
         focusColor = new ColorUIResource(255, 128, 96);
         focusCellColor = focusColor;
 
@@ -118,7 +122,7 @@ public class AluminiumDefaultTheme extends AbstractTheme {
         ACTIVE_COLORS = DEFAULT_COLORS;
         INACTIVE_COLORS = ColorHelper.createColorArr(new Color(240, 240, 240), new Color(220, 220, 220), 20);
 
-        PRESSED_COLORS = ColorHelper.createColorArr(ColorHelper.darker(selectionBackgroundColor, 5), ColorHelper.brighter(selectionBackgroundColor, 20), 20);
+        //PRESSED_COLORS = ColorHelper.createColorArr(ColorHelper.darker(selectionBackgroundColor, 5), ColorHelper.brighter(selectionBackgroundColor, 20), 20);
         DISABLED_COLORS = ColorHelper.createColorArr(Color.white, Color.lightGray, 20);
         BUTTON_COLORS = new Color[]{
                     new Color(240, 240, 240),

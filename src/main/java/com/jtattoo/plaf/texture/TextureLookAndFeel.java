@@ -100,6 +100,11 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
         rockProps.setProperty("buttonColorLight", "255 255 255");
         rockProps.setProperty("buttonColorDark", "230 230 230");
 
+        rockProps.setProperty("pressedForegroundColor", "0 0 0");
+        rockProps.setProperty("pressedBackgroundColor", "230 230 230");
+        rockProps.setProperty("pressedBackgroundColorLight", "255 255 255");
+        rockProps.setProperty("pressedBackgroundColorDark", "230 230 230");
+        
         rockProps.setProperty("menuBackgroundColor", "64 64 64");
         rockProps.setProperty("menuColorLight", "96 96 96");
         rockProps.setProperty("menuColorDark", "48 48 48");
@@ -138,10 +143,14 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
         textileProps.setProperty("controlColorLight", "240 240 240");
         textileProps.setProperty("controlColorDark", " 210 210 210");
 
-        textileProps.setProperty("pressedForegroundColor", "0 0 0");
         textileProps.setProperty("buttonColorLight", "255 255 255");
         textileProps.setProperty("buttonColorDark", "230 230 230");
 
+        textileProps.setProperty("pressedForegroundColor", "0 0 0");
+        textileProps.setProperty("pressedBackgroundColor", "230 230 230");
+        textileProps.setProperty("pressedBackgroundColorLight", "255 255 255");
+        textileProps.setProperty("pressedBackgroundColorDark", "230 230 230");
+        
         textileProps.setProperty("windowBorderColor", "27 42 111");
         textileProps.setProperty("windowTitleBackgroundColor", "40 54 114");
         textileProps.setProperty("windowTitleColorLight", "80 112 162");
@@ -190,6 +199,11 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
         snowProps.setProperty("buttonColorLight", "255 255 255");
         snowProps.setProperty("buttonColorDark", "230 230 230");
 
+        snowProps.setProperty("pressedForegroundColor", "0 0 0");
+        snowProps.setProperty("pressedBackgroundColor", "230 230 230");
+        snowProps.setProperty("pressedBackgroundColorLight", "255 255 255");
+        snowProps.setProperty("pressedBackgroundColorDark", "230 230 230");
+        
         snowProps.setProperty("windowTitleForegroundColor", "48 64 96");
         snowProps.setProperty("windowTitleBackgroundColor", "200 215 240");
         snowProps.setProperty("windowTitleColorLight", "250 250 250");

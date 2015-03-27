@@ -65,6 +65,10 @@ public class BernsteinDefaultTheme extends AbstractTheme {
         rolloverColor = new ColorUIResource(251, 220, 64);
         
         buttonBackgroundColor = new ColorUIResource(253, 249, 204);
+        
+        pressedBackgroundColor = buttonBackgroundColor;
+        pressedBackgroundColorLight = new ColorUIResource(ColorHelper.brighter(pressedBackgroundColor, 20));
+        pressedBackgroundColorDark = new ColorUIResource(ColorHelper.darker(pressedBackgroundColor, 5));
 
         controlBackgroundColor = new ColorUIResource(253, 249, 204);
         controlHighlightColor = white;
@@ -124,10 +128,10 @@ public class BernsteinDefaultTheme extends AbstractTheme {
         ACTIVE_COLORS = DEFAULT_COLORS;
         INACTIVE_COLORS = HIDEFAULT_COLORS;
         SELECTED_COLORS = DEFAULT_COLORS;
-        PRESSED_COLORS = new Color[DEFAULT_COLORS.length];
-        for (int i = 0; i < DEFAULT_COLORS.length; i++) {
-            PRESSED_COLORS[i] = backgroundColor;
-        }
+//        PRESSED_COLORS = new Color[DEFAULT_COLORS.length];
+//        for (int i = 0; i < DEFAULT_COLORS.length; i++) {
+//            PRESSED_COLORS[i] = backgroundColor;
+//        }
 
         ROLLOVER_COLORS = new Color[DEFAULT_COLORS.length];
         for (int i = 0; i < DEFAULT_COLORS.length; i++) {

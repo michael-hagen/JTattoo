@@ -64,6 +64,10 @@ public class LunaDefaultTheme extends AbstractTheme {
         buttonColorDark = new ColorUIResource(214, 208, 197);
 
         rolloverColor = lightOrange;
+        
+        pressedBackgroundColor = new ColorUIResource(232, 228, 208);
+        pressedBackgroundColorLight = new ColorUIResource(ColorHelper.brighter(pressedBackgroundColor, 20));
+        pressedBackgroundColorDark = new ColorUIResource(ColorHelper.darker(pressedBackgroundColor, 4));
 
         controlForegroundColor = black;
         controlBackgroundColor = new ColorUIResource(236, 233, 216);
@@ -108,7 +112,6 @@ public class LunaDefaultTheme extends AbstractTheme {
 
         ROLLOVER_COLORS = ColorHelper.createColorArr(ColorHelper.brighter(controlColorLight, 30), ColorHelper.brighter(controlColorDark, 20), 30);
         SELECTED_COLORS = DEFAULT_COLORS;
-        PRESSED_COLORS = ColorHelper.createColorArr(controlColorDark, controlColorLight, 20);
         DISABLED_COLORS = ColorHelper.createColorArr(Color.white, Color.lightGray, 20);
 
         // Generate the color arrays
