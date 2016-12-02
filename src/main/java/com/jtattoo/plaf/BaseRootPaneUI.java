@@ -308,7 +308,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
         installWindowListeners(root, root.getParent());
         installLayout(root);
         if (window != null) {
-            savedCursor = window.getCursor();
+            //savedCursor = window.getCursor();
             root.revalidate();
             root.repaint();
         }
@@ -325,8 +325,9 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
             root.revalidate();
         }
         // Reset the cursor, as we may have changed it to a resize cursor
-        if (window != null) {
+        if (window != null && savedCursor != null) {
             window.setCursor(savedCursor);
+            savedCursor = null;
         }
         window = null;
     }
@@ -788,9 +789,13 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
                 // Update the cursor
                 int cursor = getCursor(calculateCorner(w, ev.getX(), ev.getY()));
                 if (!isMovingWindow && cursor != 0 && ((f != null && (f.isResizable() && (DecorationHelper.getExtendedState(f) & BaseRootPaneUI.MAXIMIZED_BOTH) == 0)) || (d != null && d.isResizable()))) {
+                    if (savedCursor == null) {
+                        savedCursor = w.getCursor();
+                    }
                     w.setCursor(Cursor.getPredefinedCursor(cursor));
-                } else {
+                } else if (savedCursor != null) {
                     w.setCursor(savedCursor);
+                    savedCursor = null;
                 }
             }
         }
@@ -931,9 +936,10 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
         }
 
         public void mouseExited(MouseEvent ev) {
-            if (ev.getSource() instanceof Window) {
+            if (ev.getSource() instanceof Window && savedCursor != null) {
                 Window w = (Window) ev.getSource();
                 w.setCursor(savedCursor);
+                savedCursor = null;
             }
         }
 
