@@ -50,7 +50,6 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 
     public void installUI(JComponent c) {
         super.installUI(c);
-//        if ((header != null) && header.getTable() != null) {
         if (header != null) {
             originalHeaderRenderer = header.getDefaultRenderer();
             if ((originalHeaderRenderer != null)
@@ -61,7 +60,6 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
     }
 
     public void uninstallUI(JComponent c) {
-//        if ((header != null) && (header.getTable() != null)) {
         if (header != null) {
             if (header.getDefaultRenderer() instanceof BaseDefaultHeaderRenderer) {
                 header.setDefaultRenderer(originalHeaderRenderer);
@@ -84,15 +82,21 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
                     sortingAllowed = header.getTable().getRowSorter() != null;
                 }
                 if (rolloverEnabled || sortingAllowed || header.getReorderingAllowed()) {
-                    if (header.getBounds().contains(e.getPoint())) {
-                        int oldRolloverCol = rolloverCol;
-                        rolloverCol = header.getTable().columnAtPoint(e.getPoint());
-                        updateRolloverColumn(oldRolloverCol, rolloverCol);
-                    } else {
-                        int oldRolloverCol = rolloverCol;
-                        rolloverCol = -1;
-                        updateRolloverColumn(oldRolloverCol, rolloverCol);
-                    }
+                    final Point pt = e.getPoint();
+                    SwingUtilities.invokeLater(new Runnable() {
+
+                        public void run() {
+                            if (header.getBounds().contains(pt)) {
+                                int oldRolloverCol = rolloverCol;
+                                rolloverCol = header.getTable().columnAtPoint(pt);
+                                updateRolloverColumn(oldRolloverCol, rolloverCol);
+                            } else {
+                                int oldRolloverCol = rolloverCol;
+                                rolloverCol = -1;
+                                updateRolloverColumn(oldRolloverCol, rolloverCol);
+                            }
+                        }
+                    });
                 }
             }
 
@@ -185,7 +189,6 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
     }
 
     protected Component getHeaderRenderer(int col) {
-//        if ((header == null) || (header.getTable() == null)) {
         if (header == null) {
             return null;
         }
@@ -198,7 +201,6 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
     }
 
     private int getHeaderHeight() {
-//        if ((header == null) || (header.getTable() == null)) {
         if (header == null) {
             return 0;
         }
@@ -241,7 +243,6 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
      * @return the preferredSize
      */
     public Dimension getPreferredSize(JComponent c) {
-//        if ((header == null) || (header.getTable() == null)) {
         if (header == null) {
             return new Dimension(0, 0);
         }
@@ -258,7 +259,6 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
     }
 
     protected void updateRolloverColumn(int oldColumn, int newColumn) {
-//        if ((header == null) || (header.getTable() == null)) {
         if (header == null) {
             return;
         }
@@ -271,7 +271,6 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
     }
 
     public void paint(Graphics g, JComponent c) {
-//        if ((header == null) || (header.getTable() == null) || header.getColumnModel().getColumnCount() <= 0) {
         if ((header == null) || header.getColumnModel().getColumnCount() <= 0) {
             return;
         }
@@ -359,7 +358,6 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
     }
 
     protected void paintCell(Graphics g, Rectangle cellRect, int col) {
-//        if ((header == null) || (header.getTable() == null)) {
         if (header == null) {
             return;
         }
@@ -371,7 +369,6 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
     }
 
     private int viewIndexForColumn(TableColumn aColumn) {
-//        if ((header == null) || (header.getTable() == null)) {
         if (header == null) {
             return -1;
         }
