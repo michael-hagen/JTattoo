@@ -86,7 +86,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
     protected FocusListener focusListener;
     // PENDING(api): See comment for ContainerHandler
     private ContainerListener containerListener;
-// Private instance data
+    // Private instance data
     private Insets currentPadInsets = new Insets(0, 0, 0, 0);
     private Insets currentTabAreaInsets = new Insets(0, 0, 0, 0);
     private Component visibleComponent;
@@ -2548,22 +2548,25 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
                         - contentInsets.top - contentInsets.bottom;
 
                 for (int i = 0; i < numChildren; i++) {
-                    Component child = tabPane.getComponent(i);
-                    if (child == tabContainer) {
+                    try {
+                        Component child = tabPane.getComponent(i);
+                        if (tabContainer.equals(child)) {
 
-                        int tabContainerWidth = totalTabWidth == 0 ? cw : totalTabWidth;
-                        int tabContainerHeight = totalTabHeight == 0 ? ch : totalTabHeight;
+                            int tabContainerWidth = totalTabWidth == 0 ? cw : totalTabWidth;
+                            int tabContainerHeight = totalTabHeight == 0 ? ch : totalTabHeight;
 
-                        int tabContainerX = 0;
-                        int tabContainerY = 0;
-                        if (tabPlacement == BOTTOM) {
-                            tabContainerY = bounds.height - tabContainerHeight;
-                        } else if (tabPlacement == RIGHT) {
-                            tabContainerX = bounds.width - tabContainerWidth;
+                            int tabContainerX = 0;
+                            int tabContainerY = 0;
+                            if (tabPlacement == BOTTOM) {
+                                tabContainerY = bounds.height - tabContainerHeight;
+                            } else if (tabPlacement == RIGHT) {
+                                tabContainerX = bounds.width - tabContainerWidth;
+                            }
+                            child.setBounds(tabContainerX, tabContainerY, tabContainerWidth, tabContainerHeight);
+                        } else {
+                            child.setBounds(cx, cy, cw, ch);
                         }
-                        child.setBounds(tabContainerX, tabContainerY, tabContainerWidth, tabContainerHeight);
-                    } else {
-                        child.setBounds(cx, cy, cw, ch);
+                    } catch (Exception ex) {
                     }
                 }
             }
