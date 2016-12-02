@@ -2550,7 +2550,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
                 for (int i = 0; i < numChildren; i++) {
                     try {
                         Component child = tabPane.getComponent(i);
-                        if (tabContainer.equals(child)) {
+                        if (tabContainer == child) {
 
                             int tabContainerWidth = totalTabWidth == 0 ? cw : totalTabWidth;
                             int tabContainerHeight = totalTabHeight == 0 ? ch : totalTabHeight;
