@@ -39,6 +39,7 @@ public class SmartToggleButtonUI extends BaseToggleButtonUI {
         return new SmartToggleButtonUI();
     }
 
+    @Override
     protected void paintBackground(Graphics g, AbstractButton b) {
         super.paintBackground(g, b);
         if (b.isContentAreaFilled() && b.isRolloverEnabled() && b.getModel().isRollover() && b.isBorderPainted() && (b.getBorder() != null)) {
@@ -48,6 +49,7 @@ public class SmartToggleButtonUI extends BaseToggleButtonUI {
             g.drawLine(1, 3, b.getWidth() - 1, 3);
         }
     }
-}
+    
+} // end of class SmartToggleButtonUI
 
 

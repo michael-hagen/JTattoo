@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.aluminium;
 
 import com.jtattoo.plaf.*;
@@ -118,34 +117,42 @@ public class AluminiumLookAndFeel extends AbstractLookAndFeel {
         setTheme(themesProps);
     }
 
+    @Override
     public String getName() {
         return "Aluminium";
     }
 
+    @Override
     public String getID() {
         return "Aluminium";
     }
 
+    @Override
     public String getDescription() {
         return "The Aluminium Look and Feel";
     }
 
+    @Override
     public boolean isNativeLookAndFeel() {
         return false;
     }
 
+    @Override
     public boolean isSupportedLookAndFeel() {
         return true;
     }
 
+    @Override
     public AbstractBorderFactory getBorderFactory() {
         return AluminiumBorderFactory.getInstance();
     }
 
+    @Override
     public AbstractIconFactory getIconFactory() {
         return AluminiumIconFactory.getInstance();
     }
 
+    @Override
     protected void createDefaultTheme() {
         if (myTheme == null) {
             myTheme = new AluminiumDefaultTheme();
@@ -153,6 +160,7 @@ public class AluminiumLookAndFeel extends AbstractLookAndFeel {
         setTheme(myTheme);
     }
 
+    @Override
     protected void initClassDefaults(UIDefaults table) {
         if (!"aluminiumTheme".equals(currentThemeName)) {
             setTheme("Default");
@@ -196,9 +204,8 @@ public class AluminiumLookAndFeel extends AbstractLookAndFeel {
             "RootPaneUI", AluminiumRootPaneUI.class.getName(),
             "DesktopPaneUI", AluminiumDesktopPaneUI.class.getName(),};
         table.putDefaults(uiDefaults);
-        if (JTattooUtilities.getJavaVersion() >= 1.5) {
-            table.put("FormattedTextFieldUI", BaseFormattedTextFieldUI.class.getName());
-            table.put("SpinnerUI", BaseSpinnerUI.class.getName());
-        }
+        table.put("FormattedTextFieldUI", BaseFormattedTextFieldUI.class.getName());
+        table.put("SpinnerUI", BaseSpinnerUI.class.getName());
     }
-}
+    
+} // end of class AluminiumLookAndFeel

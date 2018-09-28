@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.hifi;
 
 import com.jtattoo.plaf.*;
@@ -45,13 +44,9 @@ public class HiFiLabelUI extends BasicLabelUI {
         return hifiLabelUI;
     }
 
+    @Override
     protected void paintEnabledText(JLabel l, Graphics g, String s, int textX, int textY) {
-        int mnemIndex = -1;
-        if (JTattooUtilities.getJavaVersion() >= 1.4) {
-            mnemIndex = l.getDisplayedMnemonicIndex();
-        } else {
-            mnemIndex = JTattooUtilities.findDisplayedMnemonicIndex(l.getText(), l.getDisplayedMnemonic());
-        }
+        int mnemIndex = l.getDisplayedMnemonicIndex();
         Color fc = l.getForeground();
         if (AbstractLookAndFeel.getTheme().isTextShadowOn() && ColorHelper.getGrayValue(fc) > 128) {
             g.setColor(Color.black);
@@ -61,17 +56,13 @@ public class HiFiLabelUI extends BasicLabelUI {
         JTattooUtilities.drawStringUnderlineCharAt(l, g, s, mnemIndex, textX, textY);
     }
 
+    @Override
     protected void paintDisabledText(JLabel l, Graphics g, String s, int textX, int textY) {
-        int mnemIndex = -1;
-        if (JTattooUtilities.getJavaVersion() >= 1.4) {
-            mnemIndex = l.getDisplayedMnemonicIndex();
-        } else {
-            mnemIndex = JTattooUtilities.findDisplayedMnemonicIndex(l.getText(), l.getDisplayedMnemonic());
-        }
+        int mnemIndex = l.getDisplayedMnemonicIndex();
         g.setColor(Color.black);
         JTattooUtilities.drawStringUnderlineCharAt(l, g, s, mnemIndex, textX + 1, textY + 1);
         g.setColor(AbstractLookAndFeel.getDisabledForegroundColor());
         JTattooUtilities.drawStringUnderlineCharAt(l, g, s, mnemIndex, textX, textY);
     }
-}
-
+    
+} // end of class HiFiLabelUI

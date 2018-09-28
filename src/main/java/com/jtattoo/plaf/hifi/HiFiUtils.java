@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.hifi;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
@@ -28,7 +27,7 @@ import com.jtattoo.plaf.JTattooUtilities;
 import java.awt.*;
 
 /**
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
 public class HiFiUtils {
 
@@ -53,4 +52,5 @@ public class HiFiUtils {
             g.fillRect(0, 0, c.getWidth(), c.getHeight());
         }
     }
-}
+    
+} // end of class HiFiUtils

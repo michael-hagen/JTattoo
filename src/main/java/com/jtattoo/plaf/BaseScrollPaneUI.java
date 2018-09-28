@@ -36,4 +36,4 @@ public class BaseScrollPaneUI extends BasicScrollPaneUI {
         return new BaseScrollPaneUI();
     }
     
-}
+} // end of class BaseScrollPaneUI

@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.hifi;
 
 import com.jtattoo.plaf.*;
@@ -35,11 +34,11 @@ import javax.swing.plaf.UIResource;
  * @author Michael Hagen
  */
 public class HiFiIcons extends BaseIcons {
-    
+
     public static Icon getComboBoxIcon() {
         return getDownArrowIcon();
     }
-    
+
     public static Icon getIconIcon() {
         if (iconIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -122,7 +121,7 @@ public class HiFiIcons extends BaseIcons {
         }
         return treeExpandedIcon;
     }
-    
+
     public static Icon getTreeCollapsedIcon() {
         if (treeCollapsedIcon == null) {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -264,11 +263,10 @@ public class HiFiIcons extends BaseIcons {
         }
         return rightArrowIcon;
     }
-    
+
 //----------------------------------------------------------------------------------------------------------------------
 // inner classes    
 //----------------------------------------------------------------------------------------------------------------------
-
     private static class CheckBoxIcon implements Icon, UIResource, Serializable {
 
         private static final int GAP = 2;
@@ -281,7 +279,8 @@ public class HiFiIcons extends BaseIcons {
         private static final Icon LARGE_CHECK_ICON = new LazyImageIcon("hifi/icons/large/check_symbol_16x15.png");
         private static final Icon LARGE_CHECK_INVERSE_ICON = new LazyImageIcon("icons/large/check_symbol_14x14.png");
         private static final Icon LARGE_CHECK_DISABLED_ICON = new LazyImageIcon("icons/large/check_symbol_disabled_14x14.png");
-        
+
+        @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
             if (!JTattooUtilities.isLeftToRight(c)) {
                 x += GAP;
@@ -357,6 +356,7 @@ public class HiFiIcons extends BaseIcons {
             }
         }
 
+        @Override
         public int getIconWidth() {
             int w;
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -369,6 +369,7 @@ public class HiFiIcons extends BaseIcons {
             return w + GAP;
         }
 
+        @Override
         public int getIconHeight() {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
                 return 15;
@@ -382,9 +383,10 @@ public class HiFiIcons extends BaseIcons {
 
 //----------------------------------------------------------------------------------------------------------------------
     private static class RadioButtonIcon implements Icon, UIResource, Serializable {
-        
+
         private static final int GAP = 2;
 
+        @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
             if (!JTattooUtilities.isLeftToRight(c)) {
                 x += GAP;
@@ -409,7 +411,7 @@ public class HiFiIcons extends BaseIcons {
             } else {
                 colors = AbstractLookAndFeel.getTheme().getDisabledColors();
             }
-            
+
             Color frameColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getButtonBackgroundColor(), 6);
             Shape savedClip = g.getClip();
             Area clipArea = new Area(new Ellipse2D.Double(x, y, w + 1, h + 1));
@@ -455,6 +457,7 @@ public class HiFiIcons extends BaseIcons {
             g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRederingHint);
         }
 
+        @Override
         public int getIconWidth() {
             int w;
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -467,6 +470,7 @@ public class HiFiIcons extends BaseIcons {
             return w + GAP;
         }
 
+        @Override
         public int getIconHeight() {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
                 return 14;
@@ -477,4 +481,5 @@ public class HiFiIcons extends BaseIcons {
             }
         }
     }
-}
+    
+} // end of class HiFiIcons

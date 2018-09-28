@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.luna;
 
 import com.jtattoo.plaf.BaseTableHeaderUI;
@@ -29,7 +28,7 @@ import javax.swing.plaf.ComponentUI;
 
 /**
  *
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
 public class LunaTableHeaderUI extends BaseTableHeaderUI {
 
@@ -37,8 +36,9 @@ public class LunaTableHeaderUI extends BaseTableHeaderUI {
         return new LunaTableHeaderUI();
     }
 
+    @Override
     protected boolean drawRolloverBar() {
         return true;
     }
-    
-}
+
+} // end of class LunaTableHeaderUI

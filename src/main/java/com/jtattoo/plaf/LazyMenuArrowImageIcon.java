@@ -73,6 +73,7 @@ public class LazyMenuArrowImageIcon implements Icon {
        }
     }
     
+    @Override
     public int getIconHeight() {
         Icon ico = getIcon(null);
         if (ico != null) {
@@ -82,6 +83,7 @@ public class LazyMenuArrowImageIcon implements Icon {
         }
     }
 
+    @Override
     public int getIconWidth() {
         Icon ico = getIcon(null);
         if (ico != null) {
@@ -91,6 +93,7 @@ public class LazyMenuArrowImageIcon implements Icon {
         }
     }
 
+    @Override
     public void paintIcon(Component c, Graphics g, int x, int y) {
         Icon ico = getIcon(c);
         if (ico != null) {
@@ -104,4 +107,4 @@ public class LazyMenuArrowImageIcon implements Icon {
         }
     }
 
-}
+} // end of class LazyMenuArrowImageIcon

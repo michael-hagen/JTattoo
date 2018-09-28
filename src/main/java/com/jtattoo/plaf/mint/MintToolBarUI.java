@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.mint;
 
 import com.jtattoo.plaf.*;
@@ -38,20 +37,24 @@ public class MintToolBarUI extends AbstractToolBarUI {
         return new MintToolBarUI();
     }
 
+    @Override
     public Border getRolloverBorder() {
         return MintBorders.getRolloverToolButtonBorder();
     }
 
+    @Override
     public Border getNonRolloverBorder() {
         return MintBorders.getToolButtonBorder();
     }
 
+    @Override
     public boolean isButtonOpaque() {
         return false;
     }
 
+    @Override
     public void paint(Graphics g, JComponent c) {
         JTattooUtilities.fillVerGradient(g, AbstractLookAndFeel.getTheme().getToolBarColors(), 0, 0, c.getWidth(), c.getHeight());
     }
-}
-
+    
+} // end of class MintToolBarUI

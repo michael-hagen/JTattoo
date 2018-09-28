@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.mcwin;
 
 import com.jtattoo.plaf.*;
@@ -28,7 +27,7 @@ import java.awt.*;
 import javax.swing.JRootPane;
 
 /**
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
 public class McWinTitlePane extends BaseTitlePane {
 
@@ -36,10 +35,12 @@ public class McWinTitlePane extends BaseTitlePane {
         super(root, ui);
     }
 
+    @Override
     public LayoutManager createLayout() {
         return new TitlePaneLayout();
     }
 
+    @Override
     public void paintBorder(Graphics g) {
         if (isActive()) {
             g.setColor(AbstractLookAndFeel.getTheme().getWindowBorderColor());
@@ -49,6 +50,7 @@ public class McWinTitlePane extends BaseTitlePane {
         g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
     }
 
+    @Override
     public void paintText(Graphics g, int x, int y, String title) {
         if (isActive()) {
             Color fc = AbstractLookAndFeel.getWindowTitleForegroundColor();
@@ -78,17 +80,21 @@ public class McWinTitlePane extends BaseTitlePane {
 //------------------------------------------------------------------------------
     protected class TitlePaneLayout implements LayoutManager {
 
+        @Override
         public void addLayoutComponent(String name, Component c) {
         }
 
+        @Override
         public void removeLayoutComponent(Component c) {
         }
 
+        @Override
         public Dimension preferredLayoutSize(Container c) {
             int height = computeHeight();
             return new Dimension(height, height);
         }
 
+        @Override
         public Dimension minimumLayoutSize(Container c) {
             return preferredLayoutSize(c);
         }
@@ -98,6 +104,7 @@ public class McWinTitlePane extends BaseTitlePane {
             return fm.getHeight() + 5;
         }
 
+        @Override
         public void layoutContainer(Container c) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
                 layoutMacStyle(c);
@@ -105,7 +112,7 @@ public class McWinTitlePane extends BaseTitlePane {
                 layoutDefault(c);
             }
         }
-        
+
         public void layoutDefault(Container c) {
             boolean leftToRight = isLeftToRight();
 
@@ -126,10 +133,10 @@ public class McWinTitlePane extends BaseTitlePane {
                     menuBar.setBounds(getWidth() - mw, (h - mh) / 2, mw, mh);
                 }
             }
-            
+
             int x = leftToRight ? w - spacing : 0;
             int y = Math.max(0, ((h - buttonHeight) / 2) - 1);
-            
+
             if (closeButton != null) {
                 x += leftToRight ? -buttonWidth : spacing;
                 closeButton.setBounds(x, y, buttonWidth, buttonHeight);
@@ -139,7 +146,7 @@ public class McWinTitlePane extends BaseTitlePane {
             }
 
             if ((maxButton != null) && (maxButton.getParent() != null)) {
-                if (DecorationHelper.isFrameStateSupported(Toolkit.getDefaultToolkit(), BaseRootPaneUI.MAXIMIZED_BOTH)) {
+                if (Toolkit.getDefaultToolkit().isFrameStateSupported(BaseRootPaneUI.MAXIMIZED_BOTH)) {
                     x += leftToRight ? -spacing - buttonWidth : spacing;
                     maxButton.setBounds(x, y, buttonWidth, buttonHeight);
                     if (!leftToRight) {
@@ -155,7 +162,7 @@ public class McWinTitlePane extends BaseTitlePane {
                     x += buttonWidth;
                 }
             }
-            
+
             buttonsWidth = leftToRight ? w - x : x;
 
             if (customTitlePanel != null) {
@@ -172,7 +179,7 @@ public class McWinTitlePane extends BaseTitlePane {
                 buttonsWidth += customTitlePanel.getPreferredSize().width;
             }
         }
-        
+
         private void layoutMacStyle(Container c) {
             int spacing = getHorSpacing();
             int h = getHeight();
@@ -193,14 +200,14 @@ public class McWinTitlePane extends BaseTitlePane {
                 x += btnWidth + spacing;
             }
             if ((maxButton != null) && (maxButton.getParent() != null)) {
-                if (DecorationHelper.isFrameStateSupported(Toolkit.getDefaultToolkit(), BaseRootPaneUI.MAXIMIZED_BOTH)) {
+                if (Toolkit.getDefaultToolkit().isFrameStateSupported(BaseRootPaneUI.MAXIMIZED_BOTH)) {
                     maxButton.setBounds(x, y, btnWidth, btnHeight);
                     x += btnWidth + spacing;
                 }
             }
 
             buttonsWidth = x;
-           
+
             if (customTitlePanel != null) {
                 int cpx = buttonsWidth + 5;
                 int cpy = 0;
@@ -210,6 +217,7 @@ public class McWinTitlePane extends BaseTitlePane {
                 buttonsWidth += cpw + 5;
             }
         }
-    } // TitlePaneLayout
+        
+    } // end fo class TitlePaneLayout
 
-}
+} // end of class McWinTitlePane

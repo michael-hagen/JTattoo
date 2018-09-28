@@ -33,7 +33,7 @@ import javax.swing.plaf.ComponentUI;
  */
 public class BernsteinTabbedPaneUI extends BaseTabbedPaneUI {
 
-    private static Color SEP_COLORS[] = {
+    private static final Color SEP_COLORS[] = {
         new Color(229, 187, 0),
         new Color(254, 240, 0),
         new Color(251, 232, 0),
@@ -45,13 +45,15 @@ public class BernsteinTabbedPaneUI extends BaseTabbedPaneUI {
         return new BernsteinTabbedPaneUI();
     }
 
+    @Override
     public void installDefaults() {
         super.installDefaults();
         tabAreaInsets.bottom = 6;
     }
 
+    @Override
     protected Color[] getContentBorderColors(int tabPlacement) {
         return SEP_COLORS;
     }
 
-}
+} // end of class BernsteinTabbedPaneUI

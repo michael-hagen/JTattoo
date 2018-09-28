@@ -70,6 +70,7 @@ public class AeroBorders extends BaseBorders {
 
         private static final Insets insets = new Insets(4, 8, 4, 8);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             Graphics2D g2D = (Graphics2D) g;
             AbstractButton button = (AbstractButton)c;
@@ -89,6 +90,7 @@ public class AeroBorders extends BaseBorders {
             g2D.setComposite(composite);
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
             return insets;
         }
@@ -101,6 +103,7 @@ public class AeroBorders extends BaseBorders {
             return borderInsets;
         }
 
+        @Override
         public boolean isBorderOpaque() {
             return true;
         }
@@ -111,6 +114,7 @@ public class AeroBorders extends BaseBorders {
 
         private static final Insets insets = new Insets(1, 1, 1, 1);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             AbstractButton button = (AbstractButton)c;
             ButtonModel model = button.getModel();
@@ -141,6 +145,7 @@ public class AeroBorders extends BaseBorders {
             }
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
             return new Insets(insets.top, insets.left, insets.bottom, insets.right);
         }
@@ -153,6 +158,7 @@ public class AeroBorders extends BaseBorders {
             return borderInsets;
         }
 
+        @Override
         public boolean isBorderOpaque() {
             return true;
         }
@@ -161,6 +167,7 @@ public class AeroBorders extends BaseBorders {
 
     public static class InternalFrameBorder extends BaseInternalFrameBorder {
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             Color borderColor = AbstractLookAndFeel.getWindowInactiveBorderColor();
             if (isActive(c)) {
@@ -174,7 +181,7 @@ public class AeroBorders extends BaseBorders {
                 cLo = ColorHelper.brighter(cLo, 20);
                 JTattooUtilities.draw3DBorder(g, cHi, cLo, x + 1, y + 1, w - 2, h - 2);
                 g.setColor(borderColor);
-                for (int i = 2; i < dw; i++) {
+                for (int i = 2; i < DW; i++) {
                     g.drawRect(i, i, w - (2 * i) - 1, h - (2 * i) - 1);
                 }
                 return;
@@ -210,26 +217,26 @@ public class AeroBorders extends BaseBorders {
             g.drawLine(x + w - 4, y + 4, x + w - 4, y + h - 4);
 
             g.setColor(cl);
-            g.drawLine(x + w, y, x + w, y + trackWidth);
+            g.drawLine(x + w, y, x + w, y + TRACK_WIDTH);
             g.setColor(ColorHelper.brighter(cl, 20));
-            g.drawLine(x + w - 1, y + 1, x + w - 1, y + trackWidth);
+            g.drawLine(x + w - 1, y + 1, x + w - 1, y + TRACK_WIDTH);
             g.setColor(ColorHelper.brighter(cl, 40));
-            g.drawLine(x + w - 2, y + 2, x + w - 2, y + trackWidth);
+            g.drawLine(x + w - 2, y + 2, x + w - 2, y + TRACK_WIDTH);
             g.setColor(ColorHelper.brighter(cl, 60));
-            g.drawLine(x + w - 3, y + 3, x + w - 3, y + trackWidth);
+            g.drawLine(x + w - 3, y + 3, x + w - 3, y + TRACK_WIDTH);
             g.setColor(cl);
-            g.drawLine(x + w - 4, y + 4, x + w - 4, y + trackWidth);
+            g.drawLine(x + w - 4, y + 4, x + w - 4, y + TRACK_WIDTH);
 
             g.setColor(cl);
-            g.drawLine(x + w, y + h - trackWidth, x + w, y + h);
+            g.drawLine(x + w, y + h - TRACK_WIDTH, x + w, y + h);
             g.setColor(ColorHelper.brighter(cl, 20));
-            g.drawLine(x + w - 1, y + h - trackWidth, x + w - 1, y + h - 1);
+            g.drawLine(x + w - 1, y + h - TRACK_WIDTH, x + w - 1, y + h - 1);
             g.setColor(ColorHelper.brighter(cl, 40));
-            g.drawLine(x + w - 2, y + h - trackWidth, x + w - 2, y + h - 2);
+            g.drawLine(x + w - 2, y + h - TRACK_WIDTH, x + w - 2, y + h - 2);
             g.setColor(ColorHelper.brighter(cl, 60));
-            g.drawLine(x + w - 3, y + h - trackWidth, x + w - 3, y + h - 3);
+            g.drawLine(x + w - 3, y + h - TRACK_WIDTH, x + w - 3, y + h - 3);
             g.setColor(cl);
-            g.drawLine(x + w - 4, y + h - trackWidth, x + w - 4, y + h - 4);
+            g.drawLine(x + w - 4, y + h - TRACK_WIDTH, x + w - 4, y + h - 4);
 
             // oben
             g.setColor(cl);
@@ -259,15 +266,15 @@ public class AeroBorders extends BaseBorders {
             g.drawLine(x + dt, y + 4, x + w - 4, y + 4);
 
             g.setColor(cl);
-            g.drawLine(x + w - trackWidth, y, x + w, y);
+            g.drawLine(x + w - TRACK_WIDTH, y, x + w, y);
             g.setColor(ColorHelper.brighter(cl, 60));
-            g.drawLine(x + w - trackWidth, y + 1, x + w - 1, y + 1);
+            g.drawLine(x + w - TRACK_WIDTH, y + 1, x + w - 1, y + 1);
             g.setColor(ColorHelper.brighter(cl, 40));
-            g.drawLine(x + w - trackWidth, y + 2, x + w - 2, y + 2);
+            g.drawLine(x + w - TRACK_WIDTH, y + 2, x + w - 2, y + 2);
             g.setColor(ColorHelper.brighter(cl, 20));
-            g.drawLine(x + w - trackWidth, y + 3, x + w - 3, y + 3);
+            g.drawLine(x + w - TRACK_WIDTH, y + 3, x + w - 3, y + 3);
             g.setColor(cl);
-            g.drawLine(x + w - trackWidth, y + 4, x + w - 4, y + 4);
+            g.drawLine(x + w - TRACK_WIDTH, y + 4, x + w - 4, y + 4);
 
             // unten
             g.setColor(cl);
@@ -293,18 +300,18 @@ public class AeroBorders extends BaseBorders {
             g.drawLine(x + db, y + h - 4, x + w - 4, y + h - 4);
 
             g.setColor(cl);
-            g.drawLine(x + w - trackWidth, y + h, x + w, y + h);
+            g.drawLine(x + w - TRACK_WIDTH, y + h, x + w, y + h);
             g.setColor(ColorHelper.brighter(cl, 20));
-            g.drawLine(x + w - trackWidth, y + h - 1, x + w - 1, y + h - 1);
+            g.drawLine(x + w - TRACK_WIDTH, y + h - 1, x + w - 1, y + h - 1);
             g.setColor(ColorHelper.brighter(cl, 40));
-            g.drawLine(x + w - trackWidth, y + h - 2, x + w - 2, y + h - 2);
+            g.drawLine(x + w - TRACK_WIDTH, y + h - 2, x + w - 2, y + h - 2);
             g.setColor(ColorHelper.brighter(cl, 60));
-            g.drawLine(x + w - trackWidth, y + h - 3, x + w - 3, y + h - 3);
+            g.drawLine(x + w - TRACK_WIDTH, y + h - 3, x + w - 3, y + h - 3);
             g.setColor(cl);
-            g.drawLine(x + w - trackWidth, y + h - 4, x + w - 4, y + h - 4);
-        } //paintBorder
+            g.drawLine(x + w - TRACK_WIDTH, y + h - 4, x + w - 4, y + h - 4);
+        } // paintBorder
 
-    } // class InternalFrameBorder
+    } // end of class InternalFrameBorder
 
-} // class AeroBorders
+} // end of class AeroBorders
 

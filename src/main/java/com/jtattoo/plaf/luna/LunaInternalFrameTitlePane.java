@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.luna;
 
 import com.jtattoo.plaf.*;
@@ -33,20 +32,23 @@ import javax.swing.JInternalFrame;
  */
 public class LunaInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
-    private static final Color frameColor = new Color(0, 25, 207);
+    private static final Color FRAME_COLOR = new Color(0, 25, 207);
 
     public LunaInternalFrameTitlePane(JInternalFrame f) {
         super(f);
     }
 
+    @Override
     protected int getHorSpacing() {
         return 2;
     }
 
+    @Override
     protected int getVerSpacing() {
         return 5;
     }
 
+    @Override
     public void paintText(Graphics g, int x, int y, String title) {
         if (isActive()) {
             g.setColor(ColorHelper.brighter(AbstractLookAndFeel.getTheme().getWindowBorderColor(), 10));
@@ -60,12 +62,14 @@ public class LunaInternalFrameTitlePane extends BaseInternalFrameTitlePane {
         JTattooUtilities.drawString(frame, g, title, x, y - 1);
     }
 
+    @Override
     public void paintBorder(Graphics g) {
         if (!JTattooUtilities.isActive(this)) {
-            g.setColor(ColorHelper.brighter(frameColor, 20));
+            g.setColor(ColorHelper.brighter(FRAME_COLOR, 20));
         } else {
-            g.setColor(frameColor);
+            g.setColor(FRAME_COLOR);
         }
         g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
     }
-}
+    
+} // end of class LunaInternalFrameTitlePane

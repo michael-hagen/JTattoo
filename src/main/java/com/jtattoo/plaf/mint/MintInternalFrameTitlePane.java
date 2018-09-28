@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.mint;
 
 import com.jtattoo.plaf.*;
@@ -37,6 +36,7 @@ public class MintInternalFrameTitlePane extends BaseInternalFrameTitlePane {
         super(f);
     }
 
+    @Override
     public void paintPalette(Graphics g) {
         if (JTattooUtilities.isFrameActive(this)) {
             JTattooUtilities.fillVerGradient(g, AbstractLookAndFeel.getTheme().getWindowTitleColors(), 0, 0, getWidth(), getHeight());
@@ -45,6 +45,7 @@ public class MintInternalFrameTitlePane extends BaseInternalFrameTitlePane {
         }
     }
 
+    @Override
     public void paintBackground(Graphics g) {
         if (JTattooUtilities.isActive(this)) {
             setBackground(AbstractLookAndFeel.getTheme().getWindowTitleBackgroundColor());
@@ -55,10 +56,12 @@ public class MintInternalFrameTitlePane extends BaseInternalFrameTitlePane {
         }
     }
 
+    @Override
     public void paintBorder(Graphics g) {
         g.setColor(ColorHelper.darker(AbstractLookAndFeel.getTheme().getWindowTitleColorDark(), 10));
         g.drawLine(0, getHeight() - 2, getWidth(), getHeight() - 2);
         g.setColor(Color.white);
         g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
     }
-}
+    
+} // end of class MintInternalFrameTitlePane

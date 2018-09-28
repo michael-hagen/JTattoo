@@ -48,6 +48,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
         return new BaseTableHeaderUI();
     }
 
+    @Override
     public void installUI(JComponent c) {
         super.installUI(c);
         if (header != null) {
@@ -59,6 +60,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
         }
     }
 
+    @Override
     public void uninstallUI(JComponent c) {
         if (header != null) {
             if (header.getDefaultRenderer() instanceof BaseDefaultHeaderRenderer) {
@@ -68,23 +70,23 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
         super.uninstallUI(c);
     }
 
+    @Override
     public void installListeners() {
         super.installListeners();
         myMouseAdapter = new MouseAdapter() {
             
+            @Override
             public void mouseReleased(MouseEvent e) {
                 if ((header == null) || (header.getTable() == null)) {
                     return;
                 }
                 boolean rolloverEnabled = Boolean.TRUE.equals(header.getClientProperty("rolloverEnabled"));
-                boolean sortingAllowed = false;
-                if (JTattooUtilities.getJavaVersion() >= 1.6) {
-                    sortingAllowed = header.getTable().getRowSorter() != null;
-                }
+                boolean sortingAllowed = header.getTable().getRowSorter() != null;
                 if (rolloverEnabled || sortingAllowed || header.getReorderingAllowed()) {
                     final Point pt = e.getPoint();
                     SwingUtilities.invokeLater(new Runnable() {
 
+                        @Override
                         public void run() {
                             if (header.getBounds().contains(pt)) {
                                 int oldRolloverCol = rolloverCol;
@@ -100,15 +102,13 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
                 }
             }
 
+            @Override
             public void mouseEntered(MouseEvent e) {
                 if ((header == null) || (header.getTable() == null)) {
                     return;
                 }
                 boolean rolloverEnabled = Boolean.TRUE.equals(header.getClientProperty("rolloverEnabled"));
-                boolean sortingAllowed = false;
-                if (JTattooUtilities.getJavaVersion() >= 1.6) {
-                    sortingAllowed = header.getTable().getRowSorter() != null;
-                }
+                boolean sortingAllowed = header.getTable().getRowSorter() != null;
                 if (rolloverEnabled || sortingAllowed || header.getReorderingAllowed()) {
                     int oldRolloverCol = rolloverCol;
                     rolloverCol = header.getTable().columnAtPoint(e.getPoint());
@@ -116,15 +116,13 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
                 }
             }
 
+            @Override
             public void mouseExited(MouseEvent e) {
                 if ((header == null) || (header.getTable() == null)) {
                     return;
                 }
                 boolean rolloverEnabled = Boolean.TRUE.equals(header.getClientProperty("rolloverEnabled"));
-                boolean sortingAllowed = false;
-                if (JTattooUtilities.getJavaVersion() >= 1.6) {
-                    sortingAllowed = header.getTable().getRowSorter() != null;
-                }
+                boolean sortingAllowed = header.getTable().getRowSorter() != null;
                 if (rolloverEnabled || sortingAllowed || header.getReorderingAllowed()) {
                     int oldRolloverCol = rolloverCol;
                     rolloverCol = -1;
@@ -134,15 +132,13 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
         };
         myMouseMotionAdapter = new MouseMotionAdapter() {
             
+            @Override
             public void mouseMoved(MouseEvent e) {
                 if ((header == null) || (header.getTable() == null)) {
                     return;
                 }
                 boolean rolloverEnabled = Boolean.TRUE.equals(header.getClientProperty("rolloverEnabled"));
-                boolean sortingAllowed = false;
-                if (JTattooUtilities.getJavaVersion() >= 1.6) {
-                    sortingAllowed = header.getTable().getRowSorter() != null;
-                }
+                boolean sortingAllowed = header.getTable().getRowSorter() != null;
                 if (rolloverEnabled || sortingAllowed || header.getReorderingAllowed()) {
                     if (header.getDraggedColumn() == null) {
                         int oldRolloverCol = rolloverCol;
@@ -152,15 +148,13 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
                 }
             }
 
+            @Override
             public void mouseDragged(MouseEvent e) {
                 if ((header == null) || (header.getTable() == null)) {
                     return;
                 }
                 boolean rolloverEnabled = Boolean.TRUE.equals(header.getClientProperty("rolloverEnabled"));
-                boolean sortingAllowed = false;
-                if (JTattooUtilities.getJavaVersion() >= 1.6) {
-                    sortingAllowed = header.getTable().getRowSorter() != null;
-                }
+                boolean sortingAllowed = header.getTable().getRowSorter() != null;
                 if (rolloverEnabled || sortingAllowed || header.getReorderingAllowed()) {
                     if (header.getDraggedColumn() != null && header.getDraggedColumn().getIdentifier() != null) {
                         rolloverCol = header.getColumnModel().getColumnIndex(header.getDraggedColumn().getIdentifier());
@@ -174,6 +168,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
         header.addMouseMotionListener(myMouseMotionAdapter);
     }
 
+    @Override
     public void uninstallListeners() {
         header.removeMouseListener(myMouseAdapter);
         header.removeMouseMotionListener(myMouseMotionAdapter);
@@ -242,6 +237,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
      * 
      * @return the preferredSize
      */
+    @Override
     public Dimension getPreferredSize(JComponent c) {
         if (header == null) {
             return new Dimension(0, 0);
@@ -266,10 +262,12 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
         header.repaint(header.getHeaderRect(newColumn));
     }
 
+    @Override
     protected void rolloverColumnUpdated(int oldColumn, int newColumn) {
         // Empty to avoid multiple paints
     }
 
+    @Override
     public void paint(Graphics g, JComponent c) {
         if ((header == null) || header.getColumnModel().getColumnCount() <= 0) {
             return;
@@ -390,10 +388,12 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
             super();
         }
 
+        @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             return new MyRenderComponent(table, value, isSelected, hasFocus, row, column);
         }
-    }
+        
+    } // end of class BaseDefaultHeaderRenderer
 
     private class MyRenderComponent extends JLabel {
 
@@ -423,7 +423,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
             setHorizontalAlignment(JLabel.CENTER);
             setHorizontalTextPosition(SwingConstants.LEADING);
             setBorder(UIManager.getBorder("TableHeader.cellBorder"));
-            if (table != null && (JTattooUtilities.getJavaVersion() >= 1.6) && (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel)) {
+            if ((table != null) && (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel)) {
                 RowSorter rowSorter = table.getRowSorter();
                 List keyList = rowSorter == null ? null : rowSorter.getSortKeys();
                 if ((keyList != null) && (keyList.size() > 0)) {
@@ -479,9 +479,12 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
             }
         }
 
+        @Override
         public void paint(Graphics g) {
             paintBackground(g);
             super.paint(g);
         }
-    }
-}
+        
+    } // end of class MyRenderComponent
+    
+} // end of class BaseTableHeaderUI

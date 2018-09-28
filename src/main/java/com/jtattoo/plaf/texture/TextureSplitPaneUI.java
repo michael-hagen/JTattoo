@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.texture;
 
 import com.jtattoo.plaf.BaseSplitPaneUI;
@@ -37,7 +36,9 @@ public class TextureSplitPaneUI extends BaseSplitPaneUI {
         return new TextureSplitPaneUI();
     }
 
+    @Override
     public BasicSplitPaneDivider createDefaultDivider() {
         return new TextureSplitPaneDivider(this);
     }
-}
+    
+} // end of class TextureSplitPaneUI

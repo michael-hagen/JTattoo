@@ -36,8 +36,10 @@ public class AluminiumScrollPaneUI extends BaseScrollPaneUI {
         return new AluminiumScrollPaneUI();
     }
 
+    @Override
     public void installDefaults(JScrollPane p) {
         super.installDefaults(p);
         p.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
     }
-}
+    
+} // end of class AluminiumScrollPaneUI

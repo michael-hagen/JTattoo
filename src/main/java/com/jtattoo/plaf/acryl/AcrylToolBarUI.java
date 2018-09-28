@@ -37,18 +37,22 @@ public class AcrylToolBarUI extends AbstractToolBarUI {
         return new AcrylToolBarUI();
     }
 
+    @Override
     public Border getRolloverBorder() {
         return AcrylBorders.getRolloverToolButtonBorder();
     }
 
+    @Override
     public Border getNonRolloverBorder() {
         return AcrylBorders.getToolButtonBorder();
     }
 
+    @Override
     public boolean isButtonOpaque() {
         return false;
     }
 
+    @Override
     public void paint(Graphics g, JComponent c) {
         int w = c.getWidth();
         int h = c.getHeight();
@@ -62,4 +66,5 @@ public class AcrylToolBarUI extends AbstractToolBarUI {
             g.drawLine(0, h - 1, w, h - 1);
         }
     }
-}
+    
+} // end of class AcrylToolBarUI

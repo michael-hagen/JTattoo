@@ -35,10 +35,12 @@ public class TextureComboBoxUI extends BaseComboBoxUI {
         return new TextureComboBoxUI();
     }
 
+    @Override
     public JButton createArrowButton() {
         return new ArrowButton();
     }
 
+    @Override
     protected void setButtonBorder() {
     }
 
@@ -51,6 +53,7 @@ public class TextureComboBoxUI extends BaseComboBoxUI {
             setContentAreaFilled(false);
         }
 
+        @Override
         public void paint(Graphics g) {
             Graphics2D g2D = (Graphics2D) g;
 
@@ -105,5 +108,6 @@ public class TextureComboBoxUI extends BaseComboBoxUI {
                 icon.paintIcon(this, g, x + dx + 1, y);
             }
         }
-    } // end class ArrowButton
-}
+    } // end of class ArrowButton
+    
+} // end of class TextureCheckBoxUI

@@ -38,6 +38,7 @@ public class BaseDesktopPaneUI extends BasicDesktopPaneUI {
         return new BaseDesktopPaneUI();
     }
 
+    @Override
     public void update(Graphics g, JComponent c) {
         if (c.isOpaque()) {
             Object backgroundTexture = c.getClientProperty("backgroundTexture");
@@ -50,4 +51,5 @@ public class BaseDesktopPaneUI extends BasicDesktopPaneUI {
         }
         paint(g, c);
     }
-}
+
+} // end of class BaseDesktopPaneUI

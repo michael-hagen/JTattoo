@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.aluminium;
 
 import com.jtattoo.plaf.BaseInternalFrameUI;
@@ -41,9 +40,10 @@ public class AluminiumInternalFrameUI extends BaseInternalFrameUI {
         return new AluminiumInternalFrameUI((JInternalFrame) c);
     }
 
+    @Override
     protected JComponent createNorthPane(JInternalFrame w) {
         titlePane = new AluminiumInternalFrameTitlePane(w);
         return titlePane;
     }
-}
-
+    
+} // end of class AluminiumInternalFrameUI

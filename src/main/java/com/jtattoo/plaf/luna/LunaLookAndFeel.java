@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.luna;
 
 import com.jtattoo.plaf.*;
@@ -118,34 +117,42 @@ public class LunaLookAndFeel extends AbstractLookAndFeel {
         setTheme(themesProps);
     }
 
+    @Override
     public String getName() {
         return "XP";
     }
 
+    @Override
     public String getID() {
         return "XP";
     }
 
+    @Override
     public String getDescription() {
         return "The XP Look and Feel";
     }
 
+    @Override
     public boolean isNativeLookAndFeel() {
         return false;
     }
 
+    @Override
     public boolean isSupportedLookAndFeel() {
         return true;
     }
 
+    @Override
     public AbstractBorderFactory getBorderFactory() {
         return LunaBorderFactory.getInstance();
     }
 
+    @Override
     public AbstractIconFactory getIconFactory() {
         return LunaIconFactory.getInstance();
     }
 
+    @Override
     protected void createDefaultTheme() {
         if (myTheme == null) {
             myTheme = new LunaDefaultTheme();
@@ -153,12 +160,14 @@ public class LunaLookAndFeel extends AbstractLookAndFeel {
         setTheme(myTheme);
     }
 
+    @Override
     protected void initComponentDefaults(UIDefaults table) {
         super.initComponentDefaults(table);
-        table.put("ScrollBar.incrementButtonGap", new Integer(-1));
-        table.put("ScrollBar.decrementButtonGap", new Integer(-1));
+        table.put("ScrollBar.incrementButtonGap", -1);
+        table.put("ScrollBar.decrementButtonGap", -1);
     }
-    
+
+    @Override
     protected void initClassDefaults(UIDefaults table) {
         if (!"lunaTheme".equals(currentThemeName)) {
             setTheme("Default");
@@ -192,7 +201,6 @@ public class LunaLookAndFeel extends AbstractLookAndFeel {
             "RadioButtonMenuItemUI", BaseRadioButtonMenuItemUI.class.getName(),
             "PopupMenuSeparatorUI", BaseSeparatorUI.class.getName(),
             "DesktopPaneUI", BaseDesktopPaneUI.class.getName(),
-
             // LunaLookAndFeel classes
             "ButtonUI", LunaButtonUI.class.getName(),
             "ComboBoxUI", LunaComboBoxUI.class.getName(),
@@ -203,9 +211,8 @@ public class LunaLookAndFeel extends AbstractLookAndFeel {
             "InternalFrameUI", LunaInternalFrameUI.class.getName(),
             "RootPaneUI", LunaRootPaneUI.class.getName(),};
         table.putDefaults(uiDefaults);
-        if (JTattooUtilities.getJavaVersion() >= 1.5) {
-            table.put("FormattedTextFieldUI", BaseFormattedTextFieldUI.class.getName());
-            table.put("SpinnerUI", BaseSpinnerUI.class.getName());
-        }
+        table.put("FormattedTextFieldUI", BaseFormattedTextFieldUI.class.getName());
+        table.put("SpinnerUI", BaseSpinnerUI.class.getName());
     }
-}
+    
+} // end of class LunaLookAndFeel

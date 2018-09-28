@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.fast;
 
 import com.jtattoo.plaf.*;
@@ -38,6 +37,7 @@ public class FastTabbedPaneUI extends BaseTabbedPaneUI {
         return new FastTabbedPaneUI();
     }
 
+    @Override
     public void installDefaults() {
         super.installDefaults();
         roundedTabs = false;
@@ -45,10 +45,12 @@ public class FastTabbedPaneUI extends BaseTabbedPaneUI {
         contentBorderInsets = new Insets(0, 0, 0, 0);
     }
 
+    @Override
     protected boolean hasInnerBorder() {
         return true;
     }
 
+    @Override
     protected Color[] getTabColors(int tabIndex, boolean isSelected, boolean isRollover) {
         Color colorArr[] = AbstractLookAndFeel.getTheme().getTabColors();
         if ((tabIndex >= 0) && (tabIndex < tabPane.getTabCount())) {
@@ -69,7 +71,8 @@ public class FastTabbedPaneUI extends BaseTabbedPaneUI {
         }
         return colorArr;
     }
-    
+
+    @Override
     protected void paintTabBackground(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
         if (isTabOpaque() || isSelected) {
             Color colorArr[] = getTabColors(tabIndex, isSelected, false);
@@ -107,4 +110,4 @@ public class FastTabbedPaneUI extends BaseTabbedPaneUI {
         }
     }
 
-}
+} // end of class FastTabbedPaneUI

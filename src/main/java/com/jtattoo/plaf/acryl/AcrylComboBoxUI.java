@@ -38,6 +38,7 @@ public class AcrylComboBoxUI extends BaseComboBoxUI {
         return new AcrylComboBoxUI();
     }
 
+    @Override
     public JButton createArrowButton() {
         ArrowButton button = new BaseComboBoxUI.ArrowButton();
         Color borderColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFrameColor(), 50);
@@ -51,6 +52,7 @@ public class AcrylComboBoxUI extends BaseComboBoxUI {
         return button;
     }
 
+    @Override
     protected void setButtonBorder() {
         Color borderColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFrameColor(), 50);
         if (JTattooUtilities.isLeftToRight(comboBox)) {
@@ -61,4 +63,5 @@ public class AcrylComboBoxUI extends BaseComboBoxUI {
             arrowButton.setBorder(border);
         }
     }
-}
+    
+} // end of class AcrylComboBoxUI

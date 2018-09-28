@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.mcwin;
 
 import com.jtattoo.plaf.*;
@@ -35,12 +34,13 @@ import javax.swing.plaf.ComponentUI;
  */
 public class McWinMenuBarUI extends BaseMenuBarUI {
 
-    private static final Color shadowColors[] = ColorHelper.createColorArr(Color.white, new Color(240, 240, 240), 8);
+    private static final Color SHADOW_COLORS[] = ColorHelper.createColorArr(Color.white, new Color(240, 240, 240), 8);
 
     public static ComponentUI createUI(JComponent x) {
         return new McWinMenuBarUI();
     }
 
+    @Override
     public void installUI(JComponent c) {
         super.installUI(c);
         if ((c != null) && (c instanceof JMenuBar)) {
@@ -49,11 +49,13 @@ public class McWinMenuBarUI extends BaseMenuBarUI {
         }
     }
 
+    @Override
     public void paint(Graphics g, JComponent c) {
         if (AbstractLookAndFeel.getTheme().isBackgroundPatternOn()) {
-            McWinUtils.fillComponent(g, c, shadowColors);
+            McWinUtils.fillComponent(g, c, SHADOW_COLORS);
         } else {
             super.paint(g, c);
         }
     }
-}
+    
+} // end of class

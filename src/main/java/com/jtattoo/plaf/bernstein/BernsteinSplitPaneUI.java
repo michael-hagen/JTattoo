@@ -37,7 +37,9 @@ public class BernsteinSplitPaneUI extends BaseSplitPaneUI {
         return new BernsteinSplitPaneUI();
     }
 
+    @Override
     public BasicSplitPaneDivider createDefaultDivider() {
         return new BernsteinSplitPaneDivider(this);
     }
-}
+    
+} // end of class BernsteinSplitPaneUI

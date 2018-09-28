@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.bernstein;
 
 import com.jtattoo.plaf.*;
@@ -28,7 +27,7 @@ import java.awt.*;
 import javax.swing.JRootPane;
 
 /**
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
 public class BernsteinTitlePane extends BaseTitlePane {
 
@@ -36,6 +35,7 @@ public class BernsteinTitlePane extends BaseTitlePane {
         super(root, ui);
     }
 
+    @Override
     public void paintBackground(Graphics g) {
         if (backgroundImage != null) {
             g.drawImage(backgroundImage, 0, 0, null);
@@ -55,6 +55,7 @@ public class BernsteinTitlePane extends BaseTitlePane {
         g2D.setComposite(composite);
     }
 
+    @Override
     public void paintBorder(Graphics g) {
         if (isActive()) {
             g.setColor(AbstractLookAndFeel.getTheme().getWindowBorderColor());
@@ -63,4 +64,5 @@ public class BernsteinTitlePane extends BaseTitlePane {
         }
         g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
     }
-}
+    
+} // end of class BernsteinTitlePane

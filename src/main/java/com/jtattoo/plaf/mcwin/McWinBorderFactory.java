@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.mcwin;
 
 import com.jtattoo.plaf.AbstractBorderFactory;
@@ -43,80 +42,99 @@ public class McWinBorderFactory implements AbstractBorderFactory {
         return instance;
     }
 
+    @Override
     public Border getFocusFrameBorder() {
         return McWinBorders.getFocusFrameBorder();
     }
 
+    @Override
     public Border getButtonBorder() {
         return McWinBorders.getButtonBorder();
     }
 
+    @Override
     public Border getToggleButtonBorder() {
         return McWinBorders.getToggleButtonBorder();
     }
 
+    @Override
     public Border getTextBorder() {
         return McWinBorders.getTextBorder();
     }
 
+    @Override
     public Border getSpinnerBorder() {
         return McWinBorders.getSpinnerBorder();
     }
 
+    @Override
     public Border getTextFieldBorder() {
         return McWinBorders.getTextFieldBorder();
     }
 
+    @Override
     public Border getComboBoxBorder() {
         return McWinBorders.getComboBoxBorder();
     }
 
+    @Override
     public Border getTableHeaderBorder() {
         return McWinBorders.getTableHeaderBorder();
     }
 
+    @Override
     public Border getTableScrollPaneBorder() {
         return McWinBorders.getTableScrollPaneBorder();
     }
 
+    @Override
     public Border getScrollPaneBorder() {
         return McWinBorders.getScrollPaneBorder();
     }
 
+    @Override
     public Border getTabbedPaneBorder() {
         return McWinBorders.getTabbedPaneBorder();
     }
 
+    @Override
     public Border getMenuBarBorder() {
         return McWinBorders.getMenuBarBorder();
     }
 
+    @Override
     public Border getMenuItemBorder() {
         return McWinBorders.getMenuItemBorder();
     }
 
+    @Override
     public Border getPopupMenuBorder() {
         return McWinBorders.getPopupMenuBorder();
     }
 
+    @Override
     public Border getInternalFrameBorder() {
         return McWinBorders.getInternalFrameBorder();
     }
 
+    @Override
     public Border getPaletteBorder() {
         return McWinBorders.getPaletteBorder();
     }
 
+    @Override
     public Border getToolBarBorder() {
         return McWinBorders.getToolBarBorder();
     }
 
+    @Override
     public Border getProgressBarBorder() {
         return McWinBorders.getProgressBarBorder();
     }
 
+    @Override
     public Border getDesktopIconBorder() {
         return McWinBorders.getDesktopIconBorder();
     }
-}
-
+    
+} // end of class McWinBorderFactory

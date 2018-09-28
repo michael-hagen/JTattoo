@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.noire;
 
 import com.jtattoo.plaf.AbstractTheme;
@@ -45,17 +44,19 @@ public class NoireDefaultTheme extends AbstractTheme {
         setUpColorArrs();
     }
 
+    @Override
     public String getPropertyFileName() {
         return "NoireTheme.properties";
     }
 
+    @Override
     public void setUpColor() {
         super.setUpColor();
 
         // Defaults for NoireLookAndFeel
         textShadow = true;
-        foregroundColor = white;
-        disabledForegroundColor = gray;
+        foregroundColor = WHITE;
+        disabledForegroundColor = GRAY;
         disabledBackgroundColor = new ColorUIResource(48, 48, 48);
 
         backgroundColor = new ColorUIResource(24, 26, 28);
@@ -64,25 +65,25 @@ public class NoireDefaultTheme extends AbstractTheme {
         alterBackgroundColor = new ColorUIResource(78, 84, 90);
 
         selectionForegroundColor = new ColorUIResource(255, 220, 120);
-        selectionBackgroundColor = black;
-        frameColor = black;
-        gridColor = black;
-        focusCellColor = orange;
+        selectionBackgroundColor = BLACK;
+        frameColor = BLACK;
+        gridColor = BLACK;
+        focusCellColor = ORANGE;
 
         inputBackgroundColor = new ColorUIResource(52, 55, 59);
         inputForegroundColor = foregroundColor;
 
-        rolloverForegroundColor = white;
+        rolloverForegroundColor = WHITE;
         rolloverColor = new ColorUIResource(240, 168, 0);
         rolloverColorLight = new ColorUIResource(240, 168, 0);
         rolloverColorDark = new ColorUIResource(196, 137, 0);
-        
+
         pressedForegroundColor = foregroundColor;
         pressedBackgroundColor = new ColorUIResource(12, 12, 12);
         pressedBackgroundColorLight = new ColorUIResource(ColorHelper.brighter(pressedBackgroundColor, 2));
         pressedBackgroundColorDark = new ColorUIResource(ColorHelper.darker(pressedBackgroundColor, 40));
 
-        buttonForegroundColor = black;
+        buttonForegroundColor = BLACK;
         buttonBackgroundColor = new ColorUIResource(120, 129, 148);
         buttonColorLight = new ColorUIResource(232, 238, 244);
         buttonColorDark = new ColorUIResource(196, 200, 208);
@@ -93,26 +94,26 @@ public class NoireDefaultTheme extends AbstractTheme {
         controlColorDark = new ColorUIResource(16, 18, 20);
         controlHighlightColor = new ColorUIResource(96, 96, 96);
         controlShadowColor = new ColorUIResource(32, 32, 32);
-        controlDarkShadowColor = black;
+        controlDarkShadowColor = BLACK;
 
         windowTitleForegroundColor = foregroundColor;
         windowTitleBackgroundColor = new ColorUIResource(16, 17, 15);
         windowTitleColorLight = new ColorUIResource(64, 67, 60);
-        windowTitleColorDark = black;
-        windowBorderColor = black;
-        windowIconColor = lightGray;
-        windowIconShadowColor = black;
-        windowIconRolloverColor = orange;
+        windowTitleColorDark = BLACK;
+        windowBorderColor = BLACK;
+        windowIconColor = LIGHT_GRAY;
+        windowIconShadowColor = BLACK;
+        windowIconRolloverColor = ORANGE;
 
         windowInactiveTitleForegroundColor = new ColorUIResource(196, 196, 196);
         windowInactiveTitleBackgroundColor = new ColorUIResource(16, 16, 16);
         windowInactiveTitleColorLight = new ColorUIResource(64, 64, 64);
         windowInactiveTitleColorDark = new ColorUIResource(32, 32, 32);
-        windowInactiveBorderColor = black;
+        windowInactiveBorderColor = BLACK;
 
-        menuForegroundColor = white;
+        menuForegroundColor = WHITE;
         menuBackgroundColor = new ColorUIResource(24, 26, 28);
-        menuSelectionForegroundColor = black;
+        menuSelectionForegroundColor = BLACK;
         menuSelectionBackgroundColor = new ColorUIResource(196, 137, 0);
         menuColorLight = new ColorUIResource(96, 96, 96);
         menuColorDark = new ColorUIResource(32, 32, 32);
@@ -123,9 +124,9 @@ public class NoireDefaultTheme extends AbstractTheme {
 
         tabAreaBackgroundColor = backgroundColor;
         desktopColor = new ColorUIResource(52, 55, 59);
-        
-        tooltipForegroundColor = white;
-        tooltipBackgroundColor = black;//new ColorUIResource(16, 16, 16);
+
+        tooltipForegroundColor = WHITE;
+        tooltipBackgroundColor = BLACK;//new ColorUIResource(16, 16, 16);
 
         controlFont = new FontUIResource("Dialog", Font.BOLD, 12);
         systemFont = new FontUIResource("Dialog", Font.BOLD, 12);
@@ -135,6 +136,7 @@ public class NoireDefaultTheme extends AbstractTheme {
         smallFont = new FontUIResource("Dialog", Font.PLAIN, 10);
     }
 
+    @Override
     public void setUpColorArrs() {
         super.setUpColorArrs();
         Color topHi = ColorHelper.brighter(buttonColorLight, 50);
@@ -157,7 +159,7 @@ public class NoireDefaultTheme extends AbstractTheme {
         DEFAULT_COLORS = new Color[22];
         System.arraycopy(topColors, 0, DEFAULT_COLORS, 0, 10);
         System.arraycopy(bottomColors, 0, DEFAULT_COLORS, 10, 12);
-        
+
         HIDEFAULT_COLORS = ColorHelper.createColorArr(ColorHelper.brighter(controlColorLight, 15), ColorHelper.brighter(controlColorDark, 15), 20);
         ACTIVE_COLORS = ColorHelper.createColorArr(controlColorLight, controlColorDark, 20);
         INACTIVE_COLORS = ColorHelper.createColorArr(ColorHelper.brighter(controlColorLight, 5), ColorHelper.brighter(controlColorDark, 5), 20);
@@ -193,4 +195,5 @@ public class NoireDefaultTheme extends AbstractTheme {
         TAB_COLORS = DEFAULT_COLORS;
         COL_HEADER_COLORS = DEFAULT_COLORS;
     }
-}
+
+} // end of class NoireDefaultTheme

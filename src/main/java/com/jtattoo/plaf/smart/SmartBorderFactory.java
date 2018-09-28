@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.smart;
 
 import com.jtattoo.plaf.AbstractBorderFactory;
@@ -43,34 +42,42 @@ public class SmartBorderFactory implements AbstractBorderFactory {
         return instance;
     }
 
+    @Override
     public Border getFocusFrameBorder() {
         return SmartBorders.getFocusFrameBorder();
     }
 
+    @Override
     public Border getButtonBorder() {
         return SmartBorders.getButtonBorder();
     }
 
+    @Override
     public Border getToggleButtonBorder() {
         return SmartBorders.getToggleButtonBorder();
     }
 
+    @Override
     public Border getTextBorder() {
         return SmartBorders.getTextBorder();
     }
 
+    @Override
     public Border getSpinnerBorder() {
         return SmartBorders.getSpinnerBorder();
     }
 
+    @Override
     public Border getTextFieldBorder() {
         return SmartBorders.getTextFieldBorder();
     }
 
+    @Override
     public Border getComboBoxBorder() {
         return SmartBorders.getComboBoxBorder();
     }
 
+    @Override
     public Border getTableHeaderBorder() {
         return SmartBorders.getTableHeaderBorder();
     }
@@ -79,44 +86,54 @@ public class SmartBorderFactory implements AbstractBorderFactory {
         return SmartBorders.getTableScrollPaneBorder();
     }
 
+    @Override
     public Border getScrollPaneBorder() {
         return SmartBorders.getScrollPaneBorder();
     }
 
+    @Override
     public Border getTabbedPaneBorder() {
         return SmartBorders.getTabbedPaneBorder();
     }
 
+    @Override
     public Border getMenuBarBorder() {
         return SmartBorders.getMenuBarBorder();
     }
 
+    @Override
     public Border getMenuItemBorder() {
         return SmartBorders.getMenuItemBorder();
     }
 
+    @Override
     public Border getPopupMenuBorder() {
         return SmartBorders.getPopupMenuBorder();
     }
 
+    @Override
     public Border getInternalFrameBorder() {
         return SmartBorders.getInternalFrameBorder();
     }
 
+    @Override
     public Border getPaletteBorder() {
         return SmartBorders.getPaletteBorder();
     }
 
+    @Override
     public Border getToolBarBorder() {
         return SmartBorders.getToolBarBorder();
     }
 
+    @Override
     public Border getProgressBarBorder() {
         return SmartBorders.getProgressBarBorder();
     }
 
+    @Override
     public Border getDesktopIconBorder() {
         return SmartBorders.getDesktopIconBorder();
     }
-}
-
+    
+} // end of class SmartBorderFactory

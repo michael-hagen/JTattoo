@@ -44,16 +44,20 @@ public class BasePopupMenuUI extends BasicPopupMenuUI {
         return new BasePopupMenuUI();
     }
 
+    @Override
     public void installUI(JComponent c) {
         super.installUI(c);
-        c.setOpaque(false);
+        popupMenu.setOpaque(false);
+        popupMenu.setLightWeightPopupEnabled(false);
     }
 
+    @Override
     public void uninstallUI(JComponent c) {
         super.uninstallUI(c);
         c.setOpaque(true);
     }
 
+    @Override
     public void installListeners() {
         super.installListeners();
         if (!isMenuOpaque()) {
@@ -62,6 +66,7 @@ public class BasePopupMenuUI extends BasicPopupMenuUI {
         }
     }
 
+    @Override
     public void uninstallListeners() {
         if (!isMenuOpaque()) {
             popupMenu.removePopupMenuListener(myPopupListener);
@@ -77,12 +82,13 @@ public class BasePopupMenuUI extends BasicPopupMenuUI {
         if (robot == null) {
             try {
                 robot = new Robot();
-            } catch (Exception ex) {
+            } catch (AWTException ex) {
             }
         }
         return robot;
     }
 
+    @Override
     public Popup getPopup(JPopupMenu popupMenu, int x, int y) {
         Popup popup = super.getPopup(popupMenu, x, y);
         if (!isMenuOpaque()) {
@@ -109,6 +115,7 @@ public class BasePopupMenuUI extends BasicPopupMenuUI {
         screenImage = null;
     }
 
+    @Override
     public void update(Graphics g, JComponent c) {
         if (screenImage != null) {
             g.drawImage(screenImage, 0, 0, null);
@@ -129,9 +136,11 @@ public class BasePopupMenuUI extends BasicPopupMenuUI {
             popupMenuUI = aPopupMenuUI;
         }
 
+        @Override
         public void popupMenuCanceled(PopupMenuEvent e) {
         }
 
+        @Override
         public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
             if (popupMenuUI.screenImage != null) {
                 JPopupMenu popup = (JPopupMenu) e.getSource();
@@ -146,8 +155,11 @@ public class BasePopupMenuUI extends BasicPopupMenuUI {
             }
         }
 
+        @Override
         public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
         }
-    }
-}
+        
+    } // end of class MyPopupMenuListener
+    
+} // end of class BasePopupMenuUI
 

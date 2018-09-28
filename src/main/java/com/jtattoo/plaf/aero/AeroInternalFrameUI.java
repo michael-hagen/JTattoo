@@ -41,10 +41,11 @@ public class AeroInternalFrameUI extends BaseInternalFrameUI {
         return new AeroInternalFrameUI((JInternalFrame)c); 
     }
     
+    @Override
     protected JComponent createNorthPane(JInternalFrame w)  {
         titlePane = new AeroInternalFrameTitlePane(w);
         return titlePane;
     }
     
-}
+} // end of class AeroInternalFrameUI
 

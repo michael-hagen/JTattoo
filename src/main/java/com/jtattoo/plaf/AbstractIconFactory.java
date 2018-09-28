@@ -115,4 +115,5 @@ public interface AbstractIconFactory {
     public Icon getThumbHorIconRollover();
 
     public Icon getThumbVerIconRollover();
-}
+    
+} // end of interface AbstractIconFactory

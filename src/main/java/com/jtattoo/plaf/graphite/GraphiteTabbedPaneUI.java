@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.graphite;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
@@ -48,18 +47,21 @@ public class GraphiteTabbedPaneUI extends BaseTabbedPaneUI {
         return new GraphiteTabbedPaneUI();
     }
 
+    @Override
     protected void installComponents() {
         simpleButtonBorder = true;
         super.installComponents();
     }
 
+    @Override
     protected Color getLoBorderColor(int tabIndex) {
         if ((tabIndex == tabPane.getSelectedIndex()) && tabPane.getBackgroundAt(tabIndex) instanceof ColorUIResource) {
             return AbstractLookAndFeel.getControlColorDark();
         }
         return AbstractLookAndFeel.getControlShadow();
     }
-    
+
+    @Override
     protected Color[] getContentBorderColors(int tabPlacement) {
         if (sepColors == null) {
             sepColors = new Color[5];
@@ -72,6 +74,7 @@ public class GraphiteTabbedPaneUI extends BaseTabbedPaneUI {
         return sepColors;
     }
 
+    @Override
     protected Font getTabFont(boolean isSelected) {
         if (isSelected) {
             return super.getTabFont(isSelected).deriveFont(Font.BOLD);
@@ -80,6 +83,7 @@ public class GraphiteTabbedPaneUI extends BaseTabbedPaneUI {
         }
     }
 
+    @Override
     protected void paintText(Graphics g, int tabPlacement, Font font, FontMetrics metrics, int tabIndex, String title, Rectangle textRect, boolean isSelected) {
         if (AbstractLookAndFeel.getTheme().isTextShadowOn()) {
             if (isSelected && tabPane.isEnabledAt(tabIndex) && (tabPane.getBackgroundAt(tabIndex) instanceof ColorUIResource) && (getTextViewForTab(tabIndex) == null)) {
@@ -90,16 +94,14 @@ public class GraphiteTabbedPaneUI extends BaseTabbedPaneUI {
                 } else {
                     g.setColor(Color.white);
                 }
-                int mnemIndex = -1;
-                if (JTattooUtilities.getJavaVersion() >= 1.4) {
-                    mnemIndex = tabPane.getDisplayedMnemonicIndexAt(tabIndex);
-                }
+                int mnemIndex = tabPane.getDisplayedMnemonicIndexAt(tabIndex);
                 JTattooUtilities.drawStringUnderlineCharAt(tabPane, g, title, mnemIndex, textRect.x, textRect.y + 1 + metrics.getAscent());
             }
         }
         super.paintText(g, tabPlacement, font, metrics, tabIndex, title, textRect, isSelected);
     }
-    
+
+    @Override
     protected void paintFocusIndicator(Graphics g, int tabPlacement, Rectangle[] rects, int tabIndex, Rectangle iconRect, Rectangle textRect, boolean isSelected) {
         if (tabPane.isRequestFocusEnabled() && tabPane.hasFocus() && isSelected && tabIndex >= 0 && textRect.width > 8) {
             g.setColor(AbstractLookAndFeel.getTheme().getFocusColor());
@@ -108,4 +110,4 @@ public class GraphiteTabbedPaneUI extends BaseTabbedPaneUI {
         }
     }
 
-}
+} // edn of class GraphiteTabbedPaneUI

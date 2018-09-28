@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.graphite;
 
 import com.jtattoo.plaf.BaseInternalFrameUI;
@@ -38,13 +37,13 @@ public class GraphiteInternalFrameUI extends BaseInternalFrameUI {
     }
 
     public static ComponentUI createUI(JComponent c) {
-        return new GraphiteInternalFrameUI((JInternalFrame)c);
+        return new GraphiteInternalFrameUI((JInternalFrame) c);
     }
 
-    protected JComponent createNorthPane(JInternalFrame w)  {
+    @Override
+    protected JComponent createNorthPane(JInternalFrame w) {
         titlePane = new GraphiteInternalFrameTitlePane(w);
         return titlePane;
     }
 
-}
-
+} // end of class GraphiteInternalFrameUI

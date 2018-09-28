@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.aluminium;
 
 import com.jtattoo.plaf.AbstractTheme;
@@ -28,6 +27,10 @@ import com.jtattoo.plaf.ColorHelper;
 import java.awt.Color;
 import javax.swing.plaf.ColorUIResource;
 
+/**
+ *
+ * @author Michael Hagen
+ */
 public class AluminiumDefaultTheme extends AbstractTheme {
 
     public AluminiumDefaultTheme() {
@@ -40,10 +43,12 @@ public class AluminiumDefaultTheme extends AbstractTheme {
         setUpColorArrs();
     }
 
+    @Override
     public String getPropertyFileName() {
         return "AluminiumTheme.properties";
     }
 
+    @Override
     public void setUpColor() {
         super.setUpColor();
         // Defaults for AluminiumLookAndFeel
@@ -54,13 +59,13 @@ public class AluminiumDefaultTheme extends AbstractTheme {
 
         frameColor = new ColorUIResource(140, 140, 140);
         backgroundPattern = true;
-        selectionForegroundColor = black;
+        selectionForegroundColor = BLACK;
         selectionBackgroundColor = new ColorUIResource(224, 227, 206);
 
         pressedBackgroundColor = selectionBackgroundColor;
         pressedBackgroundColorLight = new ColorUIResource(ColorHelper.brighter(pressedBackgroundColor, 20));
         pressedBackgroundColorDark = new ColorUIResource(ColorHelper.darker(pressedBackgroundColor, 5));
-        
+
         focusColor = new ColorUIResource(255, 128, 96);
         focusCellColor = focusColor;
 
@@ -68,11 +73,11 @@ public class AluminiumDefaultTheme extends AbstractTheme {
         rolloverColorLight = new ColorUIResource(220, 224, 201);
         rolloverColorDark = new ColorUIResource(196, 203, 163);
 
-        buttonBackgroundColor = extraLightGray;
-        buttonColorLight = white;
+        buttonBackgroundColor = EXTRA_LIGHT_GRAY;
+        buttonColorLight = WHITE;
         buttonColorDark = new ColorUIResource(210, 212, 214);
 
-        controlBackgroundColor = extraLightGray;
+        controlBackgroundColor = EXTRA_LIGHT_GRAY;
         controlColorLight = new ColorUIResource(244, 244, 244);
         controlColorDark = new ColorUIResource(224, 224, 224);
         controlHighlightColor = new ColorUIResource(240, 240, 240);
@@ -87,16 +92,16 @@ public class AluminiumDefaultTheme extends AbstractTheme {
         windowIconShadowColor = new ColorUIResource(208, 208, 208);
         windowIconRolloverColor = new ColorUIResource(196, 0, 0);
 
-        windowInactiveTitleForegroundColor = black;
+        windowInactiveTitleForegroundColor = BLACK;
         windowInactiveTitleBackgroundColor = new ColorUIResource(220, 220, 220);
         windowInactiveTitleColorLight = new ColorUIResource(220, 220, 220);
         windowInactiveTitleColorDark = new ColorUIResource(200, 200, 200);
         windowInactiveBorderColor = new ColorUIResource(140, 140, 140);
 
-        menuBackgroundColor = extraLightGray;
+        menuBackgroundColor = EXTRA_LIGHT_GRAY;
         menuSelectionForegroundColor = selectionForegroundColor;
         menuSelectionBackgroundColor = new ColorUIResource(202, 208, 172);
-        
+
         menuColorLight = new ColorUIResource(210, 210, 210);//controlColorLight;
         menuColorDark = new ColorUIResource(200, 200, 200);//controlColorDark;
 
@@ -106,11 +111,12 @@ public class AluminiumDefaultTheme extends AbstractTheme {
 
         tabAreaBackgroundColor = backgroundColor;
         desktopColor = backgroundColor;
-        
-        tooltipForegroundColor = black;
+
+        tooltipForegroundColor = BLACK;
         tooltipBackgroundColor = new ColorUIResource(ColorHelper.brighter(selectionBackgroundColor, 40));
     }
 
+    @Override
     public void setUpColorArrs() {
         super.setUpColorArrs();
         DEFAULT_COLORS = ColorHelper.createColorArr(controlColorLight, controlColorDark, 20);
@@ -125,24 +131,24 @@ public class AluminiumDefaultTheme extends AbstractTheme {
         //PRESSED_COLORS = ColorHelper.createColorArr(ColorHelper.darker(selectionBackgroundColor, 5), ColorHelper.brighter(selectionBackgroundColor, 20), 20);
         DISABLED_COLORS = ColorHelper.createColorArr(Color.white, Color.lightGray, 20);
         BUTTON_COLORS = new Color[]{
-                    new Color(240, 240, 240),
-                    new Color(235, 235, 235),
-                    new Color(232, 232, 232),
-                    new Color(230, 230, 230),
-                    new Color(228, 228, 228),
-                    new Color(225, 225, 225),
-                    new Color(220, 220, 220),
-                    new Color(215, 215, 215),
-                    new Color(210, 210, 210),
-                    new Color(205, 205, 205),
-                    new Color(210, 210, 210),
-                    new Color(215, 215, 215),
-                    new Color(220, 220, 220),
-                    new Color(225, 225, 225),
-                    new Color(228, 228, 228),
-                    new Color(230, 230, 230),
-                    new Color(232, 232, 232),
-                    new Color(235, 235, 235),};
+            new Color(240, 240, 240),
+            new Color(235, 235, 235),
+            new Color(232, 232, 232),
+            new Color(230, 230, 230),
+            new Color(228, 228, 228),
+            new Color(225, 225, 225),
+            new Color(220, 220, 220),
+            new Color(215, 215, 215),
+            new Color(210, 210, 210),
+            new Color(205, 205, 205),
+            new Color(210, 210, 210),
+            new Color(215, 215, 215),
+            new Color(220, 220, 220),
+            new Color(225, 225, 225),
+            new Color(228, 228, 228),
+            new Color(230, 230, 230),
+            new Color(232, 232, 232),
+            new Color(235, 235, 235),};
         ROLLOVER_COLORS = ColorHelper.createColorArr(rolloverColorLight, rolloverColorDark, 20);
         WINDOW_TITLE_COLORS = ColorHelper.createColorArr(windowTitleColorLight, windowTitleColorDark, 20);
         WINDOW_INACTIVE_TITLE_COLORS = ColorHelper.createColorArr(windowInactiveTitleColorLight, windowInactiveTitleColorDark, 20);
@@ -160,4 +166,5 @@ public class AluminiumDefaultTheme extends AbstractTheme {
         SLIDER_COLORS = ColorHelper.createColorArr(new Color(180, 180, 180), new Color(150, 150, 150), 10);
         PROGRESSBAR_COLORS = SLIDER_COLORS;
     }
-}
+
+} // end of class AluminiumDefaultTheme

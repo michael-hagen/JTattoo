@@ -34,4 +34,4 @@ public interface TitlePane {
     public void restore();
     public void close();
     
-}
+} // end of interface TitlePane

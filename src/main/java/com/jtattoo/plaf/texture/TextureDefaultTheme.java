@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.texture;
 
 import com.jtattoo.plaf.AbstractTheme;
@@ -42,10 +41,12 @@ public class TextureDefaultTheme extends AbstractTheme {
         setUpColorArrs();
     }
 
+    @Override
     public String getPropertyFileName() {
         return "TextureTheme.properties";
     }
 
+    @Override
     public void setUpColor() {
         super.setUpColor();
 
@@ -54,7 +55,7 @@ public class TextureDefaultTheme extends AbstractTheme {
         showFocusFrame = true;
         textShadow = true;
 
-        foregroundColor = black;
+        foregroundColor = BLACK;
         backgroundColor = new ColorUIResource(242, 232, 220);
         backgroundColorLight = new ColorUIResource(224, 215, 205);
         backgroundColorDark = new ColorUIResource(197, 184, 168);
@@ -62,16 +63,16 @@ public class TextureDefaultTheme extends AbstractTheme {
         alterBackgroundColor = new ColorUIResource(219, 206, 189);
         disabledForegroundColor = new ColorUIResource(114, 94, 80);
         disabledBackgroundColor = new ColorUIResource(244, 242, 232);
-        inputBackgroundColor = white;
-        inputForegroundColor = black;
+        inputBackgroundColor = WHITE;
+        inputForegroundColor = BLACK;
 
-        selectionForegroundColor = black;
+        selectionForegroundColor = BLACK;
         selectionBackgroundColor = new ColorUIResource(200, 215, 240);
         selectionBackgroundColorLight = new ColorUIResource(128, 128, 128);
         selectionBackgroundColorDark = new ColorUIResource(64, 64, 64);
 
-        focusColor = orange;
-        focusCellColor = orange;
+        focusColor = ORANGE;
+        focusCellColor = ORANGE;
         frameColor = new ColorUIResource(172, 162, 145);
         gridColor = new ColorUIResource(204, 197, 183);
 
@@ -79,57 +80,57 @@ public class TextureDefaultTheme extends AbstractTheme {
         rolloverColorLight = new ColorUIResource(226, 222, 214);
         rolloverColorDark = new ColorUIResource(208, 200, 185);
 
-        buttonForegroundColor = black;
-        buttonBackgroundColor = extraLightGray;
+        buttonForegroundColor = BLACK;
+        buttonBackgroundColor = EXTRA_LIGHT_GRAY;
         buttonColorLight = new ColorUIResource(247, 244, 239);
         buttonColorDark = new ColorUIResource(219, 216, 211);
 
         pressedBackgroundColor = buttonColorDark;
         pressedBackgroundColorLight = new ColorUIResource(ColorHelper.brighter(pressedBackgroundColor, 20));
         pressedBackgroundColorDark = new ColorUIResource(ColorHelper.darker(pressedBackgroundColor, 4));
-        
-        controlForegroundColor = black;
+
+        controlForegroundColor = BLACK;
         controlBackgroundColor = new ColorUIResource(240, 230, 217);
-        controlHighlightColor = white;
+        controlHighlightColor = WHITE;
         controlShadowColor = new ColorUIResource(172, 162, 145);
         controlDarkShadowColor = new ColorUIResource(100, 80, 60);
         controlColorLight = new ColorUIResource(239, 230, 221);
         controlColorDark = new ColorUIResource(220, 207, 192);
 
-        windowTitleForegroundColor = white;
+        windowTitleForegroundColor = WHITE;
         windowTitleBackgroundColor = new ColorUIResource(200, 215, 240);//new ColorUIResource(48, 48, 48);
         windowTitleColorLight = new ColorUIResource(96, 96, 96);
         windowTitleColorDark = new ColorUIResource(48, 48, 48);
-        windowBorderColor = black;
-        windowIconColor = white;
-        windowIconShadowColor = black;
-        windowIconRolloverColor = orange;
+        windowBorderColor = BLACK;
+        windowIconColor = WHITE;
+        windowIconShadowColor = BLACK;
+        windowIconRolloverColor = ORANGE;
 
-        windowInactiveTitleForegroundColor = white;
+        windowInactiveTitleForegroundColor = WHITE;
         windowInactiveTitleBackgroundColor = new ColorUIResource(240, 230, 217);//new ColorUIResource(48, 48, 48);
         windowInactiveTitleColorLight = new ColorUIResource(96, 96, 96);
         windowInactiveTitleColorDark = new ColorUIResource(48, 48, 48);
-        windowInactiveBorderColor = black;
+        windowInactiveBorderColor = BLACK;
 
-        menuForegroundColor = white;
+        menuForegroundColor = WHITE;
         menuBackgroundColor = new ColorUIResource(240, 240, 240);
-        menuSelectionForegroundColor = black;
+        menuSelectionForegroundColor = BLACK;
         menuSelectionBackgroundColor = new ColorUIResource(32, 32, 32);
         menuSelectionBackgroundColorLight = new ColorUIResource(255, 213, 113);
         menuSelectionBackgroundColorDark = new ColorUIResource(240, 168, 0);
         menuColorLight = new ColorUIResource(240, 240, 240);
         menuColorDark = new ColorUIResource(220, 220, 220);
 
-        toolbarForegroundColor = white;
+        toolbarForegroundColor = WHITE;
         toolbarBackgroundColor = new ColorUIResource(52, 52, 52);
         toolbarColorLight = menuColorLight;
         toolbarColorDark = menuColorDark;
 
         tabAreaBackgroundColor = backgroundColor;
-        tabSelectionForegroundColor = white;
-        
+        tabSelectionForegroundColor = WHITE;
+
         desktopColor = new ColorUIResource(220, 207, 192);
-        tooltipForegroundColor = black;
+        tooltipForegroundColor = BLACK;
         tooltipBackgroundColor = new ColorUIResource(244, 235, 228);
 
         controlFont = new FontUIResource("Dialog", Font.PLAIN, 13);
@@ -140,10 +141,11 @@ public class TextureDefaultTheme extends AbstractTheme {
         windowTitleFont = new FontUIResource("Dialog", Font.BOLD, 13);
     }
 
+    @Override
     public void setUpColorArrs() {
         super.setUpColorArrs();
 
-        Color topHi = white;
+        Color topHi = WHITE;
         Color topLo = buttonColorLight;
         Color bottomHi = ColorHelper.brighter(buttonColorDark, 40);
         Color bottomLo = buttonColorDark;
@@ -173,7 +175,7 @@ public class TextureDefaultTheme extends AbstractTheme {
         System.arraycopy(topColors, 0, ROLLOVER_COLORS, 0, 11);
         System.arraycopy(bottomColors, 0, ROLLOVER_COLORS, 11, 13);
         //PRESSED_COLORS = ColorHelper.createColorArr(buttonColorDark, buttonColorLight, 24);
-        DISABLED_COLORS = ColorHelper.createColorArr(superLightGray, extraLightGray, 24);
+        DISABLED_COLORS = ColorHelper.createColorArr(SUPER_LIGHT_GRAY, EXTRA_LIGHT_GRAY, 24);
         ACTIVE_COLORS = DEFAULT_COLORS;
         INACTIVE_COLORS = BUTTON_COLORS;
 
@@ -195,4 +197,4 @@ public class TextureDefaultTheme extends AbstractTheme {
         PROGRESSBAR_COLORS = SLIDER_COLORS;
     }
 
-}
+} // end of class TextureDefaultTheme

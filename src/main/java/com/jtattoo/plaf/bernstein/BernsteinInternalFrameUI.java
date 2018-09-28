@@ -20,7 +20,6 @@
 *  
 * see: APACHE-LICENSE-2.0.txt
 */
- 
 package com.jtattoo.plaf.bernstein;
 
 import com.jtattoo.plaf.BaseInternalFrameUI;
@@ -41,9 +40,11 @@ public class BernsteinInternalFrameUI extends BaseInternalFrameUI {
         return new BernsteinInternalFrameUI((JInternalFrame) c);
     }
 
+    @Override
     protected JComponent createNorthPane(JInternalFrame w) {
         titlePane = new BernsteinInternalFrameTitlePane(w);
         return titlePane;
     }
-}
+    
+} // end of class BernsteinInternalFrameUI
 

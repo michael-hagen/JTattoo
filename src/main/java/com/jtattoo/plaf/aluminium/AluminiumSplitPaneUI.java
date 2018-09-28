@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.aluminium;
 
 import com.jtattoo.plaf.BaseSplitPaneUI;
@@ -37,7 +36,9 @@ public class AluminiumSplitPaneUI extends BaseSplitPaneUI {
         return new AluminiumSplitPaneUI();
     }
 
+    @Override
     public BasicSplitPaneDivider createDefaultDivider() {
         return new AluminiumSplitPaneDivider(this);
     }
-}
+    
+} // end of class AluminiumSplitPaneUI

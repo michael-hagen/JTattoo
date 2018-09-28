@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.texture;
 
 import com.jtattoo.plaf.*;
@@ -41,18 +40,21 @@ public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
         return new TextureTabbedPaneUI();
     }
 
+    @Override
     protected void installComponents() {
         simpleButtonBorder = true;
         super.installComponents();
     }
 
+    @Override
     protected Color[] getContentBorderColors(int tabPlacement) {
         Color c = AbstractLookAndFeel.getTheme().getSelectionBackgroundColorDark();
-        return new Color[] { getLoBorderColor(0), c, c, c, ColorHelper.darker(c, 10) };
+        return new Color[]{getLoBorderColor(0), c, c, c, ColorHelper.darker(c, 10)};
     }
 
+    @Override
     protected Color getLoBorderColor(int tabIndex) {
-        if (tabIndex == tabPane.getSelectedIndex() 
+        if (tabIndex == tabPane.getSelectedIndex()
                 && tabPane.getBackgroundAt(tabIndex) instanceof ColorUIResource
                 && AbstractLookAndFeel.getTheme().isDarkTexture()) {
             return ColorHelper.darker(super.getLoBorderColor(tabIndex), 20);
@@ -60,6 +62,7 @@ public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
         return AbstractLookAndFeel.getFrameColor();
     }
 
+    @Override
     protected Font getTabFont(boolean isSelected) {
         if (isSelected) {
             return super.getTabFont(isSelected).deriveFont(Font.BOLD);
@@ -83,6 +86,7 @@ public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
         return TextureUtils.ALTER_BACKGROUND_TEXTURE_TYPE;
     }
 
+    @Override
     protected void paintContentBorder(Graphics g, int tabPlacement, int selectedIndex, int x, int y, int w, int h) {
         int textureType = TextureUtils.getTextureType(tabPane);
         int tabAreaHeight = calculateTabAreaHeight(tabPlacement, runCount, maxTabHeight);
@@ -103,7 +107,7 @@ public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
             int ht = tabPlacement == TOP || tabPlacement == BOTTOM ? h - tabAreaHeight : h;
             TextureUtils.fillComponent(g, tabPane, xt, yt, wt, ht, textureType);
         }
-        
+
         int sepHeight = tabAreaInsets.bottom;
         if (sepHeight > 0) {
             Insets bi = new Insets(0, 0, 0, 0);
@@ -148,6 +152,7 @@ public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
         }
     }
 
+    @Override
     protected void paintTabBackground(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
         Color backColor = tabPane.getBackgroundAt(tabIndex);
         if (!(backColor instanceof UIResource) || !AbstractLookAndFeel.getTheme().isDarkTexture()) {
@@ -167,7 +172,7 @@ public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
                 case TOP:
                 default:
                     if (isSelected) {
-                        Area clipArea = new Area(new RoundRectangle2D.Double(x, y, w , h + 4, d, d));
+                        Area clipArea = new Area(new RoundRectangle2D.Double(x, y, w, h + 4, d, d));
                         Area rectArea = new Area(new Rectangle2D.Double(x, y, w, h + 1));
                         clipArea.intersect(rectArea);
                         clipArea.intersect(orgClipArea);
@@ -231,6 +236,7 @@ public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
         }
     }
 
+    @Override
     protected void paintText(Graphics g, int tabPlacement, Font font, FontMetrics metrics, int tabIndex, String title, Rectangle textRect, boolean isSelected) {
         Color backColor = tabPane.getBackgroundAt(tabIndex);
         if (!(backColor instanceof UIResource) || !AbstractLookAndFeel.getTheme().isDarkTexture()) {
@@ -241,7 +247,7 @@ public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
         View v = getTextViewForTab(tabIndex);
         if (v != null) {
             // html
-            Graphics2D g2D = (Graphics2D)g;
+            Graphics2D g2D = (Graphics2D) g;
             Object savedRenderingHint = null;
             if (AbstractLookAndFeel.getTheme().isTextAntiAliasingOn()) {
                 savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING);
@@ -253,10 +259,7 @@ public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
             }
         } else {
             // plain text
-            int mnemIndex = -1;
-            if (JTattooUtilities.getJavaVersion() >= 1.4) {
-                mnemIndex = tabPane.getDisplayedMnemonicIndexAt(tabIndex);
-            }
+            int mnemIndex = tabPane.getDisplayedMnemonicIndexAt(tabIndex);
 
             if (tabPane.isEnabled() && tabPane.isEnabledAt(tabIndex)) {
                 if (isSelected) {
@@ -268,7 +271,7 @@ public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
                     }
                     JTattooUtilities.drawStringUnderlineCharAt(tabPane, g, title, mnemIndex, textRect.x + 1, textRect.y + 1 + metrics.getAscent());
                     g.setColor(titleColor);
-                    Graphics2D g2D = (Graphics2D)g;
+                    Graphics2D g2D = (Graphics2D) g;
                     Shape savedClip = g2D.getClip();
 
                     Area clipArea = new Area(new Rectangle2D.Double(textRect.x, textRect.y, textRect.width, textRect.height / 2 + 1));
@@ -305,4 +308,4 @@ public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
         }
     }
 
-}
+} // end of class TextureTabbedPaneUI

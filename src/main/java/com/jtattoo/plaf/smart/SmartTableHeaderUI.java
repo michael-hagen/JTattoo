@@ -37,8 +37,9 @@ public class SmartTableHeaderUI extends BaseTableHeaderUI {
         return new SmartTableHeaderUI();
     }
 
+    @Override
     protected boolean drawRolloverBar() {
         return true;
     }
 
-}
+} // end of class SmartTableHeaderUI

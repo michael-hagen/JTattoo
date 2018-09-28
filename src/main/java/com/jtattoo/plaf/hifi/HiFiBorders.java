@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.hifi;
 
 import com.jtattoo.plaf.*;
@@ -89,16 +88,17 @@ public class HiFiBorders extends BaseBorders {
 //------------------------------------------------------------------------------------
     public static class ButtonBorder implements Border, UIResource {
 
-        private static final Insets insets = new Insets(4, 8, 4, 8);
+        private static final Insets INSETS = new Insets(4, 8, 4, 8);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             Graphics2D g2D = (Graphics2D) g;
             g.translate(x, y);
-            
+
             Color hiFrameColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getButtonBackgroundColor(), 14);
             Color frameColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getButtonBackgroundColor(), 6);
             Color loFrameColor = ColorHelper.darker(AbstractLookAndFeel.getTheme().getButtonBackgroundColor(), 50);
-            
+
             g.setColor(hiFrameColor);
             g.drawLine(1, 0, w - 3, 0);
             g.drawLine(0, 1, 0, h - 3);
@@ -123,33 +123,37 @@ public class HiFiBorders extends BaseBorders {
             g.translate(-x, -y);
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
-            return insets;
+            return INSETS;
         }
 
         public Insets getBorderInsets(Component c, Insets borderInsets) {
-            borderInsets.left = insets.left;
-            borderInsets.top = insets.top;
-            borderInsets.right = insets.right;
-            borderInsets.bottom = insets.bottom;
+            borderInsets.left = INSETS.left;
+            borderInsets.top = INSETS.top;
+            borderInsets.right = INSETS.right;
+            borderInsets.bottom = INSETS.bottom;
             return borderInsets;
         }
 
+        @Override
         public boolean isBorderOpaque() {
             return true;
         }
-    } // class ButtonBorder
+        
+    } // end of class ButtonBorder
 
 //-------------------------------------------------------------------------------------------------    
     public static class RolloverToolButtonBorder implements Border, UIResource {
 
-        private static final Insets insets = new Insets(2, 2, 2, 2);
+        private static final Insets INSETS = new Insets(2, 2, 2, 2);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             Graphics2D g2D = (Graphics2D) g;
             Composite composite = g2D.getComposite();
-            Color c1 = null;
-            Color c2 = null;
+            Color c1;
+            Color c2;
             if (JTattooUtilities.isActive((JComponent) c)) {
                 c1 = ColorHelper.brighter(AbstractLookAndFeel.getFrameColor(), 60);
                 c2 = AbstractLookAndFeel.getFrameColor();
@@ -166,84 +170,96 @@ public class HiFiBorders extends BaseBorders {
             g2D.setComposite(composite);
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
-            return new Insets(insets.top, insets.left, insets.bottom, insets.right);
+            return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
         }
 
         public Insets getBorderInsets(Component c, Insets borderInsets) {
-            borderInsets.left = insets.left;
-            borderInsets.top = insets.top;
-            borderInsets.right = insets.right;
-            borderInsets.bottom = insets.bottom;
+            borderInsets.left = INSETS.left;
+            borderInsets.top = INSETS.top;
+            borderInsets.right = INSETS.right;
+            borderInsets.bottom = INSETS.bottom;
             return borderInsets;
         }
 
+        @Override
         public boolean isBorderOpaque() {
             return true;
         }
-    } // class RolloverToolButtonBorder
+        
+    } // end of class RolloverToolButtonBorder
 
 //-------------------------------------------------------------------------------------------------    
     public static class ScrollPaneBorder implements Border, UIResource {
 
-        private static final Insets insets = new Insets(1, 1, 1, 1);
+        private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             Color frameColor = AbstractLookAndFeel.getTheme().getFrameColor();
             JTattooUtilities.draw3DBorder(g, frameColor, ColorHelper.brighter(frameColor, 10), x, y, w, h);
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
-            return new Insets(insets.top, insets.left, insets.bottom, insets.right);
+            return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
         }
 
         public Insets getBorderInsets(Component c, Insets borderInsets) {
-            borderInsets.left = insets.left;
-            borderInsets.top = insets.top;
-            borderInsets.right = insets.right;
-            borderInsets.bottom = insets.bottom;
+            borderInsets.left = INSETS.left;
+            borderInsets.top = INSETS.top;
+            borderInsets.right = INSETS.right;
+            borderInsets.bottom = INSETS.bottom;
             return borderInsets;
         }
 
+        @Override
         public boolean isBorderOpaque() {
             return true;
         }
-    } // class ScrollPaneBorder
+        
+    } // end of class ScrollPaneBorder
 
 //-------------------------------------------------------------------------------------------------    
     public static class TabbedPaneBorder implements Border, UIResource {
 
-        private static final Insets insets = new Insets(1, 1, 1, 1);
+        private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             Color frameColor = AbstractLookAndFeel.getTheme().getFrameColor();
             JTattooUtilities.draw3DBorder(g, frameColor, ColorHelper.brighter(frameColor, 10), x, y, w, h);
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
-            return new Insets(insets.top, insets.left, insets.bottom, insets.right);
+            return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
         }
 
         public Insets getBorderInsets(Component c, Insets borderInsets) {
-            borderInsets.left = insets.left;
-            borderInsets.top = insets.top;
-            borderInsets.right = insets.right;
-            borderInsets.bottom = insets.bottom;
+            borderInsets.left = INSETS.left;
+            borderInsets.top = INSETS.top;
+            borderInsets.right = INSETS.right;
+            borderInsets.bottom = INSETS.bottom;
             return borderInsets;
         }
 
+        @Override
         public boolean isBorderOpaque() {
             return true;
         }
-    } // class TabbedPaneBorder
+        
+    } // end of class TabbedPaneBorder
 
 //-------------------------------------------------------------------------------------------------    
     public static class InternalFrameBorder extends BaseInternalFrameBorder {
 
         public InternalFrameBorder() {
-            insets.top = 3;
+            INSETS.top = 3;
         }
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             boolean active = isActive(c);
             int th = getTitleHeight(c);
@@ -256,29 +272,31 @@ public class HiFiBorders extends BaseBorders {
                 frameColor = AbstractLookAndFeel.getWindowBorderColor();
             }
             g.setColor(titleColor);
-            g.fillRect(x, y + 1, w, insets.top - 1);
+            g.fillRect(x, y + 1, w, INSETS.top - 1);
             g.setColor(borderColor);
-            g.fillRect(x + 1, y + h - dw, w - 2, dw - 1);
+            g.fillRect(x + 1, y + h - DW, w - 2, DW - 1);
             if (active) {
-                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowTitleColors(), 1, insets.top, dw, th + 1);
-                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowTitleColors(), w - dw, insets.top, dw, th + 1);
+                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowTitleColors(), 1, INSETS.top, DW, th + 1);
+                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowTitleColors(), w - DW, INSETS.top, DW, th + 1);
             } else {
-                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowInactiveTitleColors(), 1, insets.top, dw - 1, th + 1);
-                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowInactiveTitleColors(), w - dw, insets.top, dw - 1, th + 1);
+                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowInactiveTitleColors(), 1, INSETS.top, DW - 1, th + 1);
+                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowInactiveTitleColors(), w - DW, INSETS.top, DW - 1, th + 1);
             }
             g.setColor(borderColor);
-            g.fillRect(1, insets.top + th + 1, dw - 1, h - th - dw);
-            g.fillRect(w - dw, insets.top + th + 1, dw - 1, h - th - dw);
+            g.fillRect(1, INSETS.top + th + 1, DW - 1, h - th - DW);
+            g.fillRect(w - DW, INSETS.top + th + 1, DW - 1, h - th - DW);
             g.setColor(frameColor);
             g.drawRect(x, y, w - 1, h - 1);
         }
-    } // class InternalFrameBorder
+        
+    } // end of class InternalFrameBorder
 
     public static class ToolBarBorder extends AbstractBorder implements UIResource, SwingConstants {
 
         private static final LazyImageIcon HOR_RUBBER_ICON = new LazyImageIcon("hifi/icons/HorRubber.gif");
         private static final LazyImageIcon VER_RUBBER_ICON = new LazyImageIcon("hifi/icons/VerRubber.gif");
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             if (((JToolBar) c).isFloatable()) {
                 if (((JToolBar) c).getOrientation() == HORIZONTAL) {
@@ -293,6 +311,7 @@ public class HiFiBorders extends BaseBorders {
             }
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
             Insets insets = new Insets(2, 2, 2, 2);
             if (((JToolBar) c).isFloatable()) {
@@ -316,6 +335,7 @@ public class HiFiBorders extends BaseBorders {
             return insets;
         }
 
+        @Override
         public Insets getBorderInsets(Component c, Insets borderInsets) {
             Insets insets = getBorderInsets(c);
             borderInsets.left = insets.left;
@@ -324,6 +344,7 @@ public class HiFiBorders extends BaseBorders {
             borderInsets.bottom = insets.bottom;
             return borderInsets;
         }
-    } // class ToolBarBorder
-} // class HiFiBorders
+    } // end of class ToolBarBorder
+    
+} // end of class HiFiBorders
 

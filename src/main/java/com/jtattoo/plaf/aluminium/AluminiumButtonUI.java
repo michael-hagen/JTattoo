@@ -40,6 +40,7 @@ public class AluminiumButtonUI extends BaseButtonUI {
         return new AluminiumButtonUI();
     }
 
+    @Override
     protected void paintBackground(Graphics g, AbstractButton b) {
         if (!b.isContentAreaFilled() || (b.getParent() instanceof JMenuBar)) {
             return;
@@ -128,6 +129,7 @@ public class AluminiumButtonUI extends BaseButtonUI {
         g2D.setComposite(composite);
     }
 
+    @Override
     protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect, Rectangle iconRect) {
         Graphics2D g2D = (Graphics2D) g;
         int width = b.getWidth();
@@ -147,7 +149,8 @@ public class AluminiumButtonUI extends BaseButtonUI {
             g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRenderingHint);
         }
     }
-}
+    
+} // end of class AluminiumButtonUI
 
 
 

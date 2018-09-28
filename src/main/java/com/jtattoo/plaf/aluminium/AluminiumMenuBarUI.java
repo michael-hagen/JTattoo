@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.aluminium;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
@@ -40,6 +39,7 @@ public class AluminiumMenuBarUI extends BaseMenuBarUI {
         return new AluminiumMenuBarUI();
     }
 
+    @Override
     public void installUI(JComponent c) {
         super.installUI(c);
         if ((c != null) && (c instanceof JMenuBar)) {
@@ -47,6 +47,7 @@ public class AluminiumMenuBarUI extends BaseMenuBarUI {
         }
     }
 
+    @Override
     public void paint(Graphics g, JComponent c) {
         if (JTattooUtilities.isMac() || !AbstractLookAndFeel.getTheme().isBackgroundPatternOn()) {
             super.paint(g, c);
@@ -54,4 +55,5 @@ public class AluminiumMenuBarUI extends BaseMenuBarUI {
             AluminiumUtils.fillComponent(g, c);
         }
     }
-}
+
+} // end of class AluminiumMenuBarUI

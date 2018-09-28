@@ -37,7 +37,9 @@ public class AcrylRootPaneUI extends BaseRootPaneUI {
         return new AcrylRootPaneUI();
     }
 
+    @Override
     public JComponent createTitlePane(JRootPane root) {
         return new AcrylTitlePane(root, this);
     }
-}
+    
+} // end of class AcrylRootPaneUI

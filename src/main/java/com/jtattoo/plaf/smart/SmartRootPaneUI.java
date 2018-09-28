@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.smart;
 
 import com.jtattoo.plaf.BaseRootPaneUI;
@@ -29,7 +28,7 @@ import javax.swing.JRootPane;
 import javax.swing.plaf.ComponentUI;
 
 /**
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
 public class SmartRootPaneUI extends BaseRootPaneUI {
 
@@ -37,8 +36,9 @@ public class SmartRootPaneUI extends BaseRootPaneUI {
         return new SmartRootPaneUI();
     }
 
+    @Override
     public JComponent createTitlePane(JRootPane root) {
         return new SmartTitlePane(root, this);
     }
-    
-}
+
+} // end of class SmartRootPaneUI

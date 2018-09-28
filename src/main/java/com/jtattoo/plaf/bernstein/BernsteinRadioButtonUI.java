@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.bernstein;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
@@ -44,6 +43,7 @@ public class BernsteinRadioButtonUI extends BaseRadioButtonUI {
         return radioButtonUI;
     }
 
+    @Override
     public void paintBackground(Graphics g, JComponent c) {
         if (c.isOpaque()) {
             if ((c.getBackground() instanceof ColorUIResource) && c.getBackground().equals(AbstractLookAndFeel.getBackgroundColor())) {
@@ -54,4 +54,5 @@ public class BernsteinRadioButtonUI extends BaseRadioButtonUI {
             }
         }
     }
-}
+    
+} // end of class BernsteinRadioButtonUI

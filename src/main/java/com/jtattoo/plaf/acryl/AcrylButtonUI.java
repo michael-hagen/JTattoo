@@ -42,6 +42,7 @@ public class AcrylButtonUI extends BaseButtonUI {
         return new AcrylButtonUI();
     }
 
+    @Override
     protected void paintBackground(Graphics g, AbstractButton b) {
         if (AbstractLookAndFeel.getTheme().doDrawSquareButtons()) {
             super.paintBackground(g, b);
@@ -61,6 +62,7 @@ public class AcrylButtonUI extends BaseButtonUI {
             g2D.setClip(savedClip);
         }
     }
-}
+    
+} // end of class AcrylButtonUI
 
 

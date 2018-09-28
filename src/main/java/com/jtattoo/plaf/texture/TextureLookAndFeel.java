@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.texture;
 
 import com.jtattoo.plaf.*;
@@ -104,7 +103,7 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
         rockProps.setProperty("pressedBackgroundColor", "230 230 230");
         rockProps.setProperty("pressedBackgroundColorLight", "255 255 255");
         rockProps.setProperty("pressedBackgroundColorDark", "230 230 230");
-        
+
         rockProps.setProperty("menuBackgroundColor", "64 64 64");
         rockProps.setProperty("menuColorLight", "96 96 96");
         rockProps.setProperty("menuColorDark", "48 48 48");
@@ -150,7 +149,7 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
         textileProps.setProperty("pressedBackgroundColor", "230 230 230");
         textileProps.setProperty("pressedBackgroundColorLight", "255 255 255");
         textileProps.setProperty("pressedBackgroundColorDark", "230 230 230");
-        
+
         textileProps.setProperty("windowBorderColor", "27 42 111");
         textileProps.setProperty("windowTitleBackgroundColor", "40 54 114");
         textileProps.setProperty("windowTitleColorLight", "80 112 162");
@@ -162,11 +161,11 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
         textileProps.setProperty("menuColorDark", "48 48 48");
         textileProps.setProperty("menuSelectionForegroundColor", "255 255 255");
         textileProps.setProperty("menuSelectionBackgroundColor", "48 48 48");
-        
+
         textileProps.setProperty("toolbarBackgroundColor", "64 78 102");
         textileProps.setProperty("toolbarColorLight", "76 91 120");
         textileProps.setProperty("toolbarColorDark", "64 78 102");
-        
+
         textileProps.setProperty("desktopColor", "152 168 201");
         textileProps.setProperty("tooltipBackgroundColor", "255 255 220");
 
@@ -203,7 +202,7 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
         snowProps.setProperty("pressedBackgroundColor", "230 230 230");
         snowProps.setProperty("pressedBackgroundColorLight", "255 255 255");
         snowProps.setProperty("pressedBackgroundColorDark", "230 230 230");
-        
+
         snowProps.setProperty("windowTitleForegroundColor", "48 64 96");
         snowProps.setProperty("windowTitleBackgroundColor", "200 215 240");
         snowProps.setProperty("windowTitleColorLight", "250 250 250");
@@ -225,11 +224,11 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
         snowProps.setProperty("menuColorDark", "230 230 230");
         snowProps.setProperty("menuSelectionForegroundColor", "0 0 0");
         snowProps.setProperty("menuSelectionBackgroundColor", "188 206 237");
-        
+
         snowProps.setProperty("toolbarBackgroundColor", "64 64 64");
         snowProps.setProperty("toolbarColorLight", "250 250 250");
         snowProps.setProperty("toolbarColorDark", "230 230 230");
-        
+
         snowProps.setProperty("tabSelectionForegroundColor", "0 0 0");
         snowProps.setProperty("desktopColor", "240 240 240");
         snowProps.setProperty("tooltipBackgroundColor", "242 246 254");
@@ -238,7 +237,7 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
         String value;
         Iterator iter = smallFontProps.keySet().iterator();
         while (iter.hasNext()) {
-            key = (String)iter.next();
+            key = (String) iter.next();
             value = smallFontProps.getProperty(key);
             rockSmallFontProps.setProperty(key, value);
             textileSmallFontProps.setProperty(key, value);
@@ -248,7 +247,7 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
 
         iter = mediumFontProps.keySet().iterator();
         while (iter.hasNext()) {
-            key = (String)iter.next();
+            key = (String) iter.next();
             value = mediumFontProps.getProperty(key);
             rockMediumFontProps.setProperty(key, value);
             textileMediumFontProps.setProperty(key, value);
@@ -258,7 +257,7 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
 
         iter = largeFontProps.keySet().iterator();
         while (iter.hasNext()) {
-            key = (String)iter.next();
+            key = (String) iter.next();
             value = largeFontProps.getProperty(key);
             rockLargeFontProps.setProperty(key, value);
             textileLargeFontProps.setProperty(key, value);
@@ -268,7 +267,7 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
 
         iter = rockProps.keySet().iterator();
         while (iter.hasNext()) {
-            key = (String)iter.next();
+            key = (String) iter.next();
             value = rockProps.getProperty(key);
             rockSmallFontProps.setProperty(key, value);
             rockMediumFontProps.setProperty(key, value);
@@ -276,7 +275,7 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
         }
         iter = textileProps.keySet().iterator();
         while (iter.hasNext()) {
-            key = (String)iter.next();
+            key = (String) iter.next();
             value = textileProps.getProperty(key);
             textileSmallFontProps.setProperty(key, value);
             textileMediumFontProps.setProperty(key, value);
@@ -284,7 +283,7 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
         }
         iter = snowProps.keySet().iterator();
         while (iter.hasNext()) {
-            key = (String)iter.next();
+            key = (String) iter.next();
             value = snowProps.getProperty(key);
             snowSmallFontProps.setProperty(key, value);
             snowMediumFontProps.setProperty(key, value);
@@ -292,7 +291,6 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
         }
 
         //...
-
         themesList.add("Default");
         themesList.add("Small-Font");
         themesList.add("Medium-Font");
@@ -380,34 +378,42 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
         setTheme(themesProps);
     }
 
+    @Override
     public String getName() {
         return "Texture";
     }
 
+    @Override
     public String getID() {
         return "Texture";
     }
 
+    @Override
     public String getDescription() {
         return "The Texture Look and Feel";
     }
 
+    @Override
     public boolean isNativeLookAndFeel() {
         return false;
     }
 
+    @Override
     public boolean isSupportedLookAndFeel() {
         return true;
     }
 
+    @Override
     public AbstractBorderFactory getBorderFactory() {
         return TextureBorderFactory.getInstance();
     }
 
+    @Override
     public AbstractIconFactory getIconFactory() {
         return TextureIconFactory.getInstance();
     }
 
+    @Override
     protected void createDefaultTheme() {
         if (myTheme == null) {
             myTheme = new TextureDefaultTheme();
@@ -417,14 +423,16 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
         TextureUtils.setUpTextures();
     }
 
+    @Override
     protected void initComponentDefaults(UIDefaults table) {
         super.initComponentDefaults(table);
-        table.put("SplitPane.dividerSize", new Integer(8));
+        table.put("SplitPane.dividerSize", 8);
         table.put("TabbedPane.tabAreaInsets", new InsetsUIResource(5, 5, 6, 5));
-        table.put("ScrollBar.incrementButtonGap", new Integer(-1));
-        table.put("ScrollBar.decrementButtonGap", new Integer(-1));
+        table.put("ScrollBar.incrementButtonGap", -1);
+        table.put("ScrollBar.decrementButtonGap", -1);
     }
-    
+
+    @Override
     protected void initClassDefaults(UIDefaults table) {
         if (!"textureTheme".equals(currentThemeName)) {
             setTheme("Default");
@@ -444,7 +452,6 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
             "FileChooserUI", BaseFileChooserUI.class.getName(),
             "PopupMenuUI", BasePopupMenuUI.class.getName(),
             "DesktopPaneUI", BaseDesktopPaneUI.class.getName(),
-
             // TextureLookAndFeel classes
             "LabelUI", TextureLabelUI.class.getName(),
             "PanelUI", TexturePanelUI.class.getName(),
@@ -469,10 +476,8 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
             "InternalFrameUI", TextureInternalFrameUI.class.getName(),
             "RootPaneUI", TextureRootPaneUI.class.getName(),};
         table.putDefaults(uiDefaults);
-        if (JTattooUtilities.getJavaVersion() >= 1.5) {
-            table.put("FormattedTextFieldUI", BaseFormattedTextFieldUI.class.getName());
-            table.put("SpinnerUI", BaseSpinnerUI.class.getName());
-        }
+        table.put("FormattedTextFieldUI", BaseFormattedTextFieldUI.class.getName());
+        table.put("SpinnerUI", BaseSpinnerUI.class.getName());
     }
 
-}
+} // end of class TextureLookAndFeel

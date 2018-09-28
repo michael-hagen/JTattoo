@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.fast;
 
 import com.jtattoo.plaf.*;
@@ -36,6 +35,7 @@ public class FastInternalFrameTitlePane extends BaseInternalFrameTitlePane {
         super(f);
     }
 
+    @Override
     public void paintPalette(Graphics g) {
         if (JTattooUtilities.isFrameActive(this)) {
             g.setColor(AbstractLookAndFeel.getWindowTitleBackgroundColor());
@@ -45,6 +45,7 @@ public class FastInternalFrameTitlePane extends BaseInternalFrameTitlePane {
         g.fillRect(0, 0, getWidth(), getHeight());
     }
 
+    @Override
     public void paintBackground(Graphics g) {
         if (isActive()) {
             g.setColor(AbstractLookAndFeel.getWindowTitleBackgroundColor());
@@ -53,4 +54,5 @@ public class FastInternalFrameTitlePane extends BaseInternalFrameTitlePane {
         }
         g.fillRect(0, 0, getWidth(), getHeight());
     }
-}
+
+} // end of class FastInternalFrameTitlePane

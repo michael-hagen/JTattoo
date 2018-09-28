@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.mcwin;
 
 import com.jtattoo.plaf.*;
@@ -37,10 +36,12 @@ public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
         super(f);
     }
 
+    @Override
     protected LayoutManager createLayout() {
         return new MyTitlePaneLayout();
     }
 
+    @Override
     public void paintBorder(Graphics g) {
         if (JTattooUtilities.isActive(this)) {
             g.setColor(AbstractLookAndFeel.getWindowBorderColor());
@@ -50,6 +51,7 @@ public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
         g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
     }
 
+    @Override
     public void paintText(Graphics g, int x, int y, String title) {
         if (isActive()) {
             g.setColor(ColorHelper.brighter(AbstractLookAndFeel.getWindowTitleColorLight(), 40));
@@ -69,16 +71,20 @@ public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 //------------------------------------------------------------------------------
     class MyTitlePaneLayout extends TitlePaneLayout {
 
+        @Override
         public void addLayoutComponent(String name, Component c) {
         }
 
+        @Override
         public void removeLayoutComponent(Component c) {
         }
 
+        @Override
         public Dimension preferredLayoutSize(Container c) {
             return minimumLayoutSize(c);
         }
 
+        @Override
         public Dimension minimumLayoutSize(Container c) {
             int width = 30;
             if (frame.isClosable()) {
@@ -116,6 +122,7 @@ public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
             return new Dimension(width, height);
         }
 
+        @Override
         public void layoutContainer(Container c) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
                 layoutMacStyle(c);
@@ -134,7 +141,7 @@ public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
             // assumes all buttons have the same dimensions these dimensions include the borders
             int buttonHeight = h - getVerSpacing() - 1;
             int buttonWidth = buttonHeight;
-            
+
             int x = leftToRight ? w - spacing : 0;
             int y = Math.max(0, ((h - buttonHeight) / 2) - 1);
 
@@ -163,7 +170,7 @@ public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
             }
 
             buttonsWidth = leftToRight ? w - x : x;
-            
+
             if (customTitlePanel != null) {
                 int maxWidth = w - buttonsWidth - spacing - 20;
                 Icon icon = frame.getFrameIcon();
@@ -205,7 +212,7 @@ public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
             }
 
             buttonsWidth = x;
-            
+
             if (customTitlePanel != null) {
                 int cpx = buttonsWidth + 5;
                 int cpy = 0;
@@ -216,6 +223,6 @@ public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
             }
         }
 
-    } // end class MyTitlePaneLayout
+    } // end of class MyTitlePaneLayout
 
-}
+} // end of class McWinInternalFrameTitlePane

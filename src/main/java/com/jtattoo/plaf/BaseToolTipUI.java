@@ -43,6 +43,7 @@ public class BaseToolTipUI extends MetalToolTipUI {
         return new BaseToolTipUI();
     }
 
+    @Override
     public void installUI(JComponent c) {
         super.installUI(c);
         int borderSize = AbstractLookAndFeel.getTheme().getTooltipBorderSize();
@@ -60,12 +61,14 @@ public class BaseToolTipUI extends MetalToolTipUI {
         }
     }
 
+    @Override
     protected void installListeners(JComponent c) {
         super.installListeners(c);
         
         // We must set the popup window to opaque because it is cached and reused within the PopupFactory
         popupWindowListener = new ComponentAdapter() {
 
+            @Override
             public void componentHidden(ComponentEvent e) {
                 Window window = (Window)e.getComponent();
                 DecorationHelper.setTranslucentWindow(window, false);
@@ -74,6 +77,7 @@ public class BaseToolTipUI extends MetalToolTipUI {
         };
     }
 
+    @Override
     public void paint(Graphics g, JComponent c) {
         Graphics2D g2D = (Graphics2D) g;
         Composite savedComposit = g2D.getComposite();
@@ -203,4 +207,5 @@ public class BaseToolTipUI extends MetalToolTipUI {
             super.paint(g, c);
         }
     }
-}
+    
+} // end of class BaseToolTipUI

@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.mcwin;
 
 import com.jtattoo.plaf.*;
@@ -106,10 +105,9 @@ public class McWinIcons extends BaseIcons {
         return thumbVerIconRollover;
     }
 
-
 //--------------------------------------------------------------------------------------------------------
     private static class CheckBoxIcon implements Icon, UIResource, Serializable {
-        
+
         private static final int GAP = 4;
         private static final Icon SMALL_CHECK_ICON = new LazyImageIcon("mcwin/icons/small/check_symbol_16x11.png");
         private static final Icon SMALL_CHECK_DISABLED_ICON = new LazyImageIcon("mcwin/icons/small/check_symbol_disabled_16x11.png");
@@ -118,6 +116,7 @@ public class McWinIcons extends BaseIcons {
         private static final Icon LARGE_CHECK_ICON = new LazyImageIcon("mcwin/icons/large/check_symbol_20x15.png");
         private static final Icon LARGE_CHECK_DISABLED_ICON = new LazyImageIcon("mcwin/icons/large/check_symbol_disabled_20x15.png");
 
+        @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
             if (!JTattooUtilities.isLeftToRight(c)) {
                 x += GAP;
@@ -145,13 +144,13 @@ public class McWinIcons extends BaseIcons {
             JTattooUtilities.fillHorGradient(g, colors, x + 1, y + 1, w - 1, h - 1);
             g.setColor(frameColor);
             g.drawRect(x, y, w, h);
-            
+
             if (button.isEnabled() && !model.isRollover() && !model.isPressed() && !model.isSelected()) {
                 g.setColor(Color.white);
                 g.drawLine(x + 1, y + 1, x + 1, y + h - 2);
                 g.drawLine(x + w - 1, y + 1, x + w - 1, y + h - 2);
             }
-            
+
             Icon checkIcon;
             Icon checkDisabledIcon;
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -182,6 +181,7 @@ public class McWinIcons extends BaseIcons {
             }
         }
 
+        @Override
         public int getIconWidth() {
             int w;
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -194,6 +194,7 @@ public class McWinIcons extends BaseIcons {
             return w + GAP;
         }
 
+        @Override
         public int getIconHeight() {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
                 return 13;
@@ -209,6 +210,7 @@ public class McWinIcons extends BaseIcons {
 
         private static final int GAP = 2;
 
+        @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
             if (!JTattooUtilities.isLeftToRight(c)) {
                 x += GAP;
@@ -250,7 +252,7 @@ public class McWinIcons extends BaseIcons {
             Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
             g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2D.drawOval(x, y, w, h);
-            
+
             if (model.isSelected()) {
                 if (model.isEnabled()) {
                     int gv = ColorHelper.getGrayValue(colors[0]);
@@ -273,6 +275,7 @@ public class McWinIcons extends BaseIcons {
             g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRederingHint);
         }
 
+        @Override
         public int getIconWidth() {
             int w;
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -285,6 +288,7 @@ public class McWinIcons extends BaseIcons {
             return w + GAP;
         }
 
+        @Override
         public int getIconHeight() {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
                 return 14;
@@ -306,9 +310,10 @@ public class McWinIcons extends BaseIcons {
             this.isRollover = isRollover;
         }
 
+        @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
             Graphics2D g2D = (Graphics2D) g;
-            Color colors[] = null;
+            Color colors[];
             if (isRollover) {
                 colors = AbstractLookAndFeel.getTheme().getRolloverColors();
             } else {
@@ -322,9 +327,7 @@ public class McWinIcons extends BaseIcons {
             Shape savedClip = g2D.getClip();
             if (savedClip != null) {
                 Area clipArea = new Area(new Ellipse2D.Double(x + 1, y + 1, WIDTH, HEIGHT));
-                if (savedClip != null) {
-                    clipArea.intersect(new Area(savedClip));
-                }
+                clipArea.intersect(new Area(savedClip));
                 g2D.setClip(clipArea);
                 JTattooUtilities.fillHorGradient(g, colors, x + 1, y + 1, WIDTH, HEIGHT);
                 g2D.setClip(savedClip);
@@ -341,12 +344,15 @@ public class McWinIcons extends BaseIcons {
             g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRederingHint);
         }
 
+        @Override
         public int getIconWidth() {
             return WIDTH + 2;
         }
 
+        @Override
         public int getIconHeight() {
             return HEIGHT + 2;
         }
     }
-}
+    
+} // end of class McWinIcons

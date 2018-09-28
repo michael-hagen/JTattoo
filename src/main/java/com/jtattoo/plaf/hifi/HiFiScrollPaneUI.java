@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.hifi;
 
 import com.jtattoo.plaf.BaseScrollPaneUI;
@@ -36,8 +35,10 @@ public class HiFiScrollPaneUI extends BaseScrollPaneUI {
         return new HiFiScrollPaneUI();
     }
 
+    @Override
     public void installDefaults(JScrollPane p) {
         super.installDefaults(p);
         p.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
     }
-}
+    
+} // end of class HiFiScrollPaneUI

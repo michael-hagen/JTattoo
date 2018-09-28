@@ -19,14 +19,13 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.mint;
 
 import com.jtattoo.plaf.XPScrollButton;
 
 /**
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
 public class MintScrollButton extends XPScrollButton {
 
@@ -34,4 +33,4 @@ public class MintScrollButton extends XPScrollButton {
         super(direction, width);
     }
 
-}
+} // end of class MintScrollButton

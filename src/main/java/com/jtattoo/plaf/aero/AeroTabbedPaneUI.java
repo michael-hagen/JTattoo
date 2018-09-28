@@ -40,11 +40,13 @@ public class AeroTabbedPaneUI extends BaseTabbedPaneUI {
         return new AeroTabbedPaneUI();
     }
 
+    @Override
     protected void installComponents() {
         simpleButtonBorder = true;
         super.installComponents();
     }
 
+    @Override
     protected Color[] getContentBorderColors(int tabPlacement) {
         if (sepColors == null) {
             sepColors = new Color[5];
@@ -57,6 +59,7 @@ public class AeroTabbedPaneUI extends BaseTabbedPaneUI {
         return sepColors;
     }
 
+    @Override
     protected Font getTabFont(boolean isSelected) {
         if (isSelected) {
             return super.getTabFont(isSelected).deriveFont(Font.BOLD);
@@ -65,6 +68,7 @@ public class AeroTabbedPaneUI extends BaseTabbedPaneUI {
         }
     }
 
+    @Override
     protected void paintText(Graphics g, int tabPlacement, Font font, FontMetrics metrics, int tabIndex, String title, Rectangle textRect, boolean isSelected) {
         Color backColor = tabPane.getBackgroundAt(tabIndex);
         if (!(backColor instanceof UIResource)) {
@@ -87,10 +91,7 @@ public class AeroTabbedPaneUI extends BaseTabbedPaneUI {
             }
         } else {
             // plain text
-            int mnemIndex = -1;
-            if (JTattooUtilities.getJavaVersion() >= 1.4) {
-                mnemIndex = tabPane.getDisplayedMnemonicIndexAt(tabIndex);
-            }
+            int mnemIndex = tabPane.getDisplayedMnemonicIndexAt(tabIndex);
 
             if (tabPane.isEnabled() && tabPane.isEnabledAt(tabIndex)) {
                 if (isSelected ) {
@@ -116,4 +117,4 @@ public class AeroTabbedPaneUI extends BaseTabbedPaneUI {
         }
     }
 
-}
+} // end of class AeroTabbedPaneUI

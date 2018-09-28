@@ -19,15 +19,14 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.hifi;
 
 import com.jtattoo.plaf.*;
 import java.awt.Color;
 
 /**
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
 public class HiFiScrollButton extends XPScrollButton {
 
@@ -35,6 +34,7 @@ public class HiFiScrollButton extends XPScrollButton {
         super(direction, width);
     }
 
+    @Override
     public Color getFrameColor() {
         Color frameColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getButtonBackgroundColor(), 8);
         if (getModel().isPressed()) {
@@ -46,4 +46,4 @@ public class HiFiScrollButton extends XPScrollButton {
         }
     }
 
-}
+} // end of class HiFiScrollButton

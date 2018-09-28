@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.mint;
 
 import com.jtattoo.plaf.BaseRootPaneUI;
@@ -29,7 +28,7 @@ import javax.swing.JRootPane;
 import javax.swing.plaf.ComponentUI;
 
 /**
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
 public class MintRootPaneUI extends BaseRootPaneUI {
 
@@ -37,8 +36,9 @@ public class MintRootPaneUI extends BaseRootPaneUI {
         return new MintRootPaneUI();
     }
 
+    @Override
     public JComponent createTitlePane(JRootPane root) {
         return new MintTitlePane(root, this);
     }
-    
-}
+
+} // end of class MintRootPaneUI

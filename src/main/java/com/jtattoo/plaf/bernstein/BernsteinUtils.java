@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.bernstein;
 
 import com.jtattoo.plaf.*;
@@ -28,7 +27,7 @@ import java.awt.*;
 import javax.swing.Icon;
 
 /**
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
 public class BernsteinUtils {
 
@@ -57,6 +56,6 @@ public class BernsteinUtils {
             g.setColor(c.getBackground());
             g.fillRect(0, 0, c.getWidth(), c.getHeight());
         }
-
     }
-}
+    
+} // end of class BernsteinUtils

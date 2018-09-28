@@ -37,7 +37,9 @@ public class AeroRootPaneUI extends BaseRootPaneUI
        return new AeroRootPaneUI(); 
    }
    
+   @Override
    public JComponent createTitlePane(JRootPane root) { 
        return new AeroTitlePane(root, this); 
-   }   
-}
+   }
+   
+} // end of class AeroRootPaneUI

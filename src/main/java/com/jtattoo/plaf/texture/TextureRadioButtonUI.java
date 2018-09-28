@@ -45,6 +45,7 @@ public class TextureRadioButtonUI extends BaseRadioButtonUI {
         return radioButtonUI;
     }
 
+    @Override
     public void paintBackground(Graphics g, JComponent c) {
         if (c.isOpaque()) {
             if ((c.getBackground() instanceof ColorUIResource) && c.getBackground().equals(AbstractLookAndFeel.getBackgroundColor())) {
@@ -56,10 +57,11 @@ public class TextureRadioButtonUI extends BaseRadioButtonUI {
         }
     }
 
+    @Override
     protected void paintFocus(Graphics g, Rectangle t, Dimension d) {
         g.setColor(AbstractLookAndFeel.getFocusColor());
         BasicGraphicsUtils.drawDashedRect(g, t.x - 3, t.y - 1, t.width + 6, t.height + 2);
         BasicGraphicsUtils.drawDashedRect(g, t.x - 2, t.y, t.width + 4, t.height);
     }
 
-}
+} // end of class TextureRadioButtonUI

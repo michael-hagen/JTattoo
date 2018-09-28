@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.smart;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
@@ -42,6 +41,7 @@ public class SmartButtonUI extends BaseButtonUI {
         return new SmartButtonUI();
     }
 
+    @Override
     protected void paintBackground(Graphics g, AbstractButton b) {
         int w = b.getWidth();
         int h = b.getHeight();
@@ -70,6 +70,5 @@ public class SmartButtonUI extends BaseButtonUI {
         }
         g2D.setClip(savedClip);
     }
-}
-
-
+    
+} // end of class SmartButtonUI

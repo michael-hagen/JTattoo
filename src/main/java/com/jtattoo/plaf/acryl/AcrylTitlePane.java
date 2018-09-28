@@ -36,18 +36,22 @@ public class AcrylTitlePane extends BaseTitlePane {
         super(root, ui);
     }
 
+    @Override
     public LayoutManager createLayout() {
         return new TitlePaneLayout();
     }
 
+    @Override
     protected int getHorSpacing() {
         return 1;
     }
 
+    @Override
     protected int getVerSpacing() {
         return 3;
     }
 
+    @Override
     public void paintBorder(Graphics g) {
         if (isActive()) {
             g.setColor(AbstractLookAndFeel.getWindowBorderColor());
@@ -57,6 +61,7 @@ public class AcrylTitlePane extends BaseTitlePane {
         g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
     }
 
+    @Override
     public void paintText(Graphics g, int x, int y, String title) {
         Color shadowColor = AbstractLookAndFeel.getWindowTitleColorDark();
         if (isActive()) {
@@ -77,17 +82,21 @@ public class AcrylTitlePane extends BaseTitlePane {
 //-----------------------------------------------------------------------------------------------
     protected class TitlePaneLayout implements LayoutManager {
 
+        @Override
         public void addLayoutComponent(String name, Component c) {
         }
 
+        @Override
         public void removeLayoutComponent(Component c) {
         }
 
+        @Override
         public Dimension preferredLayoutSize(Container c) {
             int height = computeHeight();
             return new Dimension(height, height);
         }
 
+        @Override
         public Dimension minimumLayoutSize(Container c) {
             return preferredLayoutSize(c);
         }
@@ -97,6 +106,7 @@ public class AcrylTitlePane extends BaseTitlePane {
             return fm.getHeight() + 5;
         }
 
+        @Override
         public void layoutContainer(Container c) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
                 layoutMacStyle(c);
@@ -138,7 +148,7 @@ public class AcrylTitlePane extends BaseTitlePane {
             }
 
             if ((maxButton != null) && (maxButton.getParent() != null)) {
-                if (DecorationHelper.isFrameStateSupported(Toolkit.getDefaultToolkit(), BaseRootPaneUI.MAXIMIZED_BOTH)) {
+                if (Toolkit.getDefaultToolkit().isFrameStateSupported(BaseRootPaneUI.MAXIMIZED_BOTH)) {
                     x += leftToRight ? -spacing - btnWidth : spacing;
                     maxButton.setBounds(x, y, btnWidth, btnHeight);
                     if (!leftToRight) {
@@ -192,7 +202,7 @@ public class AcrylTitlePane extends BaseTitlePane {
                 x += btnWidth + spacing;
             }
             if ((maxButton != null) && (maxButton.getParent() != null)) {
-                if (DecorationHelper.isFrameStateSupported(Toolkit.getDefaultToolkit(), BaseRootPaneUI.MAXIMIZED_BOTH)) {
+                if (Toolkit.getDefaultToolkit().isFrameStateSupported(BaseRootPaneUI.MAXIMIZED_BOTH)) {
                     maxButton.setBounds(x, y, btnWidth, btnHeight);
                     x += btnWidth + spacing;
                 }
@@ -210,5 +220,6 @@ public class AcrylTitlePane extends BaseTitlePane {
             }
         }
         
-    }
-}
+    } // end of class TitlePaneLayout
+    
+} // end of class AcrylTitlePane

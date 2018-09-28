@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.fast;
 
 import com.jtattoo.plaf.AbstractToolBarUI;
@@ -37,16 +36,19 @@ public class FastToolBarUI extends AbstractToolBarUI {
         return new FastToolBarUI();
     }
 
+    @Override
     public Border getRolloverBorder() {
         return FastBorders.getRolloverToolButtonBorder();
     }
 
+    @Override
     public Border getNonRolloverBorder() {
         return FastBorders.getToolButtonBorder();
     }
 
+    @Override
     public boolean isButtonOpaque() {
         return false;
     }
-}
-
+    
+} // end of class FastToolBarUI

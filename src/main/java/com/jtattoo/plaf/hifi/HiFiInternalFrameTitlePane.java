@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.hifi;
 
 import com.jtattoo.plaf.*;
@@ -37,10 +36,12 @@ public class HiFiInternalFrameTitlePane extends BaseInternalFrameTitlePane {
         super(f);
     }
 
+    @Override
     protected boolean centerButtons() {
         return false;
     }
-    
+
+    @Override
     public void paintText(Graphics g, int x, int y, String title) {
         g.setColor(Color.black);
         JTattooUtilities.drawString(frame, g, title, x + 1, y);
@@ -52,6 +53,8 @@ public class HiFiInternalFrameTitlePane extends BaseInternalFrameTitlePane {
         JTattooUtilities.drawString(frame, g, title, x, y - 1);
     }
 
+    @Override
     public void paintBorder(Graphics g) {
     }
-}
+    
+} // end of class HiFiInternalFrameTitlePane

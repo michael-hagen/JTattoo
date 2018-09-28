@@ -220,33 +220,42 @@ public class AeroLookAndFeel extends AbstractLookAndFeel {
         setTheme(themesProps);
     }
     
+    @Override
     public String getName()
     { return "Aero"; }
     
+    @Override
     public String getID()
     { return "Aero"; }
     
+    @Override
     public String getDescription()
     { return "The Aero Look and Feel"; }
     
+    @Override
     public boolean isNativeLookAndFeel()
     { return false; }
     
+    @Override
     public boolean isSupportedLookAndFeel()
     { return true; }
     
+    @Override
     public AbstractBorderFactory getBorderFactory()
     { return AeroBorderFactory.getInstance(); }
     
+    @Override
     public AbstractIconFactory getIconFactory()
     { return AeroIconFactory.getInstance(); }
     
+    @Override
     protected void createDefaultTheme() {
         if (myTheme == null)
             myTheme = new AeroDefaultTheme();
         setTheme(myTheme);
     }
     
+    @Override
     protected void initClassDefaults(UIDefaults table) {
         if (!"aeroTheme".equals(currentThemeName)) {
             setTheme("Default");
@@ -292,10 +301,8 @@ public class AeroLookAndFeel extends AbstractLookAndFeel {
             "RootPaneUI", AeroRootPaneUI.class.getName(),
         };
         table.putDefaults(uiDefaults);
-        if (JTattooUtilities.getJavaVersion() >= 1.5) {
-            table.put("FormattedTextFieldUI", BaseFormattedTextFieldUI.class.getName());
-            table.put("SpinnerUI", BaseSpinnerUI.class.getName());
-        }
+        table.put("FormattedTextFieldUI", BaseFormattedTextFieldUI.class.getName());
+        table.put("SpinnerUI", BaseSpinnerUI.class.getName());
     }
     
-}
+} // end of class AeroLookAndFeel

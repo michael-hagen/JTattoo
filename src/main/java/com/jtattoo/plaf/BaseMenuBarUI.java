@@ -37,9 +37,9 @@ public class BaseMenuBarUI extends BasicMenuBarUI {
         return new BaseMenuBarUI();
     }
 
+    @Override
     public void paint(Graphics g, JComponent c) {
-        int w = c.getWidth();
-        int h = c.getHeight();
-        JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getMenuBarColors(), 0, 0, w, h);
+        JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getMenuBarColors(), 0, 0, c.getWidth(), c.getHeight());
     }
-}
+    
+} // end of class BaseMenuBarUI

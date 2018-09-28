@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.luna;
 
 import com.jtattoo.plaf.*;
@@ -34,10 +33,12 @@ public class LunaComboBoxUI extends BaseComboBoxUI {
         return new LunaComboBoxUI();
     }
 
+    @Override
     public JButton createArrowButton() {
         return new ArrowButton();
     }
 
+    @Override
     protected void setButtonBorder() {
     }
 
@@ -105,5 +106,6 @@ public class LunaComboBoxUI extends BaseComboBoxUI {
                 icon.paintIcon(this, g, x + dx + 1, y);
             }
         }
-    } // end class ArrowButton
-}
+    } // end of class ArrowButton
+    
+} // end of class LunaComboBoxUI

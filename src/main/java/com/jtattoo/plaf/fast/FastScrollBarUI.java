@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.fast;
 
 import com.jtattoo.plaf.*;
@@ -38,6 +37,7 @@ public class FastScrollBarUI extends BaseScrollBarUI {
         return new FastScrollBarUI();
     }
 
+    @Override
     protected JButton createDecreaseButton(int orientation) {
         if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
             return super.createDecreaseButton(orientation);
@@ -46,6 +46,7 @@ public class FastScrollBarUI extends BaseScrollBarUI {
         }
     }
 
+    @Override
     protected JButton createIncreaseButton(int orientation) {
         if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
             return super.createDecreaseButton(orientation);
@@ -54,11 +55,13 @@ public class FastScrollBarUI extends BaseScrollBarUI {
         }
     }
 
+    @Override
     protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
         g.setColor(AbstractLookAndFeel.getControlColorLight());
         g.fillRect(trackBounds.x, trackBounds.y, trackBounds.width, trackBounds.height);
     }
 
+    @Override
     protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
         if (!c.isEnabled()) {
             return;
@@ -81,4 +84,5 @@ public class FastScrollBarUI extends BaseScrollBarUI {
         g.drawLine(1, 1, 1, thumbBounds.height - 2);
         g.translate(-thumbBounds.x, -thumbBounds.y);
     }
-}
+
+} // end of class FastScrollBarUI

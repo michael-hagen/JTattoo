@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.aluminium;
 
 import com.jtattoo.plaf.BaseSliderUI;
@@ -44,6 +43,7 @@ public class AluminiumSliderUI extends BaseSliderUI {
         return new AluminiumSliderUI((JSlider) c);
     }
 
+    @Override
     public void paintBackground(Graphics g, JComponent c) {
         if (c.isOpaque()) {
             Component parent = c.getParent();
@@ -59,4 +59,5 @@ public class AluminiumSliderUI extends BaseSliderUI {
             }
         }
     }
-}
+    
+} // end of class AluminiumSliderUI

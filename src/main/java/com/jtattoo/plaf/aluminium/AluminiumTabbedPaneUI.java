@@ -20,7 +20,6 @@
 *  
 * see: APACHE-LICENSE-2.0.txt
 */
- 
 package com.jtattoo.plaf.aluminium;
 
 import com.jtattoo.plaf.*;
@@ -41,6 +40,7 @@ public class AluminiumTabbedPaneUI extends BaseTabbedPaneUI {
         return new AluminiumTabbedPaneUI();
     }
 
+    @Override
     public void installDefaults() {
         super.installDefaults();
         tabAreaInsets = new Insets(2, 6, 2, 6);
@@ -52,6 +52,7 @@ public class AluminiumTabbedPaneUI extends BaseTabbedPaneUI {
         BOTTOM_SELECTED_TAB_COLORS = ColorHelper.createColorArr(c, cLo, 20);
     }
 
+    @Override
     protected Font getTabFont(boolean isSelected) {
         if (isSelected) {
             return super.getTabFont(isSelected).deriveFont(Font.BOLD);
@@ -60,6 +61,7 @@ public class AluminiumTabbedPaneUI extends BaseTabbedPaneUI {
         }
     }
 
+    @Override
     protected Color[] getTabColors(int tabIndex, boolean isSelected, boolean isRollover) {
         Color backColor = tabPane.getBackgroundAt(tabIndex);
         if ((backColor instanceof UIResource) && isSelected) {
@@ -72,10 +74,12 @@ public class AluminiumTabbedPaneUI extends BaseTabbedPaneUI {
         return super.getTabColors(tabIndex, isSelected, isRollover);
     }
 
+    @Override
     protected boolean hasInnerBorder() {
         return true;
     }
 
+    @Override
     protected void paintTabBackground(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
         Color backColor = tabPane.getBackgroundAt(tabIndex);
         if (!(backColor instanceof UIResource)) {
@@ -107,14 +111,19 @@ public class AluminiumTabbedPaneUI extends BaseTabbedPaneUI {
             if (isSelected) {
                 if (tabPane.getBackgroundAt(tabIndex) instanceof UIResource) {
                     g.setColor(AbstractLookAndFeel.getBackgroundColor());
-                    if (tabPlacement == TOP) {
-                        AluminiumUtils.fillComponent(g, tabPane, x + 1, y + 1, w - 1, h + 1);
-                    } else if (tabPlacement == LEFT) {
-                        AluminiumUtils.fillComponent(g, tabPane, x + 1, y + 1, w + 1, h - 1);
-                    } else if (tabPlacement == BOTTOM) {
-                        AluminiumUtils.fillComponent(g, tabPane, x + 1, y - 2, w - 1, h + 1);
-                    } else {
-                        AluminiumUtils.fillComponent(g, tabPane, x - 1, y + 1, w + 1, h - 1);
+                    switch (tabPlacement) {
+                        case TOP:
+                            AluminiumUtils.fillComponent(g, tabPane, x + 1, y + 1, w - 1, h + 1);
+                            break;
+                        case LEFT:
+                            AluminiumUtils.fillComponent(g, tabPane, x + 1, y + 1, w + 1, h - 1);
+                            break;
+                        case BOTTOM:
+                            AluminiumUtils.fillComponent(g, tabPane, x + 1, y - 2, w - 1, h + 1);
+                            break;
+                        default:
+                            AluminiumUtils.fillComponent(g, tabPane, x - 1, y + 1, w + 1, h - 1);
+                            break;
                     }
                 } else {
                     super.paintTabBackground(g, tabPlacement, tabIndex, x, y, w, h, isSelected);
@@ -125,4 +134,4 @@ public class AluminiumTabbedPaneUI extends BaseTabbedPaneUI {
         }
     }
 
-}
+} // end of class AluminiumTabbedPaneUI

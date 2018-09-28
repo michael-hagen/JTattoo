@@ -44,13 +44,9 @@ public class BaseLabelUI extends BasicLabelUI {
         return baseLabelUI;
     }
 
+    @Override
     protected void paintEnabledText(JLabel l, Graphics g, String s, int textX, int textY) {
-        int mnemIndex;
-        if (JTattooUtilities.getJavaVersion() >= 1.4) {
-            mnemIndex = l.getDisplayedMnemonicIndex();
-        } else {
-            mnemIndex = JTattooUtilities.findDisplayedMnemonicIndex(l.getText(), l.getDisplayedMnemonic());
-        }
+        int mnemIndex = l.getDisplayedMnemonicIndex();
         Object sc = l.getClientProperty("shadowColor");
         if (sc instanceof Color) {
             g.setColor((Color)sc);
@@ -60,17 +56,14 @@ public class BaseLabelUI extends BasicLabelUI {
         JTattooUtilities.drawStringUnderlineCharAt(l, g, s, mnemIndex, textX, textY);
     }
 
+    @Override
     protected void paintDisabledText(JLabel l, Graphics g, String s, int textX, int textY) {
-        int mnemIndex;
-        if (JTattooUtilities.getJavaVersion() >= 1.4) {
-            mnemIndex = l.getDisplayedMnemonicIndex();
-        } else {
-            mnemIndex = JTattooUtilities.findDisplayedMnemonicIndex(l.getText(), l.getDisplayedMnemonic());
-        }
+        int mnemIndex = l.getDisplayedMnemonicIndex();
         g.setColor(Color.white);
         JTattooUtilities.drawStringUnderlineCharAt(l, g, s, mnemIndex, textX + 1, textY + 1);
         g.setColor(AbstractLookAndFeel.getDisabledForegroundColor());
         JTattooUtilities.drawStringUnderlineCharAt(l, g, s, mnemIndex, textX, textY);
     }
-}
+    
+} // end of class BaseLabelUI
 

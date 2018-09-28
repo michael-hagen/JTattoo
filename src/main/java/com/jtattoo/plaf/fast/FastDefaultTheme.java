@@ -19,13 +19,11 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.fast;
 
 import com.jtattoo.plaf.AbstractTheme;
 import com.jtattoo.plaf.ColorHelper;
-import java.awt.Color;
 import javax.swing.plaf.ColorUIResource;
 
 /**
@@ -43,10 +41,12 @@ public class FastDefaultTheme extends AbstractTheme {
         setUpColorArrs();
     }
 
+    @Override
     public String getPropertyFileName() {
         return "FastTheme.properties";
     }
 
+    @Override
     public void setUpColor() {
         super.setUpColor();
         // Defaults for FastLookAndFeel
@@ -55,11 +55,11 @@ public class FastDefaultTheme extends AbstractTheme {
         backgroundColorDark = new ColorUIResource(232, 232, 232);
         alterBackgroundColor = new ColorUIResource(232, 232, 232);
         selectionBackgroundColor = new ColorUIResource(210, 210, 210);
-        frameColor = gray;
+        frameColor = GRAY;
         focusColor = new ColorUIResource(160, 160, 200);
         focusCellColor = new ColorUIResource(160, 160, 200);
-        buttonBackgroundColor = extraLightGray;
-        controlBackgroundColor = extraLightGray;
+        buttonBackgroundColor = EXTRA_LIGHT_GRAY;
+        controlBackgroundColor = EXTRA_LIGHT_GRAY;
 
         windowTitleBackgroundColor = new ColorUIResource(210, 210, 210);
         windowBorderColor = new ColorUIResource(210, 210, 210);
@@ -68,7 +68,7 @@ public class FastDefaultTheme extends AbstractTheme {
         windowInactiveBorderColor = new ColorUIResource(230, 230, 230);
 
         menuBackgroundColor = new ColorUIResource(240, 240, 240);
-        menuSelectionBackgroundColor = lightGray;
+        menuSelectionBackgroundColor = LIGHT_GRAY;
 
         toolbarBackgroundColor = new ColorUIResource(240, 240, 240);
 
@@ -76,6 +76,7 @@ public class FastDefaultTheme extends AbstractTheme {
         desktopColor = new ColorUIResource(128, 128, 148);
     }
 
+    @Override
     public void setUpColorArrs() {
         super.setUpColorArrs();
         // Generate the color arrays
@@ -86,15 +87,15 @@ public class FastDefaultTheme extends AbstractTheme {
         INACTIVE_COLORS = HIDEFAULT_COLORS;
 
         //ROLLOVER_COLORS = ColorHelper.createColorArr(buttonBackgroundColor, buttonBackgroundColor, 2);
-        ROLLOVER_COLORS = ColorHelper.createColorArr(superLightGray, superLightGray, 2);
+        ROLLOVER_COLORS = ColorHelper.createColorArr(SUPER_LIGHT_GRAY, SUPER_LIGHT_GRAY, 2);
         SELECTED_COLORS = ColorHelper.createColorArr(backgroundColor, backgroundColor, 2);
         DISABLED_COLORS = ColorHelper.createColorArr(controlColorLight, controlColorLight, 2);
 
         BUTTON_COLORS = ColorHelper.createColorArr(buttonBackgroundColor, buttonBackgroundColor, 2);
-        COL_HEADER_COLORS = ColorHelper.createColorArr(superLightGray, superLightGray, 2);
-        CHECKBOX_COLORS = ColorHelper.createColorArr(superLightGray, superLightGray, 2);
+        COL_HEADER_COLORS = ColorHelper.createColorArr(SUPER_LIGHT_GRAY, SUPER_LIGHT_GRAY, 2);
+        CHECKBOX_COLORS = ColorHelper.createColorArr(SUPER_LIGHT_GRAY, SUPER_LIGHT_GRAY, 2);
 
         TAB_COLORS = DEFAULT_COLORS;
-        
     }
-}
+
+} // end of class FastDefaultTheme

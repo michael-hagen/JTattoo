@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.bernstein;
 
 import com.jtattoo.plaf.AbstractBorderFactory;
@@ -43,80 +42,99 @@ public class BernsteinBorderFactory implements AbstractBorderFactory {
         return instance;
     }
 
+    @Override
     public Border getFocusFrameBorder() {
         return BernsteinBorders.getFocusFrameBorder();
     }
 
+    @Override
     public Border getButtonBorder() {
         return BernsteinBorders.getButtonBorder();
     }
 
+    @Override
     public Border getToggleButtonBorder() {
         return BernsteinBorders.getToggleButtonBorder();
     }
 
+    @Override
     public Border getTextBorder() {
         return BernsteinBorders.getTextBorder();
     }
 
+    @Override
     public Border getSpinnerBorder() {
         return BernsteinBorders.getSpinnerBorder();
     }
 
+    @Override
     public Border getTextFieldBorder() {
         return BernsteinBorders.getTextFieldBorder();
     }
 
+    @Override
     public Border getComboBoxBorder() {
         return BernsteinBorders.getComboBoxBorder();
     }
 
+    @Override
     public Border getTableHeaderBorder() {
         return BernsteinBorders.getTableHeaderBorder();
     }
 
+    @Override
     public Border getTableScrollPaneBorder() {
         return BernsteinBorders.getTableScrollPaneBorder();
     }
 
+    @Override
     public Border getScrollPaneBorder() {
         return BernsteinBorders.getScrollPaneBorder();
     }
 
+    @Override
     public Border getTabbedPaneBorder() {
         return BernsteinBorders.getTabbedPaneBorder();
     }
 
+    @Override
     public Border getMenuBarBorder() {
         return BernsteinBorders.getMenuBarBorder();
     }
 
+    @Override
     public Border getMenuItemBorder() {
         return BernsteinBorders.getMenuItemBorder();
     }
 
+    @Override
     public Border getPopupMenuBorder() {
         return BernsteinBorders.getPopupMenuBorder();
     }
 
+    @Override
     public Border getInternalFrameBorder() {
         return BernsteinBorders.getInternalFrameBorder();
     }
 
+    @Override
     public Border getPaletteBorder() {
         return BernsteinBorders.getPaletteBorder();
     }
 
+    @Override
     public Border getToolBarBorder() {
         return BernsteinBorders.getToolBarBorder();
     }
 
+    @Override
     public Border getProgressBarBorder() {
         return BernsteinBorders.getProgressBarBorder();
     }
 
+    @Override
     public Border getDesktopIconBorder() {
         return BernsteinBorders.getDesktopIconBorder();
     }
-}
-
+    
+} // end of class BernsteinBorderFactory

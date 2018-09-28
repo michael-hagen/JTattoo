@@ -110,16 +110,19 @@ public class AcrylBorders extends BaseBorders {
 
         private static final Insets insets = new Insets(2, 2, 2, 2);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
             Color borderColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFrameColor(), 50);
             g.setColor(borderColor);
             g.drawRect(x, y, width - 1, height - 1);
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
             return new Insets(insets.top, insets.left, insets.bottom, insets.right);
         }
 
+        @Override
         public Insets getBorderInsets(Component c, Insets borderInsets) {
             borderInsets.left = insets.left;
             borderInsets.top = insets.top;
@@ -134,16 +137,19 @@ public class AcrylBorders extends BaseBorders {
 
         private static final Insets insets = new Insets(1, 1, 1, 1);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
             Color borderColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFrameColor(), 50);
             g.setColor(borderColor);
             g.drawRect(x, y, width - 1, height - 1);
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
             return new Insets(insets.top, insets.left, insets.bottom, insets.right);
         }
 
+        @Override
         public Insets getBorderInsets(Component c, Insets borderInsets) {
             borderInsets.left = insets.left;
             borderInsets.top = insets.top;
@@ -158,16 +164,19 @@ public class AcrylBorders extends BaseBorders {
 
         private static final Insets insets = new Insets(1, 1, 1, 1);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
             Color borderColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFrameColor(), 50);
             g.setColor(borderColor);
             g.drawRect(x, y, width - 1, height - 1);
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
             return new Insets(insets.top, insets.left, insets.bottom, insets.right);
         }
 
+        @Override
         public Insets getBorderInsets(Component c, Insets borderInsets) {
             borderInsets.left = insets.left;
             borderInsets.top = insets.top;
@@ -189,6 +198,7 @@ public class AcrylBorders extends BaseBorders {
             this.tableBorder = tableBorder;
         }
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             g.setColor(ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFrameColor(), 50));
             g.drawRect(x, y, w - 1, h - 1);
@@ -196,6 +206,7 @@ public class AcrylBorders extends BaseBorders {
             g.drawRect(x + 1, y + 1, w - 3, h - 3);
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
             if (tableBorder) {
                 return new Insets(tableInsets.top, tableInsets.left, tableInsets.bottom, tableInsets.right);
@@ -204,6 +215,7 @@ public class AcrylBorders extends BaseBorders {
             }
         }
 
+        @Override
         public Insets getBorderInsets(Component c, Insets borderInsets) {
             Insets ins = getBorderInsets(c);
             borderInsets.left = ins.left;
@@ -219,6 +231,7 @@ public class AcrylBorders extends BaseBorders {
 
         private static final Insets insets = new Insets(3, 6, 3, 6);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             AbstractButton button = (AbstractButton) c;
             ButtonModel model = button.getModel();
@@ -249,6 +262,7 @@ public class AcrylBorders extends BaseBorders {
             }
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
             return insets;
         }
@@ -261,6 +275,7 @@ public class AcrylBorders extends BaseBorders {
             return borderInsets;
         }
 
+        @Override
         public boolean isBorderOpaque() {
             return true;
         }
@@ -270,6 +285,7 @@ public class AcrylBorders extends BaseBorders {
 
         private static final Insets insets = new Insets(2, 2, 2, 2);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             AbstractButton button = (AbstractButton) c;
             ButtonModel model = button.getModel();
@@ -310,6 +326,7 @@ public class AcrylBorders extends BaseBorders {
             }
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
             return new Insets(insets.top, insets.left, insets.bottom, insets.right);
         }
@@ -322,17 +339,20 @@ public class AcrylBorders extends BaseBorders {
             return borderInsets;
         }
 
+        @Override
         public boolean isBorderOpaque() {
             return true;
         }
-    } // class RolloverToolButtonBorder
+        
+    } // end of class RolloverToolButtonBorder
 
     public static class InternalFrameBorder extends BaseInternalFrameBorder {
 
         public InternalFrameBorder() {
-            insets.top = 3;
+            INSETS.top = 3;
         }
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             boolean active = isActive(c);
             int th = getTitleHeight(c);
@@ -345,26 +365,26 @@ public class AcrylBorders extends BaseBorders {
                 frameColor = ColorHelper.darker(AbstractLookAndFeel.getWindowBorderColor(), 10);
             }
             g.setColor(titleColor);
-            g.fillRect(x, y + 1, w, insets.top - 1);
+            g.fillRect(x, y + 1, w, INSETS.top - 1);
             g.setColor(borderColor);
-            g.fillRect(x + 1, y + h - dw, w - 2, dw - 1);
+            g.fillRect(x + 1, y + h - DW, w - 2, DW - 1);
 
             if (active) {
-                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowTitleColors(), 1, insets.top, dw, th + 1);
-                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowTitleColors(), w - dw, insets.top, dw, th + 1);
+                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowTitleColors(), 1, INSETS.top, DW, th + 1);
+                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowTitleColors(), w - DW, INSETS.top, DW, th + 1);
             } else {
-                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowInactiveTitleColors(), 1, insets.top, dw - 1, th + 1);
-                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowInactiveTitleColors(), w - dw, insets.top, dw - 1, th + 1);
+                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowInactiveTitleColors(), 1, INSETS.top, DW - 1, th + 1);
+                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowInactiveTitleColors(), w - DW, INSETS.top, DW - 1, th + 1);
             }
             g.setColor(borderColor);
-            g.fillRect(1, insets.top + th + 1, dw - 1, h - th - dw);
-            g.fillRect(w - dw, insets.top + th + 1, dw - 1, h - th - dw);
+            g.fillRect(1, INSETS.top + th + 1, DW - 1, h - th - DW);
+            g.fillRect(w - DW, INSETS.top + th + 1, DW - 1, h - th - DW);
 
             g.setColor(frameColor);
             g.drawRect(x, y, w - 1, h - 1);
-            g.drawLine(x + dw - 1, y + insets.top + th, x + dw - 1, y + h - dw);
-            g.drawLine(x + w - dw, y + insets.top + th, x + w - dw, y + h - dw);
-            g.drawLine(x + dw - 1, y + h - dw, x + w - dw, y + h - dw);
+            g.drawLine(x + DW - 1, y + INSETS.top + th, x + DW - 1, y + h - DW);
+            g.drawLine(x + w - DW, y + INSETS.top + th, x + w - DW, y + h - DW);
+            g.drawLine(x + DW - 1, y + h - DW, x + w - DW, y + h - DW);
         }
 
     } // class InternalFrameBorder

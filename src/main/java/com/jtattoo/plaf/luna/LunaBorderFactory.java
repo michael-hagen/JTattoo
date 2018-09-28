@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.luna;
 
 import com.jtattoo.plaf.AbstractBorderFactory;
@@ -43,80 +42,99 @@ public class LunaBorderFactory implements AbstractBorderFactory {
         return instance;
     }
 
+    @Override
     public Border getFocusFrameBorder() {
         return LunaBorders.getFocusFrameBorder();
     }
 
+    @Override
     public Border getButtonBorder() {
         return LunaBorders.getButtonBorder();
     }
 
+    @Override
     public Border getToggleButtonBorder() {
         return LunaBorders.getToggleButtonBorder();
     }
 
+    @Override
     public Border getTextBorder() {
         return LunaBorders.getTextBorder();
     }
 
+    @Override
     public Border getSpinnerBorder() {
         return LunaBorders.getSpinnerBorder();
     }
 
+    @Override
     public Border getTextFieldBorder() {
         return LunaBorders.getTextFieldBorder();
     }
 
+    @Override
     public Border getComboBoxBorder() {
         return LunaBorders.getComboBoxBorder();
     }
 
+    @Override
     public Border getTableHeaderBorder() {
         return LunaBorders.getTableHeaderBorder();
     }
 
+    @Override
     public Border getTableScrollPaneBorder() {
         return LunaBorders.getTableScrollPaneBorder();
     }
 
+    @Override
     public Border getScrollPaneBorder() {
         return LunaBorders.getScrollPaneBorder();
     }
 
+    @Override
     public Border getTabbedPaneBorder() {
         return LunaBorders.getTabbedPaneBorder();
     }
 
+    @Override
     public Border getMenuBarBorder() {
         return LunaBorders.getMenuBarBorder();
     }
 
+    @Override
     public Border getMenuItemBorder() {
         return LunaBorders.getMenuItemBorder();
     }
 
+    @Override
     public Border getPopupMenuBorder() {
         return LunaBorders.getPopupMenuBorder();
     }
 
+    @Override
     public Border getInternalFrameBorder() {
         return LunaBorders.getInternalFrameBorder();
     }
 
+    @Override
     public Border getPaletteBorder() {
         return LunaBorders.getPaletteBorder();
     }
 
+    @Override
     public Border getToolBarBorder() {
         return LunaBorders.getToolBarBorder();
     }
 
+    @Override
     public Border getProgressBarBorder() {
         return LunaBorders.getProgressBarBorder();
     }
 
+    @Override
     public Border getDesktopIconBorder() {
         return LunaBorders.getDesktopIconBorder();
     }
-}
-
+    
+} // end of class LunaBorderFactory

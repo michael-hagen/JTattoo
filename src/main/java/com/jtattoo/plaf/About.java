@@ -33,40 +33,41 @@ import javax.swing.*;
  */
 
 // TODO:
-// - Auf dem Mac scheint es ein Problem mit dem zeichnen des Aluminium Hintergrunds zu geben
+// - Auf dem Mac scheint es ein Problem mit dem Zeichnen des Aluminium Hintergrunds zu geben
 // - setMaximizedBounds unter Linux bei multiscreen Umgebungen funktioniert nicht. Aus diesem Grund
 //   wird in Linux die Toolbar beim maximieren verdeckt (siehe BaseTitlePane maximize)
 public class About extends JDialog {
 
     public static String JTATTOO_VERSION = "Version: 1.6.12";
     
-    private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    private static final Dimension dlgSize = new Dimension(440, 240);
-    private static final int dlgPosX = (screenSize.width / 2) - (dlgSize.width / 2);
-    private static final int dlgPosY = (screenSize.height / 2) - (dlgSize.height / 2);
+    private static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
+    private static final Dimension DLG_SIZE = new Dimension(440, 240);
+    private static final int DLG_POS_X = (SCREEN_SIZE.width / 2) - (DLG_SIZE.width / 2);
+    private static final int DLG_POS_Y = (SCREEN_SIZE.height / 2) - (DLG_SIZE.height / 2);
 
     public About() {
         super((JFrame) null, "About JTattoo");
         JPanel contentPanel = new JPanel(null);
         JLabel titleLabel = new JLabel("JTattoo " + JTATTOO_VERSION);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        titleLabel.setBounds(0, 20, dlgSize.width - 8, 36);
+        titleLabel.setBounds(0, 20, DLG_SIZE.width - 8, 36);
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
         contentPanel.add(titleLabel);
 
         JLabel copyrightLabel = new JLabel("(c) 2002 and later by MH Software-Entwicklung");
-        copyrightLabel.setBounds(0, 80, dlgSize.width - 8, 20);
+        copyrightLabel.setBounds(0, 80, DLG_SIZE.width - 8, 20);
         copyrightLabel.setHorizontalAlignment(JLabel.CENTER);
         contentPanel.add(copyrightLabel);
 
         JButton okButton = new JButton("OK");
-        okButton.setBounds((dlgSize.width - 80) / 2, 170, 80, 24);
+        okButton.setBounds((DLG_SIZE.width - 80) / 2, 170, 80, 24);
         contentPanel.add(okButton);
 
         setContentPane(contentPanel);
 
         addWindowListener(new WindowAdapter() {
 
+            @Override
             public void windowClosing(WindowEvent ev) {
                 System.exit(0);
             }
@@ -74,6 +75,7 @@ public class About extends JDialog {
 
         okButton.addActionListener(new ActionListener() {
 
+            @Override
             public void actionPerformed(ActionEvent ev) {
                 System.exit(0);
             }
@@ -87,11 +89,18 @@ public class About extends JDialog {
         try {
             UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
             About dlg = new About();
-            dlg.setSize(dlgSize);
-            dlg.setLocation(dlgPosX, dlgPosY);
+            dlg.setSize(DLG_SIZE);
+            dlg.setLocation(DLG_POS_X, DLG_POS_Y);
             dlg.setVisible(true);
-        } catch (Exception ex) {
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (IllegalAccessException ex) {
+            ex.printStackTrace();
+        } catch (InstantiationException ex) {
+            ex.printStackTrace();
+        } catch (UnsupportedLookAndFeelException ex) {
             ex.printStackTrace();
         }
     }
-}
+    
+} // end of class About

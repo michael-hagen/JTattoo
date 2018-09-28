@@ -38,21 +38,25 @@ public class BaseMenuItemUI extends BasicMenuItemUI {
         return new BaseMenuItemUI();
     }
 
+    @Override
     public void installUI(JComponent c) {
         super.installUI(c);
         c.setOpaque(false);
     }
 
+    @Override
     public void uninstallUI(JComponent c) {
         c.setOpaque(true);
         super.uninstallUI(c);
     }
 
+    @Override
     public void update(Graphics g, JComponent c) {
         paintBackground(g, c, 0, 0, c.getWidth(), c.getHeight());
         paint(g, c);
     }
 
+    @Override
     protected void paintBackground(Graphics g, JMenuItem menuItem, Color bgColor) {
         if (menuItem.isOpaque()) {
             int w = menuItem.getWidth();
@@ -89,6 +93,7 @@ public class BaseMenuItemUI extends BasicMenuItemUI {
         }
     }
 
+    @Override
     protected void paintText(Graphics g, JMenuItem menuItem, Rectangle textRect, String text) {
         ButtonModel model = menuItem.getModel();
         Color foreColor = menuItem.getForeground();
@@ -109,4 +114,5 @@ public class BaseMenuItemUI extends BasicMenuItemUI {
             g2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, savedRenderingHint);
         }
     }
-}
+    
+} // end of class BaseMenuItemUI

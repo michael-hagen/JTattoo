@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.fast;
 
 import com.jtattoo.plaf.*;
@@ -59,7 +58,6 @@ public class FastLookAndFeel extends AbstractLookAndFeel {
     private static final Properties greenSmallFontProps = new Properties();
     private static final Properties greenLargeFontProps = new Properties();
     private static final Properties greenGiantFontProps = new Properties();
-
 
     static {
         smallFontProps.setProperty("controlTextFont", "Dialog 10");
@@ -223,34 +221,42 @@ public class FastLookAndFeel extends AbstractLookAndFeel {
         setTheme(themesProps);
     }
 
+    @Override
     public String getName() {
         return "Fast";
     }
 
+    @Override
     public String getID() {
         return "Fast";
     }
 
+    @Override
     public String getDescription() {
         return "The Fast Look and Feel";
     }
 
+    @Override
     public boolean isNativeLookAndFeel() {
         return false;
     }
 
+    @Override
     public boolean isSupportedLookAndFeel() {
         return true;
     }
 
+    @Override
     public AbstractBorderFactory getBorderFactory() {
         return FastBorderFactory.getInstance();
     }
 
+    @Override
     public AbstractIconFactory getIconFactory() {
         return FastIconFactory.getInstance();
     }
 
+    @Override
     protected void createDefaultTheme() {
         if (myTheme == null) {
             myTheme = new FastDefaultTheme();
@@ -258,6 +264,7 @@ public class FastLookAndFeel extends AbstractLookAndFeel {
         setTheme(myTheme);
     }
 
+    @Override
     protected void initClassDefaults(UIDefaults table) {
         if (!"fastTheme".equals(currentThemeName)) {
             setTheme("Default");
@@ -289,7 +296,6 @@ public class FastLookAndFeel extends AbstractLookAndFeel {
             "RadioButtonMenuItemUI", BaseRadioButtonMenuItemUI.class.getName(),
             "PopupMenuSeparatorUI", BaseSeparatorUI.class.getName(),
             "DesktopPaneUI", BaseDesktopPaneUI.class.getName(),
-            
             // FastLookAndFeel classes
             "ButtonUI", FastButtonUI.class.getName(),
             "ToggleButtonUI", FastToggleButtonUI.class.getName(),
@@ -301,14 +307,14 @@ public class FastLookAndFeel extends AbstractLookAndFeel {
             "InternalFrameUI", FastInternalFrameUI.class.getName(),
             "RootPaneUI", FastRootPaneUI.class.getName(),};
         table.putDefaults(uiDefaults);
-        if (JTattooUtilities.getJavaVersion() >= 1.5) {
-            table.put("FormattedTextFieldUI", BaseFormattedTextFieldUI.class.getName());
-            table.put("SpinnerUI", BaseSpinnerUI.class.getName());
-        }
+        table.put("FormattedTextFieldUI", BaseFormattedTextFieldUI.class.getName());
+        table.put("SpinnerUI", BaseSpinnerUI.class.getName());
     }
 
+    @Override
     protected void initComponentDefaults(UIDefaults table) {
         super.initComponentDefaults(table);
         table.put("SplitPane.centerOneTouchButtons", Boolean.FALSE);
     }
-}
+    
+} // end of class FastLookAndFeel

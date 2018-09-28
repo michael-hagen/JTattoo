@@ -40,6 +40,7 @@ public class BernsteinButtonUI extends BaseButtonUI {
         return new BernsteinButtonUI();
     }
 
+    @Override
     protected void paintBackground(Graphics g, AbstractButton b) {
         if (!b.isContentAreaFilled() || (b.getParent() instanceof JMenuBar)) {
             return;
@@ -91,6 +92,6 @@ public class BernsteinButtonUI extends BaseButtonUI {
         }
     }
     
-}
+} // end of class BernsteinButtonUI
 
 

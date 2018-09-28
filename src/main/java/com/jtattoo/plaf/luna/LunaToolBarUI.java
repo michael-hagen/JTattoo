@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.luna;
 
 import com.jtattoo.plaf.*;
@@ -35,18 +34,22 @@ public class LunaToolBarUI extends AbstractToolBarUI {
         return new LunaToolBarUI();
     }
 
+    @Override
     public Border getRolloverBorder() {
         return LunaBorders.getRolloverToolButtonBorder();
     }
 
+    @Override
     public Border getNonRolloverBorder() {
         return LunaBorders.getToolButtonBorder();
     }
 
+    @Override
     public boolean isButtonOpaque() {
         return false;
     }
 
+    @Override
     public void paint(Graphics g, JComponent c) {
         int w = c.getWidth();
         int h = c.getHeight();
@@ -54,4 +57,5 @@ public class LunaToolBarUI extends AbstractToolBarUI {
         g.setColor(ColorHelper.darker(AbstractLookAndFeel.getToolbarColorDark(), 10));
         g.drawLine(0, 0, w, 0);
     }
-}
+    
+} // end of class LunaToolBarUI

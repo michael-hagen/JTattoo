@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.luna;
 
 import com.jtattoo.plaf.*;
@@ -108,11 +107,12 @@ public class LunaBorders extends BaseBorders {
     //------------------------------------------------------------------------------------
     public static class ButtonBorder implements Border, UIResource {
 
-        private static final Color defaultColorHi = new Color(220, 230, 245);
-        private static final Color defaultColorMed = new Color(212, 224, 243);
-        private static final Color defaultColorLo = new Color(200, 215, 240);
-        private static final Insets insets = new Insets(3, 6, 3, 6);
+        private static final Color DEFAUULT_COLOR_HI = new Color(220, 230, 245);
+        private static final Color DEFAULT_COLOR_MED = new Color(212, 224, 243);
+        private static final Color DEFAULT_COLOR_LO = new Color(200, 215, 240);
+        private static final Insets INSETS = new Insets(3, 6, 3, 6);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             AbstractButton button = (AbstractButton) c;
             Graphics2D g2D = (Graphics2D) g;
@@ -123,11 +123,11 @@ public class LunaBorders extends BaseBorders {
             if (AbstractLookAndFeel.getTheme().doDrawSquareButtons()) {
                 if (button.getRootPane() != null && button.equals(button.getRootPane().getDefaultButton())) {
                     if (!button.getModel().isRollover()) {
-                        g2D.setColor(defaultColorHi);
+                        g2D.setColor(DEFAUULT_COLOR_HI);
                         g2D.drawRect(x + 1, y + 1, w - 4, h - 5);
-                        g2D.setColor(defaultColorMed);
+                        g2D.setColor(DEFAULT_COLOR_MED);
                         g2D.drawRect(x + 2, y + 2, w - 6, h - 6);
-                        g2D.setColor(defaultColorLo);
+                        g2D.setColor(DEFAULT_COLOR_LO);
                         g2D.drawLine(x + 3, h - 3, w - 3, h - 3);
                         g2D.drawLine(w - 3, y + 4, w - 3, h - 4);
                     }
@@ -143,11 +143,11 @@ public class LunaBorders extends BaseBorders {
                 g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 if (button.getRootPane() != null && button.equals(button.getRootPane().getDefaultButton())) {
                     if (!button.getModel().isRollover()) {
-                        g2D.setColor(defaultColorHi);
+                        g2D.setColor(DEFAUULT_COLOR_HI);
                         g2D.drawRoundRect(x + 1, y + 1, w - 4, h - 5, 6, 6);
-                        g2D.setColor(defaultColorMed);
+                        g2D.setColor(DEFAULT_COLOR_MED);
                         g2D.drawRoundRect(x + 2, y + 2, w - 6, h - 6, 6, 6);
-                        g2D.setColor(defaultColorLo);
+                        g2D.setColor(DEFAULT_COLOR_LO);
                         g2D.drawLine(x + 3, h - 3, w - 3, h - 3);
                         g2D.drawLine(w - 3, y + 4, w - 3, h - 4);
                     }
@@ -163,27 +163,31 @@ public class LunaBorders extends BaseBorders {
             }
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
-            return insets;
+            return INSETS;
         }
 
         public Insets getBorderInsets(Component c, Insets borderInsets) {
-            borderInsets.left = insets.left;
-            borderInsets.top = insets.top;
-            borderInsets.right = insets.right;
-            borderInsets.bottom = insets.bottom;
+            borderInsets.left = INSETS.left;
+            borderInsets.top = INSETS.top;
+            borderInsets.right = INSETS.right;
+            borderInsets.bottom = INSETS.bottom;
             return borderInsets;
         }
 
+        @Override
         public boolean isBorderOpaque() {
             return true;
         }
-    } // class ButtonBorder
+        
+    } // end of class ButtonBorder
 
     public static class RolloverToolButtonBorder implements Border, UIResource {
 
-        private static final Insets insets = new Insets(2, 2, 2, 2);
+        private static final Insets INSETS = new Insets(2, 2, 2, 2);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             AbstractButton button = (AbstractButton) c;
             ButtonModel model = button.getModel();
@@ -225,99 +229,113 @@ public class LunaBorders extends BaseBorders {
             }
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
-            return new Insets(insets.top, insets.left, insets.bottom, insets.right);
+            return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
         }
 
         public Insets getBorderInsets(Component c, Insets borderInsets) {
-            borderInsets.left = insets.left;
-            borderInsets.top = insets.top;
-            borderInsets.right = insets.right;
-            borderInsets.bottom = insets.bottom;
+            borderInsets.left = INSETS.left;
+            borderInsets.top = INSETS.top;
+            borderInsets.right = INSETS.right;
+            borderInsets.bottom = INSETS.bottom;
             return borderInsets;
         }
 
+        @Override
         public boolean isBorderOpaque() {
             return true;
         }
-    } // class RolloverToolButtonBorder
+        
+    } // end of class RolloverToolButtonBorder
 
     public static class ComboBoxBorder extends AbstractBorder implements UIResource {
 
-        private static final Color fieldBorderColor = new Color(127, 157, 185);
-        private static final Insets insets = new Insets(1, 1, 1, 1);
+        private static final Color BORDER_COLOR = new Color(127, 157, 185);
+        private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
             width--;
             height--;
-            g.setColor(fieldBorderColor);
+            g.setColor(BORDER_COLOR);
             g.drawRect(x, y, width, height);
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
-            return new Insets(insets.top, insets.left, insets.bottom, insets.right);
+            return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
         }
 
+        @Override
         public Insets getBorderInsets(Component c, Insets borderInsets) {
-            borderInsets.left = insets.left;
-            borderInsets.top = insets.top;
-            borderInsets.right = insets.right;
-            borderInsets.bottom = insets.bottom;
+            borderInsets.left = INSETS.left;
+            borderInsets.top = INSETS.top;
+            borderInsets.right = INSETS.right;
+            borderInsets.bottom = INSETS.bottom;
             return borderInsets;
         }
-    } // class ComboBoxBorder
+        
+    } // end of class ComboBoxBorder
 
     public static class TextFieldBorder extends AbstractBorder implements UIResource {
 
-        private static final Color fieldBorderColor = new Color(127, 157, 185);
-        private static final Insets insets = new Insets(2, 2, 2, 2);
+        private static final Color BORDER_COLOR = new Color(127, 157, 185);
+        private static final Insets INSETS = new Insets(2, 2, 2, 2);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
             width--;
             height--;
-            g.setColor(fieldBorderColor);
+            g.setColor(BORDER_COLOR);
             g.drawRect(x, y, width, height);
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
-            return new Insets(insets.top, insets.left, insets.bottom, insets.right);
+            return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
         }
 
+        @Override
         public Insets getBorderInsets(Component c, Insets borderInsets) {
-            borderInsets.left = insets.left;
-            borderInsets.top = insets.top;
-            borderInsets.right = insets.right;
-            borderInsets.bottom = insets.bottom;
+            borderInsets.left = INSETS.left;
+            borderInsets.top = INSETS.top;
+            borderInsets.right = INSETS.right;
+            borderInsets.bottom = INSETS.bottom;
             return borderInsets;
         }
-    } // class TextFieldBorder
+        
+    } // end of class TextFieldBorder
 
     public static class ScrollPaneBorder extends AbstractBorder implements UIResource {
 
-        private static final Color fieldBorderColor = new Color(127, 157, 185);
-        private static final Insets insets = new Insets(2, 2, 2, 2);
-        private static final Insets tableInsets = new Insets(1, 1, 1, 1);
+        private static final Color BORDER_COLOR = new Color(127, 157, 185);
+        private static final Insets INSETS = new Insets(2, 2, 2, 2);
+        private static final Insets TABLE_INSETS = new Insets(1, 1, 1, 1);
         private boolean tableBorder = false;
 
         public ScrollPaneBorder(boolean tableBorder) {
             this.tableBorder = tableBorder;
         }
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-            g.setColor(fieldBorderColor);
+            g.setColor(BORDER_COLOR);
             g.drawRect(x, y, w - 1, h - 1);
             g.setColor(ColorHelper.brighter(AbstractLookAndFeel.getTheme().getBackgroundColor(), 50));
             g.drawRect(x + 1, y + 1, w - 3, h - 3);
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
             if (tableBorder) {
-                return new Insets(tableInsets.top, tableInsets.left, tableInsets.bottom, tableInsets.right);
+                return new Insets(TABLE_INSETS.top, TABLE_INSETS.left, TABLE_INSETS.bottom, TABLE_INSETS.right);
             } else {
-                return new Insets(insets.top, insets.left, insets.bottom, insets.right);
+                return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
             }
         }
 
+        @Override
         public Insets getBorderInsets(Component c, Insets borderInsets) {
             Insets ins = getBorderInsets(c);
             borderInsets.left = ins.left;
@@ -326,14 +344,16 @@ public class LunaBorders extends BaseBorders {
             borderInsets.bottom = ins.bottom;
             return borderInsets;
         }
-    } // class ScrollPaneBorder
+        
+    } // end of class ScrollPaneBorder
 
     public static class InternalFrameBorder extends BaseInternalFrameBorder {
 
         public InternalFrameBorder() {
-            insets.top = 3;
+            INSETS.top = 3;
         }
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             boolean active = isActive(c);
             int th = getTitleHeight(c);
@@ -344,32 +364,33 @@ public class LunaBorders extends BaseBorders {
                 borderColor = ColorHelper.brighter(borderColor, 20);
             }
             g.setColor(titleColor);
-            g.fillRect(x, y + 1, w, insets.top - 1);
+            g.fillRect(x, y + 1, w, INSETS.top - 1);
             g.setColor(borderColor);
-            g.fillRect(x + 1, y + h - dw, w - 2, dw - 1);
-            g.fillRect(1, insets.top + th + 1, dw - 1, h - th - dw);
-            g.fillRect(w - dw, insets.top + th + 1, dw - 1, h - th - dw);
+            g.fillRect(x + 1, y + h - DW, w - 2, DW - 1);
+            g.fillRect(1, INSETS.top + th + 1, DW - 1, h - th - DW);
+            g.fillRect(w - DW, INSETS.top + th + 1, DW - 1, h - th - DW);
 
             if (active) {
-                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowTitleColors(), 1, insets.top, dw, th + 1);
-                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowTitleColors(), w - dw, insets.top, dw, th + 1);
+                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowTitleColors(), 1, INSETS.top, DW, th + 1);
+                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowTitleColors(), w - DW, INSETS.top, DW, th + 1);
             } else {
-                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowInactiveTitleColors(), 1, insets.top, dw, th + 1);
-                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowInactiveTitleColors(), w - dw, insets.top, dw, th + 1);
+                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowInactiveTitleColors(), 1, INSETS.top, DW, th + 1);
+                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowInactiveTitleColors(), w - DW, INSETS.top, DW, th + 1);
             }
 
             g.setColor(ColorHelper.darker(borderColor, 15));
             g.drawRect(x, y, w - 1, h - 1);
-            g.drawLine(x + dw - 1, y + insets.top + th, x + dw - 1, y + h - dw);
-            g.drawLine(x + w - dw, y + insets.top + th, x + w - dw, y + h - dw);
-            g.drawLine(x + dw - 1, y + h - dw, x + w - dw, y + h - dw);
+            g.drawLine(x + DW - 1, y + INSETS.top + th, x + DW - 1, y + h - DW);
+            g.drawLine(x + w - DW, y + INSETS.top + th, x + w - DW, y + h - DW);
+            g.drawLine(x + DW - 1, y + h - DW, x + w - DW, y + h - DW);
         }
-    } // class InternalFrameBorder
+    } // end of class InternalFrameBorder
 
     public static class TableHeaderBorder extends AbstractBorder implements UIResource {
 
-        private static final Insets insets = new Insets(0, 1, 1, 1);
+        private static final Insets INSETS = new Insets(0, 1, 1, 1);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             g.setColor(ColorHelper.brighter(AbstractLookAndFeel.getControlBackgroundColor(), 40));
             g.drawLine(0, 0, 0, h - 1);
@@ -379,17 +400,21 @@ public class LunaBorders extends BaseBorders {
             g.drawLine(0, h - 1, w - 1, h - 1);
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
-            return new Insets(insets.top, insets.left, insets.bottom, insets.right);
+            return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
         }
 
+        @Override
         public Insets getBorderInsets(Component c, Insets borderInsets) {
-            borderInsets.left = insets.left;
-            borderInsets.top = insets.top;
-            borderInsets.right = insets.right;
-            borderInsets.bottom = insets.bottom;
+            borderInsets.left = INSETS.left;
+            borderInsets.top = INSETS.top;
+            borderInsets.right = INSETS.right;
+            borderInsets.bottom = INSETS.bottom;
             return borderInsets;
         }
-    } // class TableHeaderBorder
-} // class LunaBorders
+        
+    } // end of class TableHeaderBorder
+    
+} // end of class LunaBorders
 

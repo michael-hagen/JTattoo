@@ -40,10 +40,12 @@ public class AeroDefaultTheme extends AbstractTheme {
         setUpColorArrs();
     }
     
+    @Override
     public String getPropertyFileName() { 
         return "AeroTheme.properties"; 
     }
     
+    @Override
     public void setUpColor() {
         super.setUpColor();
         backgroundColor = new ColorUIResource(236, 236, 236);
@@ -52,7 +54,7 @@ public class AeroDefaultTheme extends AbstractTheme {
         alterBackgroundColor = new ColorUIResource(228, 228, 228);
         frameColor = new ColorUIResource(160, 164, 168);
         
-        selectionForegroundColor = black;
+        selectionForegroundColor = BLACK;
         selectionBackgroundColor = new ColorUIResource(176, 196, 222);
         rolloverColor = new ColorUIResource(192, 212, 230);
 
@@ -67,11 +69,11 @@ public class AeroDefaultTheme extends AbstractTheme {
         controlBackgroundColor = backgroundColor;
         controlColorLight = new ColorUIResource(150, 176, 211);
         controlColorDark = new ColorUIResource(60, 95, 142);
-        controlHighlightColor = white;
+        controlHighlightColor = WHITE;
         controlShadowColor = new ColorUIResource(180, 186, 190);
         controlDarkShadowColor = frameColor;
         
-        windowTitleForegroundColor = white;
+        windowTitleForegroundColor = WHITE;
         windowTitleBackgroundColor = new ColorUIResource(176, 196, 222);
         windowTitleColorLight = new ColorUIResource(ColorHelper.brighter(controlColorLight, 20));
         windowTitleColorDark = new ColorUIResource(ColorHelper.brighter(controlColorDark, 20));
@@ -93,11 +95,12 @@ public class AeroDefaultTheme extends AbstractTheme {
         toolbarColorDark = new ColorUIResource(200, 200, 200);
         
         tabAreaBackgroundColor = backgroundColor;
-        tabSelectionForegroundColor = white;
+        tabSelectionForegroundColor = WHITE;
         
         desktopColor = new ColorUIResource(240, 240, 240);
     }
     
+    @Override
     public void setUpColorArrs() {
         super.setUpColorArrs();
         Color color1[] = ColorHelper.createColorArr(controlColorLight, controlColorDark, 6);
@@ -168,4 +171,4 @@ public class AeroDefaultTheme extends AbstractTheme {
         WINDOW_INACTIVE_TITLE_COLORS = INACTIVE_COLORS;
     }
     
-}
+} // end of class AeroDefaultTheme

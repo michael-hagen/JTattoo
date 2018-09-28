@@ -37,7 +37,9 @@ public class AluminiumRootPaneUI extends BaseRootPaneUI {
         return new AluminiumRootPaneUI();
     }
 
+    @Override
     public JComponent createTitlePane(JRootPane root) {
         return new AluminiumTitlePane(root, this);
     }
-}
+    
+} // end of class AluminiumRootPaneUI

@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.aluminium;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
@@ -32,19 +31,19 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.Icon;
 
 /**
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
 public class AluminiumUtils {
 
     private static final Icon BG_IMAGE = new LazyImageIcon("aluminium/icons/background.jpg");
-    private static final Icon ALTER_BG_IMAGE = new LazyImageIcon("aluminium/icons/alterBackground.jpg");
+    //private static final Icon ALTER_BG_IMAGE = new LazyImageIcon("aluminium/icons/alterBackground.jpg");
     private static Image backgroundImage = null;
-    
+
     private AluminiumUtils() {
     }
 
     public static void fillComponent(Graphics g, Component c) {
-        Graphics2D g2D = (Graphics2D)g;
+        Graphics2D g2D = (Graphics2D) g;
         int w = c.getWidth();
         int h = c.getHeight();
         if (AbstractLookAndFeel.getTheme().isBackgroundPatternOn()) {
@@ -52,49 +51,36 @@ public class AluminiumUtils {
             Point p = JTattooUtilities.getRelLocation(c);
             Dimension d = JTattooUtilities.getFrameSize(c);
             int y = -p.y;
-            if (JTattooUtilities.getJavaVersion() >= 1.6) {
-                int iw = BG_IMAGE.getIconWidth();
-                int ih = BG_IMAGE.getIconHeight();
-                while (y < h) {
-                    int x = -p.x;
-                    while (x < w) {
-                        BG_IMAGE.paintIcon(c, g, x, y);
-                        x += iw;
-                    }
-                    y += ih;
+            int iw = BG_IMAGE.getIconWidth();
+            int ih = BG_IMAGE.getIconHeight();
+            while (y < h) {
+                int x = -p.x;
+                while (x < w) {
+                    BG_IMAGE.paintIcon(c, g, x, y);
+                    x += iw;
                 }
-                // higlight
-                if (backgroundImage == null 
-                        || backgroundImage.getWidth(null) != d.width 
-                        || backgroundImage.getHeight(null) != d.height) {
-                    backgroundImage = c.createImage(d.width, d.height);
-                    Graphics2D ig2D = (Graphics2D)backgroundImage.getGraphics();
-                    Point pt1 = new Point(0, 0);
-                    Point pt2 = new Point(d.width, 0);
-                    float fractions[] = {0.0f, 0.5f, 1.0f };
-                    Color c1 = new Color(220, 220, 220);
-                    Color colors[] = {c1, Color.white, c1};
-                    ig2D.setPaint(new LinearGradientPaint(pt1, pt2, fractions, colors));
-                    ig2D.fillRect(0, 0, d.width, d.height);
-                    ig2D.dispose();
-                }
-
-                Composite savedComposite = g2D.getComposite();
-                g2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));
-                g2D.drawImage(backgroundImage, -p.x, 0, null);
-                g2D.setComposite(savedComposite);
-            } else {
-                int iw = ALTER_BG_IMAGE.getIconWidth();
-                int ih = ALTER_BG_IMAGE.getIconHeight();
-                while (y < h) {
-                    int x = -p.x;
-                    while (x < w) {
-                        ALTER_BG_IMAGE.paintIcon(c, g, x, y);
-                        x += iw;
-                    }
-                    y += ih;
-                }
+                y += ih;
             }
+            // higlight
+            if (backgroundImage == null
+                    || backgroundImage.getWidth(null) != d.width
+                    || backgroundImage.getHeight(null) != d.height) {
+                backgroundImage = c.createImage(d.width, d.height);
+                Graphics2D ig2D = (Graphics2D) backgroundImage.getGraphics();
+                Point pt1 = new Point(0, 0);
+                Point pt2 = new Point(d.width, 0);
+                float fractions[] = {0.0f, 0.5f, 1.0f};
+                Color c1 = new Color(220, 220, 220);
+                Color colors[] = {c1, Color.white, c1};
+                ig2D.setPaint(new LinearGradientPaint(pt1, pt2, fractions, colors));
+                ig2D.fillRect(0, 0, d.width, d.height);
+                ig2D.dispose();
+            }
+
+            Composite savedComposite = g2D.getComposite();
+            g2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));
+            g2D.drawImage(backgroundImage, -p.x, 0, null);
+            g2D.setComposite(savedComposite);
         } else {
             g.setColor(c.getBackground());
             g.fillRect(0, 0, w, h);
@@ -112,4 +98,5 @@ public class AluminiumUtils {
         fillComponent(g, c);
         g2D.setClip(savedClip);
     }
-}
+    
+} // end of class AluminiumUtils

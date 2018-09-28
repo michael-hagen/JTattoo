@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.luna;
 
 import com.jtattoo.plaf.BaseRootPaneUI;
@@ -29,7 +28,7 @@ import javax.swing.JRootPane;
 import javax.swing.plaf.ComponentUI;
 
 /**
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
 public class LunaRootPaneUI extends BaseRootPaneUI {
 
@@ -37,7 +36,9 @@ public class LunaRootPaneUI extends BaseRootPaneUI {
         return new LunaRootPaneUI();
     }
 
+    @Override
     public JComponent createTitlePane(JRootPane root) {
         return new LunaTitlePane(root, this);
     }
-}
+    
+} // end of class LunaRootPaneUI

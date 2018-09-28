@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.fast;
 
 import com.jtattoo.plaf.*;
@@ -29,7 +28,7 @@ import java.awt.Graphics;
 import javax.swing.JRootPane;
 
 /**
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
 public class FastTitlePane extends BaseTitlePane {
 
@@ -37,6 +36,7 @@ public class FastTitlePane extends BaseTitlePane {
         super(root, ui);
     }
 
+    @Override
     public void paintBackground(Graphics g) {
         if (isActive()) {
             g.setColor(AbstractLookAndFeel.getWindowTitleBackgroundColor());
@@ -47,6 +47,7 @@ public class FastTitlePane extends BaseTitlePane {
         }
     }
 
+    @Override
     public void paintBorder(Graphics g) {
         Color borderColor = AbstractLookAndFeel.getWindowInactiveBorderColor();
         if (isActive()) {
@@ -54,4 +55,5 @@ public class FastTitlePane extends BaseTitlePane {
         }
         JTattooUtilities.draw3DBorder(g, ColorHelper.brighter(borderColor, 30), ColorHelper.darker(borderColor, 5), 0, 0, getWidth(), getHeight());
     }
-}
+    
+} // end of class FastTitlePane

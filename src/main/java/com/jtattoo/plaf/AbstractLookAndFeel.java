@@ -35,16 +35,6 @@ import javax.swing.plaf.metal.MetalTheme;
  */
 abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
 
-    // Workaround to avoid a bug in the java 1.3 VM
-    static {
-        try {
-            if (JTattooUtilities.getJavaVersion() < 1.4) {
-                UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-            }
-        } catch (Exception ex) {
-        }
-    }
-
     protected static String currentThemeName = "abstractTheme";
 
     private static AbstractTheme myTheme = null;
@@ -53,6 +43,7 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
 
     abstract public AbstractIconFactory getIconFactory();
 
+    @Override
     protected void initSystemColorDefaults(UIDefaults table) {
         Object[] systemColors = {
             "desktop", getDesktopColor(), // Color of the desktop background
@@ -99,6 +90,7 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
         }
     }
 
+    @Override
     protected void initComponentDefaults(UIDefaults table) {
         super.initComponentDefaults(table);
 
@@ -223,8 +215,8 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
             "Slider.background", getBackgroundColor(),
             "Slider.focus", getFocusColor(),
             "Slider.focusInsets", new InsetsUIResource(0, 0, 0, 0),
-            "Slider.trackWidth", new Integer(7),
-            "Slider.majorTickLength", new Integer(6),
+            "Slider.trackWidth", 7,
+            "Slider.majorTickLength", 6,
             // Progress Bar
             "ProgressBar.border", progressBarBorder,
             "ProgressBar.background", progressBarBackground,
@@ -262,7 +254,7 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
             "InternalFrame.border", getBorderFactory().getInternalFrameBorder(),
             "InternalFrame.font", getWindowTitleFont(),
             "InternalFrame.paletteBorder", getBorderFactory().getPaletteBorder(),
-            "InternalFrame.paletteTitleHeight", new Integer(11),
+            "InternalFrame.paletteTitleHeight", 11,
             "InternalFrame.paletteCloseIcon", getIconFactory().getPaletteCloseIcon(),
             "InternalFrame.icon", getIconFactory().getMenuIcon(),
             "InternalFrame.iconifyIcon", getIconFactory().getIconIcon(),
@@ -290,7 +282,7 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
             "ScrollBar.thumb", getControlBackgroundColor(),
             "ScrollBar.thumbShadow", getControlShadowColor(),
             "ScrollBar.thumbHighlight", getControlHighlightColor(),
-            "ScrollBar.width", new Integer(17),
+            "ScrollBar.width", 17,
             "ScrollBar.allowsAbsolutePositioning", Boolean.TRUE,
             // ScrollPane
             "ScrollPane.border", scrollPaneBorder,
@@ -406,7 +398,7 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
             "Separator.foreground", getControlForegroundColor(),
             // SplitPane
             "SplitPane.centerOneTouchButtons", Boolean.TRUE,
-            "SplitPane.dividerSize", new Integer(7),
+            "SplitPane.dividerSize", 7,
             "SplitPane.border", BorderFactory.createEmptyBorder(),
             // Tree
             "Tree.background", getInputBackgroundColor(),
@@ -437,36 +429,34 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
             "ToolBar.floatingForeground", getToolbarForegroundColor(),};
         table.putDefaults(defaults);
 
-        if (JTattooUtilities.getJavaVersion() >= 1.5) {
-            table.put("Spinner.font", getControlTextFont());
-            table.put("Spinner.background", getButtonBackgroundColor());
-            table.put("Spinner.foreground", getButtonForegroundColor());
-            table.put("Spinner.border", getBorderFactory().getSpinnerBorder());
-            table.put("Spinner.arrowButtonInsets", null);
-            table.put("Spinner.arrowButtonBorder", BorderFactory.createEmptyBorder());
-            table.put("Spinner.editorBorderPainted", Boolean.FALSE);
-        }
+        table.put("Spinner.font", getControlTextFont());
+        table.put("Spinner.background", getButtonBackgroundColor());
+        table.put("Spinner.foreground", getButtonForegroundColor());
+        table.put("Spinner.border", getBorderFactory().getSpinnerBorder());
+        table.put("Spinner.arrowButtonInsets", null);
+        table.put("Spinner.arrowButtonBorder", BorderFactory.createEmptyBorder());
+        table.put("Spinner.editorBorderPainted", Boolean.FALSE);
         if (getTheme().isMacStyleScrollBarOn()) {
             if (getTheme().isSmallFontSize()) {
-                table.put("ScrollBar.width", new Integer(8));
-                table.put("SplitPane.dividerSize", new Integer(7));
+                table.put("ScrollBar.width", 8);
+                table.put("SplitPane.dividerSize", 7);
             } else if (getTheme().isMediumFontSize()) {
-                table.put("ScrollBar.width", new Integer(10));
-                table.put("SplitPane.dividerSize", new Integer(9));
+                table.put("ScrollBar.width", 10);
+                table.put("SplitPane.dividerSize", 9);
             } else {
-                table.put("ScrollBar.width", new Integer(12));
-                table.put("SplitPane.dividerSize", new Integer(11));
+                table.put("ScrollBar.width", 12);
+                table.put("SplitPane.dividerSize", 11);
             }
         } else {
             if (getTheme().isSmallFontSize()) {
-                table.put("ScrollBar.width", new Integer(17));
-                table.put("SplitPane.dividerSize", new Integer(7));
+                table.put("ScrollBar.width", 17);
+                table.put("SplitPane.dividerSize", 7);
             } else if (getTheme().isMediumFontSize()) {
-                table.put("ScrollBar.width", new Integer(19));
-                table.put("SplitPane.dividerSize", new Integer(9));
+                table.put("ScrollBar.width", 19);
+                table.put("SplitPane.dividerSize", 9);
             } else {
-                table.put("ScrollBar.width", new Integer(21));
-                table.put("SplitPane.dividerSize", new Integer(11));
+                table.put("ScrollBar.width", 21);
+                table.put("SplitPane.dividerSize", 11);
             }
         }
     }
@@ -479,9 +469,11 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
         MetalLookAndFeel.setCurrentTheme(theme);
         myTheme = theme;
         if (isWindowDecorationOn()) {
-            DecorationHelper.decorateWindows(Boolean.TRUE);
+            JFrame.setDefaultLookAndFeelDecorated(true);
+            JDialog.setDefaultLookAndFeelDecorated(true);
         } else {
-            DecorationHelper.decorateWindows(Boolean.FALSE);
+            JFrame.setDefaultLookAndFeelDecorated(false);
+            JDialog.setDefaultLookAndFeelDecorated(false);
         }
     }
 
@@ -712,4 +704,4 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
         return getTheme().getTooltipBackgroundColor();
     }
 
-}
+} // end of class AbstractLookAndFeel

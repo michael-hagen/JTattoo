@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.luna;
 
 import com.jtattoo.plaf.AbstractTheme;
@@ -40,10 +39,12 @@ public class LunaDefaultTheme extends AbstractTheme {
         setUpColorArrs();
     }
 
+    @Override
     public String getPropertyFileName() {
         return "LunaTheme.properties";
     }
 
+    @Override
     public void setUpColor() {
         super.setUpColor();
 
@@ -53,41 +54,41 @@ public class LunaDefaultTheme extends AbstractTheme {
         backgroundColorDark = new ColorUIResource(232, 228, 208);
         alterBackgroundColor = new ColorUIResource(232, 228, 208);
 
-        selectionForegroundColor = black;
+        selectionForegroundColor = BLACK;
         selectionBackgroundColor = new ColorUIResource(194, 208, 243);//new ColorUIResource(200, 210, 240);
 
         frameColor = new ColorUIResource(0, 88, 168); // new ColorUIResource(0, 60, 116);
         focusCellColor = new ColorUIResource(0, 60, 116);
 
         buttonBackgroundColor = new ColorUIResource(236, 233, 216);
-        buttonColorLight = white;
+        buttonColorLight = WHITE;
         buttonColorDark = new ColorUIResource(214, 208, 197);
 
-        rolloverColor = lightOrange;
-        
+        rolloverColor = LIGHT_ORANGE;
+
         pressedBackgroundColor = new ColorUIResource(232, 228, 208);
         pressedBackgroundColorLight = new ColorUIResource(ColorHelper.brighter(pressedBackgroundColor, 20));
         pressedBackgroundColorDark = new ColorUIResource(ColorHelper.darker(pressedBackgroundColor, 4));
 
-        controlForegroundColor = black;
+        controlForegroundColor = BLACK;
         controlBackgroundColor = new ColorUIResource(236, 233, 216);
-        controlColorLight = white;
+        controlColorLight = WHITE;
         controlColorDark = new ColorUIResource(214, 208, 197);
 
-        windowTitleForegroundColor = white;
+        windowTitleForegroundColor = WHITE;
         windowTitleBackgroundColor = new ColorUIResource(2, 100, 247);
         windowTitleColorLight = new ColorUIResource(139, 185, 254);
         windowTitleColorDark = new ColorUIResource(2, 80, 196);
         windowBorderColor = new ColorUIResource(2, 80, 196);
 
-        windowInactiveTitleForegroundColor = white;
-        windowInactiveTitleBackgroundColor = new ColorUIResource(39, 106, 204); 
+        windowInactiveTitleForegroundColor = WHITE;
+        windowInactiveTitleBackgroundColor = new ColorUIResource(39, 106, 204);
         windowInactiveTitleColorLight = new ColorUIResource(141, 186, 253);
         windowInactiveTitleColorDark = new ColorUIResource(39, 106, 204);
         windowInactiveBorderColor = new ColorUIResource(39, 106, 204);
 
         menuBackgroundColor = backgroundColor;
-        menuSelectionForegroundColor = white;
+        menuSelectionForegroundColor = WHITE;
         menuSelectionBackgroundColor = new ColorUIResource(49, 106, 197);
         menuColorLight = new ColorUIResource(248, 247, 241);
         menuColorDark = backgroundColor;
@@ -100,6 +101,7 @@ public class LunaDefaultTheme extends AbstractTheme {
         desktopColor = backgroundColor;
     }
 
+    @Override
     public void setUpColorArrs() {
         super.setUpColorArrs();
 
@@ -135,24 +137,24 @@ public class LunaDefaultTheme extends AbstractTheme {
         TOOLBAR_COLORS = ColorHelper.createColorArr(toolbarColorLight, toolbarColorDark, 20);
 
         BUTTON_COLORS = new Color[]{
-                    new Color(255, 255, 255),
-                    new Color(254, 254, 254),
-                    new Color(252, 252, 251),
-                    new Color(251, 251, 249),
-                    new Color(250, 250, 248),
-                    new Color(249, 249, 246),
-                    new Color(248, 248, 244),
-                    new Color(247, 247, 243),
-                    new Color(246, 246, 242),
-                    new Color(245, 245, 240),
-                    new Color(244, 244, 239),
-                    new Color(243, 243, 238),
-                    new Color(242, 242, 236),
-                    new Color(241, 241, 235),
-                    new Color(240, 240, 234),
-                    new Color(236, 235, 230),
-                    new Color(226, 223, 214),
-                    new Color(214, 208, 197),};
+            new Color(255, 255, 255),
+            new Color(254, 254, 254),
+            new Color(252, 252, 251),
+            new Color(251, 251, 249),
+            new Color(250, 250, 248),
+            new Color(249, 249, 246),
+            new Color(248, 248, 244),
+            new Color(247, 247, 243),
+            new Color(246, 246, 242),
+            new Color(245, 245, 240),
+            new Color(244, 244, 239),
+            new Color(243, 243, 238),
+            new Color(242, 242, 236),
+            new Color(241, 241, 235),
+            new Color(240, 240, 234),
+            new Color(236, 235, 230),
+            new Color(226, 223, 214),
+            new Color(214, 208, 197),};
         TAB_COLORS = ColorHelper.createColorArr(Color.white, new Color(236, 235, 230), 20);
         COL_HEADER_COLORS = TAB_COLORS;
         CHECKBOX_COLORS = TAB_COLORS;
@@ -162,4 +164,5 @@ public class LunaDefaultTheme extends AbstractTheme {
         SLIDER_COLORS = THUMB_COLORS;//ColorHelper.createColorArr(new Color(243, 241, 236), new Color(254, 254, 251), 20);
         PROGRESSBAR_COLORS = THUMB_COLORS;
     }
-}
+    
+} // end of class LunaDefaultTheme

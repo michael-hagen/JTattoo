@@ -45,6 +45,7 @@ public class BaseTitleButton extends NoFocusButton {
         this.alpha = Math.max(0.2f, alpha);
     }
 
+    @Override
     public void paint(Graphics g) {
         if (JTattooUtilities.isActive(this) || (alpha >= 1.0)) {
             super.paint(g);
@@ -58,4 +59,4 @@ public class BaseTitleButton extends NoFocusButton {
         }
     }
 
-}
+} // end of class BaseTitleButton

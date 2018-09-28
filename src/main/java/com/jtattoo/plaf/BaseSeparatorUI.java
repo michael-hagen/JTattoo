@@ -43,6 +43,7 @@ public class BaseSeparatorUI extends BasicSeparatorUI {
         return new BaseSeparatorUI();
     }
 
+    @Override
     public void paint(Graphics g, JComponent c) {
         boolean horizontal = true;
         if (c instanceof JSeparator) {
@@ -66,10 +67,12 @@ public class BaseSeparatorUI extends BasicSeparatorUI {
         }
     }
 
+    @Override
     public Dimension getPreferredSize(JComponent c) {
         return size;
     }
-}
+    
+} // end of class BaseSeparatorUI
 
 
 

@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.texture;
 
 import com.jtattoo.plaf.*;
@@ -84,7 +83,7 @@ public class TextureIcons extends BaseIcons {
         }
         return rightArrowIcon;
     }
-    
+
     public static Icon getIconIcon() {
         if (iconIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -198,4 +197,5 @@ public class TextureIcons extends BaseIcons {
             return BaseIcons.getThumbVerIconRollover();
         }
     }
-}
+    
+} // end of class TextureIcons

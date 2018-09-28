@@ -42,6 +42,7 @@ public class TextureMenuUI extends BaseMenuUI {
         return new TextureMenuUI();
     }
 
+    @Override
     protected void paintBackground(Graphics g, JComponent c, int x, int y, int w, int h) {
         JMenuItem mi = (JMenuItem) c;
         ButtonModel model = mi.getModel();
@@ -62,6 +63,7 @@ public class TextureMenuUI extends BaseMenuUI {
         }
     }
 
+    @Override
     protected void paintText(Graphics g, JMenuItem menuItem, Rectangle textRect, String text) {
         if (!AbstractLookAndFeel.getTheme().isDarkTexture()) {
             super.paintText(g, menuItem, textRect, text);
@@ -97,4 +99,4 @@ public class TextureMenuUI extends BaseMenuUI {
         JTattooUtilities.drawStringUnderlineCharAt(menuItem, g, text, mnemIndex, textRect.x, textRect.y + fm.getAscent());
     }
 
-}
+} // end of clas TextureMenuUI

@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.aluminium;
 
 import com.jtattoo.plaf.BasePanelUI;
@@ -43,6 +42,7 @@ public class AluminiumPanelUI extends BasePanelUI {
         return panelUI;
     }
 
+    @Override
     public void update(Graphics g, JComponent c) {
         if (c.isOpaque() && c.getBackground() instanceof ColorUIResource && c.getClientProperty("backgroundTexture") == null) {
             AluminiumUtils.fillComponent(g, c);
@@ -50,4 +50,5 @@ public class AluminiumPanelUI extends BasePanelUI {
             super.update(g, c);
         }
     }
-}
+    
+} // end of class AluminiumPanelUI

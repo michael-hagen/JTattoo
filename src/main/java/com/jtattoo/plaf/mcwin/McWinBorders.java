@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.mcwin;
 
 import com.jtattoo.plaf.*;
@@ -71,15 +70,19 @@ public class McWinBorders extends BaseBorders {
     // Implementation of border classes
     //------------------------------------------------------------------------------------
     public static class ButtonBorder implements Border, UIResource {
+        private static final Insets INSETS = new Insets(2, 12, 2, 12);
+        private static final Insets SQUARE_INSETS = new Insets(3, 4, 3, 4);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
             if (AbstractLookAndFeel.getTheme().doDrawSquareButtons()) {
-                return new Insets(3, 4, 3, 4);
+                return SQUARE_INSETS;
             } else {
-                return new Insets(2, 12, 2, 12);
+                return INSETS;
             }
         }
 
@@ -92,13 +95,18 @@ public class McWinBorders extends BaseBorders {
             return borderInsets;
         }
 
+        @Override
         public boolean isBorderOpaque() {
             return true;
         }
-    } // class ButtonBorder
+        
+    } // end of class ButtonBorder
 
     public static class RolloverToolButtonBorder implements Border, UIResource {
+        
+        private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             AbstractButton button = (AbstractButton) c;
             ButtonModel model = button.getModel();
@@ -114,8 +122,9 @@ public class McWinBorders extends BaseBorders {
             g.drawLine(w - 1, 0, w - 1, h - 1);
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
-            return new Insets(1, 1, 1, 1);
+            return INSETS;
         }
 
         public Insets getBorderInsets(Component c, Insets borderInsets) {
@@ -126,13 +135,16 @@ public class McWinBorders extends BaseBorders {
             return borderInsets;
         }
 
+        @Override
         public boolean isBorderOpaque() {
             return true;
         }
-    } // class RolloverToolButtonBorder
+        
+    } // end of class RolloverToolButtonBorder
 
     public static class InternalFrameBorder extends BaseInternalFrameBorder {
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             boolean active = isActive(c);
             boolean resizable = isResizable(c);
@@ -164,27 +176,29 @@ public class McWinBorders extends BaseBorders {
                 return;
             }
             g.setColor(titleColor);
-            g.fillRect(x, y + 1, w, dw - 1);
+            g.fillRect(x, y + 1, w, DW - 1);
             g.setColor(borderColor);
-            g.fillRect(x + 1, y + h - dw, w - 2, dw - 1);
+            g.fillRect(x + 1, y + h - DW, w - 2, DW - 1);
             if (active) {
-                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowTitleColors(), 1, dw, dw, th + 1);
-                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowTitleColors(), w - dw, dw, dw, th + 1);
+                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowTitleColors(), 1, DW, DW, th + 1);
+                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowTitleColors(), w - DW, DW, DW, th + 1);
             } else {
-                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowInactiveTitleColors(), 1, dw, dw, th + 1);
-                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowInactiveTitleColors(), w - dw, dw, dw, th + 1);
+                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowInactiveTitleColors(), 1, DW, DW, th + 1);
+                JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowInactiveTitleColors(), w - DW, DW, DW, th + 1);
             }
             g.setColor(borderColor);
-            g.fillRect(1, insets.top + th + 1, dw - 1, h - th - dw);
-            g.fillRect(w - dw, insets.top + th + 1, dw - 1, h - th - dw);
+            g.fillRect(1, INSETS.top + th + 1, DW - 1, h - th - DW);
+            g.fillRect(w - DW, INSETS.top + th + 1, DW - 1, h - th - DW);
 
             g.setColor(ColorHelper.darker(frameColor, 10));
             g.drawRect(x, y, w - 1, h - 1);
             g.setColor(frameColor);
-            g.drawLine(x + dw - 1, y + dw + th, x + dw - 1, y + h - dw);
-            g.drawLine(x + w - dw, y + dw + th, x + w - dw, y + h - dw);
-            g.drawLine(x + dw - 1, y + h - dw, x + w - dw, y + h - dw);
+            g.drawLine(x + DW - 1, y + DW + th, x + DW - 1, y + h - DW);
+            g.drawLine(x + w - DW, y + DW + th, x + w - DW, y + h - DW);
+            g.drawLine(x + DW - 1, y + h - DW, x + w - DW, y + h - DW);
         }
-    } // class InternalFrameBorder
-} // class McWinBorders
+        
+    } // end of class InternalFrameBorder
+    
+} // end of class McWinBorders
 

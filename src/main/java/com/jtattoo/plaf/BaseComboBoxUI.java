@@ -36,8 +36,8 @@ import javax.swing.plaf.basic.BasicComboBoxUI;
 
 public class BaseComboBoxUI extends BasicComboBoxUI {
 
-    private PropertyChangeListener propertyChangeListener = null;
-    private FocusListener focusListener = null;
+    private PropertyChangeListener myPpropertyChangeListener = null;
+    private FocusListener myFocusListener = null;
     private Border orgBorder = null;
     private Color orgBackgroundColor = null;
 
@@ -45,9 +45,11 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
         return new BaseComboBoxUI();
     }
 
+    @Override
     public void installUI(JComponent c) {
         super.installUI(c);
         comboBox.setRequestFocusEnabled(true);
+        comboBox.setLightWeightPopupEnabled(false);
         if (comboBox.getEditor() != null) {
             if (comboBox.getEditor().getEditorComponent() instanceof JTextField) {
                 ((JTextField) (comboBox.getEditor().getEditorComponent())).setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -55,14 +57,16 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
         }
     }
 
+    @Override
     protected void installListeners() {
         super.installListeners();
-        propertyChangeListener = new PropertyChangeHandler();
-        comboBox.addPropertyChangeListener(propertyChangeListener);
+        myPpropertyChangeListener = new PropertyChangeHandler();
+        comboBox.addPropertyChangeListener(myPpropertyChangeListener);
 
         if (AbstractLookAndFeel.getTheme().doShowFocusFrame()) {
-            focusListener = new FocusListener() {
+            myFocusListener = new FocusListener() {
 
+                @Override
                 public void focusGained(FocusEvent e) {
                     if (comboBox != null) {
                         orgBorder = comboBox.getBorder();
@@ -79,6 +83,7 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
                     }
                 }
 
+                @Override
                 public void focusLost(FocusEvent e) {
                     if (comboBox != null) {
                         if (orgBorder instanceof UIResource) {
@@ -88,18 +93,20 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
                     }
                 }
             };
-            comboBox.addFocusListener(focusListener);
+            comboBox.addFocusListener(myFocusListener);
         }
     }
 
+    @Override
     protected void uninstallListeners() {
-        comboBox.removePropertyChangeListener(propertyChangeListener);
-        comboBox.removeFocusListener(focusListener);
-        propertyChangeListener = null;
-        focusListener = null;
+        comboBox.removePropertyChangeListener(myPpropertyChangeListener);
+        comboBox.removeFocusListener(myFocusListener);
+        myPpropertyChangeListener = null;
+        myFocusListener = null;
         super.uninstallListeners();
     }
 
+    @Override
     public Dimension getPreferredSize(JComponent c) {
         Dimension size = super.getPreferredSize(c);
         if (comboBox.getGraphics() != null) {
@@ -113,6 +120,7 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
         return new Dimension(size.width + 2, size.height + 2);
     }
 
+    @Override
     public JButton createArrowButton() {
         JButton button = new ArrowButton();
         if (JTattooUtilities.isLeftToRight(comboBox)) {
@@ -137,6 +145,7 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
 
     public class PropertyChangeHandler implements PropertyChangeListener {
 
+        @Override
         public void propertyChange(PropertyChangeEvent e) {
             String name = e.getPropertyName();
             if (name.equals("componentOrientation")) {
@@ -148,6 +157,7 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
 
     public static class ArrowButton extends NoFocusButton {
 
+        @Override
         public void paint(Graphics g) {
             Dimension size = getSize();
             Color colors[];
@@ -183,4 +193,5 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
             
         }
     }
-}
+    
+} // end of class BaseComboBoxUI

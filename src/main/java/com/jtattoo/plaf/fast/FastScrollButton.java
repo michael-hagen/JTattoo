@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.fast;
 
 import com.jtattoo.plaf.*;
@@ -34,6 +33,7 @@ public class FastScrollButton extends BaseScrollButton {
         super(direction, width);
     }
 
+    @Override
     public void paint(Graphics g) {
         boolean isPressed = getModel().isPressed();
 
@@ -52,26 +52,39 @@ public class FastScrollButton extends BaseScrollButton {
         g.setColor(backColor);
         g.fillRect(0, 0, width, height);
 
-        if (getDirection() == NORTH) {
-            Icon upArrow = BaseIcons.getUpArrowIcon();
-            int x = (width / 2) - (upArrow.getIconWidth() / 2);
-            int y = (height / 2) - (upArrow.getIconHeight() / 2) - 1;
-            upArrow.paintIcon(this, g, x, y);
-        } else if (getDirection() == SOUTH) {
-            Icon downArrow = BaseIcons.getDownArrowIcon();
-            int x = (width / 2) - (downArrow.getIconWidth() / 2);
-            int y = (height / 2) - (downArrow.getIconHeight() / 2);
-            downArrow.paintIcon(this, g, x, y);
-        } else if (getDirection() == WEST) {
-            Icon leftArrow = BaseIcons.getLeftArrowIcon();
-            int x = (width / 2) - (leftArrow.getIconWidth() / 2) - 1;
-            int y = (height / 2) - (leftArrow.getIconHeight() / 2);
-            leftArrow.paintIcon(this, g, x, y);
-        } else {
-            Icon rightArrow = BaseIcons.getRightArrowIcon();
-            int x = (width / 2) - (rightArrow.getIconWidth() / 2);
-            int y = (height / 2) - (rightArrow.getIconHeight() / 2);
-            rightArrow.paintIcon(this, g, x, y);
+        switch (getDirection()) {
+            case NORTH:
+                {
+                    Icon upArrow = BaseIcons.getUpArrowIcon();
+                    int x = (width / 2) - (upArrow.getIconWidth() / 2);
+                    int y = (height / 2) - (upArrow.getIconHeight() / 2) - 1;
+                    upArrow.paintIcon(this, g, x, y);
+                    break;
+                }
+            case SOUTH:
+                {
+                    Icon downArrow = BaseIcons.getDownArrowIcon();
+                    int x = (width / 2) - (downArrow.getIconWidth() / 2);
+                    int y = (height / 2) - (downArrow.getIconHeight() / 2);
+                    downArrow.paintIcon(this, g, x, y);
+                    break;
+                }
+            case WEST:
+                {
+                    Icon leftArrow = BaseIcons.getLeftArrowIcon();
+                    int x = (width / 2) - (leftArrow.getIconWidth() / 2) - 1;
+                    int y = (height / 2) - (leftArrow.getIconHeight() / 2);
+                    leftArrow.paintIcon(this, g, x, y);
+                    break;
+                }
+            default:
+                {
+                    Icon rightArrow = BaseIcons.getRightArrowIcon();
+                    int x = (width / 2) - (rightArrow.getIconWidth() / 2);
+                    int y = (height / 2) - (rightArrow.getIconHeight() / 2);
+                    rightArrow.paintIcon(this, g, x, y);
+                    break;
+                }
         }
 
         JTattooUtilities.draw3DBorder(g, ColorHelper.brighter(loColor, 20), loColor, 0, 0, width, height);
@@ -81,5 +94,5 @@ public class FastScrollButton extends BaseScrollButton {
             g.drawLine(1, 1, 1, height - 2);
         }
     }
-}
-
+    
+} // end of class FastScrollButton

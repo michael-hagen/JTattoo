@@ -181,8 +181,8 @@ public class ColorHelper {
      */
     public static int getGrayValue(Color[] ca) {
         int sum = 0;
-        for (int i = 0; i < ca.length; i++) {
-            sum += getGrayValue(ca[i]);
+        for (Color color : ca) {
+            sum += getGrayValue(color);
         }
         return (sum / ca.length);
     }
@@ -202,4 +202,5 @@ public class ColorHelper {
         int gray = getGrayValue(c);
         return new Color(gray, gray, gray, c.getAlpha());
     }
-}
+    
+} // end of class ColorHelper

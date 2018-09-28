@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.mcwin;
 
 import com.jtattoo.plaf.AbstractToolBarUI;
@@ -38,19 +37,24 @@ public class McWinToolBarUI extends AbstractToolBarUI {
         return new McWinToolBarUI();
     }
 
+    @Override
     public Border getRolloverBorder() {
         return McWinBorders.getRolloverToolButtonBorder();
     }
 
+    @Override
     public Border getNonRolloverBorder() {
         return McWinBorders.getToolButtonBorder();
     }
 
+    @Override
     public boolean isButtonOpaque() {
         return true;
     }
 
+    @Override
     public void paint(Graphics g, JComponent c) {
         McWinUtils.fillComponent(g, c);
     }
-}
+    
+} // end of class McWinToolBarUI

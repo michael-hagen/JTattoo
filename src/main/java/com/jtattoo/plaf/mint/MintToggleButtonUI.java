@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.mint;
 
 import com.jtattoo.plaf.*;
@@ -41,13 +40,14 @@ public class MintToggleButtonUI extends BaseToggleButtonUI {
         return new MintToggleButtonUI();
     }
 
+    @Override
     protected void paintBackground(Graphics g, AbstractButton b) {
         if (!b.isContentAreaFilled() || (b.getParent() instanceof JMenuBar)) {
             return;
         }
 
-        if ((b.getWidth() < 32) 
-                || (b.getHeight() < 16) 
+        if ((b.getWidth() < 32)
+                || (b.getHeight() < 16)
                 || !(b.isBorderPainted() && (b.getBorder() instanceof UIResource))
                 || AbstractLookAndFeel.getTheme().doDrawSquareButtons()) {
             ButtonModel model = b.getModel();
@@ -66,7 +66,7 @@ public class MintToggleButtonUI extends BaseToggleButtonUI {
             }
             return;
         }
-        
+
         Graphics2D g2D = (Graphics2D) g;
         int width = b.getWidth() - 2;
         int height = b.getHeight() - 2;
@@ -136,6 +136,7 @@ public class MintToggleButtonUI extends BaseToggleButtonUI {
         g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRederingHint);
     }
 
+    @Override
     protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect, Rectangle iconRect) {
         Graphics2D g2D = (Graphics2D) g;
         int width = b.getWidth();
@@ -155,4 +156,5 @@ public class MintToggleButtonUI extends BaseToggleButtonUI {
             g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRenderingHint);
         }
     }
-}
+    
+} // end of class MintToggleButtonUI

@@ -294,34 +294,42 @@ public class AcrylLookAndFeel extends AbstractLookAndFeel {
         setTheme(themesProps);
     }
 
+    @Override
     public String getName() {
         return "Acryl";
     }
 
+    @Override
     public String getID() {
         return "Acryl";
     }
 
+    @Override
     public String getDescription() {
         return "The Acryl Look and Feel";
     }
 
+    @Override
     public boolean isNativeLookAndFeel() {
         return false;
     }
 
+    @Override
     public boolean isSupportedLookAndFeel() {
         return true;
     }
 
+    @Override
     public AbstractBorderFactory getBorderFactory() {
         return AcrylBorderFactory.getInstance();
     }
 
+    @Override
     public AbstractIconFactory getIconFactory() {
         return AcrylIconFactory.getInstance();
     }
 
+    @Override
     protected void createDefaultTheme() {
         if (myTheme == null) {
             myTheme = new AcrylDefaultTheme();
@@ -329,6 +337,7 @@ public class AcrylLookAndFeel extends AbstractLookAndFeel {
         setTheme(myTheme);
     }
 
+    @Override
     protected void initClassDefaults(UIDefaults table) {
         if (!"acrylTheme".equals(currentThemeName)) {
             setTheme("Default");
@@ -374,9 +383,8 @@ public class AcrylLookAndFeel extends AbstractLookAndFeel {
             "ScrollBarUI", AcrylScrollBarUI.class.getName(),
         };
         table.putDefaults(uiDefaults);
-        if (JTattooUtilities.getJavaVersion() >= 1.5) {
-            table.put("FormattedTextFieldUI", BaseFormattedTextFieldUI.class.getName());
-            table.put("SpinnerUI", AcrylSpinnerUI.class.getName());
-        }
+        table.put("FormattedTextFieldUI", BaseFormattedTextFieldUI.class.getName());
+        table.put("SpinnerUI", AcrylSpinnerUI.class.getName());
     }
-}
+    
+} // end of class AcrylLookAndFeel

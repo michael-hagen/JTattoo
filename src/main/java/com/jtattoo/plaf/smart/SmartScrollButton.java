@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.smart;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
@@ -28,7 +27,7 @@ import com.jtattoo.plaf.BaseScrollButton;
 import java.awt.Graphics;
 
 /**
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
 public class SmartScrollButton extends BaseScrollButton {
 
@@ -36,6 +35,7 @@ public class SmartScrollButton extends BaseScrollButton {
         super(direction, width);
     }
 
+    @Override
     public void paint(Graphics g) {
         super.paint(g);
         if (getModel().isRollover()) {
@@ -44,4 +44,5 @@ public class SmartScrollButton extends BaseScrollButton {
             g.drawLine(1, 2, getWidth() - 2, 2);
         }
     }
-}
+    
+} // end of class SmartScrollButton

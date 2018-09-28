@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.mcwin;
 
 import com.jtattoo.plaf.BaseToggleButtonUI;
@@ -37,6 +36,7 @@ public class McWinToggleButtonUI extends BaseToggleButtonUI {
         return new McWinToggleButtonUI();
     }
 
+    @Override
     protected void paintBackground(Graphics g, AbstractButton b) {
         if (!b.isContentAreaFilled() || (b.getParent() instanceof JMenuBar)) {
             return;
@@ -54,6 +54,5 @@ public class McWinToggleButtonUI extends BaseToggleButtonUI {
         g2D.drawLine(width - 1, 0, width - 1, height - 1);
         g2D.setComposite(composite);
     }
-}
-
-
+    
+} // end of class McWinToggleButtonUI

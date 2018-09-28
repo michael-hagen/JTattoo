@@ -42,6 +42,7 @@ public class TextureButtonUI extends BaseButtonUI {
         return new TextureButtonUI();
     }
 
+    @Override
     protected void paintBackground(Graphics g, AbstractButton b) {
         if (AbstractLookAndFeel.getTheme().doDrawSquareButtons()) {
             super.paintBackground(g, b);
@@ -60,6 +61,7 @@ public class TextureButtonUI extends BaseButtonUI {
         }
     }
 
+    @Override
     protected void paintIcon(Graphics g, JComponent c, Rectangle iconRect) {
         AbstractButton b = (AbstractButton)c;
         Graphics2D g2D = (Graphics2D) g;
@@ -77,17 +79,13 @@ public class TextureButtonUI extends BaseButtonUI {
         g2D.setComposite(savedComposite);
     }
 
+    @Override
     protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
         Graphics2D g2D = (Graphics2D) g;
         Composite savedComposite = g2D.getComposite();
         ButtonModel model = b.getModel();
         FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
-        int mnemIndex;
-        if (JTattooUtilities.getJavaVersion() >= 1.4) {
-            mnemIndex = b.getDisplayedMnemonicIndex();
-        } else {
-            mnemIndex = JTattooUtilities.findDisplayedMnemonicIndex(b.getText(), model.getMnemonic());
-        }
+        int mnemIndex = b.getDisplayedMnemonicIndex();
 
         if (model.isEnabled()) {
             int offs = 0;
@@ -138,6 +136,7 @@ public class TextureButtonUI extends BaseButtonUI {
         }
     }
 
+    @Override
     protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect, Rectangle iconRect) {
         if (!AbstractLookAndFeel.getTheme().doShowFocusFrame()) {
             g.setColor(AbstractLookAndFeel.getFocusColor());
@@ -146,6 +145,6 @@ public class TextureButtonUI extends BaseButtonUI {
         }
     }
 
-}
+} // end of class TextureButtonUI
 
 

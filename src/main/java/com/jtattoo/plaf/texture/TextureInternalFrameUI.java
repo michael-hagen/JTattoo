@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.texture;
 
 import com.jtattoo.plaf.BaseInternalFrameUI;
@@ -34,17 +33,17 @@ import javax.swing.plaf.ComponentUI;
 public class TextureInternalFrameUI extends BaseInternalFrameUI {
 
     public TextureInternalFrameUI(JInternalFrame b) {
-        super(b); 
+        super(b);
     }
-    
+
     public static ComponentUI createUI(JComponent c) {
-        return new TextureInternalFrameUI((JInternalFrame)c);
+        return new TextureInternalFrameUI((JInternalFrame) c);
     }
-    
-    protected JComponent createNorthPane(JInternalFrame w)  {
+
+    @Override
+    protected JComponent createNorthPane(JInternalFrame w) {
         titlePane = new TextureInternalFrameTitlePane(w);
         return titlePane;
     }
-    
-}
 
+} // end of class TextureInternalFrameUI

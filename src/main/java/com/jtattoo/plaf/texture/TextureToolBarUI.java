@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.texture;
 
 import com.jtattoo.plaf.AbstractToolBarUI;
@@ -32,27 +31,30 @@ import javax.swing.plaf.ComponentUI;
 /**
  * @author Michael Hagen
  */
-public class TextureToolBarUI extends AbstractToolBarUI
-{
-   public static ComponentUI createUI(JComponent c) {
-       return new TextureToolBarUI();
-   }
+public class TextureToolBarUI extends AbstractToolBarUI {
 
-   public Border getRolloverBorder() {
-       return TextureBorders.getRolloverToolButtonBorder();
-   }
+    public static ComponentUI createUI(JComponent c) {
+        return new TextureToolBarUI();
+    }
 
-   public Border getNonRolloverBorder() {
-       return TextureBorders.getToolButtonBorder();
-   }
+    @Override
+    public Border getRolloverBorder() {
+        return TextureBorders.getRolloverToolButtonBorder();
+    }
 
-   public boolean isButtonOpaque() {
-       return false;
-   }
+    @Override
+    public Border getNonRolloverBorder() {
+        return TextureBorders.getToolButtonBorder();
+    }
 
+    @Override
+    public boolean isButtonOpaque() {
+        return false;
+    }
+
+    @Override
     public void paint(Graphics g, JComponent c) {
         TextureUtils.fillComponent(g, c, TextureUtils.getTextureType(c));
     }
 
-}
-
+} // end of class TextureToolBarUI

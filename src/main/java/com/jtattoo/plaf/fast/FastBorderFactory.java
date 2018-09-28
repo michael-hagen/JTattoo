@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.fast;
 
 import com.jtattoo.plaf.AbstractBorderFactory;
@@ -43,80 +42,99 @@ public class FastBorderFactory implements AbstractBorderFactory {
         return instance;
     }
 
+    @Override
     public Border getFocusFrameBorder() {
         return FastBorders.getFocusFrameBorder();
     }
 
+    @Override
     public Border getButtonBorder() {
         return FastBorders.getButtonBorder();
     }
 
+    @Override
     public Border getToggleButtonBorder() {
         return FastBorders.getToggleButtonBorder();
     }
 
+    @Override
     public Border getTextBorder() {
         return FastBorders.getTextBorder();
     }
 
+    @Override
     public Border getSpinnerBorder() {
         return FastBorders.getSpinnerBorder();
     }
 
+    @Override
     public Border getTextFieldBorder() {
         return FastBorders.getTextFieldBorder();
     }
 
+    @Override
     public Border getComboBoxBorder() {
         return FastBorders.getComboBoxBorder();
     }
 
+    @Override
     public Border getTableHeaderBorder() {
         return FastBorders.getTableHeaderBorder();
     }
 
+    @Override
     public Border getTableScrollPaneBorder() {
         return FastBorders.getTableScrollPaneBorder();
     }
 
+    @Override
     public Border getScrollPaneBorder() {
         return FastBorders.getScrollPaneBorder();
     }
 
+    @Override
     public Border getTabbedPaneBorder() {
         return FastBorders.getTabbedPaneBorder();
     }
 
+    @Override
     public Border getMenuBarBorder() {
         return FastBorders.getMenuBarBorder();
     }
 
+    @Override
     public Border getMenuItemBorder() {
         return FastBorders.getMenuItemBorder();
     }
 
+    @Override
     public Border getPopupMenuBorder() {
         return FastBorders.getPopupMenuBorder();
     }
 
+    @Override
     public Border getInternalFrameBorder() {
         return FastBorders.getInternalFrameBorder();
     }
 
+    @Override
     public Border getPaletteBorder() {
         return FastBorders.getPaletteBorder();
     }
 
+    @Override
     public Border getToolBarBorder() {
         return FastBorders.getToolBarBorder();
     }
 
+    @Override
     public Border getProgressBarBorder() {
         return FastBorders.getProgressBarBorder();
     }
 
+    @Override
     public Border getDesktopIconBorder() {
         return FastBorders.getDesktopIconBorder();
     }
-}
-
+    
+} // end of class FastBorderFactory

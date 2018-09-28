@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.mcwin;
 
 import javax.swing.*;
@@ -40,8 +39,10 @@ public class McWinCheckBoxUI extends McWinRadioButtonUI {
         return checkBoxUI;
     }
 
+    @Override
     public void installDefaults(AbstractButton b) {
         super.installDefaults(b);
         icon = UIManager.getIcon("CheckBox.icon");
     }
-}
+
+} // end of class McWinCheckBoxUI

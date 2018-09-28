@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.mcwin;
 
 import com.jtattoo.plaf.*;
@@ -40,6 +39,7 @@ public class McWinButtonUI extends BaseButtonUI {
         return new McWinButtonUI();
     }
 
+    @Override
     protected void paintBackground(Graphics g, AbstractButton b) {
         if (b.getParent() instanceof JToolBar) {
             b.setContentAreaFilled(true);
@@ -67,7 +67,7 @@ public class McWinButtonUI extends BaseButtonUI {
         Composite composite = g2D.getComposite();
         Object savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
         g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        
+
         Color colors[] = AbstractLookAndFeel.getTheme().getButtonColors();
         if (b.isEnabled()) {
             Color background = b.getBackground();
@@ -112,7 +112,7 @@ public class McWinButtonUI extends BaseButtonUI {
         } else { // disabled
             colors = AbstractLookAndFeel.getTheme().getDisabledColors();
         }
-        
+
         if (AbstractLookAndFeel.getTheme().doDrawSquareButtons()
                 || (((width < 64) || (height < 16)) && ((b.getText() == null) || b.getText().length() == 0))) {
             JTattooUtilities.fillHorGradient(g, colors, 0, 0, width - 1, height - 1);
@@ -149,6 +149,7 @@ public class McWinButtonUI extends BaseButtonUI {
         g2D.setComposite(composite);
     }
 
+    @Override
     protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect, Rectangle iconRect) {
         Graphics2D g2D = (Graphics2D) g;
         int width = b.getWidth();
@@ -169,6 +170,4 @@ public class McWinButtonUI extends BaseButtonUI {
         }
     }
 
-}
-
-
+} // end of class McWinButtonUI

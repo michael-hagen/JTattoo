@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.mcwin;
 
 import com.jtattoo.plaf.BaseSplitPaneUI;
@@ -37,7 +36,9 @@ public class McWinSplitPaneUI extends BaseSplitPaneUI {
         return new McWinSplitPaneUI();
     }
 
+    @Override
     public BasicSplitPaneDivider createDefaultDivider() {
         return new McWinSplitPaneDivider(this);
     }
-}
+    
+} // end of class McWinSplitPaneUI

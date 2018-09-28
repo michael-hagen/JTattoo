@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.mcwin;
 
 import com.jtattoo.plaf.*;
@@ -39,6 +38,7 @@ public class McWinComboBoxUI extends BaseComboBoxUI {
         return new McWinComboBoxUI();
     }
 
+    @Override
     public JButton createArrowButton() {
         ArrowButton button = new ArrowButton();
         if (JTattooUtilities.isLeftToRight(comboBox)) {
@@ -54,6 +54,7 @@ public class McWinComboBoxUI extends BaseComboBoxUI {
 //--------------------------------------------------------------------------------------------------
     static class ArrowButton extends NoFocusButton {
 
+        @Override
         public void paint(Graphics g) {
             Dimension size = getSize();
             if (isEnabled()) {
@@ -84,4 +85,5 @@ public class McWinComboBoxUI extends BaseComboBoxUI {
             paintBorder(g);
         }
     }
-}
+    
+} // end of class McWinComboBoxUI

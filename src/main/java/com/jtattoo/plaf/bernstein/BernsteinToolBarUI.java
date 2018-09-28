@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.bernstein;
 
 import com.jtattoo.plaf.AbstractToolBarUI;
@@ -38,19 +37,24 @@ public class BernsteinToolBarUI extends AbstractToolBarUI {
         return new BernsteinToolBarUI();
     }
 
+    @Override
     public Border getRolloverBorder() {
         return BernsteinBorders.getRolloverToolButtonBorder();
     }
 
+    @Override
     public Border getNonRolloverBorder() {
         return BernsteinBorders.getToolButtonBorder();
     }
 
+    @Override
     public boolean isButtonOpaque() {
         return true;
     }
 
+    @Override
     public void paint(Graphics g, JComponent c) {
         BernsteinUtils.fillComponent(g, c);
     }
-}
+
+} // end of class BernsteinToolBarUI

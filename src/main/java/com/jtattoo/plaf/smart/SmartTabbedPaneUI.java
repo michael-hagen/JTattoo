@@ -38,12 +38,14 @@ public class SmartTabbedPaneUI extends BaseTabbedPaneUI {
         return new SmartTabbedPaneUI();
     }
 
+    @Override
     public void installDefaults() {
         super.installDefaults();
         tabAreaInsets = new Insets(2, 6, 2, 6);
         contentBorderInsets = new Insets(0, 0, 0, 0);
     }
 
+    @Override
     protected Color getGapColor(int tabIndex) {
         if (tabIndex == tabPane.getSelectedIndex()) {
             return tabPane.getBackgroundAt(tabIndex);
@@ -51,6 +53,7 @@ public class SmartTabbedPaneUI extends BaseTabbedPaneUI {
         return super.getGapColor(tabIndex);
     }
     
+    @Override
     protected Font getTabFont(boolean isSelected) {
         if (isSelected) {
             return super.getTabFont(isSelected).deriveFont(Font.BOLD);
@@ -59,37 +62,49 @@ public class SmartTabbedPaneUI extends BaseTabbedPaneUI {
         }
     }
 
+    @Override
     protected boolean hasInnerBorder() {
         return true;
     }
 
+    @Override
     protected void paintTabBackground(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
         if (isSelected) {
             g.setColor(tabPane.getBackgroundAt(tabIndex));
-            if (tabPlacement == TOP) {
-                g.fillRect(x + 1, y + 1, w - 1, h + 2);
-            } else if (tabPlacement == LEFT) {
-                g.fillRect(x + 1, y + 1, w + 2, h - 1);
-            } else if (tabPlacement == BOTTOM) {
-                g.fillRect(x + 1, y - 2, w - 1, h + 1);
-            } else {
-                g.fillRect(x - 2, y + 1, w + 2, h - 1);
+            switch (tabPlacement) {
+                case TOP:
+                    g.fillRect(x + 1, y + 1, w - 1, h + 2);
+                    break;
+                case LEFT:
+                    g.fillRect(x + 1, y + 1, w + 2, h - 1);
+                    break;
+                case BOTTOM:
+                    g.fillRect(x + 1, y - 2, w - 1, h + 1);
+                    break;
+                default:
+                    g.fillRect(x - 2, y + 1, w + 2, h - 1);
+                    break;
             }
         } else {
             super.paintTabBackground(g, tabPlacement, tabIndex, x, y, w, h, isSelected);
             if (!isSelected && tabIndex == rolloverIndex && tabPane.isEnabledAt(tabIndex)) {
                 g.setColor(AbstractLookAndFeel.getFocusColor());
-                if (tabPlacement == TOP) {
-                    g.fillRect(x + 2, y + 1, w - 3, 2);
-                } else if (tabPlacement == LEFT) {
-                    g.fillRect(x, y + 1, w - 1, 2);
-                } else if (tabPlacement == BOTTOM) {
-                    g.fillRect(x + 2, y + h - 3, w - 3, 2);
-                } else {
-                    g.fillRect(x, y + 1, w - 1, 2);
+                switch (tabPlacement) {
+                    case TOP:
+                        g.fillRect(x + 2, y + 1, w - 3, 2);
+                        break;
+                    case LEFT:
+                        g.fillRect(x, y + 1, w - 1, 2);
+                        break;
+                    case BOTTOM:
+                        g.fillRect(x + 2, y + h - 3, w - 3, 2);
+                        break;
+                    default:
+                        g.fillRect(x, y + 1, w - 1, 2);
+                        break;
                 }
             }
         }
     }
 
-}
+} // end of class SmartTabbedPaneUI

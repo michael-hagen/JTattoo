@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.texture;
 
 import com.jtattoo.plaf.*;
@@ -30,43 +29,49 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.JRootPane;
 
 /**
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
 public class TextureTitlePane extends BaseTitlePane {
-    
+
     public TextureTitlePane(JRootPane root, BaseRootPaneUI ui) {
-        super(root, ui); 
+        super(root, ui);
     }
 
+    @Override
     protected int getHorSpacing() {
         return AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn() ? 1 : 0;
     }
-    
+
+    @Override
     protected int getVerSpacing() {
         return AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn() ? 3 : 0;
     }
 
+    @Override
     protected boolean centerButtons() {
         return false;
     }
 
+    @Override
     public void paintBorder(Graphics g) {
     }
 
+    @Override
     public void paintBackground(Graphics g) {
         TextureUtils.fillComponent(g, this, TextureUtils.WINDOW_TEXTURE_TYPE);
     }
 
+    @Override
     public void paintText(Graphics g, int x, int y, String title) {
-        Graphics2D g2D = (Graphics2D)g;
+        Graphics2D g2D = (Graphics2D) g;
         Shape savedClip = g2D.getClip();
         Color fc = AbstractLookAndFeel.getWindowTitleForegroundColor();
         if (fc.equals(Color.white)) {
             Color bc = AbstractLookAndFeel.getWindowTitleColorDark();
             g2D.setColor(bc);
-            JTattooUtilities.drawString(rootPane, g, title, x-1, y-1);
+            JTattooUtilities.drawString(rootPane, g, title, x - 1, y - 1);
             g2D.setColor(ColorHelper.darker(bc, 30));
-            JTattooUtilities.drawString(rootPane, g, title, x+1, y+1);
+            JTattooUtilities.drawString(rootPane, g, title, x + 1, y + 1);
         }
         g.setColor(fc);
 
@@ -87,5 +92,5 @@ public class TextureTitlePane extends BaseTitlePane {
 
         g2D.setClip(savedClip);
     }
-    
-}
+
+} // end of class TextureTitlePane

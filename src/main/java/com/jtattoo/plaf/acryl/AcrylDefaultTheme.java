@@ -40,10 +40,12 @@ public class AcrylDefaultTheme extends AbstractTheme {
         setUpColorArrs();
     }
 
+    @Override
     public String getPropertyFileName() {
         return "AcrylTheme.properties";
     }
 
+    @Override
     public void setUpColor() {
         super.setUpColor();
         // Defaults for AcrylLookAndFeel
@@ -55,12 +57,12 @@ public class AcrylDefaultTheme extends AbstractTheme {
         backgroundColorDark = new ColorUIResource(232, 232, 232);
         alterBackgroundColor = new ColorUIResource(232, 232, 232);
 
-        selectionForegroundColor = white;
-        selectionBackgroundColor = extraDarkGray;
+        selectionForegroundColor = WHITE;
+        selectionBackgroundColor = EXTRA_DARK_GRAY;
         frameColor = new ColorUIResource(32, 32, 32);
         focusCellColor = focusColor;
 
-        buttonBackgroundColor = extraLightGray;
+        buttonBackgroundColor = EXTRA_LIGHT_GRAY;
         buttonColorLight = new ColorUIResource(244, 244, 244);
         buttonColorDark = new ColorUIResource(220, 220, 220);
 
@@ -72,15 +74,15 @@ public class AcrylDefaultTheme extends AbstractTheme {
         pressedBackgroundColorLight = new ColorUIResource(ColorHelper.brighter(pressedBackgroundColor, 28));
         pressedBackgroundColorDark = new ColorUIResource(ColorHelper.darker(pressedBackgroundColor, 4));
         
-        controlForegroundColor = black;
+        controlForegroundColor = BLACK;
         controlBackgroundColor = backgroundColor;
         controlColorLight = new ColorUIResource(96, 98, 100);
         controlColorDark = new ColorUIResource(64, 65, 66);//new ColorUIResource(48, 49, 50);
 
-        controlShadowColor = gray;
-        controlDarkShadowColor = darkGray;
+        controlShadowColor = GRAY;
+        controlDarkShadowColor = DARK_GRAY;
 
-        windowTitleForegroundColor = white;
+        windowTitleForegroundColor = WHITE;
         windowTitleBackgroundColor = controlColorLight;
         windowTitleColorLight = controlColorLight;
         windowTitleColorDark = controlColorDark;
@@ -93,9 +95,9 @@ public class AcrylDefaultTheme extends AbstractTheme {
         windowInactiveBorderColor = new ColorUIResource(ColorHelper.brighter(windowBorderColor, 10));
 
         menuBackgroundColor = backgroundColor;
-        menuSelectionForegroundColor = white;
-        menuSelectionBackgroundColor = extraDarkGray;
-        menuColorLight = white;
+        menuSelectionForegroundColor = WHITE;
+        menuSelectionBackgroundColor = EXTRA_DARK_GRAY;
+        menuColorLight = WHITE;
         menuColorDark = backgroundColor;
 
         toolbarBackgroundColor = backgroundColor;
@@ -108,6 +110,7 @@ public class AcrylDefaultTheme extends AbstractTheme {
         desktopColor = backgroundColor;
     }
 
+    @Override
     public void setUpColorArrs() {
         super.setUpColorArrs();
 
@@ -220,4 +223,5 @@ public class AcrylDefaultTheme extends AbstractTheme {
         SLIDER_COLORS = DEFAULT_COLORS;
         PROGRESSBAR_COLORS = DEFAULT_COLORS;
     }
-}
+    
+} // end of class AcrylDefaultTheme

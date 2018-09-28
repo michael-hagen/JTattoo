@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.fast;
 
 import com.jtattoo.plaf.*;
@@ -38,6 +37,7 @@ public class FastToggleButtonUI extends BaseToggleButtonUI {
         return new FastToggleButtonUI();
     }
 
+    @Override
     protected void paintBackground(Graphics g, AbstractButton b) {
         if (b.isContentAreaFilled() && !(b.getParent() instanceof JMenuBar)) {
             Color backColor = b.getBackground();
@@ -53,4 +53,5 @@ public class FastToggleButtonUI extends BaseToggleButtonUI {
             g.fillRect(1, 1, b.getWidth() - 2, b.getHeight() - 2);
         }
     }
-}
+    
+} // end of class FastToggleButtonUI

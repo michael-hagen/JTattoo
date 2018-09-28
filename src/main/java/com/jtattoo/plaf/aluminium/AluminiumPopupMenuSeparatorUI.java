@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.aluminium;
 
 import java.awt.*;
@@ -34,32 +33,33 @@ import javax.swing.plaf.basic.BasicSeparatorUI;
  */
 public class AluminiumPopupMenuSeparatorUI extends BasicSeparatorUI {
 
-    private static final Dimension size = new Dimension(1, 1);
+    private static final Dimension SIZE = new Dimension(1, 1);
 
     public static ComponentUI createUI(JComponent c) {
         return new AluminiumPopupMenuSeparatorUI();
     }
 
+    @Override
     public void paint(Graphics g, JComponent c) {
-        boolean horizontal = true;
-        if (c instanceof JSeparator) {
-            JSeparator sep = ((JSeparator) c);
-            horizontal = (sep.getOrientation() == JSeparator.HORIZONTAL);
-        }
-        if (horizontal) {
-            g.setColor(Color.lightGray);
-            g.drawLine(0, 0, c.getWidth(), 0);
-        } else {
-            g.setColor(Color.lightGray);
-            g.drawLine(0, 0, 0, c.getHeight());
+        if (c != null) {
+            boolean horizontal = true;
+            if (c instanceof JSeparator) {
+                JSeparator sep = ((JSeparator) c);
+                horizontal = (sep.getOrientation() == JSeparator.HORIZONTAL);
+            }
+            if (horizontal) {
+                g.setColor(Color.lightGray);
+                g.drawLine(0, 0, c.getWidth(), 0);
+            } else {
+                g.setColor(Color.lightGray);
+                g.drawLine(0, 0, 0, c.getHeight());
+            }
         }
     }
 
+    @Override
     public Dimension getPreferredSize(JComponent c) {
-        return size;
+        return SIZE;
     }
-}
-
-
-
-
+    
+} // end of class AluminiumPopupMenuSeparatorUI

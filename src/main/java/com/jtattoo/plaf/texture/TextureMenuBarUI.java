@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.texture;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
@@ -29,7 +28,6 @@ import javax.swing.JComponent;
 import javax.swing.JMenuBar;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicMenuBarUI;
-
 
 /**
  * @author Michael Hagen
@@ -40,6 +38,7 @@ public class TextureMenuBarUI extends BasicMenuBarUI {
         return new TextureMenuBarUI();
     }
 
+    @Override
     public void installUI(JComponent c) {
         super.installUI(c);
         if ((c != null) && (c instanceof JMenuBar)) {
@@ -48,6 +47,7 @@ public class TextureMenuBarUI extends BasicMenuBarUI {
         }
     }
 
+    @Override
     public void paint(Graphics g, JComponent c) {
         TextureUtils.fillComponent(g, c, TextureUtils.MENUBAR_TEXTURE_TYPE);
 
@@ -65,4 +65,5 @@ public class TextureMenuBarUI extends BasicMenuBarUI {
             g2D.setComposite(savedComposite);
         }
     }
-}
+    
+} // end of class TextureMenuBarUI

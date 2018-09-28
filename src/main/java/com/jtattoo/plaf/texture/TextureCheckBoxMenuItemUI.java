@@ -38,6 +38,7 @@ public class TextureCheckBoxMenuItemUI extends BaseCheckBoxMenuItemUI {
         return new TextureCheckBoxMenuItemUI();
     }
 
+    @Override
     protected void paintBackground(Graphics g, JComponent c, int x, int y, int w, int h) {
         JMenuItem mi = (JMenuItem) c;
         ButtonModel model = mi.getModel();
@@ -52,6 +53,7 @@ public class TextureCheckBoxMenuItemUI extends BaseCheckBoxMenuItemUI {
         }
     }
 
+    @Override
     protected void paintText(Graphics g, JMenuItem menuItem, Rectangle textRect, String text) {
         if (!AbstractLookAndFeel.getTheme().isDarkTexture()) {
             super.paintText(g, menuItem, textRect, text);
@@ -81,4 +83,5 @@ public class TextureCheckBoxMenuItemUI extends BaseCheckBoxMenuItemUI {
         }
         JTattooUtilities.drawStringUnderlineCharAt(menuItem, g, text, mnemIndex, textRect.x, textRect.y + fm.getAscent());
     }
-}
+    
+} // end of class TextureCheckBoxMenuItemUI

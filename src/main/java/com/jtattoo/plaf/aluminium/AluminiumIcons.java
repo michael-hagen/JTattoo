@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.aluminium;
 
 import com.jtattoo.plaf.*;
@@ -145,4 +144,4 @@ public class AluminiumIcons extends BaseIcons {
         return splitterRightArrowIcon;
     }
 
-}
+} // end of class AluminiumIcons

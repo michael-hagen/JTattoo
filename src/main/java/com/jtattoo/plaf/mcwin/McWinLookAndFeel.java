@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.mcwin;
 
 import com.jtattoo.plaf.*;
@@ -234,34 +233,42 @@ public class McWinLookAndFeel extends AbstractLookAndFeel {
         setTheme(themesProps);
     }
 
+    @Override
     public String getName() {
         return "McWin";
     }
 
+    @Override
     public String getID() {
         return "McWin";
     }
 
+    @Override
     public String getDescription() {
         return "The McWin Look and Feel";
     }
 
+    @Override
     public boolean isNativeLookAndFeel() {
         return false;
     }
 
+    @Override
     public boolean isSupportedLookAndFeel() {
         return true;
     }
 
+    @Override
     public AbstractBorderFactory getBorderFactory() {
         return McWinBorderFactory.getInstance();
     }
 
+    @Override
     public AbstractIconFactory getIconFactory() {
         return McWinIconFactory.getInstance();
     }
 
+    @Override
     protected void createDefaultTheme() {
         if (myTheme == null) {
             myTheme = new McWinDefaultTheme();
@@ -269,6 +276,7 @@ public class McWinLookAndFeel extends AbstractLookAndFeel {
         setTheme(myTheme);
     }
 
+    @Override
     protected void initClassDefaults(UIDefaults table) {
         if (!"mcwinTheme".equals(currentThemeName)) {
             setTheme("Default");
@@ -296,7 +304,6 @@ public class McWinLookAndFeel extends AbstractLookAndFeel {
             "RadioButtonMenuItemUI", BaseRadioButtonMenuItemUI.class.getName(),
             "PopupMenuSeparatorUI", BaseSeparatorUI.class.getName(),
             "DesktopPaneUI", BaseDesktopPaneUI.class.getName(),
-            
             // McWinLookAndFeel classes
             "CheckBoxUI", McWinCheckBoxUI.class.getName(),
             "RadioButtonUI", McWinRadioButtonUI.class.getName(),
@@ -313,15 +320,15 @@ public class McWinLookAndFeel extends AbstractLookAndFeel {
             "InternalFrameUI", McWinInternalFrameUI.class.getName(),
             "RootPaneUI", McWinRootPaneUI.class.getName(),};
         table.putDefaults(uiDefaults);
-        if (JTattooUtilities.getJavaVersion() >= 1.5) {
-            table.put("FormattedTextFieldUI", BaseFormattedTextFieldUI.class.getName());
-            table.put("SpinnerUI", BaseSpinnerUI.class.getName());
-        }
+        table.put("FormattedTextFieldUI", BaseFormattedTextFieldUI.class.getName());
+        table.put("SpinnerUI", BaseSpinnerUI.class.getName());
     }
 
+    @Override
     protected void initComponentDefaults(UIDefaults table) {
         super.initComponentDefaults(table);
         table.put("SplitPane.centerOneTouchButtons", Boolean.FALSE);
         table.put("TabbedPane.tabAreaInsets", new InsetsUIResource(5, 5, 6, 5));
     }
-}
+    
+} // end of class McWinLookAndFeel

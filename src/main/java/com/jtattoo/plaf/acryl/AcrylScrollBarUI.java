@@ -38,6 +38,7 @@ public class AcrylScrollBarUI extends BaseScrollBarUI {
         return new AcrylScrollBarUI();
     }
 
+    @Override
     protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
         if (!c.isEnabled()) {
             return;
@@ -113,4 +114,5 @@ public class AcrylScrollBarUI extends BaseScrollBarUI {
 
         g.translate(-thumbBounds.x, -thumbBounds.y);
     }
-}
+    
+} // end of class AcrylScrollBarUI

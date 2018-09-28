@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.hifi;
 
 import com.jtattoo.plaf.*;
@@ -41,6 +40,7 @@ public class HiFiButtonUI extends BaseButtonUI {
         return new HiFiButtonUI();
     }
 
+    @Override
     protected void paintBackground(Graphics g, AbstractButton b) {
         if (!b.isContentAreaFilled() || (b.getParent() instanceof JMenuBar)) {
             return;
@@ -60,15 +60,11 @@ public class HiFiButtonUI extends BaseButtonUI {
         g2D.setClip(savedClip);
     }
 
+    @Override
     protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
         ButtonModel model = b.getModel();
         FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
-        int mnemIndex;
-        if (JTattooUtilities.getJavaVersion() >= 1.4) {
-            mnemIndex = b.getDisplayedMnemonicIndex();
-        } else {
-            mnemIndex = JTattooUtilities.findDisplayedMnemonicIndex(b.getText(), model.getMnemonic());
-        }
+        int mnemIndex = b.getDisplayedMnemonicIndex();
         int offs = 0;
         if (model.isArmed() && model.isPressed()) {
             offs = 1;
@@ -100,4 +96,5 @@ public class HiFiButtonUI extends BaseButtonUI {
         g2D.setColor(foreground);
         JTattooUtilities.drawStringUnderlineCharAt(b, g, text, mnemIndex, textRect.x + offs, textRect.y + offs + fm.getAscent());
     }
-}
+    
+} // end of class HiFiButtonUI

@@ -43,80 +43,104 @@ public class AluminiumBorderFactory implements AbstractBorderFactory {
         return instance;
     }
 
+    @Override
     public Border getFocusFrameBorder() {
         return AluminiumBorders.getFocusFrameBorder();
     }
 
+    @Override
     public Border getButtonBorder() {
         return AluminiumBorders.getButtonBorder();
     }
 
+    /**
+     *
+     * @return
+     */
+    @Override
     public Border getToggleButtonBorder() {
         return AluminiumBorders.getToggleButtonBorder();
     }
 
+    @Override
     public Border getTextBorder() {
         return AluminiumBorders.getTextBorder();
     }
 
+    @Override
     public Border getSpinnerBorder() {
         return AluminiumBorders.getSpinnerBorder();
     }
 
+    @Override
     public Border getTextFieldBorder() {
         return AluminiumBorders.getTextFieldBorder();
     }
 
+    @Override
     public Border getComboBoxBorder() {
         return AluminiumBorders.getComboBoxBorder();
     }
 
+    @Override
     public Border getTableHeaderBorder() {
         return AluminiumBorders.getTableHeaderBorder();
     }
 
+    @Override
     public Border getTableScrollPaneBorder() {
         return AluminiumBorders.getTableScrollPaneBorder();
     }
 
+    @Override
     public Border getScrollPaneBorder() {
         return AluminiumBorders.getScrollPaneBorder();
     }
 
+    @Override
     public Border getTabbedPaneBorder() {
         return AluminiumBorders.getTabbedPaneBorder();
     }
 
+    @Override
     public Border getMenuBarBorder() {
         return AluminiumBorders.getMenuBarBorder();
     }
 
+    @Override
     public Border getMenuItemBorder() {
         return AluminiumBorders.getMenuItemBorder();
     }
 
+    @Override
     public Border getPopupMenuBorder() {
         return AluminiumBorders.getPopupMenuBorder();
     }
 
+    @Override
     public Border getInternalFrameBorder() {
         return AluminiumBorders.getInternalFrameBorder();
     }
 
+    @Override
     public Border getPaletteBorder() {
         return AluminiumBorders.getPaletteBorder();
     }
 
+    @Override
     public Border getToolBarBorder() {
         return AluminiumBorders.getToolBarBorder();
     }
 
+    @Override
     public Border getProgressBarBorder() {
         return AluminiumBorders.getProgressBarBorder();
     }
 
+    @Override
     public Border getDesktopIconBorder() {
         return AluminiumBorders.getDesktopIconBorder();
     }
-}
+    
+} // end of class AluminiumBorderFactory
 

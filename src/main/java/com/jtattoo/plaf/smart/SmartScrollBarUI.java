@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.smart;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
@@ -32,7 +31,7 @@ import javax.swing.plaf.ComponentUI;
 
 /**
  *
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
 public class SmartScrollBarUI extends BaseScrollBarUI {
 
@@ -40,6 +39,7 @@ public class SmartScrollBarUI extends BaseScrollBarUI {
         return new SmartScrollBarUI();
     }
 
+    @Override
     protected JButton createDecreaseButton(int orientation) {
         if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
             return super.createDecreaseButton(orientation);
@@ -48,6 +48,7 @@ public class SmartScrollBarUI extends BaseScrollBarUI {
         }
     }
 
+    @Override
     protected JButton createIncreaseButton(int orientation) {
         if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
             return super.createIncreaseButton(orientation);
@@ -56,6 +57,7 @@ public class SmartScrollBarUI extends BaseScrollBarUI {
         }
     }
 
+    @Override
     protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
         super.paintThumb(g, c, thumbBounds);
         if (isRollover) {
@@ -69,4 +71,5 @@ public class SmartScrollBarUI extends BaseScrollBarUI {
             }
         }
     }
-}
+    
+} // end of class SmartScrollBarUI

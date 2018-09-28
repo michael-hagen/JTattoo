@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.mint;
 
 import com.jtattoo.plaf.BaseTabbedPaneUI;
@@ -36,9 +35,10 @@ public class MintTabbedPaneUI extends BaseTabbedPaneUI {
         return new MintTabbedPaneUI();
     }
 
+    @Override
     public void installDefaults() {
         super.installDefaults();
         tabAreaInsets.bottom = 6;
     }
 
-}
+} // end of class MintTabbedPaneUI

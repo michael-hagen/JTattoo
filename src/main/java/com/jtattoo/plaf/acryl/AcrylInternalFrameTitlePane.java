@@ -37,18 +37,22 @@ public class AcrylInternalFrameTitlePane extends BaseInternalFrameTitlePane {
         super(f);
     }
 
+    @Override
     protected LayoutManager createLayout() {
         return new BaseTitlePaneLayout();
     }
 
+    @Override
     protected int getHorSpacing() {
         return 1;
     }
 
+    @Override
     protected int getVerSpacing() {
         return 3;
     }
 
+    @Override
     public void paintBorder(Graphics g) {
         if (isActive()) {
             g.setColor(AbstractLookAndFeel.getWindowBorderColor());
@@ -58,6 +62,7 @@ public class AcrylInternalFrameTitlePane extends BaseInternalFrameTitlePane {
         g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
     }
 
+    @Override
     public void paintText(Graphics g, int x, int y, String title) {
         Color shadowColor = AbstractLookAndFeel.getWindowTitleColorDark();
         if (isActive()) {
@@ -79,16 +84,20 @@ public class AcrylInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 //--------------------------------------------------------------------------------------------
     class BaseTitlePaneLayout extends TitlePaneLayout {
 
+        @Override
         public void addLayoutComponent(String name, Component c) {
         }
 
+        @Override
         public void removeLayoutComponent(Component c) {
         }
 
+        @Override
         public Dimension preferredLayoutSize(Container c) {
             return minimumLayoutSize(c);
         }
 
+        @Override
         public Dimension minimumLayoutSize(Container c) {
             int width = 30;
             if (frame.isClosable()) {
@@ -126,6 +135,7 @@ public class AcrylInternalFrameTitlePane extends BaseInternalFrameTitlePane {
             return new Dimension(width, height);
         }
 
+        @Override
         public void layoutContainer(Container c) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
                 layoutMacStyle(c);
@@ -227,4 +237,5 @@ public class AcrylInternalFrameTitlePane extends BaseInternalFrameTitlePane {
         }
 
     } // end class BaseTitlePaneLayout
-}
+
+} // end of class AcrylInternalFrameTitlePane

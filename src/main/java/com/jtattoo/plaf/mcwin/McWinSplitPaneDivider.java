@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.mcwin;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
@@ -36,6 +35,7 @@ public class McWinSplitPaneDivider extends BaseSplitPaneDivider {
         super(ui);
     }
 
+    @Override
     public void paint(Graphics g) {
         if (AbstractLookAndFeel.getTheme().isBrightMode()) {
             centerOneTouchButtons = true;
@@ -48,4 +48,5 @@ public class McWinSplitPaneDivider extends BaseSplitPaneDivider {
             paintComponents(g);
         }
     }
-}
+    
+} // end of class McWinSplitPaneDivider

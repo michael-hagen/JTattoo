@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.smart;
 
 import com.jtattoo.plaf.*;
@@ -426,34 +425,42 @@ public class SmartLookAndFeel extends AbstractLookAndFeel {
         setTheme(themesProps);
     }
 
+    @Override
     public String getName() {
         return "Smart";
     }
 
+    @Override
     public String getID() {
         return "Smart";
     }
 
+    @Override
     public String getDescription() {
         return "The Smart Look and Feel";
     }
 
+    @Override
     public boolean isNativeLookAndFeel() {
         return false;
     }
 
+    @Override
     public boolean isSupportedLookAndFeel() {
         return true;
     }
 
+    @Override
     public AbstractBorderFactory getBorderFactory() {
         return SmartBorderFactory.getInstance();
     }
 
+    @Override
     public AbstractIconFactory getIconFactory() {
         return SmartIconFactory.getInstance();
     }
 
+    @Override
     protected void createDefaultTheme() {
         if (myTheme == null) {
             myTheme = new SmartDefaultTheme();
@@ -461,6 +468,7 @@ public class SmartLookAndFeel extends AbstractLookAndFeel {
         setTheme(myTheme);
     }
 
+    @Override
     protected void initClassDefaults(UIDefaults table) {
         if (!"smartTheme".equals(currentThemeName)) {
             setTheme("Default");
@@ -493,7 +501,6 @@ public class SmartLookAndFeel extends AbstractLookAndFeel {
             "RadioButtonMenuItemUI", BaseRadioButtonMenuItemUI.class.getName(),
             "PopupMenuSeparatorUI", BaseSeparatorUI.class.getName(),
             "DesktopPaneUI", BaseDesktopPaneUI.class.getName(),
-            
             // SmartLookAndFeel classes
             "ButtonUI", SmartButtonUI.class.getName(),
             "ToggleButtonUI", SmartToggleButtonUI.class.getName(),
@@ -505,9 +512,8 @@ public class SmartLookAndFeel extends AbstractLookAndFeel {
             "InternalFrameUI", SmartInternalFrameUI.class.getName(),
             "RootPaneUI", SmartRootPaneUI.class.getName(),};
         table.putDefaults(uiDefaults);
-        if (JTattooUtilities.getJavaVersion() >= 1.5) {
-            table.put("FormattedTextFieldUI", BaseFormattedTextFieldUI.class.getName());
-            table.put("SpinnerUI", BaseSpinnerUI.class.getName());
-        }
+        table.put("FormattedTextFieldUI", BaseFormattedTextFieldUI.class.getName());
+        table.put("SpinnerUI", BaseSpinnerUI.class.getName());
     }
-}
+    
+} // end of class SmartLookAndFeel

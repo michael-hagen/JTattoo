@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.texture;
 
 import com.jtattoo.plaf.BaseRootPaneUI;
@@ -29,15 +28,17 @@ import javax.swing.JRootPane;
 import javax.swing.plaf.ComponentUI;
 
 /**
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
-public class TextureRootPaneUI extends BaseRootPaneUI
-{
-   public static ComponentUI createUI(JComponent c) { 
-       return new TextureRootPaneUI();
-   }
-   
-   public JComponent createTitlePane(JRootPane root) { 
-       return new TextureTitlePane(root, this);
-   }   
-}
+public class TextureRootPaneUI extends BaseRootPaneUI {
+
+    public static ComponentUI createUI(JComponent c) {
+        return new TextureRootPaneUI();
+    }
+
+    @Override
+    public JComponent createTitlePane(JRootPane root) {
+        return new TextureTitlePane(root, this);
+    }
+
+} // end of class TextureRootPaneUI

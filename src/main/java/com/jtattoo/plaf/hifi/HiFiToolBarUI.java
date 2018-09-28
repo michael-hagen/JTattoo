@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.hifi;
 
 import com.jtattoo.plaf.AbstractToolBarUI;
@@ -38,20 +37,24 @@ public class HiFiToolBarUI extends AbstractToolBarUI {
         return new HiFiToolBarUI();
     }
 
+    @Override
     public Border getRolloverBorder() {
         return HiFiBorders.getRolloverToolButtonBorder();
     }
 
+    @Override
     public Border getNonRolloverBorder() {
         return HiFiBorders.getToolButtonBorder();
     }
 
+    @Override
     public boolean isButtonOpaque() {
         return true;
     }
 
+    @Override
     public void paint(Graphics g, JComponent c) {
         HiFiUtils.fillComponent(g, c);
     }
-}
-
+    
+} // end of class HiFiToolBarUI

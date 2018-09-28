@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.graphite;
 
 import com.jtattoo.plaf.*;
@@ -28,7 +27,7 @@ import java.awt.*;
 import javax.swing.JRootPane;
 
 /**
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
 public class GraphiteTitlePane extends BaseTitlePane {
 
@@ -36,18 +35,22 @@ public class GraphiteTitlePane extends BaseTitlePane {
         super(root, ui);
     }
 
+    @Override
     protected int getHorSpacing() {
         return AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn() ? 1 : 0;
     }
 
+    @Override
     protected int getVerSpacing() {
         return AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn() ? 3 : 0;
     }
 
+    @Override
     protected boolean centerButtons() {
         return false;
     }
-    
+
+    @Override
     public void paintBorder(Graphics g) {
         if (isActive()) {
             g.setColor(ColorHelper.darker(AbstractLookAndFeel.getWindowBorderColor(), 10));
@@ -57,18 +60,19 @@ public class GraphiteTitlePane extends BaseTitlePane {
         g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
     }
 
+    @Override
     public void paintText(Graphics g, int x, int y, String title) {
-        Graphics2D g2D = (Graphics2D)g;
+        Graphics2D g2D = (Graphics2D) g;
         Color fc = isActive() ? AbstractLookAndFeel.getWindowTitleForegroundColor() : AbstractLookAndFeel.getWindowInactiveTitleForegroundColor();
         if (fc.equals(Color.white)) {
             Color bc = isActive() ? AbstractLookAndFeel.getWindowTitleColorDark() : AbstractLookAndFeel.getWindowInactiveTitleColorDark();
             g2D.setColor(bc);
-            JTattooUtilities.drawString(rootPane, g, title, x-1, y-1);
+            JTattooUtilities.drawString(rootPane, g, title, x - 1, y - 1);
             g2D.setColor(ColorHelper.darker(bc, 30));
-            JTattooUtilities.drawString(rootPane, g, title, x+1, y+1);
+            JTattooUtilities.drawString(rootPane, g, title, x + 1, y + 1);
         }
         g.setColor(fc);
         JTattooUtilities.drawString(rootPane, g, title, x, y);
     }
 
-}
+} // end of class GraphiteTitlePane

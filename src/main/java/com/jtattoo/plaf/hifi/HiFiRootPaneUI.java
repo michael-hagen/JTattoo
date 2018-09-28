@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.hifi;
 
 import com.jtattoo.plaf.BaseRootPaneUI;
@@ -29,7 +28,7 @@ import javax.swing.JRootPane;
 import javax.swing.plaf.ComponentUI;
 
 /**
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
 public class HiFiRootPaneUI extends BaseRootPaneUI {
 
@@ -37,7 +36,9 @@ public class HiFiRootPaneUI extends BaseRootPaneUI {
         return new HiFiRootPaneUI();
     }
 
+    @Override
     public JComponent createTitlePane(JRootPane root) {
         return new HiFiTitlePane(root, this);
     }
-}
+    
+} // end of class HiFiRootPaneUI

@@ -54,6 +54,7 @@ public class BaseSliderUI extends BasicSliderUI {
         return new BaseSliderUI((JSlider) c);
     }
 
+    @Override
     public TrackListener createTrackListener(JSlider slider) {
         return new MyTrackListener();
     }
@@ -94,6 +95,7 @@ public class BaseSliderUI extends BasicSliderUI {
         }
     }
 
+    @Override
     protected Dimension getThumbSize() {
         Dimension size = super.getThumbSize();
         if ((getThumbHorIcon() != null) && (getThumbVerIcon() != null)) {
@@ -108,13 +110,14 @@ public class BaseSliderUI extends BasicSliderUI {
         return size;
     }
 
+    @Override
     public void paint(Graphics g, JComponent c) {
         paintBackground(g, c);
         recalculateIfInsetsChanged();
         recalculateIfOrientationChanged();
         Rectangle clip = g.getClipBounds();
         
-        if ( !clip.intersects(trackRect) && slider.getPaintTrack()) {
+        if (!clip.intersects(trackRect) && slider.getPaintTrack()) {
             calculateGeometry();
         }
         
@@ -146,6 +149,7 @@ public class BaseSliderUI extends BasicSliderUI {
         }
     }
 
+    @Override
     public void paintTrack(Graphics g) {
         boolean leftToRight = JTattooUtilities.isLeftToRight(slider);
 
@@ -238,6 +242,7 @@ public class BaseSliderUI extends BasicSliderUI {
         g.translate(-trackRect.x, -trackRect.y);
     }
 
+    @Override
     public void paintTicks(Graphics g) {
         boolean leftToRight = JTattooUtilities.isLeftToRight(slider);
         Rectangle tickBounds = tickRect;
@@ -309,14 +314,12 @@ public class BaseSliderUI extends BasicSliderUI {
         }
     }
 
+    @Override
     protected boolean isDragging() {
-        if (JTattooUtilities.getJavaVersion() >= 1.5) {
-            return super.isDragging();
-        } else {
-            return false;
-        }
+        return super.isDragging();
     }
 
+    @Override
     public void paintThumb(Graphics g) {
         Icon icon;
         if (slider.getOrientation() == JSlider.HORIZONTAL) {
@@ -344,8 +347,12 @@ public class BaseSliderUI extends BasicSliderUI {
         g2D.setComposite(savedComposite);
     }
 
+    //--------------------------------------------------------------------------
+    // inner classes
+    //--------------------------------------------------------------------------
     protected class MyTrackListener extends TrackListener {
 
+        @Override
         public void mouseEntered(MouseEvent e) {
             super.mouseEntered(e);
             if (slider.isEnabled()) {
@@ -354,6 +361,7 @@ public class BaseSliderUI extends BasicSliderUI {
             }
         }
 
+        @Override
         public void mouseMoved(MouseEvent e) {
             super.mouseMoved(e);
             if (slider.isEnabled()) {
@@ -365,6 +373,7 @@ public class BaseSliderUI extends BasicSliderUI {
             }
         }
 
+        @Override
         public void mouseExited(MouseEvent e) {
             super.mouseExited(e);
             if (slider.isEnabled()) {
@@ -373,5 +382,6 @@ public class BaseSliderUI extends BasicSliderUI {
             }
         }
 
-    }
-}
+    } // end of class MyTrackListener
+
+} // end of class BaseSliderUI

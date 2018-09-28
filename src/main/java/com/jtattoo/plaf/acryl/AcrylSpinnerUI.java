@@ -48,6 +48,7 @@ public class AcrylSpinnerUI extends BaseSpinnerUI {
         return new AcrylSpinnerUI();
     }
 
+    @Override
     protected Component createNextButton() {
         JButton button = (JButton) super.createNextButton();
         Color frameColor = ColorHelper.brighter(AbstractLookAndFeel.getFrameColor(), 50);
@@ -61,6 +62,7 @@ public class AcrylSpinnerUI extends BaseSpinnerUI {
         return button;
     }
 
+    @Override
     protected Component createPreviousButton() {
         JButton button = (JButton) super.createPreviousButton();
         Color frameColor = ColorHelper.brighter(AbstractLookAndFeel.getFrameColor(), 50);
@@ -73,4 +75,5 @@ public class AcrylSpinnerUI extends BaseSpinnerUI {
         }
         return button;
     }
-}
+    
+} // end of class AcrylSpinnerUI

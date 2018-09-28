@@ -44,15 +44,16 @@ public class NoFocusButton extends JButton {
     private void init() {
         setFocusPainted(false);
         setRolloverEnabled(true);
-        if (JTattooUtilities.getJavaVersion() >= 1.4) {
-            setFocusable(false);
-        }
+        setFocusable(false);
     }
 
+    @Override
     public boolean isFocusTraversable() {
         return false;
     }
 
+    @Override
     public void requestFocus() {
     }
-}
+    
+} // NoFocusButton

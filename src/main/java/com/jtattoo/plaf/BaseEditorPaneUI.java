@@ -48,11 +48,13 @@ public class BaseEditorPaneUI extends BasicEditorPaneUI {
         return new BaseEditorPaneUI();
     }
 
+    @Override
     public void installDefaults() {
         super.installDefaults();
         updateBackground();
     }
 
+    @Override
     protected void installKeyboardActions() {
         super.installKeyboardActions();
         if (JTattooUtilities.isMac()) {
@@ -66,12 +68,14 @@ public class BaseEditorPaneUI extends BasicEditorPaneUI {
         }
     }
 
+    @Override
     protected void installListeners() {
         super.installListeners();
 
         if (AbstractLookAndFeel.getTheme().doShowFocusFrame()) {
             focusListener = new FocusListener() {
 
+                @Override
                 public void focusGained(FocusEvent e) {
                     if (getComponent() != null) {
                         orgBorder = getComponent().getBorder();
@@ -85,6 +89,7 @@ public class BaseEditorPaneUI extends BasicEditorPaneUI {
                     }
                 }
 
+                @Override
                 public void focusLost(FocusEvent e) {
                     if (getComponent() != null) {
                         if (orgBorder instanceof UIResource) {
@@ -99,12 +104,14 @@ public class BaseEditorPaneUI extends BasicEditorPaneUI {
         }
     }
 
+    @Override
     protected void uninstallListeners() {
         getComponent().removeFocusListener(focusListener);
         focusListener = null;
         super.uninstallListeners();
     }
 
+    @Override
     protected void paintBackground(Graphics g) {
         g.setColor(getComponent().getBackground());
         if (AbstractLookAndFeel.getTheme().doShowFocusFrame()) {
@@ -125,4 +132,5 @@ public class BaseEditorPaneUI extends BasicEditorPaneUI {
             }
         }
     }
-}
+    
+} // end of class BaseEditorPaneUI

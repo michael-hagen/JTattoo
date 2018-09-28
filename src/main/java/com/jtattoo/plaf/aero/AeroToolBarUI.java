@@ -37,15 +37,19 @@ public class AeroToolBarUI extends AbstractToolBarUI {
         return new AeroToolBarUI();
     }
 
+    @Override
     public Border getRolloverBorder() {
         return AeroBorders.getRolloverToolButtonBorder();
     }
 
+    @Override
     public Border getNonRolloverBorder() {
         return AeroBorders.getToolButtonBorder();
     }
 
+    @Override
     public boolean isButtonOpaque() {
         return false;
     }
-}
+    
+} // end of class AeroToolBarUI

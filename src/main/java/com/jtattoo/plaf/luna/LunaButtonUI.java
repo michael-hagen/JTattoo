@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.luna;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
@@ -43,6 +42,7 @@ public class LunaButtonUI extends BaseButtonUI {
         return new LunaButtonUI();
     }
 
+    @Override
     protected void paintBackground(Graphics g, AbstractButton b) {
         int w = b.getWidth();
         int h = b.getHeight();
@@ -70,8 +70,10 @@ public class LunaButtonUI extends BaseButtonUI {
         g2D.setClip(savedClip);
     }
 
+    @Override
     protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect, Rectangle iconRect) {
         g.setColor(Color.black);
         BasicGraphicsUtils.drawDashedRect(g, 3, 3, b.getWidth() - 6, b.getHeight() - 6);
     }
-}
+    
+} // end of class LunaButtonUI

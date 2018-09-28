@@ -62,6 +62,7 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
         super(f);
     }
 
+    @Override
     protected void installDefaults() {
         super.installDefaults();
         setFont(UIManager.getFont("InternalFrame.font"));
@@ -90,6 +91,7 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
         repaint();
     }
 
+    @Override
     protected void createButtons() {
         iconButton = new BaseTitleButton(iconifyAction, ICONIFY, iconIcon, 1.0f);
         maxButton = new BaseTitleButton(maximizeAction, MAXIMIZE, maxIcon, 1.0f);
@@ -97,6 +99,7 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
         setButtonIcons();
     }
 
+    @Override
     protected void setButtonIcons() {
         super.setButtonIcons();
         iconButton.setToolTipText(null);
@@ -104,27 +107,33 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
         closeButton.setToolTipText(null);
     }
 
+    @Override
     protected void enableActions() {
         super.enableActions();
         maximizeAction.setEnabled(frame.isMaximizable());
     }
 
+    @Override
     protected void assembleSystemMenu() {
     }
 
+    @Override
     protected void addSystemMenuItems(JMenu systemMenu) {
     }
 
+    @Override
     protected void addSubComponents() {
         add(iconButton);
         add(maxButton);
         add(closeButton);
     }
 
+    @Override
     protected PropertyChangeListener createPropertyChangeListener() {
         return new BasePropertyChangeHandler();
     }
 
+    @Override
     protected LayoutManager createLayout() {
         return new BaseTitlePaneLayout();
     }
@@ -182,6 +191,7 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
         repaint();
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         AbstractButton button = (AbstractButton) e.getSource();
         button.getModel().setRollover(false);
@@ -241,9 +251,7 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
         if (image != null) {
             Graphics2D g2D = (Graphics2D)g;
             Object savedHint = g2D.getRenderingHint(RenderingHints.KEY_INTERPOLATION);
-            if (JTattooUtilities.getJavaVersion() >= 1.6) {
-                g2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-            }
+            g2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
             int h = getHeight();
             int ih = image.getHeight(null);
             int iw = image.getWidth(null);
@@ -272,6 +280,7 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
         JTattooUtilities.drawString(frame, g, title, x, y);
     }
 
+    @Override
     public void paintBorder(Graphics g) {
         Color borderColor = AbstractLookAndFeel.getWindowInactiveBorderColor();
         if (isActive() || isPalette) {
@@ -280,6 +289,7 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
         JTattooUtilities.draw3DBorder(g, ColorHelper.brighter(borderColor, 20), ColorHelper.darker(borderColor, 10), 0, 0, getWidth(), getHeight());
     }
 
+    @Override
     public void paintComponent(Graphics g) {
         if (isPalette) {
             paintPalette(g);
@@ -345,6 +355,7 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
 
     class BasePropertyChangeHandler extends BasicInternalFrameTitlePane.PropertyChangeHandler {
 
+        @Override
         public void propertyChange(PropertyChangeEvent evt) {
             String prop = (String) evt.getPropertyName();
             if (prop.equals(JInternalFrame.IS_SELECTED_PROPERTY)) {
@@ -352,7 +363,7 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
                 iconButton.putClientProperty(PAINT_ACTIVE, b);
                 closeButton.putClientProperty(PAINT_ACTIVE, b);
                 maxButton.putClientProperty(PAINT_ACTIVE, b);
-                if (b.booleanValue()) {
+                if (b) {
                     activateFrame();
                 } else {
                     deactivateFrame();
@@ -368,16 +379,20 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
 //------------------------------------------------------------------------------
     class BaseTitlePaneLayout extends TitlePaneLayout {
 
+        @Override
         public void addLayoutComponent(String name, Component c) {
         }
 
+        @Override
         public void removeLayoutComponent(Component c) {
         }
 
+        @Override
         public Dimension preferredLayoutSize(Container c) {
             return minimumLayoutSize(c);
         }
 
+        @Override
         public Dimension minimumLayoutSize(Container c) {
             int width = 30;
             if (frame.isClosable()) {
@@ -413,6 +428,7 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
             return new Dimension(width, height);
         }
 
+        @Override
         public void layoutContainer(Container c) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
                 layoutMacStyle(c);
@@ -512,5 +528,6 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
                 buttonsWidth += cpw + 5;
             }
         }
-    } // end class BaseTitlePaneLayout
-}
+    } // end of class BaseTitlePaneLayout
+
+} // end of class BaseInternalFrameTitlePane

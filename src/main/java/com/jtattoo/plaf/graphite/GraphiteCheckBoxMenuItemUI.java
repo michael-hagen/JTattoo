@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.graphite;
 
 import com.jtattoo.plaf.*;
@@ -37,6 +36,7 @@ public class GraphiteCheckBoxMenuItemUI extends BaseCheckBoxMenuItemUI {
         return new GraphiteCheckBoxMenuItemUI();
     }
 
+    @Override
     protected void paintBackground(Graphics g, JComponent c, int x, int y, int w, int h) {
         JMenuItem mi = (JMenuItem) c;
         ButtonModel model = mi.getModel();
@@ -44,7 +44,7 @@ public class GraphiteCheckBoxMenuItemUI extends BaseCheckBoxMenuItemUI {
             JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getMenuSelectionColors(), x, y, w, h);
         } else {
             super.paintBackground(g, c, x, y, w, h);
-        } 
+        }
     }
 
-}
+} // end of class GraphiteCheckBoxMenuItemUI

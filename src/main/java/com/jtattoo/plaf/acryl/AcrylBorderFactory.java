@@ -43,80 +43,100 @@ public class AcrylBorderFactory implements AbstractBorderFactory {
         return instance;
     }
 
+    @Override
     public Border getFocusFrameBorder() {
         return AcrylBorders.getFocusFrameBorder();
     }
 
+    @Override
     public Border getButtonBorder() {
         return AcrylBorders.getButtonBorder();
     }
 
+    @Override
     public Border getToggleButtonBorder() {
         return AcrylBorders.getToggleButtonBorder();
     }
 
+    @Override
     public Border getTextBorder() {
         return AcrylBorders.getTextBorder();
     }
 
+    @Override
     public Border getSpinnerBorder() {
         return AcrylBorders.getSpinnerBorder();
     }
 
+    @Override
     public Border getTextFieldBorder() {
         return AcrylBorders.getTextFieldBorder();
     }
 
+    @Override
     public Border getComboBoxBorder() {
         return AcrylBorders.getComboBoxBorder();
     }
 
+    @Override
     public Border getTableHeaderBorder() {
         return AcrylBorders.getTableHeaderBorder();
     }
 
+    @Override
     public Border getTableScrollPaneBorder() {
         return AcrylBorders.getTableScrollPaneBorder();
     }
 
+    @Override
     public Border getScrollPaneBorder() {
         return AcrylBorders.getScrollPaneBorder();
     }
 
+    @Override
     public Border getTabbedPaneBorder() {
         return AcrylBorders.getTabbedPaneBorder();
     }
 
+    @Override
     public Border getMenuBarBorder() {
         return AcrylBorders.getMenuBarBorder();
     }
 
+    @Override
     public Border getMenuItemBorder() {
         return AcrylBorders.getMenuItemBorder();
     }
 
+    @Override
     public Border getPopupMenuBorder() {
         return AcrylBorders.getPopupMenuBorder();
     }
 
+    @Override
     public Border getInternalFrameBorder() {
         return AcrylBorders.getInternalFrameBorder();
     }
 
+    @Override
     public Border getPaletteBorder() {
         return AcrylBorders.getPaletteBorder();
     }
 
+    @Override
     public Border getToolBarBorder() {
         return AcrylBorders.getToolBarBorder();
     }
 
+    @Override
     public Border getProgressBarBorder() {
         return AcrylBorders.getProgressBarBorder();
     }
 
+    @Override
     public Border getDesktopIconBorder() {
         return AcrylBorders.getDesktopIconBorder();
     }
-}
+    
+} // end of class AcrylBorderFactory
 

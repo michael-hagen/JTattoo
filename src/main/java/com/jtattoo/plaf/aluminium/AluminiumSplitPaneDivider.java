@@ -37,6 +37,7 @@ public class AluminiumSplitPaneDivider extends BaseSplitPaneDivider {
         super(ui);
     }
 
+    @Override
     public void paint(Graphics g) {
         if (JTattooUtilities.isMac() || !AbstractLookAndFeel.getTheme().isBackgroundPatternOn()) {
             super.paint(g);
@@ -50,4 +51,5 @@ public class AluminiumSplitPaneDivider extends BaseSplitPaneDivider {
             g2D.setComposite(composite);
         }
     }
-}
+    
+} // end of class AluminiumSliderUI

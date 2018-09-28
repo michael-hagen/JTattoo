@@ -53,12 +53,14 @@ public class BaseRadioButtonUI extends BasicRadioButtonUI {
         return radioButtonUI;
     }
 
+    @Override
     public void installDefaults(AbstractButton b) {
         super.installDefaults(b);
         b.setRolloverEnabled(true);
         icon = UIManager.getIcon("RadioButton.icon");
     }
 
+    @Override
     public void paint(Graphics g, JComponent c) {
         AbstractButton b = (AbstractButton) c;
         g.setFont(c.getFont());
@@ -73,10 +75,7 @@ public class BaseRadioButtonUI extends BasicRadioButtonUI {
         iconRect.x = iconRect.y = iconRect.width = iconRect.height = 0;
         textRect.x = textRect.y = textRect.width = textRect.height = 0;
         Icon altIcon = b.getIcon();
-        int iconTextGap = getDefaultTextIconGap(b);
-        if (JTattooUtilities.getJavaVersion() >= 1.4) {
-            iconTextGap = b.getIconTextGap();
-        }
+        int iconTextGap = b.getIconTextGap();
         String text = SwingUtilities.layoutCompoundLabel(
                 c,
                 fm,
@@ -112,6 +111,7 @@ public class BaseRadioButtonUI extends BasicRadioButtonUI {
         g.fillRect(0, 0, c.getWidth(), c.getHeight());
     }
 
+    @Override
     protected void paintIcon(Graphics g, JComponent c, Rectangle iconRect) {
         AbstractButton b = (AbstractButton) c;
         ButtonModel model = b.getModel();
@@ -171,12 +171,7 @@ public class BaseRadioButtonUI extends BasicRadioButtonUI {
             ButtonModel model = b.getModel();
             g.setFont(b.getFont());
             FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
-            int mnemIndex;
-            if (JTattooUtilities.getJavaVersion() >= 1.4) {
-                mnemIndex = b.getDisplayedMnemonicIndex();
-            } else {
-                mnemIndex = JTattooUtilities.findDisplayedMnemonicIndex(b.getText(), model.getMnemonic());
-            }
+            int mnemIndex = b.getDisplayedMnemonicIndex();
             if (model.isEnabled()) {
                 g.setColor(b.getForeground());
                 JTattooUtilities.drawStringUnderlineCharAt(c, g, text, mnemIndex, textRect.x, textRect.y + fm.getAscent());
@@ -189,8 +184,10 @@ public class BaseRadioButtonUI extends BasicRadioButtonUI {
         }
     }
 
+    @Override
     protected void paintFocus(Graphics g, Rectangle t, Dimension d) {
         g.setColor(AbstractLookAndFeel.getFocusColor());
         BasicGraphicsUtils.drawDashedRect(g, t.x, t.y - 1, t.width + 1, t.height + 1);
     }
-}
+    
+} // end of class BaseRadioButtonUI

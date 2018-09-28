@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.smart;
 
 import com.jtattoo.plaf.BaseInternalFrameUI;
@@ -41,9 +40,10 @@ public class SmartInternalFrameUI extends BaseInternalFrameUI {
         return new SmartInternalFrameUI((JInternalFrame) c);
     }
 
+    @Override
     protected JComponent createNorthPane(JInternalFrame w) {
         titlePane = new SmartInternalFrameTitlePane(w);
         return titlePane;
     }
-}
-
+    
+} // end of class SmartInternalFrameUI

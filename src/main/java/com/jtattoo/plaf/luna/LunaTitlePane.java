@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.luna;
 
 import com.jtattoo.plaf.*;
@@ -28,7 +27,7 @@ import java.awt.*;
 import javax.swing.JRootPane;
 
 /**
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
 public class LunaTitlePane extends BaseTitlePane {
 
@@ -36,14 +35,17 @@ public class LunaTitlePane extends BaseTitlePane {
         super(root, ui);
     }
 
+    @Override
     protected int getHorSpacing() {
         return 2;
     }
 
+    @Override
     protected int getVerSpacing() {
         return 5;
     }
 
+    @Override
     public void paintBorder(Graphics g) {
         if (isActive()) {
             g.setColor(AbstractLookAndFeel.getTheme().getFrameColor());
@@ -53,6 +55,7 @@ public class LunaTitlePane extends BaseTitlePane {
         g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
     }
 
+    @Override
     public void paintText(Graphics g, int x, int y, String title) {
         if (isActive()) {
             g.setColor(ColorHelper.brighter(AbstractLookAndFeel.getTheme().getWindowBorderColor(), 10));
@@ -66,4 +69,4 @@ public class LunaTitlePane extends BaseTitlePane {
         JTattooUtilities.drawString(rootPane, g, title, x, y - 1);
     }
 
-}
+} // end of class LunaTitlePane

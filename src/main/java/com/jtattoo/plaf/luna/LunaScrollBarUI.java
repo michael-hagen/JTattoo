@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.luna;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
@@ -31,7 +30,7 @@ import javax.swing.plaf.ComponentUI;
 
 /**
  *
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
 public class LunaScrollBarUI extends XPScrollBarUI {
 
@@ -39,6 +38,7 @@ public class LunaScrollBarUI extends XPScrollBarUI {
         return new LunaScrollBarUI();
     }
 
+    @Override
     protected JButton createDecreaseButton(int orientation) {
         if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
             return super.createDecreaseButton(orientation);
@@ -47,6 +47,7 @@ public class LunaScrollBarUI extends XPScrollBarUI {
         }
     }
 
+    @Override
     protected JButton createIncreaseButton(int orientation) {
         if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
             return super.createIncreaseButton(orientation);
@@ -55,4 +56,4 @@ public class LunaScrollBarUI extends XPScrollBarUI {
         }
     }
 
-}
+} // end of class LunaScrollBarUI

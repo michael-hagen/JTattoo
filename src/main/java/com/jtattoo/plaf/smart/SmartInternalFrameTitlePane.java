@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.smart;
 
 import com.jtattoo.plaf.*;
@@ -37,12 +36,13 @@ public class SmartInternalFrameTitlePane extends BaseInternalFrameTitlePane {
         super(f);
     }
 
+    @Override
     public void paintPalette(Graphics g) {
         int width = getWidth();
         int height = getHeight();
 
-        Color backColor = null;
-        Color frameColor = null;
+        Color backColor;
+        Color frameColor;
         if (JTattooUtilities.isFrameActive(this)) {
             JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowTitleColors(), 0, 0, width, height);
             backColor = AbstractLookAndFeel.getTheme().getWindowTitleColors()[10];
@@ -66,7 +66,7 @@ public class SmartInternalFrameTitlePane extends BaseInternalFrameTitlePane {
         float dc1 = 50.0f;
         float dc2 = 5.0f;
         Color c1 = ColorHelper.brighter(backColor, dc1);
-        Color c2 = null;
+        Color c2;
         while ((dy + 2) < height) {
             c2 = ColorHelper.darker(backColor, dc2);
             dc2 += 5.0f;
@@ -80,12 +80,13 @@ public class SmartInternalFrameTitlePane extends BaseInternalFrameTitlePane {
         g2D.setComposite(composite);
     }
 
+    @Override
     public void paintBackground(Graphics g) {
         Graphics2D g2D = (Graphics2D) g;
         int width = getWidth();
         int height = getHeight();
-        Color backColor = null;
-        Color frameColor = null;
+        Color backColor;
+        Color frameColor;
         if (JTattooUtilities.isActive(this)) {
             backColor = AbstractLookAndFeel.getTheme().getWindowTitleColors()[10];
             frameColor = AbstractLookAndFeel.getTheme().getFrameColor();
@@ -133,7 +134,7 @@ public class SmartInternalFrameTitlePane extends BaseInternalFrameTitlePane {
             float dc2 = 5.0f;
 
             Color c1 = ColorHelper.brighter(backColor, dc1);
-            Color c2 = null;
+            Color c2;
             while ((dy + 5) < height) {
                 c2 = ColorHelper.darker(backColor, dc2);
                 dc2 += 5.0f;
@@ -150,9 +151,11 @@ public class SmartInternalFrameTitlePane extends BaseInternalFrameTitlePane {
         g.drawLine(0, height - 1, width, height - 1);
     }
 
+    @Override
     public void paintBorder(Graphics g) {
     }
 
+    @Override
     public void paintText(Graphics g, int x, int y, String title) {
         if (isActive()) {
             Color titleColor = AbstractLookAndFeel.getWindowTitleForegroundColor();
@@ -167,4 +170,5 @@ public class SmartInternalFrameTitlePane extends BaseInternalFrameTitlePane {
             JTattooUtilities.drawString(frame, g, title, x, y - 1);
         }
     }
-}
+    
+} // end of class SmartInternalFrameTitlePane

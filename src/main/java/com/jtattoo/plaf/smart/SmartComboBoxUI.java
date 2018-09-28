@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.smart;
 
 import com.jtattoo.plaf.*;
@@ -38,6 +37,7 @@ public class SmartComboBoxUI extends BaseComboBoxUI {
         return new SmartComboBoxUI();
     }
 
+    @Override
     public JButton createArrowButton() {
         ArrowButton button = new ArrowButton();
         if (JTattooUtilities.isLeftToRight(comboBox)) {
@@ -53,6 +53,7 @@ public class SmartComboBoxUI extends BaseComboBoxUI {
 //--------------------------------------------------------------------------------------------------
     static class ArrowButton extends BaseComboBoxUI.ArrowButton {
 
+        @Override
         public void paint(Graphics g) {
             super.paint(g);
             if (getModel().isRollover()) {
@@ -61,5 +62,7 @@ public class SmartComboBoxUI extends BaseComboBoxUI {
                 g.drawLine(1, 1, getWidth() - 1, 1);
             }
         }
-    }
-}
+        
+    } // end of class Arrow Button
+    
+} // end of class SmartComboBoxUI

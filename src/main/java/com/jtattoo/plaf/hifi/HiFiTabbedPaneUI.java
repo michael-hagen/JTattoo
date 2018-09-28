@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.hifi;
 
 import com.jtattoo.plaf.*;
@@ -39,17 +38,18 @@ public class HiFiTabbedPaneUI extends BaseTabbedPaneUI {
         return new HiFiTabbedPaneUI();
     }
 
+    @Override
     protected Color[] getContentBorderColors(int tabPlacement) {
         Color SEP_COLORS[] = {
             ColorHelper.darker(AbstractLookAndFeel.getBackgroundColor(), 40),
             ColorHelper.brighter(AbstractLookAndFeel.getBackgroundColor(), 20),
             ColorHelper.darker(AbstractLookAndFeel.getBackgroundColor(), 20),
             ColorHelper.darker(AbstractLookAndFeel.getBackgroundColor(), 40),
-            ColorHelper.darker(AbstractLookAndFeel.getBackgroundColor(), 60),
-        };
+            ColorHelper.darker(AbstractLookAndFeel.getBackgroundColor(), 60),};
         return SEP_COLORS;
     }
 
+    @Override
     protected void paintText(Graphics g, int tabPlacement, Font font, FontMetrics metrics, int tabIndex, String title, Rectangle textRect, boolean isSelected) {
         Color backColor = tabPane.getBackgroundAt(tabIndex);
         if (!(backColor instanceof UIResource)) {
@@ -72,10 +72,7 @@ public class HiFiTabbedPaneUI extends BaseTabbedPaneUI {
             }
         } else {
             // plain text
-            int mnemIndex = -1;
-            if (JTattooUtilities.getJavaVersion() >= 1.4) {
-                mnemIndex = tabPane.getDisplayedMnemonicIndexAt(tabIndex);
-            }
+            int mnemIndex = tabPane.getDisplayedMnemonicIndexAt(tabIndex);
 
             Graphics2D g2D = (Graphics2D) g;
             Composite composite = g2D.getComposite();
@@ -100,4 +97,4 @@ public class HiFiTabbedPaneUI extends BaseTabbedPaneUI {
         }
     }
 
-}
+} // end of class HiFiTabbedPaneUI

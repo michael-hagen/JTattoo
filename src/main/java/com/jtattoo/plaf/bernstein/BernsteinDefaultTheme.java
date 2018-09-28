@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.bernstein;
 
 import com.jtattoo.plaf.AbstractTheme;
@@ -43,10 +42,12 @@ public class BernsteinDefaultTheme extends AbstractTheme {
         setUpColorArrs();
     }
 
+    @Override
     public String getPropertyFileName() {
         return "BernsteinTheme.properties";
     }
 
+    @Override
     public void setUpColor() {
         super.setUpColor();
         // Defaults for BernsteinLookAndFeel
@@ -54,24 +55,24 @@ public class BernsteinDefaultTheme extends AbstractTheme {
         menuAlpha = 0.85f;
 
         backgroundColor = new ColorUIResource(253, 249, 204);
-        backgroundColorLight = white;
+        backgroundColorLight = WHITE;
         backgroundColorDark = new ColorUIResource(253, 241, 176);
         alterBackgroundColor = new ColorUIResource(253, 241, 176);
-        
+
         selectionBackgroundColor = new ColorUIResource(250, 216, 32);
         disabledForegroundColor = new ColorUIResource(164, 164, 164);
         frameColor = new ColorUIResource(233, 199, 5);
         focusCellColor = new ColorUIResource(139, 92, 0);
         rolloverColor = new ColorUIResource(251, 220, 64);
-        
+
         buttonBackgroundColor = new ColorUIResource(253, 249, 204);
-        
+
         pressedBackgroundColor = buttonBackgroundColor;
         pressedBackgroundColorLight = new ColorUIResource(ColorHelper.brighter(pressedBackgroundColor, 20));
         pressedBackgroundColorDark = new ColorUIResource(ColorHelper.darker(pressedBackgroundColor, 5));
 
         controlBackgroundColor = new ColorUIResource(253, 249, 204);
-        controlHighlightColor = white;
+        controlHighlightColor = WHITE;
         controlShadowColor = new ColorUIResource(247, 231, 34);
         controlDarkShadowColor = frameColor;
         controlColorLight = new ColorUIResource(252, 218, 0);
@@ -83,7 +84,7 @@ public class BernsteinDefaultTheme extends AbstractTheme {
         windowBorderColor = new ColorUIResource(254, 240, 0);
 
         windowInactiveTitleBackgroundColor = backgroundColor;
-        windowInactiveTitleColorLight = white;
+        windowInactiveTitleColorLight = WHITE;
         windowInactiveTitleColorDark = new ColorUIResource(236, 236, 236);
         windowInactiveBorderColor = new ColorUIResource(254, 240, 0);
 
@@ -91,35 +92,36 @@ public class BernsteinDefaultTheme extends AbstractTheme {
         menuSelectionBackgroundColor = selectionBackgroundColor;
 
         toolbarBackgroundColor = backgroundColor;
-        
+
         tabAreaBackgroundColor = backgroundColor;
         desktopColor = new ColorUIResource(253, 249, 204);
-        
-        tooltipForegroundColor = black;
+
+        tooltipForegroundColor = BLACK;
         tooltipBackgroundColor = new ColorUIResource(254, 240, 80);
     }
 
+    @Override
     public void setUpColorArrs() {
         super.setUpColorArrs();
         // Generate the color arrays
         DEFAULT_COLORS = new Color[]{
-                    new Color(247, 225, 0),
-                    new Color(251, 232, 0),
-                    new Color(243, 216, 0),
-                    new Color(237, 204, 0),
-                    new Color(239, 209, 0),
-                    new Color(242, 215, 0),
-                    new Color(243, 216, 0),
-                    new Color(245, 221, 0),
-                    new Color(246, 222, 0),
-                    new Color(247, 225, 0),
-                    new Color(248, 227, 0),
-                    new Color(249, 230, 0),
-                    new Color(251, 232, 0),
-                    new Color(252, 235, 0),
-                    new Color(253, 237, 0),
-                    new Color(253, 237, 0),
-                    new Color(254, 240, 0),};
+            new Color(247, 225, 0),
+            new Color(251, 232, 0),
+            new Color(243, 216, 0),
+            new Color(237, 204, 0),
+            new Color(239, 209, 0),
+            new Color(242, 215, 0),
+            new Color(243, 216, 0),
+            new Color(245, 221, 0),
+            new Color(246, 222, 0),
+            new Color(247, 225, 0),
+            new Color(248, 227, 0),
+            new Color(249, 230, 0),
+            new Color(251, 232, 0),
+            new Color(252, 235, 0),
+            new Color(253, 237, 0),
+            new Color(253, 237, 0),
+            new Color(254, 240, 0),};
         HIDEFAULT_COLORS = new Color[DEFAULT_COLORS.length];
         for (int i = 0; i < DEFAULT_COLORS.length; i++) {
             HIDEFAULT_COLORS[i] = ColorHelper.brighter(DEFAULT_COLORS[i], 50.0);
@@ -156,4 +158,5 @@ public class BernsteinDefaultTheme extends AbstractTheme {
         SLIDER_COLORS = DEFAULT_COLORS;
         PROGRESSBAR_COLORS = DEFAULT_COLORS;
     }
-}
+    
+} // end of class BernsteinDefaultTheme

@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.mint;
 
 import com.jtattoo.plaf.*;
@@ -39,13 +38,14 @@ public class MintButtonUI extends BaseButtonUI {
         return new MintButtonUI();
     }
 
+    @Override
     protected void paintBackground(Graphics g, AbstractButton b) {
         if (!b.isContentAreaFilled() || (b.getParent() instanceof JMenuBar)) {
             return;
         }
 
-        if ((b.getWidth() < 32) 
-                || (b.getHeight() < 16) 
+        if ((b.getWidth() < 32)
+                || (b.getHeight() < 16)
                 || !(b.isBorderPainted() && (b.getBorder() instanceof UIResource))
                 || AbstractLookAndFeel.getTheme().doDrawSquareButtons()) {
             ButtonModel model = b.getModel();
@@ -69,7 +69,7 @@ public class MintButtonUI extends BaseButtonUI {
         int width = b.getWidth() - 2;
         int height = b.getHeight() - 2;
         ButtonModel model = b.getModel();
-        
+
         if (model.isPressed() && model.isArmed()) {
             Color color = AbstractLookAndFeel.getTheme().getPressedBackgroundColor();
             g2D.setColor(color);
@@ -91,7 +91,7 @@ public class MintButtonUI extends BaseButtonUI {
             System.arraycopy(src, 0, colors, 0, colors.length);
             colors[colors.length - 2] = ColorHelper.darker(colors[colors.length - 2], 15);
         }
-        
+
         Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
         g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         // Paint shadow
@@ -124,6 +124,7 @@ public class MintButtonUI extends BaseButtonUI {
         g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRederingHint);
     }
 
+    @Override
     protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect, Rectangle iconRect) {
         Graphics2D g2D = (Graphics2D) g;
         int width = b.getWidth();
@@ -143,4 +144,5 @@ public class MintButtonUI extends BaseButtonUI {
             g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRenderingHint);
         }
     }
-}
+    
+} // end of class MintButtonUI

@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.mint;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
@@ -39,9 +38,11 @@ public class MintMenuBarUI extends BasicMenuBarUI {
         return new MintMenuBarUI();
     }
 
+    @Override
     public void paint(Graphics g, JComponent c) {
         int w = c.getWidth();
         int h = c.getHeight();
         JTattooUtilities.fillVerGradient(g, AbstractLookAndFeel.getTheme().getMenuBarColors(), 0, 0, w, h);
     }
-}
+
+} // end of class MintMenuBarUI

@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.texture;
 
 import com.jtattoo.plaf.AbstractBorderFactory;
@@ -32,90 +31,110 @@ import javax.swing.border.Border;
 public class TextureBorderFactory implements AbstractBorderFactory {
 
     private static TextureBorderFactory instance = null;
-    
+
     private TextureBorderFactory() {
     }
-    
+
     public static synchronized TextureBorderFactory getInstance() {
-        if (instance == null)
+        if (instance == null) {
             instance = new TextureBorderFactory();
+        }
         return instance;
     }
-    
+
+    @Override
     public Border getFocusFrameBorder() {
         return TextureBorders.getFocusFrameBorder();
     }
 
+    @Override
     public Border getButtonBorder() {
         return TextureBorders.getButtonBorder();
     }
-    
+
+    @Override
     public Border getToggleButtonBorder() {
         return TextureBorders.getToggleButtonBorder();
     }
-    
+
+    @Override
     public Border getTextBorder() {
         return TextureBorders.getTextBorder();
     }
-    
+
+    @Override
     public Border getSpinnerBorder() {
         return TextureBorders.getSpinnerBorder();
     }
-    
+
+    @Override
     public Border getTextFieldBorder() {
         return TextureBorders.getTextFieldBorder();
     }
-    
+
+    @Override
     public Border getComboBoxBorder() {
         return TextureBorders.getComboBoxBorder();
     }
-    
+
+    @Override
     public Border getTableHeaderBorder() {
         return TextureBorders.getTableHeaderBorder();
     }
-    
+
+    @Override
     public Border getTableScrollPaneBorder() {
         return TextureBorders.getTableScrollPaneBorder();
     }
 
+    @Override
     public Border getScrollPaneBorder() {
         return TextureBorders.getScrollPaneBorder();
     }
-    
+
+    @Override
     public Border getTabbedPaneBorder() {
         return TextureBorders.getTabbedPaneBorder();
     }
-    
+
+    @Override
     public Border getMenuBarBorder() {
         return TextureBorders.getMenuBarBorder();
     }
-    
+
+    @Override
     public Border getMenuItemBorder() {
         return TextureBorders.getMenuItemBorder();
     }
-    
+
+    @Override
     public Border getPopupMenuBorder() {
         return TextureBorders.getPopupMenuBorder();
     }
-    
+
+    @Override
     public Border getInternalFrameBorder() {
         return TextureBorders.getInternalFrameBorder();
     }
-    
+
+    @Override
     public Border getPaletteBorder() {
         return TextureBorders.getPaletteBorder();
     }
-    
+
+    @Override
     public Border getToolBarBorder() {
         return TextureBorders.getToolBarBorder();
     }
-    
+
+    @Override
     public Border getProgressBarBorder() {
         return TextureBorders.getProgressBarBorder();
     }
-    
+
+    @Override
     public Border getDesktopIconBorder() {
         return TextureBorders.getDesktopIconBorder();
     }
-}
-
+    
+} // end of class TextureBorderFactory

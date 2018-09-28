@@ -39,6 +39,7 @@ public class TextureScrollBarUI extends XPScrollBarUI {
         return new TextureScrollBarUI();
     }
 
+    @Override
     protected JButton createDecreaseButton(int orientation) {
         if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
             return super.createDecreaseButton(orientation);
@@ -47,6 +48,7 @@ public class TextureScrollBarUI extends XPScrollBarUI {
         }
     }
 
+    @Override
     protected JButton createIncreaseButton(int orientation) {
         if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
             return super.createIncreaseButton(orientation);
@@ -55,4 +57,4 @@ public class TextureScrollBarUI extends XPScrollBarUI {
         }
     }
 
-}
+} // end of class TextureRootPaneUI

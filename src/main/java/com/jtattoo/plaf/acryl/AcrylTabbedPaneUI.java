@@ -38,11 +38,13 @@ public class AcrylTabbedPaneUI extends BaseTabbedPaneUI {
         return new AcrylTabbedPaneUI();
     }
 
+    @Override
     public void installDefaults() {
         super.installDefaults();
         tabAreaInsets.bottom = 5;
     }
 
+    @Override
     protected Color[] getTabColors(int tabIndex, boolean isSelected, boolean isRollover) {
         if ((tabIndex >= 0) && (tabIndex < tabPane.getTabCount())) {
             boolean isEnabled = tabPane.isEnabledAt(tabIndex);
@@ -70,6 +72,7 @@ public class AcrylTabbedPaneUI extends BaseTabbedPaneUI {
         return AbstractLookAndFeel.getTheme().getTabColors();
     }
 
+    @Override
     protected Color[] getContentBorderColors(int tabPlacement) {
         Color SEP_COLORS[] = {
             ColorHelper.brighter(AbstractLookAndFeel.getControlColorLight(), 20),
@@ -81,10 +84,12 @@ public class AcrylTabbedPaneUI extends BaseTabbedPaneUI {
         return SEP_COLORS;
     }
 
+    @Override
     protected Color getContentBorderColor() {
         return ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFrameColor(), 50);
     }
 
+    @Override
     protected Color getLoBorderColor(int tabIndex) {
         if (tabIndex == tabPane.getSelectedIndex() && tabPane.getBackgroundAt(tabIndex) instanceof ColorUIResource) {
             return ColorHelper.brighter(AbstractLookAndFeel.getFrameColor(), 10);
@@ -92,6 +97,7 @@ public class AcrylTabbedPaneUI extends BaseTabbedPaneUI {
         return super.getLoBorderColor(tabIndex);
     }
     
+    @Override
     protected Font getTabFont(boolean isSelected) {
         if (isSelected) {
             return super.getTabFont(isSelected).deriveFont(Font.BOLD);
@@ -100,6 +106,7 @@ public class AcrylTabbedPaneUI extends BaseTabbedPaneUI {
         }
     }
 
+    @Override
     protected void paintText(Graphics g, int tabPlacement, Font font, FontMetrics metrics, int tabIndex, String title, Rectangle textRect, boolean isSelected) {
         Color backColor = tabPane.getBackgroundAt(tabIndex);
         if (!(backColor instanceof UIResource)) {
@@ -122,10 +129,7 @@ public class AcrylTabbedPaneUI extends BaseTabbedPaneUI {
             }
         } else {
             // plain text
-            int mnemIndex = -1;
-            if (JTattooUtilities.getJavaVersion() >= 1.4) {
-                mnemIndex = tabPane.getDisplayedMnemonicIndexAt(tabIndex);
-            }
+            int mnemIndex = tabPane.getDisplayedMnemonicIndexAt(tabIndex);
 
             if (tabPane.isEnabled() && tabPane.isEnabledAt(tabIndex)) {
                 if (isSelected) {
@@ -149,4 +153,5 @@ public class AcrylTabbedPaneUI extends BaseTabbedPaneUI {
             }
         }
     }
-}
+    
+} // end of class AcrylTabbedPaneUI

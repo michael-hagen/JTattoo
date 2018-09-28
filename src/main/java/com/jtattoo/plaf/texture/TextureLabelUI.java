@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.texture;
 
 import com.jtattoo.plaf.*;
@@ -44,13 +43,9 @@ public class TextureLabelUI extends BasicLabelUI {
         return hifiLabelUI;
     }
 
+    @Override
     protected void paintEnabledText(JLabel l, Graphics g, String s, int textX, int textY) {
-        int mnemIndex = -1;
-        if (JTattooUtilities.getJavaVersion() >= 1.4) {
-            mnemIndex = l.getDisplayedMnemonicIndex();
-        } else {
-            mnemIndex = JTattooUtilities.findDisplayedMnemonicIndex(l.getText(), l.getDisplayedMnemonic());
-        }
+        int mnemIndex = l.getDisplayedMnemonicIndex();
         Color fc = l.getForeground();
         if (AbstractLookAndFeel.getTheme().isTextShadowOn() && ColorHelper.getGrayValue(fc) > 164) {
             g.setColor(Color.black);
@@ -58,7 +53,7 @@ public class TextureLabelUI extends BasicLabelUI {
         } else {
             Object sc = l.getClientProperty("shadowColor");
             if (sc instanceof Color) {
-                g.setColor((Color)sc);
+                g.setColor((Color) sc);
                 JTattooUtilities.drawStringUnderlineCharAt(l, g, s, mnemIndex, textX, textY + 1);
             }
         }
@@ -66,13 +61,9 @@ public class TextureLabelUI extends BasicLabelUI {
         JTattooUtilities.drawStringUnderlineCharAt(l, g, s, mnemIndex, textX, textY);
     }
 
+    @Override
     protected void paintDisabledText(JLabel l, Graphics g, String s, int textX, int textY) {
-        int mnemIndex = -1;
-        if (JTattooUtilities.getJavaVersion() >= 1.4) {
-            mnemIndex = l.getDisplayedMnemonicIndex();
-        } else {
-            mnemIndex = JTattooUtilities.findDisplayedMnemonicIndex(l.getText(), l.getDisplayedMnemonic());
-        }
+        int mnemIndex = l.getDisplayedMnemonicIndex();
         Graphics2D g2D = (Graphics2D) g;
         Composite savedComposite = g2D.getComposite();
         AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f);
@@ -91,4 +82,4 @@ public class TextureLabelUI extends BasicLabelUI {
         JTattooUtilities.drawStringUnderlineCharAt(l, g, s, mnemIndex, textX, textY);
     }
 
-}
+} // end of class TextureLabelUI

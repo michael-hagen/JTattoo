@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.graphite;
 
 import com.jtattoo.plaf.AbstractBorderFactory;
@@ -43,80 +42,99 @@ public class GraphiteBorderFactory implements AbstractBorderFactory {
         return instance;
     }
 
+    @Override
     public Border getFocusFrameBorder() {
         return GraphiteBorders.getFocusFrameBorder();
     }
 
+    @Override
     public Border getButtonBorder() {
         return GraphiteBorders.getButtonBorder();
     }
 
+    @Override
     public Border getToggleButtonBorder() {
         return GraphiteBorders.getToggleButtonBorder();
     }
 
+    @Override
     public Border getTextBorder() {
         return GraphiteBorders.getTextBorder();
     }
 
+    @Override
     public Border getSpinnerBorder() {
         return GraphiteBorders.getSpinnerBorder();
     }
 
+    @Override
     public Border getTextFieldBorder() {
         return GraphiteBorders.getTextFieldBorder();
     }
 
+    @Override
     public Border getComboBoxBorder() {
         return GraphiteBorders.getComboBoxBorder();
     }
 
+    @Override
     public Border getTableHeaderBorder() {
         return GraphiteBorders.getTableHeaderBorder();
     }
 
+    @Override
     public Border getTableScrollPaneBorder() {
         return GraphiteBorders.getTableScrollPaneBorder();
     }
 
+    @Override
     public Border getScrollPaneBorder() {
         return GraphiteBorders.getScrollPaneBorder();
     }
 
+    @Override
     public Border getTabbedPaneBorder() {
         return GraphiteBorders.getTabbedPaneBorder();
     }
 
+    @Override
     public Border getMenuBarBorder() {
         return GraphiteBorders.getMenuBarBorder();
     }
 
+    @Override
     public Border getMenuItemBorder() {
         return GraphiteBorders.getMenuItemBorder();
     }
 
+    @Override
     public Border getPopupMenuBorder() {
         return GraphiteBorders.getPopupMenuBorder();
     }
 
+    @Override
     public Border getInternalFrameBorder() {
         return GraphiteBorders.getInternalFrameBorder();
     }
 
+    @Override
     public Border getPaletteBorder() {
         return GraphiteBorders.getPaletteBorder();
     }
 
+    @Override
     public Border getToolBarBorder() {
         return GraphiteBorders.getToolBarBorder();
     }
 
+    @Override
     public Border getProgressBarBorder() {
         return GraphiteBorders.getProgressBarBorder();
     }
 
+    @Override
     public Border getDesktopIconBorder() {
         return GraphiteBorders.getDesktopIconBorder();
     }
-}
-
+    
+} // end of class GraphiteBorderFactory

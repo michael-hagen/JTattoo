@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.graphite;
 
 import com.jtattoo.plaf.AbstractTheme;
@@ -42,89 +41,90 @@ public class GraphiteDefaultTheme extends AbstractTheme {
         setUpColorArrs();
     }
 
+    @Override
     public String getPropertyFileName() {
         return "GraphiteTheme.properties";
     }
 
+    @Override
     public void setUpColor() {
         super.setUpColor();
 
 //        showFocusFrame = true;
-
-        foregroundColor = black;
+        foregroundColor = BLACK;
         backgroundColor = new ColorUIResource(224, 224, 224);
-        backgroundColorLight = white;
-        backgroundColorDark = lightGray;
+        backgroundColorLight = WHITE;
+        backgroundColorDark = LIGHT_GRAY;
         alterBackgroundColor = new ColorUIResource(220, 220, 220);
         disabledForegroundColor = new ColorUIResource(128, 128, 128);
         disabledBackgroundColor = new ColorUIResource(240, 240, 240);
-        inputBackgroundColor = white;
-        inputForegroundColor = black;
+        inputBackgroundColor = WHITE;
+        inputForegroundColor = BLACK;
 
-        selectionForegroundColor = white;
+        selectionForegroundColor = WHITE;
         selectionBackgroundColor = new ColorUIResource(80, 80, 80);
         selectionBackgroundColorLight = new ColorUIResource(96, 96, 96);
         selectionBackgroundColorDark = new ColorUIResource(64, 64, 64);
 
-        focusColor = orange;
-        focusCellColor = orange;
+        focusColor = ORANGE;
+        focusCellColor = ORANGE;
         frameColor = new ColorUIResource(144, 144, 144);
         gridColor = new ColorUIResource(200, 200, 200);
 
-        rolloverColor = orange;
+        rolloverColor = ORANGE;
         rolloverColorLight = new ColorUIResource(255, 213, 113);
         rolloverColorDark = new ColorUIResource(240, 168, 0);
 
         pressedBackgroundColor = new ColorUIResource(230, 230, 230);
         pressedBackgroundColorLight = new ColorUIResource(240, 240, 240);
         pressedBackgroundColorDark = new ColorUIResource(220, 220, 220);
-        
-        buttonForegroundColor = black;
-        buttonBackgroundColor = extraLightGray;
-        buttonColorLight = white;
-        buttonColorDark = extraLightGray;
 
-        controlForegroundColor = black;
-        controlBackgroundColor = extraLightGray;
+        buttonForegroundColor = BLACK;
+        buttonBackgroundColor = EXTRA_LIGHT_GRAY;
+        buttonColorLight = WHITE;
+        buttonColorDark = EXTRA_LIGHT_GRAY;
+
+        controlForegroundColor = BLACK;
+        controlBackgroundColor = EXTRA_LIGHT_GRAY;
         controlShadowColor = new ColorUIResource(164, 164, 164);
         controlDarkShadowColor = new ColorUIResource(64, 64, 64);
         controlColorLight = new ColorUIResource(96, 96, 96);
         controlColorDark = new ColorUIResource(40, 40, 40);
 
-        windowTitleForegroundColor = white;
+        windowTitleForegroundColor = WHITE;
         windowTitleBackgroundColor = new ColorUIResource(88, 88, 88);
         windowTitleColorLight = new ColorUIResource(88, 88, 88);
         windowTitleColorDark = new ColorUIResource(24, 24, 24);
-        windowBorderColor = black;
-        windowIconColor = white;
-        windowIconShadowColor = black;
-        windowIconRolloverColor = orange;
+        windowBorderColor = BLACK;
+        windowIconColor = WHITE;
+        windowIconShadowColor = BLACK;
+        windowIconRolloverColor = ORANGE;
 
-        windowInactiveTitleForegroundColor = white;
+        windowInactiveTitleForegroundColor = WHITE;
         windowInactiveTitleBackgroundColor = new ColorUIResource(224, 224, 224);
         windowInactiveTitleColorLight = new ColorUIResource(64, 64, 64);
         windowInactiveTitleColorDark = new ColorUIResource(0, 0, 0);
-        windowInactiveBorderColor = black;
+        windowInactiveBorderColor = BLACK;
 
-        menuForegroundColor = black;
+        menuForegroundColor = BLACK;
         menuBackgroundColor = new ColorUIResource(240, 240, 240);
-        menuSelectionForegroundColor = black;
+        menuSelectionForegroundColor = BLACK;
         menuSelectionBackgroundColor = new ColorUIResource(32, 32, 32);
         menuSelectionBackgroundColorLight = new ColorUIResource(255, 213, 113);
         menuSelectionBackgroundColorDark = new ColorUIResource(240, 168, 0);
         menuColorLight = new ColorUIResource(240, 240, 240);
         menuColorDark = new ColorUIResource(220, 220, 220);
 
-        toolbarForegroundColor = black;
+        toolbarForegroundColor = BLACK;
         toolbarBackgroundColor = backgroundColor;
         toolbarColorLight = menuColorLight;
         toolbarColorDark = menuColorDark;
 
         tabAreaBackgroundColor = backgroundColor;
-        tabSelectionForegroundColor = white;
+        tabSelectionForegroundColor = WHITE;
         desktopColor = backgroundColor;
-        tooltipForegroundColor = black;
-        tooltipBackgroundColor = yellow;
+        tooltipForegroundColor = BLACK;
+        tooltipBackgroundColor = YELLOW;
 
         controlFont = new FontUIResource("Dialog", Font.PLAIN, 13);
         systemFont = new FontUIResource("Dialog", Font.PLAIN, 13);
@@ -134,6 +134,7 @@ public class GraphiteDefaultTheme extends AbstractTheme {
         windowTitleFont = new FontUIResource("Dialog", Font.BOLD, 13);
     }
 
+    @Override
     public void setUpColorArrs() {
         super.setUpColorArrs();
         BUTTON_COLORS = ColorHelper.createColorArr(buttonColorLight, buttonColorDark, 24);
@@ -148,7 +149,7 @@ public class GraphiteDefaultTheme extends AbstractTheme {
         MENU_SELECTION_COLORS = ColorHelper.createColorArr(menuSelectionBackgroundColorLight, menuSelectionBackgroundColorDark, 20);
         ROLLOVER_COLORS = ColorHelper.createColorArr(rolloverColorLight, rolloverColorDark, 24);
         //PRESSED_COLORS = ColorHelper.createColorArr(menuColorDark, menuColorLight, 24);
-        DISABLED_COLORS = ColorHelper.createColorArr(superLightGray, extraLightGray, 24);
+        DISABLED_COLORS = ColorHelper.createColorArr(SUPER_LIGHT_GRAY, EXTRA_LIGHT_GRAY, 24);
         ACTIVE_COLORS = DEFAULT_COLORS;
         INACTIVE_COLORS = BUTTON_COLORS;
 
@@ -175,5 +176,4 @@ public class GraphiteDefaultTheme extends AbstractTheme {
         PROGRESSBAR_COLORS = DEFAULT_COLORS;
     }
 
-
-}
+} // end of class GraphiteDefaultTheme

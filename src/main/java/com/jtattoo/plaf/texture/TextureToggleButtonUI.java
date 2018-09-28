@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.texture;
 
 import com.jtattoo.plaf.*;
@@ -39,8 +38,9 @@ public class TextureToggleButtonUI extends BaseToggleButtonUI {
         return new TextureToggleButtonUI();
     }
 
+    @Override
     protected void paintIcon(Graphics g, JComponent c, Rectangle iconRect) {
-        AbstractButton b = (AbstractButton)c;
+        AbstractButton b = (AbstractButton) c;
         Graphics2D g2D = (Graphics2D) g;
         Composite savedComposite = g2D.getComposite();
         if (!b.isContentAreaFilled()) {
@@ -51,12 +51,13 @@ public class TextureToggleButtonUI extends BaseToggleButtonUI {
         g2D.setComposite(savedComposite);
     }
 
+    @Override
     protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
         Graphics2D g2D = (Graphics2D) g;
         Composite savedComposite = g2D.getComposite();
         ButtonModel model = b.getModel();
         FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
-        int mnemIndex = (JTattooUtilities.getJavaVersion() >= 1.4) ? b.getDisplayedMnemonicIndex() : JTattooUtilities.findDisplayedMnemonicIndex(b.getText(), model.getMnemonic());
+        int mnemIndex = b.getDisplayedMnemonicIndex();
         if (model.isEnabled()) {
             int offs = 0;
             if (model.isArmed() && model.isPressed()) {
@@ -97,6 +98,7 @@ public class TextureToggleButtonUI extends BaseToggleButtonUI {
         }
     }
 
+    @Override
     protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect, Rectangle iconRect) {
         if (!AbstractLookAndFeel.getTheme().doShowFocusFrame()) {
             g.setColor(AbstractLookAndFeel.getFocusColor());
@@ -105,4 +107,4 @@ public class TextureToggleButtonUI extends BaseToggleButtonUI {
         }
     }
 
-}
+} // end of clas TextureToggleButtonUI

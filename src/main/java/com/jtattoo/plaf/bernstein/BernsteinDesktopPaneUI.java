@@ -20,8 +20,7 @@
 *  
 * see: APACHE-LICENSE-2.0.txt
 */
- 
-package com.jtattoo.plaf.bernstein;
+ package com.jtattoo.plaf.bernstein;
 
 import com.jtattoo.plaf.BaseDesktopPaneUI;
 import java.awt.Graphics;
@@ -42,6 +41,7 @@ public class BernsteinDesktopPaneUI extends BaseDesktopPaneUI {
         return desktopPaneUI;
     }
 
+    @Override
     public void update(Graphics g, JComponent c) {
         if (c.getClientProperty("backgroundTexture") == null) {
             BernsteinUtils.fillComponent(g, c);
@@ -49,4 +49,5 @@ public class BernsteinDesktopPaneUI extends BaseDesktopPaneUI {
             super.update(g, c);
         }
     }
-}
+    
+} // end of class BernsteinDesktopPaneUI

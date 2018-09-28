@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.smart;
 
 import com.jtattoo.plaf.AbstractTheme;
@@ -40,10 +39,12 @@ public class SmartDefaultTheme extends AbstractTheme {
         setUpColorArrs();
     }
 
+    @Override
     public String getPropertyFileName() {
         return "SmartTheme.properties";
     }
 
+    @Override
     public void setUpColor() {
         super.setUpColor();
 
@@ -60,7 +61,7 @@ public class SmartDefaultTheme extends AbstractTheme {
         focusCellColor = new ColorUIResource(255, 230, 120);
 
         buttonBackgroundColor = new ColorUIResource(218, 230, 254);
-        buttonColorLight = white;
+        buttonColorLight = WHITE;
         buttonColorDark = backgroundColor;
 
         rolloverColor = new ColorUIResource(218, 230, 254);
@@ -70,8 +71,8 @@ public class SmartDefaultTheme extends AbstractTheme {
         pressedBackgroundColor = new ColorUIResource(180, 197, 240);
         pressedBackgroundColorLight = new ColorUIResource(218, 230, 254);
         pressedBackgroundColorDark = new ColorUIResource(180, 197, 240);
-        
-        controlForegroundColor = black;
+
+        controlForegroundColor = BLACK;
         controlBackgroundColor = backgroundColor;
         controlColorLight = new ColorUIResource(218, 230, 254);
         controlColorDark = new ColorUIResource(180, 197, 240);
@@ -89,7 +90,7 @@ public class SmartDefaultTheme extends AbstractTheme {
         windowInactiveBorderColor = new ColorUIResource(164, 165, 169);
 
         menuBackgroundColor = new ColorUIResource(248, 247, 239);
-        menuSelectionForegroundColor = black;
+        menuSelectionForegroundColor = BLACK;
         menuSelectionBackgroundColor = selectionBackgroundColor;
         menuColorLight = new ColorUIResource(248, 245, 235);
         menuColorDark = backgroundColor;
@@ -102,6 +103,7 @@ public class SmartDefaultTheme extends AbstractTheme {
         desktopColor = backgroundColor;
     }
 
+    @Override
     public void setUpColorArrs() {
         super.setUpColorArrs();
 
@@ -130,4 +132,5 @@ public class SmartDefaultTheme extends AbstractTheme {
         SLIDER_COLORS = DEFAULT_COLORS;
         PROGRESSBAR_COLORS = DEFAULT_COLORS;
     }
-}
+    
+} // end of class SmartDefaultTheme

@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.hifi;
 
 import com.jtattoo.plaf.*;
@@ -31,7 +30,7 @@ import javax.swing.plaf.ComponentUI;
 
 /**
  *
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
 public class HiFiScrollBarUI extends XPScrollBarUI {
 
@@ -39,6 +38,7 @@ public class HiFiScrollBarUI extends XPScrollBarUI {
         return new HiFiScrollBarUI();
     }
 
+    @Override
     protected void installDefaults() {
         super.installDefaults();
         Color colors[] = AbstractLookAndFeel.getTheme().getThumbColors();
@@ -50,6 +50,7 @@ public class HiFiScrollBarUI extends XPScrollBarUI {
         }
     }
 
+    @Override
     protected JButton createDecreaseButton(int orientation) {
         if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
             return super.createDecreaseButton(orientation);
@@ -58,6 +59,7 @@ public class HiFiScrollBarUI extends XPScrollBarUI {
         }
     }
 
+    @Override
     protected JButton createIncreaseButton(int orientation) {
         if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
             return super.createIncreaseButton(orientation);
@@ -66,6 +68,7 @@ public class HiFiScrollBarUI extends XPScrollBarUI {
         }
     }
 
+    @Override
     protected Color getFrameColor() {
         Color frameColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getButtonBackgroundColor(), 8);
         if (isDragging) {
@@ -77,4 +80,4 @@ public class HiFiScrollBarUI extends XPScrollBarUI {
         }
     }
 
-}
+} // end of class HiFiScrollBarUI

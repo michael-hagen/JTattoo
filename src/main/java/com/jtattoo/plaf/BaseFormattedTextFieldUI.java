@@ -44,12 +44,14 @@ public class BaseFormattedTextFieldUI extends BasicFormattedTextFieldUI {
         return new BaseFormattedTextFieldUI();
     }
 
+    @Override
     protected void installListeners() {
         super.installListeners();
 
         if (AbstractLookAndFeel.getTheme().doShowFocusFrame()) {
             focusListener = new FocusListener() {
 
+                @Override
                 public void focusGained(FocusEvent e) {
                     if (getComponent() != null) {
                         orgBorder = getComponent().getBorder();
@@ -63,6 +65,7 @@ public class BaseFormattedTextFieldUI extends BasicFormattedTextFieldUI {
                     }
                 }
 
+                @Override
                 public void focusLost(FocusEvent e) {
                     if (getComponent() != null) {
                         if (orgBorder instanceof UIResource) {
@@ -77,12 +80,14 @@ public class BaseFormattedTextFieldUI extends BasicFormattedTextFieldUI {
         }
     }
 
+    @Override
     protected void uninstallListeners() {
         getComponent().removeFocusListener(focusListener);
         focusListener = null;
         super.uninstallListeners();
     }
 
+    @Override
     protected void paintBackground(Graphics g) {
         g.setColor(getComponent().getBackground());
         if (AbstractLookAndFeel.getTheme().doShowFocusFrame()) {
@@ -93,6 +98,7 @@ public class BaseFormattedTextFieldUI extends BasicFormattedTextFieldUI {
         g.fillRect(0, 0, getComponent().getWidth(), getComponent().getHeight());
     }
 
+    @Override
     protected void paintSafely(Graphics g) {
         Graphics2D g2D = (Graphics2D) g;
         Object savedRenderingHint = null;
@@ -105,4 +111,5 @@ public class BaseFormattedTextFieldUI extends BasicFormattedTextFieldUI {
             g2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, savedRenderingHint);
         }
     }
-}
+    
+} // end of class BaseFormattedTextFieldUI

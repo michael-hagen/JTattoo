@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.texture;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
@@ -37,6 +36,7 @@ public class TextureSplitPaneDivider extends BaseSplitPaneDivider {
         super(ui);
     }
 
+    @Override
     public void paint(Graphics g) {
         if (!isFlatMode()) {
             TextureUtils.fillComponent(g, this, TextureUtils.getTextureType(splitPane));
@@ -99,4 +99,5 @@ public class TextureSplitPaneDivider extends BaseSplitPaneDivider {
         }
         paintComponents(g);
     }
-}
+    
+} // end of class TextureSplitPaneDivider

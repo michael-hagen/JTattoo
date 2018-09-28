@@ -57,15 +57,17 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
         return new BaseInternalFrameUI((JInternalFrame) c);
     }
 
+    @Override
     public void installUI(JComponent c) {
         super.installUI(c);
         Object paletteProp = c.getClientProperty(IS_PALETTE);
         if (paletteProp != null) {
-            setPalette(((Boolean) paletteProp).booleanValue());
+            setPalette(((Boolean) paletteProp));
         }
         stripContentBorder();
     }
 
+    @Override
     public void uninstallUI(JComponent c) {
         Container cp = frame.getContentPane();
         if (cp instanceof JComponent) {
@@ -77,6 +79,7 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
         super.uninstallUI(c);
     }
 
+    @Override
     protected void installDefaults() {
         super.installDefaults();
         Icon frameIcon = frame.getFrameIcon();
@@ -85,16 +88,19 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
         }
     }
     
+    @Override
     protected void installListeners() {
         super.installListeners();
         frame.addPropertyChangeListener(MY_PROPERTY_CHANGE_HANDLER);
     }
 
+    @Override
     protected void uninstallListeners() {
         frame.removePropertyChangeListener(MY_PROPERTY_CHANGE_HANDLER);
         super.uninstallListeners();
     }
 
+    @Override
     protected void uninstallComponents() {
         titlePane = null;
         super.uninstallComponents();
@@ -111,6 +117,7 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
         }
     }
 
+    @Override
     protected JComponent createNorthPane(JInternalFrame w) {
         return new BaseInternalFrameTitlePane(w);
     }
@@ -133,6 +140,7 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
 //-----------------------------------------------------------------------------
     private static class MyPropertyChangeHandler implements PropertyChangeListener {
 
+        @Override
         public void propertyChange(PropertyChangeEvent e) {
             JInternalFrame jif = (JInternalFrame) e.getSource();
             if (!(jif.getUI() instanceof BaseInternalFrameUI)) {
@@ -153,7 +161,7 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
                 }
             } else if (name.equals(IS_PALETTE)) {
                 if (e.getNewValue() != null) {
-                    ui.setPalette(((Boolean) e.getNewValue()).booleanValue());
+                    ui.setPalette(((Boolean) e.getNewValue()));
                 } else {
                     ui.setPalette(false);
                 }
@@ -164,10 +172,9 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
                     JDesktopPane jp = (JDesktopPane)e.getNewValue();
                     Window window = SwingUtilities.getWindowAncestor(jp);
                     if (window != null) {
-                        WindowListener wl[] = window.getWindowListeners();
                         boolean doAdd = true;
-                        for (int i = 0; i < wl.length; i++) {
-                            if (wl[i].equals(MY_WINDOW_HANDLER)) {
+                        for (WindowListener wl : window.getWindowListeners()) {
+                            if (wl.equals(MY_WINDOW_HANDLER)) {
                                 doAdd = false;
                                 break;
                             }
@@ -185,19 +192,22 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
                 }
             }
         }
-    } // end class MyPropertyChangeHandler
+    } // end of class MyPropertyChangeHandler
     
 //-----------------------------------------------------------------------------
     private static class MyWindowHandler extends WindowAdapter {
 
+        @Override
         public void windowActivated(WindowEvent e) {
             e.getWindow().invalidate();
             e.getWindow().repaint();
         }
         
+        @Override
         public void windowDeactivated(WindowEvent e) {
             e.getWindow().invalidate();
             e.getWindow().repaint();
         }
-    } // end class MyWindowHandler
-}
+    } // end of class MyWindowHandler
+
+} // end of class BaseInternalFrameUI

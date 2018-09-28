@@ -41,9 +41,11 @@ public class AcrylInternalFrameUI extends BaseInternalFrameUI {
         return new AcrylInternalFrameUI((JInternalFrame) c);
     }
 
+    @Override
     protected JComponent createNorthPane(JInternalFrame w) {
         titlePane = new AcrylInternalFrameTitlePane(w);
         return titlePane;
     }
-}
+    
+} // end of class AcrylInternalFrameUI
 

@@ -39,15 +39,13 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 
     public BaseSplitPaneDivider(BasicSplitPaneUI ui) {
         super(ui);
-        if (JTattooUtilities.getJavaVersion() >= 1.4) {
-            if (UIManager.get("SplitPane.centerOneTouchButtons") != null) {
-                centerOneTouchButtons = UIManager.getBoolean("SplitPane.centerOneTouchButtons");
-            }
+        if (UIManager.get("SplitPane.centerOneTouchButtons") != null) {
+            centerOneTouchButtons = UIManager.getBoolean("SplitPane.centerOneTouchButtons");
         }
         setLayout(new MyDividerLayout());
         Object flatModeProperty = ui.getSplitPane().getClientProperty("flatMode");
         if (flatModeProperty instanceof Boolean) {
-            flatMode = ((Boolean)flatModeProperty).booleanValue();
+            flatMode = ((Boolean)flatModeProperty);
         }
     }
 
@@ -59,6 +57,7 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
         this.flatMode = flatMode;
     }
     
+    @Override
     public Border getBorder() {
         return null;
     }
@@ -67,6 +66,7 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
         return ColorHelper.darker(AbstractLookAndFeel.getTheme().getRolloverColor(), 16);
     }
 
+    @Override
     public void paint(Graphics g) {
         if (!isFlatMode()) {
             Graphics2D g2D = (Graphics2D) g;
@@ -134,9 +134,11 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
         paintComponents(g);
     }
 
+    @Override
     protected JButton createLeftOneTouchButton() {
         JButton b = new JButton() {
 
+            @Override
             public void paint(Graphics g) {
                 Color color = getBackground();
                 int w = getSize().width;
@@ -169,6 +171,7 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
                 }
             }
 
+            @Override
             public boolean isFocusTraversable() {
                 return false;
             }
@@ -181,9 +184,11 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
         return b;
     }
 
+    @Override
     protected JButton createRightOneTouchButton() {
         JButton b = new JButton() {
 
+            @Override
             public void paint(Graphics g) {
                 Color color = getBackground();
                 int w = getSize().width;
@@ -216,6 +221,7 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
                 }
             }
 
+            @Override
             public boolean isFocusTraversable() {
                 return false;
             }
@@ -236,6 +242,7 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
      */
     protected class MyDividerLayout implements LayoutManager {
 
+        @Override
         public void layoutContainer(Container c) {
             if (leftButton != null && rightButton != null && c == BaseSplitPaneDivider.this) {
                 if (splitPane.isOneTouchExpandable()) {
@@ -275,6 +282,7 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
             }
         }
 
+        @Override
         public Dimension minimumLayoutSize(Container c) {
             // NOTE: This isn't really used, refer to
             // BasicSplitPaneDivider.getPreferredSize for the reason.
@@ -314,15 +322,19 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
             return new Dimension(width, height);
         }
 
+        @Override
         public Dimension preferredLayoutSize(Container c) {
             return minimumLayoutSize(c);
         }
 
+        @Override
         public void removeLayoutComponent(Component c) {
         }
 
+        @Override
         public void addLayoutComponent(String string, Component c) {
         }
 
-    } // end class MyDividerLayout
-}
+    } // end of class MyDividerLayout
+
+} // end of class BaseSplitPaneDivieder

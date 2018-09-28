@@ -176,9 +176,10 @@ public class AcrylIcons extends BaseIcons {
 //----------------------------------------------------------------------------------------------------------------------
     private static class TitleButtonIcon implements Icon {
 
-        private static final Color extraLightGray = new Color(240, 240, 240);
-        private static final Color closerColorLight = new Color(241, 172, 154);
-        private static final Color closerColorDark = new Color(224, 56, 2);
+        private static final Color EXTRA_LIGHT_GRAY = new Color(240, 240, 240);
+        private static final Color CLOSER_COLOR_LIGHT = new Color(241, 172, 154);
+        private static final Color CLOSER_COLOR_DARK = new Color(224, 56, 2);
+        
         public static final int ICON_ICON_TYP = 0;
         public static final int MIN_ICON_TYP = 1;
         public static final int MAX_ICON_TYP = 2;
@@ -189,14 +190,17 @@ public class AcrylIcons extends BaseIcons {
             iconTyp = typ;
         }
 
+        @Override
         public int getIconHeight() {
             return 20;
         }
 
+        @Override
         public int getIconWidth() {
             return 20;
         }
 
+        @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
             int w = c.getWidth();
             int h = c.getHeight();
@@ -214,8 +218,8 @@ public class AcrylIcons extends BaseIcons {
             Color cLo = ColorHelper.darker(AbstractLookAndFeel.getTheme().getWindowTitleColorDark(), 10);
             Color cShadow = Color.black;
             if (iconTyp == CLOSE_ICON_TYP) {
-                cHi = closerColorLight;
-                cLo = closerColorDark;
+                cHi = CLOSER_COLOR_LIGHT;
+                cLo = CLOSER_COLOR_DARK;
             }
 
             if (isPressed && isArmed) {
@@ -227,8 +231,8 @@ public class AcrylIcons extends BaseIcons {
             } else if (isRollover) {
                 cFrameInner = ColorHelper.brighter(cFrameInner, 50);
                 if (iconTyp == CLOSE_ICON_TYP) {
-                    cHi = closerColorLight;
-                    cLo = closerColorDark;
+                    cHi = CLOSER_COLOR_LIGHT;
+                    cLo = CLOSER_COLOR_DARK;
                     cShadow = cLo;
                     g2D.setPaint(new GradientPaint(0, 0, cHi, w, h, cLo));
                     g2D.fillRect(2, 2, w - 3, h - 3);
@@ -247,14 +251,21 @@ public class AcrylIcons extends BaseIcons {
             g2D.drawRect(1, 1, w - 3, h - 3);
 
             Icon icon = null;
-            if (iconTyp == ICON_ICON_TYP) {
-                icon = new BaseIcons.IconSymbol(extraLightGray, cShadow, null, new Insets(0, 5, 0, 5));
-            } else if (iconTyp == MIN_ICON_TYP) {
-                icon = new BaseIcons.MinSymbol(extraLightGray, cShadow, null, new Insets(0, 4, 0, 4));
-            } else if (iconTyp == MAX_ICON_TYP) {
-                icon = new BaseIcons.MaxSymbol(extraLightGray, cShadow, null, new Insets(0, 4, 0, 4));
-            } else if (iconTyp == CLOSE_ICON_TYP) {
-                icon = new BaseIcons.CloseSymbol(Color.white, ColorHelper.darker(cShadow, 50), null, new Insets(0, 5, 0, 5));
+            switch (iconTyp) {
+                case ICON_ICON_TYP:
+                    icon = new BaseIcons.IconSymbol(EXTRA_LIGHT_GRAY, cShadow, null, new Insets(0, 5, 0, 5));
+                    break;
+                case MIN_ICON_TYP:
+                    icon = new BaseIcons.MinSymbol(EXTRA_LIGHT_GRAY, cShadow, null, new Insets(0, 4, 0, 4));
+                    break;
+                case MAX_ICON_TYP:
+                    icon = new BaseIcons.MaxSymbol(EXTRA_LIGHT_GRAY, cShadow, null, new Insets(0, 4, 0, 4));
+                    break;
+                case CLOSE_ICON_TYP:
+                    icon = new BaseIcons.CloseSymbol(Color.white, ColorHelper.darker(cShadow, 50), null, new Insets(0, 5, 0, 5));
+                    break;
+                default:
+                    break;
             }
             if (icon != null) {
                 icon.paintIcon(c, g, 0, 0);
@@ -280,6 +291,7 @@ public class AcrylIcons extends BaseIcons {
         //private static final Icon LARGE_CHECK_PRESSED_ICON = new LazyImageIcon("acryl/icons/large/check_symbol_pressed_14x14.png");
         private static final Icon LARGE_CHECK_DISABLED_ICON = new LazyImageIcon("icons/large/check_symbol_disabled_14x14.png");
         
+        @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
             if (!JTattooUtilities.isLeftToRight(c)) {
                 x += GAP;
@@ -352,6 +364,7 @@ public class AcrylIcons extends BaseIcons {
             }
         }
 
+        @Override
         public int getIconWidth() {
             int w;
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -364,6 +377,7 @@ public class AcrylIcons extends BaseIcons {
             return w + GAP;
         }
 
+        @Override
         public int getIconHeight() {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
                 return 14;
@@ -380,6 +394,7 @@ public class AcrylIcons extends BaseIcons {
 
         private static final int GAP = 2;
         
+        @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
             if (!JTattooUtilities.isLeftToRight(c)) {
                 x += GAP;
@@ -445,6 +460,7 @@ public class AcrylIcons extends BaseIcons {
             g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRederingHint);
         }
 
+        @Override
         public int getIconWidth() {
             int w;
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -457,6 +473,7 @@ public class AcrylIcons extends BaseIcons {
             return w + GAP;
         }
 
+        @Override
         public int getIconHeight() {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
                 return 14;
@@ -468,4 +485,4 @@ public class AcrylIcons extends BaseIcons {
         }
     }
     
-}
+} // end of class AcrylIcons

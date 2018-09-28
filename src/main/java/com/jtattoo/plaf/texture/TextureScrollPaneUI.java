@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.texture;
 
 import com.jtattoo.plaf.BaseScrollPaneUI;
@@ -38,11 +37,13 @@ public class TextureScrollPaneUI extends BaseScrollPaneUI {
         return new TextureScrollPaneUI();
     }
 
+    @Override
     public void installDefaults(JScrollPane p) {
         super.installDefaults(p);
         p.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
     }
 
+    @Override
     public void update(Graphics g, JComponent c) {
         if (c.getBackground() instanceof ColorUIResource) {
             if (c.isOpaque()) {
@@ -53,4 +54,4 @@ public class TextureScrollPaneUI extends BaseScrollPaneUI {
         }
     }
 
-}
+} // end of class TextureScrollPaneUI

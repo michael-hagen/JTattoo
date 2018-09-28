@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.graphite;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
@@ -43,6 +42,7 @@ public class GraphiteButtonUI extends BaseButtonUI {
         return new GraphiteButtonUI();
     }
 
+    @Override
     protected void paintBackground(Graphics g, AbstractButton b) {
         if (AbstractLookAndFeel.getTheme().doDrawSquareButtons()) {
             super.paintBackground(g, b);
@@ -63,6 +63,7 @@ public class GraphiteButtonUI extends BaseButtonUI {
         }
     }
 
+    @Override
     protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect, Rectangle iconRect) {
         if (!AbstractLookAndFeel.getTheme().doShowFocusFrame()) {
             g.setColor(AbstractLookAndFeel.getFocusColor());
@@ -71,6 +72,4 @@ public class GraphiteButtonUI extends BaseButtonUI {
         }
     }
 
-}
-
-
+} // end of class GraphiteButtonUI

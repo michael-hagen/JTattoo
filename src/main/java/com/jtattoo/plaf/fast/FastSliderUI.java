@@ -33,8 +33,8 @@ import javax.swing.plaf.ComponentUI;
  */
 public class FastSliderUI extends BaseSliderUI {
 
-    private static ThumbHorIcon thumbHorIcon = new ThumbHorIcon();
-    private static ThumbVerIcon thumbVerIcon = new ThumbVerIcon();
+    private static final ThumbHorIcon THUMB_HOR_ICON = new ThumbHorIcon();
+    private static final ThumbVerIcon THUMB_VER_ICON = new ThumbVerIcon();
 
     public FastSliderUI(JSlider slider) {
         super(slider);
@@ -44,22 +44,27 @@ public class FastSliderUI extends BaseSliderUI {
         return new FastSliderUI((JSlider) c);
     }
 
+    @Override
     public Icon getThumbHorIcon() {
-        return thumbHorIcon;
+        return THUMB_HOR_ICON;
     }
 
+    @Override
     public Icon getThumbHorIconRollover() {
-        return thumbHorIcon;
+        return THUMB_HOR_ICON;
     }
 
+    @Override
     public Icon getThumbVerIcon() {
-        return thumbVerIcon;
+        return THUMB_VER_ICON;
     }
 
+    @Override
     public Icon getThumbVerIconRollover() {
-        return thumbVerIcon;
+        return THUMB_VER_ICON;
     }
 
+    @Override
     public void paintTrack(Graphics g) {
         boolean leftToRight = JTattooUtilities.isLeftToRight(slider);
 
@@ -141,11 +146,15 @@ public class FastSliderUI extends BaseSliderUI {
         g.translate(-trackRect.x, -trackRect.y);
     }
 
+//------------------------------------------------------------------------------    
+// inner classes    
+//------------------------------------------------------------------------------    
     private static class ThumbHorIcon implements Icon {
 
         private static final int WIDTH = 11;
         private static final int HEIGHT = 18;
 
+        @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
             int w = WIDTH - 1;
             int h = HEIGHT - 1;
@@ -168,20 +177,24 @@ public class FastSliderUI extends BaseSliderUI {
             g.drawLine(x + 1, y + 1, x + 1, y + h - dw);
         }
 
+        @Override
         public int getIconWidth() {
             return WIDTH;
         }
 
+        @Override
         public int getIconHeight() {
             return HEIGHT;
         }
-    }
+        
+    } // end of class ThumbHorIcon
 
     private static class ThumbVerIcon implements Icon {
 
         private static final int WIDTH = 18;
         private static final int HEIGHT = 11;
 
+        @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
             int w = WIDTH - 1;
             int h = HEIGHT - 1;
@@ -204,12 +217,15 @@ public class FastSliderUI extends BaseSliderUI {
             g.drawLine(x + 1, y + 1, x + 1, y + h - 1);
         }
 
+        @Override
         public int getIconWidth() {
             return WIDTH;
         }
 
+        @Override
         public int getIconHeight() {
             return HEIGHT;
         }
-    }
-}
+    } // end of class ThumbVerIcon
+    
+} // end of class FastSliderUI

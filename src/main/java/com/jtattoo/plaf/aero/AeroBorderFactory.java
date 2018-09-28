@@ -30,6 +30,7 @@ import javax.swing.border.Border;
  * @author Michael Hagen
  */
 public class AeroBorderFactory implements AbstractBorderFactory {
+    
     private static AeroBorderFactory instance = null;
     
     private AeroBorderFactory() {
@@ -41,80 +42,100 @@ public class AeroBorderFactory implements AbstractBorderFactory {
         return instance;
     }
     
+    @Override
     public Border getFocusFrameBorder() {
         return AeroBorders.getFocusFrameBorder();
     }
 
+    @Override
     public Border getButtonBorder() {
         return AeroBorders.getButtonBorder(); 
     }
     
+    @Override
     public Border getToggleButtonBorder() {
         return AeroBorders.getToggleButtonBorder(); 
     }
     
+    @Override
     public Border getTextBorder() {
         return AeroBorders.getTextBorder(); 
     }
     
+    @Override
     public Border getSpinnerBorder() {
         return AeroBorders.getSpinnerBorder();
     }
     
+    @Override
     public Border getTextFieldBorder() {
         return AeroBorders.getTextFieldBorder(); 
     }
     
+    @Override
     public Border getComboBoxBorder() {
         return AeroBorders.getComboBoxBorder(); 
     }
     
+    @Override
     public Border getTableHeaderBorder() {
         return AeroBorders.getTableHeaderBorder(); 
     }
     
+    @Override
     public Border getTableScrollPaneBorder() {
         return AeroBorders.getTableScrollPaneBorder();
     }
 
+    @Override
     public Border getScrollPaneBorder() {
         return AeroBorders.getScrollPaneBorder(); 
     }
     
+    @Override
     public Border getTabbedPaneBorder() {
         return AeroBorders.getTabbedPaneBorder(); 
     }
     
+    @Override
     public Border getMenuBarBorder() {
         return AeroBorders.getMenuBarBorder(); 
     }
     
+    @Override
     public Border getMenuItemBorder() {
         return AeroBorders.getMenuItemBorder(); 
     }
     
+    @Override
     public Border getPopupMenuBorder() {
         return AeroBorders.getPopupMenuBorder(); 
     }
     
+    @Override
     public Border getInternalFrameBorder() {
         return AeroBorders.getInternalFrameBorder(); 
     }
     
+    @Override
     public Border getPaletteBorder() {
         return AeroBorders.getPaletteBorder(); 
     }
     
+    @Override
     public Border getToolBarBorder() {
         return AeroBorders.getToolBarBorder(); 
     }
     
+    @Override
     public Border getProgressBarBorder() {
         return AeroBorders.getProgressBarBorder(); 
     }
     
+    @Override
     public Border getDesktopIconBorder() {
         return AeroBorders.getDesktopIconBorder(); 
     }
-}
+    
+} // end of class AeroBorderFactory
 

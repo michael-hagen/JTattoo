@@ -58,6 +58,7 @@ public class LazyImageIcon implements Icon {
         return null;
     }
     
+    @Override
     public int getIconHeight() {
         if (getIcon() != null) {
             return icon.getIconHeight();
@@ -66,6 +67,7 @@ public class LazyImageIcon implements Icon {
         }
     }
 
+    @Override
     public int getIconWidth() {
         if (getIcon() != null) {
             return icon.getIconWidth();
@@ -74,6 +76,7 @@ public class LazyImageIcon implements Icon {
         }
     }
 
+    @Override
     public void paintIcon(Component c, Graphics g, int x, int y) {
         if (getIcon() != null) {
             icon.paintIcon(c, g, x, y);
@@ -86,4 +89,4 @@ public class LazyImageIcon implements Icon {
         }
     }
 
-}
+} // end of class LazyImageIcon

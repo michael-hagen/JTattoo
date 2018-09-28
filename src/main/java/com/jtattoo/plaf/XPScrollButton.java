@@ -72,6 +72,7 @@ public abstract class XPScrollButton extends BaseScrollButton {
         return Color.white;
     }
 
+    @Override
     public void paint(Graphics g) {
         Graphics2D g2D = (Graphics2D) g;
         Composite savedComposite = g2D.getComposite();
@@ -124,37 +125,45 @@ public abstract class XPScrollButton extends BaseScrollButton {
         int y;
         Icon icon;
         // paint the icon
-        if (getDirection() == NORTH) {
-            icon = getUpArrowIcon();
-            x = (width / 2) - (icon.getIconWidth() / 2);
-            y = (height / 2) - (icon.getIconHeight() / 2);
-        } else if (getDirection() == SOUTH) {
-            icon = getDownArrowIcon();
-            x = (width / 2) - (icon.getIconWidth() / 2);
-            y = (height / 2) - (icon.getIconHeight() / 2) + 1;
-        } else if (getDirection() == WEST) {
-            icon = getLeftArrowIcon();
-            x = (width / 2) - (icon.getIconWidth() / 2);
-            y = (height / 2) - (icon.getIconHeight() / 2);
-        } else {
-            icon = getRightArrowIcon();
-            x = (width / 2) - (icon.getIconWidth() / 2) + 1;
-            y = (height / 2) - (icon.getIconHeight() / 2);
+        switch (getDirection()) {
+            case NORTH:
+                icon = getUpArrowIcon();
+                x = (width / 2) - (icon.getIconWidth() / 2);
+                y = (height / 2) - (icon.getIconHeight() / 2);
+                break;
+            case SOUTH:
+                icon = getDownArrowIcon();
+                x = (width / 2) - (icon.getIconWidth() / 2);
+                y = (height / 2) - (icon.getIconHeight() / 2) + 1;
+                break;
+            case WEST:
+                icon = getLeftArrowIcon();
+                x = (width / 2) - (icon.getIconWidth() / 2);
+                y = (height / 2) - (icon.getIconHeight() / 2);
+                break;
+            default:
+                icon = getRightArrowIcon();
+                x = (width / 2) - (icon.getIconWidth() / 2) + 1;
+                y = (height / 2) - (icon.getIconHeight() / 2);
+                break;
         }
         icon.paintIcon(this, g, x, y);
     }
 
+    @Override
     public Dimension getPreferredSize() {
-        if (getDirection() == NORTH) {
-            return new Dimension(buttonWidth, buttonWidth);
-        } else if (getDirection() == SOUTH) {
-            return new Dimension(buttonWidth, buttonWidth);
-        } else if (getDirection() == EAST) {
-            return new Dimension(buttonWidth, buttonWidth);
-        } else if (getDirection() == WEST) {
-            return new Dimension(buttonWidth, buttonWidth);
-        } else {
-            return new Dimension(0, 0);
+        switch (getDirection()) {
+            case NORTH:
+                return new Dimension(buttonWidth, buttonWidth);
+            case SOUTH:
+                return new Dimension(buttonWidth, buttonWidth);
+            case EAST:
+                return new Dimension(buttonWidth, buttonWidth);
+            case WEST:
+                return new Dimension(buttonWidth, buttonWidth);
+            default:
+                return new Dimension(0, 0);
         }
     }
-}
+    
+} // end of class XPScrollButton

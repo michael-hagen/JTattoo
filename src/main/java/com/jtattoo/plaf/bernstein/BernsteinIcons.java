@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.bernstein;
 
 import com.jtattoo.plaf.*;
@@ -125,6 +124,7 @@ public class BernsteinIcons extends BaseIcons {
             checkDisabledSelectedIcon = new LazyImageIcon("bernstein/icons/check_disabled_selected.gif");
         }
 
+        @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
             if (!JTattooUtilities.isLeftToRight(c)) {
                 x += 2;
@@ -158,10 +158,12 @@ public class BernsteinIcons extends BaseIcons {
             }
         }
 
+        @Override
         public int getIconWidth() {
             return checkIcon.getIconWidth() + 2;
         }
 
+        @Override
         public int getIconHeight() {
             return checkIcon.getIconHeight();
         }
@@ -185,6 +187,7 @@ public class BernsteinIcons extends BaseIcons {
             radioDisabledSelectedIcon = new LazyImageIcon("bernstein/icons/radio_disabled_selected.gif");
         }
 
+        @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
             if (!JTattooUtilities.isLeftToRight(c)) {
                 x += 2;
@@ -214,12 +217,15 @@ public class BernsteinIcons extends BaseIcons {
             }
         }
 
+        @Override
         public int getIconWidth() {
             return radioIcon.getIconWidth() + 2;
         }
 
+        @Override
         public int getIconHeight() {
             return radioIcon.getIconHeight();
         }
     }
-}
+    
+} // end of class BernsteinIcons

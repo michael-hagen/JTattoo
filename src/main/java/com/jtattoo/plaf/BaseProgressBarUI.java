@@ -43,6 +43,7 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
         return new BaseProgressBarUI();
     }
 
+    @Override
     public void installUI(JComponent c) {
         super.installUI(c);
         c.setBorder(UIManager.getBorder("ProgressBar.border"));
@@ -50,6 +51,7 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
         c.addPropertyChangeListener(propertyChangeListener);
     }
 
+    @Override
     public void uninstallUI(JComponent c) {
         c.removePropertyChangeListener(propertyChangeListener);
         super.uninstallUI(c);
@@ -58,6 +60,7 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
     /*
      * The "selectionForeground" is the color of the text when it is painted over a filled area of the progress bar.
      */
+    @Override
     protected Color getSelectionForeground() {
         Object selectionForeground = progressBar.getClientProperty("selectionForeground");
         if (selectionForeground instanceof Color) {
@@ -69,6 +72,7 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
     /*
      * The "selectionBackground" is the color of the text when it is painted over an unfilled area of the progress bar.
      */
+    @Override
     protected Color getSelectionBackground() {
         Object selectionBackground = progressBar.getClientProperty("selectionBackground");
         if (selectionBackground instanceof Color) {
@@ -107,11 +111,9 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
         g2D.setClip(savedClip);
     }
 
+    @Override
     protected void paintString(Graphics g, int x, int y, int width, int height, int amountFull, Insets b) {
-        boolean indeterminate = false;
-        if (JTattooUtilities.getJavaVersion() >= 1.6) {
-            indeterminate = progressBar.isIndeterminate();
-        }
+        boolean indeterminate = progressBar.isIndeterminate();
         if (progressBar.getOrientation() == JProgressBar.HORIZONTAL) {
             if (JTattooUtilities.isLeftToRight(progressBar)) {
                 if (indeterminate) {
@@ -133,6 +135,7 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
         }
     }
 
+    @Override
     protected void paintIndeterminate(Graphics g, JComponent c) {
         if (!(g instanceof Graphics2D)) {
             return;
@@ -191,6 +194,7 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
         }
     }
 
+    @Override
     protected void paintDeterminate(Graphics g, JComponent c) {
         if (!(g instanceof Graphics2D)) {
             return;
@@ -246,13 +250,10 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
         }
     }
 
+    @Override
     public void paint(Graphics g, JComponent c) {
-        if (JTattooUtilities.getJavaVersion() >= 1.4) {
-            if (progressBar.isIndeterminate()) {
-                paintIndeterminate(g, c);
-            } else {
-                paintDeterminate(g, c);
-            }
+        if (progressBar.isIndeterminate()) {
+            paintIndeterminate(g, c);
         } else {
             paintDeterminate(g, c);
         }
@@ -261,6 +262,7 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
 //-----------------------------------------------------------------------------------------------
     protected class PropertyChangeHandler implements PropertyChangeListener {
 
+        @Override
         public void propertyChange(PropertyChangeEvent e) {
             if ("selectionForeground".equals(e.getPropertyName()) && (e.getNewValue() instanceof Color)) {
                 progressBar.invalidate();
@@ -270,5 +272,6 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
                 progressBar.repaint();
             }
         }
-    }
-}
+    } // end of class PropertyChangeHandler
+    
+} // end of class BaseProgressBarUI

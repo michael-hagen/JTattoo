@@ -40,8 +40,10 @@ public class BaseCheckBoxUI extends BaseRadioButtonUI {
         return checkBoxUI;
     }
 
+    @Override
     public void installDefaults(AbstractButton b) {
         super.installDefaults(b);
         icon = UIManager.getIcon("CheckBox.icon");
     }
-}
+
+} // end of class BaseCheckBoxUI

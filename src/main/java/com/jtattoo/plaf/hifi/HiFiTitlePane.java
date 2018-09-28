@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.hifi;
 
 import com.jtattoo.plaf.*;
@@ -29,7 +28,7 @@ import java.awt.Graphics;
 import javax.swing.JRootPane;
 
 /**
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
 public class HiFiTitlePane extends BaseTitlePane {
 
@@ -37,10 +36,12 @@ public class HiFiTitlePane extends BaseTitlePane {
         super(root, ui);
     }
 
+    @Override
     protected boolean centerButtons() {
         return false;
     }
-    
+
+    @Override
     public void paintText(Graphics g, int x, int y, String title) {
         g.setColor(Color.black);
         JTattooUtilities.drawString(rootPane, g, title, x + 1, y + 1);
@@ -52,7 +53,8 @@ public class HiFiTitlePane extends BaseTitlePane {
         JTattooUtilities.drawString(rootPane, g, title, x, y);
     }
 
+    @Override
     protected void paintBorder(Graphics g) {
     }
 
-}
+} // end of class HiFiTitlePane

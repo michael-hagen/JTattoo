@@ -40,6 +40,7 @@ public class BaseButtonUI extends BasicButtonUI {
         return new BaseButtonUI();
     }
 
+    @Override
     protected void installKeyboardActions(AbstractButton b) {
         super.installKeyboardActions(b);
         InputMap im = (InputMap) UIManager.get("Button.focusInputMap");
@@ -52,12 +53,14 @@ public class BaseButtonUI extends BasicButtonUI {
         }
     }
 
+    @Override
     public void installDefaults(AbstractButton b) {
         super.installDefaults(b);
         b.setOpaque(false);
         b.setRolloverEnabled(true);
     }
 
+    @Override
     protected void uninstallDefaults(AbstractButton b) {
         super.uninstallDefaults(b);
         b.setOpaque(true);
@@ -65,6 +68,7 @@ public class BaseButtonUI extends BasicButtonUI {
     }
     
 
+    @Override
     protected BasicButtonListener createButtonListener(AbstractButton b) {
         return new BaseButtonListener(b);
     }
@@ -120,15 +124,11 @@ public class BaseButtonUI extends BasicButtonUI {
         }
     }
 
+    @Override
     protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
         ButtonModel model = b.getModel();
         FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
-        int mnemIndex;
-        if (JTattooUtilities.getJavaVersion() >= 1.4) {
-            mnemIndex = b.getDisplayedMnemonicIndex();
-        } else {
-            mnemIndex = JTattooUtilities.findDisplayedMnemonicIndex(b.getText(), model.getMnemonic());
-        }
+        int mnemIndex = b.getDisplayedMnemonicIndex();
 
         if (model.isEnabled()) {
             Color foreground = b.getForeground();
@@ -166,11 +166,13 @@ public class BaseButtonUI extends BasicButtonUI {
         }
     }
 
+    @Override
     protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect, Rectangle iconRect) {
         g.setColor(AbstractLookAndFeel.getFocusColor());
         BasicGraphicsUtils.drawDashedRect(g, 4, 3, b.getWidth() - 8, b.getHeight() - 6);
     }
 
+    @Override
     public void paint(Graphics g, JComponent c) {
         Graphics2D g2D = (Graphics2D) g;
 
@@ -188,10 +190,7 @@ public class BaseButtonUI extends BasicButtonUI {
         textRect.x = textRect.y = textRect.width = textRect.height = 0;
         iconRect.x = iconRect.y = iconRect.width = iconRect.height = 0;
 
-        int iconTextGap = defaultTextIconGap;
-        if (JTattooUtilities.getJavaVersion() >= 1.4) {
-            iconTextGap = b.getIconTextGap();
-        }
+        int iconTextGap = b.getIconTextGap();
         String text = SwingUtilities.layoutCompoundLabel(
                 c, fm, b.getText(), b.getIcon(),
                 b.getVerticalAlignment(), b.getHorizontalAlignment(),
@@ -238,4 +237,5 @@ public class BaseButtonUI extends BasicButtonUI {
             paintFocus(g, b, viewRect, textRect, iconRect);
         }
     }
-}
+
+} // end of class BaseButtonUI

@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.texture;
 
 import com.jtattoo.plaf.*;
@@ -31,7 +30,7 @@ import javax.swing.Icon;
 import javax.swing.JComponent;
 
 /**
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
 public class TextureUtils {
 
@@ -62,7 +61,7 @@ public class TextureUtils {
     private static Icon pressedTexture = null;
     private static Icon disabledTexture = null;
     private static Icon menubarTexture = null;
-    
+
     private TextureUtils() {
     }
 
@@ -147,25 +146,41 @@ public class TextureUtils {
         int textureType = TextureUtils.BACKGROUND_TEXTURE_TYPE;
         Object textureProperty = c.getClientProperty("textureType");
         if (textureProperty instanceof Integer) {
-            int bt = ((Integer)textureProperty).intValue();
+            int bt = (Integer)textureProperty;
             if (bt >= 0 && bt <= TextureUtils.LAST_TEXTURE_TYPE) {
                 textureType = bt;
             }
         }
         return textureType;
     }
-    
+
     public static Icon getTexture(int textureType) {
         Icon texture = null;
         switch (textureType) {
-            case WINDOW_TEXTURE_TYPE: texture = windowTexture; break;
-            case BACKGROUND_TEXTURE_TYPE: texture = backgroundTexture; break;
-            case ALTER_BACKGROUND_TEXTURE_TYPE: texture = alterBackgroundTexture; break;
-            case SELECTED_TEXTURE_TYPE: texture = selectedTexture; break;
-            case ROLLOVER_TEXTURE_TYPE: texture = rolloverTexture; break;
-            case PRESSED_TEXTURE_TYPE: texture = pressedTexture; break;
-            case DISABLED_TEXTURE_TYPE: texture = disabledTexture; break;
-            case MENUBAR_TEXTURE_TYPE: texture = menubarTexture; break;
+            case WINDOW_TEXTURE_TYPE:
+                texture = windowTexture;
+                break;
+            case BACKGROUND_TEXTURE_TYPE:
+                texture = backgroundTexture;
+                break;
+            case ALTER_BACKGROUND_TEXTURE_TYPE:
+                texture = alterBackgroundTexture;
+                break;
+            case SELECTED_TEXTURE_TYPE:
+                texture = selectedTexture;
+                break;
+            case ROLLOVER_TEXTURE_TYPE:
+                texture = rolloverTexture;
+                break;
+            case PRESSED_TEXTURE_TYPE:
+                texture = pressedTexture;
+                break;
+            case DISABLED_TEXTURE_TYPE:
+                texture = disabledTexture;
+                break;
+            case MENUBAR_TEXTURE_TYPE:
+                texture = menubarTexture;
+                break;
         }
         return texture;
     }
@@ -230,4 +245,5 @@ public class TextureUtils {
         }
         g2D.setClip(savedClip);
     }
-}
+    
+} // end of class TextureUtils

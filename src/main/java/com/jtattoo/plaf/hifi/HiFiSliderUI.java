@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.hifi;
 
 import com.jtattoo.plaf.BaseSliderUI;
@@ -44,6 +43,7 @@ public class HiFiSliderUI extends BaseSliderUI {
         return new HiFiSliderUI((JSlider) c);
     }
 
+    @Override
     public void paintBackground(Graphics g, JComponent c) {
         if (c.isOpaque()) {
             Component parent = c.getParent();
@@ -59,4 +59,5 @@ public class HiFiSliderUI extends BaseSliderUI {
             }
         }
     }
-}
+    
+} // end of class HiFiSliderUI

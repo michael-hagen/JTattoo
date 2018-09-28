@@ -37,6 +37,7 @@ public class BaseTableUI extends BasicTableUI {
         return new BaseTableUI();
     }
 
+    @Override
     public void installDefaults() {
         super.installDefaults();
         // Setup the rowheight. The font may change if UI switches
@@ -44,4 +45,4 @@ public class BaseTableUI extends BasicTableUI {
         table.setRowHeight(fm.getHeight() + (fm.getHeight() / 4));
     }
 
-}
+} // end of class BaseTableUI

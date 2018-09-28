@@ -41,26 +41,31 @@ public class BaseSplitPaneUI extends BasicSplitPaneUI {
         return new BaseSplitPaneUI();
     }
 
+    @Override
     protected void installListeners() {
         super.installListeners();
         myPropertyChangeListener = new PropertyChangeListener() {
 
+            @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 if ("flatMode".equals(evt.getPropertyName()) && evt.getNewValue() instanceof Boolean) {
-                    ((BaseSplitPaneDivider)getDivider()).setFlatMode(((Boolean)evt.getNewValue()).booleanValue());
+                    ((BaseSplitPaneDivider)getDivider()).setFlatMode(((Boolean)evt.getNewValue()));
                 }
             }
         };
         getSplitPane().addPropertyChangeListener(myPropertyChangeListener);
     }
 
+    @Override
     protected void uninstallListeners() {
         super.uninstallListeners();
         getSplitPane().removePropertyChangeListener(myPropertyChangeListener);
     }
 
     
+    @Override
     public BasicSplitPaneDivider createDefaultDivider() {
         return new BaseSplitPaneDivider(this);
     }
-}
+    
+} // end of class BaseSplitPaneUI

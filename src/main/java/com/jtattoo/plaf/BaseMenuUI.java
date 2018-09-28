@@ -42,29 +42,34 @@ public class BaseMenuUI extends BasicMenuUI {
         return new BaseMenuUI();
     }
 
+    @Override
     public void installUI(JComponent c) {
         super.installUI(c);
         c.setOpaque(false);
     }
 
+    @Override
     public void uninstallUI(JComponent c) {
         c.setOpaque(true);
         super.uninstallUI(c);
     }
 
+    @Override
     public void update(Graphics g, JComponent c) {
         paintBackground(g, c, 0, 0, c.getWidth(), c.getHeight());
         paint(g, c);
     }
 
+    @Override
     protected void installDefaults() {
         super.installDefaults();
         Boolean isRolloverEnabled = (Boolean)UIManager.get("MenuBar.rolloverEnabled");
-        if (isRolloverEnabled.booleanValue()) {
+        if (isRolloverEnabled) {
             menuItem.setRolloverEnabled(true);
         }
     }
 
+    @Override
     protected void paintBackground(Graphics g, JMenuItem menuItem, Color bgColor) {
         if (menuItem.isOpaque()) {
             int w = menuItem.getWidth();
@@ -117,6 +122,7 @@ public class BaseMenuUI extends BasicMenuUI {
         }
     }
 
+    @Override
     protected void paintText(Graphics g, JMenuItem menuItem, Rectangle textRect, String text) {
         ButtonModel model = menuItem.getModel();
         Graphics2D g2D = (Graphics2D) g;
@@ -144,12 +150,9 @@ public class BaseMenuUI extends BasicMenuUI {
         }
     }
 
+    @Override
     protected MouseInputListener createMouseInputListener(JComponent c) {
-        if (JTattooUtilities.getJavaVersion() >= 1.5) {
-            return new MyMouseInputHandler();
-        } else {
-            return super.createMouseInputListener(c);
-        }
+        return new MyMouseInputHandler();
     }
 
 //------------------------------------------------------------------------------
@@ -158,6 +161,7 @@ public class BaseMenuUI extends BasicMenuUI {
 
     protected class MyMouseInputHandler extends BasicMenuUI.MouseInputHandler {
 
+        @Override
         public void mouseEntered(MouseEvent evt) {
             super.mouseEntered(evt);
 
@@ -168,6 +172,7 @@ public class BaseMenuUI extends BasicMenuUI {
             }
         }
 
+        @Override
         public void mouseExited(MouseEvent evt) {
             super.mouseExited(evt);
 
@@ -178,5 +183,6 @@ public class BaseMenuUI extends BasicMenuUI {
                 menuItem.repaint();
             }
         }
-    }
-}
+    } // end of class MyMouseInputHandler
+    
+} // end of class BaseMenuUI

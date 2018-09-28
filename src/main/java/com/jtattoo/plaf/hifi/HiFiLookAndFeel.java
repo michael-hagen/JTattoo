@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.hifi;
 
 import com.jtattoo.plaf.*;
@@ -118,47 +117,57 @@ public class HiFiLookAndFeel extends AbstractLookAndFeel {
         setTheme(themesProps);
     }
 
+    @Override
     public String getName() {
         return "HiFi";
     }
 
+    @Override
     public String getID() {
         return "HiFi";
     }
 
+    @Override
     public String getDescription() {
         return "The HiFi Look and Feel";
     }
 
+    @Override
     public boolean isNativeLookAndFeel() {
         return false;
     }
 
+    @Override
     public boolean isSupportedLookAndFeel() {
         return true;
     }
 
+    @Override
     public AbstractBorderFactory getBorderFactory() {
         return HiFiBorderFactory.getInstance();
     }
 
+    @Override
     public AbstractIconFactory getIconFactory() {
         return HiFiIconFactory.getInstance();
     }
 
+    @Override
     protected void createDefaultTheme() {
         if (myTheme == null) {
             myTheme = new HiFiDefaultTheme();
         }
         setTheme(myTheme);
     }
-    
+
+    @Override
     protected void initComponentDefaults(UIDefaults table) {
         super.initComponentDefaults(table);
-        table.put("ScrollBar.incrementButtonGap", new Integer(-1));
-        table.put("ScrollBar.decrementButtonGap", new Integer(-1));
+        table.put("ScrollBar.incrementButtonGap", -1);
+        table.put("ScrollBar.decrementButtonGap", -1);
     }
-    
+
+    @Override
     protected void initClassDefaults(UIDefaults table) {
         if (!"hifiTheme".equals(currentThemeName)) {
             setTheme("Default");
@@ -185,7 +194,6 @@ public class HiFiLookAndFeel extends AbstractLookAndFeel {
             "RadioButtonMenuItemUI", BaseRadioButtonMenuItemUI.class.getName(),
             "PopupMenuSeparatorUI", BaseSeparatorUI.class.getName(),
             "DesktopPaneUI", BaseDesktopPaneUI.class.getName(),
-            
             // HiFiLookAndFeel classes
             "LabelUI", HiFiLabelUI.class.getName(),
             "CheckBoxUI", HiFiCheckBoxUI.class.getName(),
@@ -203,9 +211,8 @@ public class HiFiLookAndFeel extends AbstractLookAndFeel {
             "InternalFrameUI", HiFiInternalFrameUI.class.getName(),
             "RootPaneUI", HiFiRootPaneUI.class.getName(),};
         table.putDefaults(uiDefaults);
-        if (JTattooUtilities.getJavaVersion() >= 1.5) {
-            table.put("FormattedTextFieldUI", BaseFormattedTextFieldUI.class.getName());
-            table.put("SpinnerUI", BaseSpinnerUI.class.getName());
-        }
+        table.put("FormattedTextFieldUI", BaseFormattedTextFieldUI.class.getName());
+        table.put("SpinnerUI", BaseSpinnerUI.class.getName());
     }
-}
+    
+} // end of class HiFiLookAndFeel

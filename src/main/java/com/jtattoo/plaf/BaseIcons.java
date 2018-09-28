@@ -644,6 +644,7 @@ public class BaseIcons {
         private static final Icon LARGE_CHECK_ICON = new LazyImageIcon("icons/large/check_symbol_14x14.png");
         private static final Icon LARGE_CHECK_DISABLED_ICON = new LazyImageIcon("icons/large/check_symbol_disabled_14x14.png");
 
+        @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
             if (!JTattooUtilities.isLeftToRight(c)) {
                 x += GAP;
@@ -725,6 +726,7 @@ public class BaseIcons {
             }
         }
 
+        @Override
         public int getIconWidth() {
             int w;
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -737,6 +739,7 @@ public class BaseIcons {
             return w + GAP;
         }
 
+        @Override
         public int getIconHeight() {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
                 return 15;
@@ -753,6 +756,7 @@ public class BaseIcons {
         
         private static int GAP = 2;
 
+        @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
             if (!JTattooUtilities.isLeftToRight(c)) {
                 x += GAP;
@@ -871,6 +875,7 @@ public class BaseIcons {
             g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRederingHint);
         }
 
+        @Override
         public int getIconWidth() {
             int w;
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -883,6 +888,7 @@ public class BaseIcons {
             return w + GAP;
         }
 
+        @Override
         public int getIconHeight() {
             if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
                 return 14;
@@ -892,11 +898,13 @@ public class BaseIcons {
                 return 18;
             }
         }
-    }
+        
+    } // end of class RadioButtonIcon
 
 //-----------------------------------------------------------------------------------------------------------
     public static class MacCloseIcon implements Icon, UIResource {
 
+        @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
             AbstractButton btn = (AbstractButton) c;
             ButtonModel model = btn.getModel();
@@ -933,17 +941,21 @@ public class BaseIcons {
             }
         }
 
+        @Override
         public int getIconHeight() {
             return 24;
         }
 
+        @Override
         public int getIconWidth() {
             return 24;
         }
-    }
+        
+    } // end of class MacCloseIcon
     
     public static class MacIconIcon implements Icon, UIResource {
 
+        @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
             AbstractButton btn = (AbstractButton) c;
             ButtonModel model = btn.getModel();
@@ -1003,17 +1015,21 @@ public class BaseIcons {
             }
         }
 
+        @Override
         public int getIconHeight() {
             return 24;
         }
 
+        @Override
         public int getIconWidth() {
             return 24;
         }
-    }
+        
+    } // end of class MacIconIcon
 
     public static class MacMaxIcon implements Icon, UIResource {
 
+        @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
             AbstractButton btn = (AbstractButton) c;
             ButtonModel model = btn.getModel();
@@ -1072,17 +1088,21 @@ public class BaseIcons {
             }
         }
 
+        @Override
         public int getIconHeight() {
             return 24;
         }
 
+        @Override
         public int getIconWidth() {
             return 24;
         }
-    }
+        
+    } // end of class MacMaxIcon
     
     public static class MacMinIcon implements Icon, UIResource {
 
+        @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
             AbstractButton btn = (AbstractButton) c;
             ButtonModel model = btn.getModel();
@@ -1141,14 +1161,17 @@ public class BaseIcons {
             }
         }
 
+        @Override
         public int getIconHeight() {
             return 24;
         }
 
+        @Override
         public int getIconWidth() {
             return 24;
         }
-    }
+        
+    } // end of class MacMinIcon
     
 //-----------------------------------------------------------------------------------------------------------
     public static class IconSymbol implements Icon {
@@ -1186,14 +1209,17 @@ public class BaseIcons {
             this.insets = insets;
         }
 
+        @Override
         public int getIconHeight() {
             return 16;
         }
 
+        @Override
         public int getIconWidth() {
             return 16;
         }
 
+        @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
             Graphics2D g2D = (Graphics2D) g;
             g2D.translate(insets.left, insets.top);
@@ -1230,7 +1256,8 @@ public class BaseIcons {
             g2D.setStroke(savedStroke);
             g2D.translate(-insets.left, -insets.top);
         }
-    }
+        
+    } // end of class IconSymbol
 
 //-----------------------------------------------------------------------------------------------------------
     public static class MaxSymbol implements Icon {
@@ -1268,14 +1295,17 @@ public class BaseIcons {
             this.insets = insets;
         }
 
+        @Override
         public int getIconHeight() {
             return 16;
         }
 
+        @Override
         public int getIconWidth() {
             return 16;
         }
 
+        @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
             Graphics2D g2D = (Graphics2D) g;
             g2D.translate(insets.left, insets.top);
@@ -1314,7 +1344,8 @@ public class BaseIcons {
             g2D.setStroke(savedStroke);
             g2D.translate(-insets.left, -insets.top);
         }
-    }
+        
+    } // end of class MaxSymbol
 
 //-----------------------------------------------------------------------------------------------------------
     public static class MinSymbol implements Icon {
@@ -1352,14 +1383,17 @@ public class BaseIcons {
             this.insets = insets;
         }
 
+        @Override
         public int getIconHeight() {
             return 16;
         }
 
+        @Override
         public int getIconWidth() {
             return 16;
         }
 
+        @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
             Graphics2D g2D = (Graphics2D) g;
             g2D.translate(insets.left, insets.top);
@@ -1422,7 +1456,8 @@ public class BaseIcons {
             g2D.drawLine(x, y + lw, x + w, y + lw);
 
         }
-    }
+        
+    } // end of class MinSymbol
 
 //-----------------------------------------------------------------------------------------------------------
     public static class CloseSymbol implements Icon {
@@ -1460,14 +1495,17 @@ public class BaseIcons {
             this.insets = insets;
         }
 
+        @Override
         public int getIconHeight() {
             return 16;
         }
 
+        @Override
         public int getIconWidth() {
             return 16;
         }
 
+        @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
             Graphics2D g2D = (Graphics2D) g;
             g2D.translate(insets.left, insets.top);
@@ -1510,5 +1548,7 @@ public class BaseIcons {
             g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRederingHint);
             g2D.translate(-insets.left, -insets.top);
         }
-    }
-}
+        
+    } // end of class CloseSymbol
+    
+} // end of class BaseIcons

@@ -37,12 +37,14 @@ public class SmartTitlePane extends BaseTitlePane {
         super(root, ui);
     }
 
+    @Override
     public void createButtons() {
         iconifyButton = new BaseTitleButton(iconifyAction, ICONIFY, iconifyIcon, 1.0f);
         maxButton = new BaseTitleButton(restoreAction, MAXIMIZE, maximizeIcon, 1.0f);
         closeButton = new BaseTitleButton(closeAction, CLOSE, closeIcon, 1.0f);
     }
 
+    @Override
     public void paintBorder(Graphics g) {
         if (isActive()) {
             g.setColor(AbstractLookAndFeel.getTheme().getFrameColor());
@@ -52,12 +54,13 @@ public class SmartTitlePane extends BaseTitlePane {
         g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
     }
 
+    @Override
     public void paintBackground(Graphics g) {
         Graphics2D g2D = (Graphics2D) g;
         int width = getWidth();
         int height = getHeight();
-        Color backColor = null;
-        Color frameColor = null;
+        Color backColor;
+        Color frameColor;
         if (JTattooUtilities.isActive(this)) {
             backColor = AbstractLookAndFeel.getTheme().getWindowTitleColors()[10];
             frameColor = AbstractLookAndFeel.getTheme().getFrameColor();
@@ -111,7 +114,7 @@ public class SmartTitlePane extends BaseTitlePane {
             float dc2 = 5.0f;
 
             Color c1 = ColorHelper.brighter(backColor, dc1);
-            Color c2 = null;
+            Color c2;
             while ((dy + 5) < height) {
                 c2 = ColorHelper.darker(backColor, dc2);
                 dc2 += 5.0f;
@@ -128,6 +131,7 @@ public class SmartTitlePane extends BaseTitlePane {
         g.drawLine(0, height - 1, width, height - 1);
     }
 
+    @Override
     public void paintText(Graphics g, int x, int y, String title) {
         if (isActive()) {
             Color titleColor = AbstractLookAndFeel.getWindowTitleForegroundColor();
@@ -143,4 +147,4 @@ public class SmartTitlePane extends BaseTitlePane {
         }
     }
 
-}
+} // end of class SmartTitlePane

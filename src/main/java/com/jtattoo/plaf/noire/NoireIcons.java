@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.noire;
 
 import com.jtattoo.plaf.*;
@@ -39,13 +38,13 @@ public class NoireIcons extends HiFiIcons {
     public static Icon getDownArrowIcon() {
         return BaseIcons.getDownArrowIcon();
     }
-    
+
     public static Icon getLeftArrowIcon() {
         return BaseIcons.getLeftArrowIcon();
     }
-    
+
     public static Icon getRightArrowIcon() {
         return BaseIcons.getRightArrowIcon();
     }
-    
-}
+
+} // end of class NoireIcons

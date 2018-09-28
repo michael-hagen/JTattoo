@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.fast;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
@@ -36,9 +35,11 @@ public class FastSplitPaneDivider extends BaseSplitPaneDivider {
         super(ui);
     }
 
+    @Override
     public void paint(Graphics g) {
         g.setColor(AbstractLookAndFeel.getBackgroundColor());
         g.fillRect(0, 0, getSize().width, getSize().height);
         paintComponents(g);
     }
-}
+    
+} // end of class FastSplitPaneDivider

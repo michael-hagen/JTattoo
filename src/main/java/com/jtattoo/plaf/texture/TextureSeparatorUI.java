@@ -39,22 +39,26 @@ public class TextureSeparatorUI extends BasicSeparatorUI {
         return new TextureSeparatorUI();
     }
 
+    @Override
     public void paint(Graphics g, JComponent c) {
-        boolean horizontal = true;
-        if (c instanceof JSeparator) {
-            horizontal = (((JSeparator) c).getOrientation() == JSeparator.HORIZONTAL);
-        }
-        if (horizontal) {
-            int w = c.getWidth();
-            g.setColor(AbstractLookAndFeel.getFrameColor());
-            g.drawLine(0, 0, w, 0);
-        } else {
-            int h = c.getHeight();
-            g.setColor(AbstractLookAndFeel.getFrameColor());
-            g.drawLine(0, 0, 0, h);
+        if (c != null) {
+            boolean horizontal = true;
+            if (c instanceof JSeparator) {
+                horizontal = (((JSeparator) c).getOrientation() == JSeparator.HORIZONTAL);
+            }
+            if (horizontal) {
+                int w = c.getWidth();
+                g.setColor(AbstractLookAndFeel.getFrameColor());
+                g.drawLine(0, 0, w, 0);
+            } else {
+                int h = c.getHeight();
+                g.setColor(AbstractLookAndFeel.getFrameColor());
+                g.drawLine(0, 0, 0, h);
+            }
         }
     }
 
+    @Override
     public Dimension getPreferredSize(JComponent c) {
         if (((JSeparator) c).getOrientation() == JSeparator.VERTICAL) {
             return new Dimension(1, 0);

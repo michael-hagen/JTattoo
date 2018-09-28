@@ -37,6 +37,7 @@ public class GraphiteMenuItemUI extends BaseMenuItemUI {
         return new GraphiteMenuItemUI();
     }
 
+    @Override
     protected void paintBackground(Graphics g, JComponent c, int x, int y, int w, int h) {
         JMenuItem mi = (JMenuItem) c;
         ButtonModel model = mi.getModel();
@@ -47,4 +48,4 @@ public class GraphiteMenuItemUI extends BaseMenuItemUI {
         }
     }
 
-}
+} // end of class GraphiteMenuItemUI

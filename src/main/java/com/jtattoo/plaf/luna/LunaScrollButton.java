@@ -19,18 +19,18 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.luna;
 
 import com.jtattoo.plaf.XPScrollButton;
 
 /**
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
 public class LunaScrollButton extends XPScrollButton {
 
     public LunaScrollButton(int direction, int width) {
         super(direction, width);
     }
-}
+    
+} // end of class LunaScrollButton

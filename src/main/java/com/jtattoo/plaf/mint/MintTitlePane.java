@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.mint;
 
 import com.jtattoo.plaf.*;
@@ -28,7 +27,7 @@ import java.awt.*;
 import javax.swing.JRootPane;
 
 /**
- * @author  Michael Hagen
+ * @author Michael Hagen
  */
 public class MintTitlePane extends BaseTitlePane {
 
@@ -36,12 +35,14 @@ public class MintTitlePane extends BaseTitlePane {
         super(root, ui);
     }
 
+    @Override
     public void createButtons() {
         iconifyButton = new BaseTitleButton(iconifyAction, ICONIFY, iconifyIcon, 1.0f);
         maxButton = new BaseTitleButton(restoreAction, MAXIMIZE, maximizeIcon, 1.0f);
         closeButton = new BaseTitleButton(closeAction, CLOSE, closeIcon, 1.0f);
     }
 
+    @Override
     public void paintBackground(Graphics g) {
         if (isActive()) {
             Graphics2D g2D = (Graphics2D) g;
@@ -58,10 +59,12 @@ public class MintTitlePane extends BaseTitlePane {
         }
     }
 
+    @Override
     public void paintBorder(Graphics g) {
         g.setColor(ColorHelper.darker(AbstractLookAndFeel.getTheme().getWindowTitleColorDark(), 10));
         g.drawLine(0, getHeight() - 2, getWidth(), getHeight() - 2);
         g.setColor(Color.white);
         g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
     }
-}
+
+} // end of class MintTitlePane

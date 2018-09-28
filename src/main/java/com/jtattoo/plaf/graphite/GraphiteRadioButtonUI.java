@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.graphite;
 
 import com.jtattoo.plaf.AbstractLookAndFeel;
@@ -44,10 +43,11 @@ public class GraphiteRadioButtonUI extends BaseRadioButtonUI {
         return radioButtonUI;
     }
 
+    @Override
     protected void paintFocus(Graphics g, Rectangle t, Dimension d) {
         g.setColor(AbstractLookAndFeel.getFocusColor());
         BasicGraphicsUtils.drawDashedRect(g, t.x - 3, t.y - 1, t.width + 6, t.height + 2);
         BasicGraphicsUtils.drawDashedRect(g, t.x - 2, t.y, t.width + 4, t.height);
     }
 
-}
+} // end of class GraphiteRadioButtonUI

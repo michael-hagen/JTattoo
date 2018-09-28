@@ -24,7 +24,6 @@
 package com.jtattoo.plaf;
 
 import java.awt.*;
-import java.lang.reflect.Method;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
 
@@ -33,15 +32,15 @@ import javax.swing.plaf.basic.BasicGraphicsUtils;
  */
 public class JTattooUtilities {
 
-    private static final boolean isWindows = System.getProperty("os.name").toLowerCase().indexOf("windows") != -1;
-    private static final boolean isOS2 = System.getProperty("os.name").toLowerCase().indexOf("os/2") != -1;
-    private static final boolean isMac = System.getProperty("os.name").toLowerCase().indexOf("mac") != -1;
-    private static final boolean isLinux = System.getProperty("os.name").toLowerCase().indexOf("linux") != -1;
-    private static final boolean isSunOS = System.getProperty("os.name").toLowerCase().indexOf("sunos") != -1;
-    private static final boolean isAIX = System.getProperty("os.name").toLowerCase().indexOf("aix") != -1;
-    private static final boolean isHPUX = System.getProperty("os.name").toLowerCase().indexOf("hpux") != -1;
-    private static final boolean isFreeBSD = System.getProperty("os.name").toLowerCase().indexOf("freebsd") != -1;
-    private static final boolean isHiresScreen = Toolkit.getDefaultToolkit().getScreenSize().width > 1280;
+    private static final boolean IS_WINDOWS = System.getProperty("os.name").toLowerCase().contains("windows");
+    private static final boolean IS_OS2 = System.getProperty("os.name").toLowerCase().contains("os/2");
+    private static final boolean IS_MAC = System.getProperty("os.name").toLowerCase().contains("mac");
+    private static final boolean IS_LINUX = System.getProperty("os.name").toLowerCase().contains("linux");
+    private static final boolean IS_SUNOS = System.getProperty("os.name").toLowerCase().contains("sunos");
+    private static final boolean IS_AIX = System.getProperty("os.name").toLowerCase().contains("aix");
+    private static final boolean IS_HPUX = System.getProperty("os.name").toLowerCase().contains("hpux");
+    private static final boolean IS_FREEBSD = System.getProperty("os.name").toLowerCase().contains("freebsd");
+    private static final boolean IS_HIRES_SCREEN = Toolkit.getDefaultToolkit().getScreenSize().width > 1280;
     private static Double javaVersion = null;
     private static Double osVersion = null;
     private static final String ELLIPSIS = "...";
@@ -63,11 +62,11 @@ public class JTattooUtilities {
                     }
                 }
                 javaVersion = new Double(version);
-            } catch (Exception ex) {
-                javaVersion = new Double(1.3);
+            } catch (NumberFormatException ex) {
+                javaVersion = 1.3;
             }
         }
-        return javaVersion.doubleValue();
+        return javaVersion;
     }
 
     public static double getOSVersion() {
@@ -87,47 +86,47 @@ public class JTattooUtilities {
                     }
                 }
                 osVersion = new Double(version);
-            } catch (Exception ex) {
-                osVersion = new Double(1.0);
+            } catch (NumberFormatException ex) {
+                osVersion = 1.0;
             }
         }
-        return osVersion.doubleValue();
+        return osVersion;
     }
     
     public static boolean isWindows() {
-        return isWindows;
+        return IS_WINDOWS;
     }
 
     public static boolean isOS2() {
-        return isOS2;
+        return IS_OS2;
     }
 
     public static boolean isMac() {
-        return isMac;
+        return IS_MAC;
     }
 
     public static boolean isLinux() {
-        return isLinux;
+        return IS_LINUX;
     }
 
     public static boolean isSunOS() {
-        return isSunOS;
+        return IS_SUNOS;
     }
 
     public static boolean isAIX() {
-        return isAIX;
+        return IS_AIX;
     }
 
     public static boolean isHPUX() {
-        return isHPUX;
+        return IS_HPUX;
     }
 
     public static boolean isFreeBSD() {
-        return isFreeBSD;
+        return IS_FREEBSD;
     }
 
     public static boolean isHiresScreen() {
-        return isHiresScreen;
+        return IS_HIRES_SCREEN;
     }
 
     public static boolean isLeftToRight(Component c) {
@@ -167,27 +166,13 @@ public class JTattooUtilities {
         }
         Window w = SwingUtilities.getWindowAncestor(c);
         if (w != null) {
-            if (w.getClass().getName().indexOf("Popup") >= 0) {
+            if (w.getClass().getName().contains("Popup")) {
                 return true;
             } else {
-                return isWindowActive(w);
+                return w.isActive();
             }
         }
 
-        return true;
-    }
-
-    public static boolean isWindowActive(Window window) {
-        if (getJavaVersion() >= 1.4) {
-            try {
-                Class paramTypes[] = null;
-                Object args[] = null;
-                Method m = window.getClass().getMethod("isActive", paramTypes);
-                Boolean b = (Boolean) m.invoke(window, args);
-                return b.booleanValue();
-            } catch (Exception ex) {
-            }
-        }
         return true;
     }
 
@@ -216,7 +201,7 @@ public class JTattooUtilities {
         }
 
         Container parent = getRootContainer(c);
-        if ((parent != null) && parent.isShowing()) {
+        if ((parent != null) && parent.isShowing() && c.isShowing()) {
             Point p1 = c.getLocationOnScreen();
             Point p2 = parent.getLocationOnScreen();
             return new Point(p1.x - p2.x, p1.y - p2.y);
@@ -242,39 +227,8 @@ public class JTattooUtilities {
         return text;
     }
 
-    public static int findDisplayedMnemonicIndex(String text, int mnemonic) {
-        if (text == null || mnemonic == '\0') {
-            return -1;
-        }
-
-        char uc = Character.toUpperCase((char)mnemonic);
-        char lc = Character.toLowerCase((char)mnemonic);
-
-        int uci = text.indexOf(uc);
-        int lci = text.indexOf(lc);
-
-        if (uci == -1) {
-            return lci;
-        } else if(lci == -1) {
-            return uci;
-        } else {
-            return (lci < uci) ? lci : uci;
-        }
-    }
-
     public static FontMetrics getFontMetrics(JComponent c, Graphics g, Font f) {
         FontMetrics fm = null;
-        if (getJavaVersion() >= 1.6) {
-            try {
-                Class swingUtilities2Class = Class.forName("sun.swing.SwingUtilities2");
-                Class classParams[] = {JComponent.class, Graphics.class, Font.class};
-                Method m = swingUtilities2Class.getMethod("getFontMetrics", classParams);
-                Object methodParams[] = {c, g, f};
-                fm = (FontMetrics)m.invoke(null, methodParams);
-            } catch (Exception ex) {
-                // Nothing to do
-            }
-        } 
         if (fm == null) {
             if (g == null) {
                 if (c != null) {
@@ -305,19 +259,7 @@ public class JTattooUtilities {
             savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING);
             g2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, AbstractLookAndFeel.getTheme().getTextAntiAliasingHint());
         }
-        if (getJavaVersion() >= 1.6) {
-            try {
-                Class swingUtilities2Class = Class.forName("sun.swing.SwingUtilities2");
-                Class classParams[] = {JComponent.class, Graphics.class, String.class, Integer.TYPE, Integer.TYPE};
-                Method m = swingUtilities2Class.getMethod("drawString", classParams);
-                Object methodParams[] = {c, g, text, new Integer(x), new Integer(y)};
-                m.invoke(null, methodParams);
-            } catch (Exception ex) {
-                g.drawString(text, x, y);
-            }
-        } else {
-            g.drawString(text, x, y);
-        }
+        g2D.drawString(text, x, y);
         if (AbstractLookAndFeel.getTheme().isTextAntiAliasingOn()) {
             g2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, savedRenderingHint);
         }
@@ -330,21 +272,7 @@ public class JTattooUtilities {
             savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING);
             g2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, AbstractLookAndFeel.getTheme().getTextAntiAliasingHint());
         }
-        if (getJavaVersion() >= 1.6) {
-            try {
-                Class swingUtilities2Class = Class.forName("sun.swing.SwingUtilities2");
-                Class classParams[] = {JComponent.class, Graphics.class, String.class, Integer.TYPE, Integer.TYPE, Integer.TYPE};
-                Method m = swingUtilities2Class.getMethod("drawStringUnderlineCharAt", classParams);
-                Object methodParams[] = {c, g, text, new Integer(underlinedIndex), new Integer(x), new Integer(y)};
-                m.invoke(null, methodParams);
-            } catch (Exception ex) {
-                BasicGraphicsUtils.drawString(g, text, underlinedIndex, x, y);
-            }
-        } else if (getJavaVersion() >= 1.4) {
-            BasicGraphicsUtils.drawStringUnderlineCharAt(g, text, underlinedIndex, x, y);
-        } else {
-            BasicGraphicsUtils.drawString(g, text, underlinedIndex, x, y);
-        }
+        BasicGraphicsUtils.drawStringUnderlineCharAt(g, text, underlinedIndex, x, y);
         if (AbstractLookAndFeel.getTheme().isTextAntiAliasingOn()) {
             g2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, savedRenderingHint);
         }
@@ -571,4 +499,5 @@ public class JTattooUtilities {
         g2D.drawArc(x2 - d, y, d, d, -90, 45);
         g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRederingHint);
     }
-}
+    
+} // end of class JTattooUtilities

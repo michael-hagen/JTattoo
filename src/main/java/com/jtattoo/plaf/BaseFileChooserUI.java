@@ -56,10 +56,12 @@ public class BaseFileChooserUI extends MetalFileChooserUI {
         return new BaseFileChooserUI((JFileChooser) c);
     }
 
+    @Override
     protected void installListeners(JFileChooser fc) {
         super.installListeners(fc);
         ancestorListener = new AncestorListener() {
 
+            @Override
             public void ancestorAdded(AncestorEvent event) {
                 Window w = SwingUtilities.getWindowAncestor(getFileChooser());
                 if (w != null) {
@@ -67,9 +69,11 @@ public class BaseFileChooserUI extends MetalFileChooserUI {
                 }
             }
 
+            @Override
             public void ancestorRemoved(AncestorEvent event) {
             }
 
+            @Override
             public void ancestorMoved(AncestorEvent event) {
             }
         };
@@ -77,6 +81,7 @@ public class BaseFileChooserUI extends MetalFileChooserUI {
         fc.addAncestorListener(ancestorListener);
     }
 
+    @Override
     protected void uninstallListeners(JFileChooser fc) {
         super.uninstallListeners(fc); 
         fc.removeAncestorListener(ancestorListener);
@@ -94,6 +99,7 @@ public class BaseFileChooserUI extends MetalFileChooserUI {
      * @return   a <code>Dimension</code> specifying the preferred
      *           width and height of the file chooser
      */
+    @Override
     public Dimension getPreferredSize(JComponent c) {
         int prefWidth = PREF_SIZE.width;
         Dimension d = c.getLayout().preferredLayoutSize(c);
@@ -105,17 +111,15 @@ public class BaseFileChooserUI extends MetalFileChooserUI {
         }
     }
 
+    @Override
     public FileView getFileView(JFileChooser fc) {
-        if (JTattooUtilities.getJavaVersion() < 1.4) {
-            return super.getFileView(fc);
-        } else {
-            return fileView;
-        }
+        return fileView;
     }
 
 //------------------------------------------------------------------------------    
     protected class BaseFileView extends BasicFileView {
 
+        @Override
         public Icon getIcon(File f) {
             Icon icon = getCachedIcon(f);
             if (icon != null) {
@@ -130,5 +134,7 @@ public class BaseFileChooserUI extends MetalFileChooserUI {
             cacheIcon(f, icon);
             return icon;
         }
-    }
-}
+        
+    } // end of class BaseFileView
+    
+} // end of class BaseFileChooserUI

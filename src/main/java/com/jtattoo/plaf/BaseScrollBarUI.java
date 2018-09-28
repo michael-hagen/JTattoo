@@ -53,6 +53,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
         return new BaseScrollBarUI();
     }
 
+    @Override
     protected void installDefaults() {
         super.installDefaults();
         
@@ -82,6 +83,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
         }
     }
 
+    @Override
     protected JButton createDecreaseButton(int orientation) {
         if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
             return new InvisibleScrollButton();
@@ -90,6 +92,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
         }
     }
 
+    @Override
     protected JButton createIncreaseButton(int orientation) {
         if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
             return new InvisibleScrollButton();
@@ -98,10 +101,12 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
         }
     }
 
+    @Override
     public TrackListener createTrackListener() {
         return new MyTrackListener();
     }
 
+    @Override
     public Dimension getPreferredSize(JComponent c) {
         if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
             if (scrollbar.getOrientation() == JScrollBar.VERTICAL) {
@@ -118,10 +123,12 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
         }
     }
 
+    @Override
     protected Dimension getMinimumThumbSize() {
         return new Dimension(scrollBarWidth, scrollBarWidth);
     }
 
+    @Override
     protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
         int w = c.getWidth();
         int h = c.getHeight();
@@ -148,6 +155,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
         }
     }
 
+    @Override
     protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
         if (!c.isEnabled()) {
             return;
@@ -221,6 +229,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
         g.translate(-thumbBounds.x, -thumbBounds.y);
     }
 
+    @Override
     protected void layoutVScrollbar(JScrollBar sb) {
         if (AbstractLookAndFeel.getTheme().isLinuxStyleScrollBarOn() && incrButton.isVisible() && decrButton.isVisible()) {
             Dimension sbSize = sb.getSize();
@@ -286,6 +295,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
         }
     }
 
+    @Override
     protected void layoutHScrollbar(JScrollBar sb) {
         if (AbstractLookAndFeel.getTheme().isLinuxStyleScrollBarOn() && incrButton.isVisible() && decrButton.isVisible()) {
             Dimension sbSize = sb.getSize();
@@ -356,6 +366,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 //-----------------------------------------------------------------------------
     protected class MyTrackListener extends TrackListener {
 
+        @Override
         public void mouseEntered(MouseEvent e) {
             super.mouseEntered(e);
             isRollover = true;
@@ -363,6 +374,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
             scrollbar.repaint(r.x, r.y, r.width, r.height);
         }
 
+        @Override
         public void mouseExited(MouseEvent e) {
             super.mouseExited(e);
             isRollover = false;
@@ -370,18 +382,21 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
             scrollbar.repaint(r.x, r.y, r.width, r.height);
         }
 
+        @Override
         public void mousePressed(MouseEvent e) {
             super.mousePressed(e);
             Rectangle r = getTrackBounds();
             scrollbar.repaint(r.x, r.y, r.width, r.height);
         }
 
+        @Override
         public void mouseReleased(MouseEvent e) {
             super.mouseReleased(e);
             Rectangle r = getTrackBounds();
             scrollbar.repaint(r.x, r.y, r.width, r.height);
         }
-    }
+        
+    } // end of class MyTrackListener
 
 //-----------------------------------------------------------------------------    
     private static class InvisibleScrollButton extends JButton {
@@ -391,9 +406,11 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
             setVisible(false);
         }
 
+        @Override
         public Dimension getPreferredSize() {
             return new Dimension(0, 0);
         }
         
-    }
-}
+    } // end of class InvisibleScrollButton
+
+} // end of class BaseScrollBarUI

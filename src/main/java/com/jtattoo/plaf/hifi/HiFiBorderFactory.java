@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.hifi;
 
 import com.jtattoo.plaf.AbstractBorderFactory;
@@ -43,22 +42,27 @@ public class HiFiBorderFactory implements AbstractBorderFactory {
         return instance;
     }
 
+    @Override
     public Border getFocusFrameBorder() {
         return HiFiBorders.getFocusFrameBorder();
     }
 
+    @Override
     public Border getButtonBorder() {
         return HiFiBorders.getButtonBorder();
     }
 
+    @Override
     public Border getToggleButtonBorder() {
         return HiFiBorders.getToggleButtonBorder();
     }
 
+    @Override
     public Border getTextBorder() {
         return HiFiBorders.getTextBorder();
     }
 
+    @Override
     public Border getSpinnerBorder() {
         return HiFiBorders.getSpinnerBorder();
     }
@@ -67,56 +71,69 @@ public class HiFiBorderFactory implements AbstractBorderFactory {
         return HiFiBorders.getTextFieldBorder();
     }
 
+    @Override
     public Border getComboBoxBorder() {
         return HiFiBorders.getComboBoxBorder();
     }
 
+    @Override
     public Border getTableHeaderBorder() {
         return HiFiBorders.getTableHeaderBorder();
     }
 
+    @Override
     public Border getTableScrollPaneBorder() {
         return HiFiBorders.getTableScrollPaneBorder();
     }
 
+    @Override
     public Border getScrollPaneBorder() {
         return HiFiBorders.getScrollPaneBorder();
     }
 
+    @Override
     public Border getTabbedPaneBorder() {
         return HiFiBorders.getTabbedPaneBorder();
     }
 
+    @Override
     public Border getMenuBarBorder() {
         return HiFiBorders.getMenuBarBorder();
     }
 
+    @Override
     public Border getMenuItemBorder() {
         return HiFiBorders.getMenuItemBorder();
     }
 
+    @Override
     public Border getPopupMenuBorder() {
         return HiFiBorders.getPopupMenuBorder();
     }
 
+    @Override
     public Border getInternalFrameBorder() {
         return HiFiBorders.getInternalFrameBorder();
     }
 
+    @Override
     public Border getPaletteBorder() {
         return HiFiBorders.getPaletteBorder();
     }
 
+    @Override
     public Border getToolBarBorder() {
         return HiFiBorders.getToolBarBorder();
     }
 
+    @Override
     public Border getProgressBarBorder() {
         return HiFiBorders.getProgressBarBorder();
     }
 
+    @Override
     public Border getDesktopIconBorder() {
         return HiFiBorders.getDesktopIconBorder();
     }
-}
-
+    
+} // end of class HiFiBorderFactory

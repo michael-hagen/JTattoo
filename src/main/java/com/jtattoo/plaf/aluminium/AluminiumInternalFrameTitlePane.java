@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.aluminium;
 
 import com.jtattoo.plaf.*;
@@ -36,10 +35,12 @@ public class AluminiumInternalFrameTitlePane extends BaseInternalFrameTitlePane 
         super(f);
     }
 
+    @Override
     protected boolean centerButtons() {
         return false;
     }
-    
+
+    @Override
     public void paintBorder(Graphics g) {
         if (isActive()) {
             g.setColor(AbstractLookAndFeel.getTheme().getWindowBorderColor());
@@ -49,6 +50,7 @@ public class AluminiumInternalFrameTitlePane extends BaseInternalFrameTitlePane 
         g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
     }
 
+    @Override
     public void paintText(Graphics g, int x, int y, String title) {
         if (isActive()) {
             g.setColor(AbstractLookAndFeel.getWindowTitleBackgroundColor());
@@ -62,4 +64,5 @@ public class AluminiumInternalFrameTitlePane extends BaseInternalFrameTitlePane 
             JTattooUtilities.drawString(frame, g, title, x, y - 2);
         }
     }
-}
+
+} // end of class AluminiumInternalFrameTitlePane

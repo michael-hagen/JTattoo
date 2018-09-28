@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.graphite;
 
 import com.jtattoo.plaf.AbstractToolBarUI;
@@ -37,15 +36,19 @@ public class GraphiteToolBarUI extends AbstractToolBarUI {
         return new GraphiteToolBarUI();
     }
 
+    @Override
     public Border getRolloverBorder() {
         return GraphiteBorders.getRolloverToolButtonBorder();
     }
 
+    @Override
     public Border getNonRolloverBorder() {
         return GraphiteBorders.getToolButtonBorder();
     }
 
+    @Override
     public boolean isButtonOpaque() {
         return false;
     }
-}
+    
+} // end of class GraphiteToolBarUI

@@ -37,14 +37,17 @@ public class AeroTitlePane extends BaseTitlePane {
         super(root, ui);
     }
 
+    @Override
     protected int getHorSpacing() {
         return AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn() ? 1 : 0;
     }
 
+    @Override
     protected int getVerSpacing() {
         return AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn() ? 3 : 0;
     }
 
+    @Override
     public void createButtons() {
         if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
             super.createButtons();
@@ -55,6 +58,7 @@ public class AeroTitlePane extends BaseTitlePane {
         }
     }
 
+    @Override
     public void paintBorder(Graphics g) {
         if (isActive()) {
             g.setColor(ColorHelper.brighter(AbstractLookAndFeel.getWindowTitleColorDark(), 50));
@@ -65,6 +69,7 @@ public class AeroTitlePane extends BaseTitlePane {
         g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
     }
 
+    @Override
     public void paintText(Graphics g, int x, int y, String title) {
         if (isActive()) {
             Color titleColor = AbstractLookAndFeel.getWindowTitleForegroundColor();
@@ -90,6 +95,7 @@ public class AeroTitlePane extends BaseTitlePane {
             super(action, accessibleName, icon, 1.0f);
         }
 
+        @Override
         public void paint(Graphics g) {
             boolean isPressed = getModel().isPressed();
             boolean isArmed = getModel().isArmed();
@@ -112,4 +118,5 @@ public class AeroTitlePane extends BaseTitlePane {
             getIcon().paintIcon(this, g, 1, 0);
         }
     }
-}
+    
+} // end of class AeroTitlePane

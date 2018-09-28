@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.mint;
 
 import com.jtattoo.plaf.*;
@@ -62,7 +61,6 @@ public class MintLookAndFeel extends AbstractLookAndFeel {
         giantFontProps.setProperty("menuTextFont", "Dialog 18");
         giantFontProps.setProperty("windowTitleFont", "Dialog 18");
         giantFontProps.setProperty("subTextFont", "Dialog 16");
-
 
         themesList.add("Default");
         themesList.add("Small-Font");
@@ -120,34 +118,42 @@ public class MintLookAndFeel extends AbstractLookAndFeel {
         setTheme(themesProps);
     }
 
+    @Override
     public String getName() {
         return "Mint";
     }
 
+    @Override
     public String getID() {
         return "Mint";
     }
 
+    @Override
     public String getDescription() {
         return "The Mint Look and Feel";
     }
 
+    @Override
     public boolean isNativeLookAndFeel() {
         return false;
     }
 
+    @Override
     public boolean isSupportedLookAndFeel() {
         return true;
     }
 
+    @Override
     public AbstractBorderFactory getBorderFactory() {
         return MintBorderFactory.getInstance();
     }
 
+    @Override
     public AbstractIconFactory getIconFactory() {
         return MintIconFactory.getInstance();
     }
 
+    @Override
     protected void createDefaultTheme() {
         if (myTheme == null) {
             myTheme = new MintDefaultTheme();
@@ -155,12 +161,14 @@ public class MintLookAndFeel extends AbstractLookAndFeel {
         setTheme(myTheme);
     }
 
+    @Override
     protected void initComponentDefaults(UIDefaults table) {
         super.initComponentDefaults(table);
-        table.put("ScrollBar.incrementButtonGap", new Integer(-1));
-        table.put("ScrollBar.decrementButtonGap", new Integer(-1));
+        table.put("ScrollBar.incrementButtonGap", -1);
+        table.put("ScrollBar.decrementButtonGap", -1);
     }
-    
+
+    @Override
     protected void initClassDefaults(UIDefaults table) {
         if (!"mintTheme".equals(currentThemeName)) {
             setTheme("Default");
@@ -193,7 +201,6 @@ public class MintLookAndFeel extends AbstractLookAndFeel {
             "RadioButtonMenuItemUI", BaseRadioButtonMenuItemUI.class.getName(),
             "PopupMenuSeparatorUI", BaseSeparatorUI.class.getName(),
             "DesktopPaneUI", BaseDesktopPaneUI.class.getName(),
-            
             // MintLookAndFeel classes
             "ButtonUI", MintButtonUI.class.getName(),
             "ToggleButtonUI", MintToggleButtonUI.class.getName(),
@@ -205,9 +212,8 @@ public class MintLookAndFeel extends AbstractLookAndFeel {
             "InternalFrameUI", MintInternalFrameUI.class.getName(),
             "RootPaneUI", MintRootPaneUI.class.getName(),};
         table.putDefaults(uiDefaults);
-        if (JTattooUtilities.getJavaVersion() >= 1.5) {
-            table.put("FormattedTextFieldUI", BaseFormattedTextFieldUI.class.getName());
-            table.put("SpinnerUI", BaseSpinnerUI.class.getName());
-        }
+        table.put("FormattedTextFieldUI", BaseFormattedTextFieldUI.class.getName());
+        table.put("SpinnerUI", BaseSpinnerUI.class.getName());
     }
-}
+    
+} // end of class MintLookAndFeel

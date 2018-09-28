@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.bernstein;
 
 import com.jtattoo.plaf.BaseSplitPaneDivider;
@@ -35,8 +34,10 @@ public class BernsteinSplitPaneDivider extends BaseSplitPaneDivider {
         super(ui);
     }
 
+    @Override
     public void paint(Graphics g) {
         BernsteinUtils.fillComponent(g, this);
         paintComponents(g);
     }
-}
+
+} // end of cass BernsteinSplitPaneDivider

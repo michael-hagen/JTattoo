@@ -36,9 +36,10 @@ public class BaseRadioButtonMenuItemUI extends BaseMenuItemUI {
         return new BaseRadioButtonMenuItemUI();
     }
 
+    @Override
     protected void installDefaults() {
         super.installDefaults();
         checkIcon = UIManager.getIcon("RadioButtonMenuItem.checkIcon");
     }
 
-}
+} // end of class BaseRadioButtonMenuItemUI

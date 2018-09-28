@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.noire;
 
 import com.jtattoo.plaf.*;
@@ -73,7 +72,7 @@ public class NoireLookAndFeel extends AbstractLookAndFeel {
         themesMap.put("Small-Font", smallFontProps);
         themesMap.put("Large-Font", largeFontProps);
         themesMap.put("Giant-Font", giantFontProps);
-       
+
     }
 
     public static java.util.List getThemes() {
@@ -116,34 +115,42 @@ public class NoireLookAndFeel extends AbstractLookAndFeel {
         setTheme(themesProps);
     }
 
+    @Override
     public String getName() {
         return "Noire";
     }
 
+    @Override
     public String getID() {
         return "Noire";
     }
 
+    @Override
     public String getDescription() {
         return "The Noire Look and Feel";
     }
 
+    @Override
     public boolean isNativeLookAndFeel() {
         return false;
     }
 
+    @Override
     public boolean isSupportedLookAndFeel() {
         return true;
     }
 
+    @Override
     public AbstractBorderFactory getBorderFactory() {
         return HiFiBorderFactory.getInstance();
     }
 
+    @Override
     public AbstractIconFactory getIconFactory() {
         return NoireIconFactory.getInstance();
     }
 
+    @Override
     protected void createDefaultTheme() {
         if (myTheme == null) {
             myTheme = new NoireDefaultTheme();
@@ -151,6 +158,7 @@ public class NoireLookAndFeel extends AbstractLookAndFeel {
         setTheme(myTheme);
     }
 
+    @Override
     protected void initClassDefaults(UIDefaults table) {
         if (!"noireTheme".equals(currentThemeName)) {
             setTheme("Default");
@@ -179,7 +187,6 @@ public class NoireLookAndFeel extends AbstractLookAndFeel {
             "RadioButtonMenuItemUI", BaseRadioButtonMenuItemUI.class.getName(),
             "PopupMenuSeparatorUI", BaseSeparatorUI.class.getName(),
             "DesktopPaneUI", BaseDesktopPaneUI.class.getName(),
-            
             // HiFiLookAndFeel classes
             "LabelUI", HiFiLabelUI.class.getName(),
             "CheckBoxUI", HiFiCheckBoxUI.class.getName(),
@@ -195,9 +202,8 @@ public class NoireLookAndFeel extends AbstractLookAndFeel {
             "InternalFrameUI", HiFiInternalFrameUI.class.getName(),
             "RootPaneUI", HiFiRootPaneUI.class.getName(),};
         table.putDefaults(uiDefaults);
-        if (JTattooUtilities.getJavaVersion() >= 1.5) {
-            table.put("FormattedTextFieldUI", BaseFormattedTextFieldUI.class.getName());
-            table.put("SpinnerUI", BaseSpinnerUI.class.getName());
-        }
+        table.put("FormattedTextFieldUI", BaseFormattedTextFieldUI.class.getName());
+        table.put("SpinnerUI", BaseSpinnerUI.class.getName());
     }
-}
+    
+} //end of class NoireLookAndFeel

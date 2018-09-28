@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.smart;
 
 import com.jtattoo.plaf.*;
@@ -37,18 +36,22 @@ public class SmartToolBarUI extends AbstractToolBarUI {
         return new SmartToolBarUI();
     }
 
+    @Override
     public Border getRolloverBorder() {
         return SmartBorders.getRolloverToolButtonBorder();
     }
 
+    @Override
     public Border getNonRolloverBorder() {
         return SmartBorders.getToolButtonBorder();
     }
 
+    @Override
     public boolean isButtonOpaque() {
         return false;
     }
 
+    @Override
     public void paint(Graphics g, JComponent c) {
         int w = c.getWidth();
         int h = c.getHeight();
@@ -62,4 +65,5 @@ public class SmartToolBarUI extends AbstractToolBarUI {
             g.drawLine(0, h - 1, w, h - 1);
         }
     }
-}
+    
+} // SmartToolBarUI

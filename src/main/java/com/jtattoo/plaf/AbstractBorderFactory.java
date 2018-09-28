@@ -67,5 +67,6 @@ public interface AbstractBorderFactory {
     public Border getDesktopIconBorder();
 
     public Border getProgressBarBorder();
-}
+    
+} // end of interface AbstractBorderFactory
 

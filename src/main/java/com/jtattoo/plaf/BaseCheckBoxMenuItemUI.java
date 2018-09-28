@@ -36,9 +36,10 @@ public class BaseCheckBoxMenuItemUI extends BaseMenuItemUI {
         return new BaseCheckBoxMenuItemUI();
     }
 
+    @Override
     protected void installDefaults() {
         super.installDefaults();
         checkIcon = UIManager.getIcon("CheckBoxMenuItem.checkIcon");
     }
 
-}
+} // end of class BaseCheckBoxMenuItemUI

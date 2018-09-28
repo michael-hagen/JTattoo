@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.bernstein;
 
 import com.jtattoo.plaf.*;
@@ -36,6 +35,7 @@ public class BernsteinInternalFrameTitlePane extends BaseInternalFrameTitlePane 
         super(f);
     }
 
+    @Override
     public void paintPalette(Graphics g) {
         BernsteinUtils.fillComponent(g, this);
         Graphics2D g2D = (Graphics2D) g;
@@ -52,6 +52,7 @@ public class BernsteinInternalFrameTitlePane extends BaseInternalFrameTitlePane 
         g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
     }
 
+    @Override
     public void paintBackground(Graphics g) {
         BernsteinUtils.fillComponent(g, this);
         Graphics2D g2D = (Graphics2D) g;
@@ -68,6 +69,8 @@ public class BernsteinInternalFrameTitlePane extends BaseInternalFrameTitlePane 
         g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
     }
 
+    @Override
     public void paintBorder(Graphics g) {
     }
-}
+    
+} // end of class BernsteinInternalFrameTitlePane

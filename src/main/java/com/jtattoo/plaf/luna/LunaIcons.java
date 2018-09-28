@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.luna;
 
 import com.jtattoo.plaf.*;
@@ -88,7 +87,7 @@ public class LunaIcons extends BaseIcons {
         }
         return rightArrowIcon;
     }
-    
+
     public static Icon getIconIcon() {
         if (iconIcon == null) {
             if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -136,31 +135,34 @@ public class LunaIcons extends BaseIcons {
 //------------------------------------------------------------------------------
     private static class TitleButtonIcon implements Icon {
 
-        private static final Color blueFrameColor = Color.white;
-        private static final Color blueColorLight = new Color(154, 183, 250);
-        private static final Color blueColorDark = new Color(0, 69, 211);
-        private static final Color closerColorLight = new Color(241, 172, 154);
-        private static final Color closerColorDark = new Color(224, 56, 2);
-        
+        private static final Color BLUE_FRAME_COLOR = Color.white;
+        private static final Color BLUE_COLOR_LIGHT = new Color(154, 183, 250);
+        private static final Color BLUE_COLOR_DARK = new Color(0, 69, 211);
+        private static final Color CLOSER_COLOR_LIGHT = new Color(241, 172, 154);
+        private static final Color CLOSER_COLOR_DARK = new Color(224, 56, 2);
+
         private static final int ICON_ICON_TYP = 0;
         private static final int MIN_ICON_TYP = 1;
         private static final int MAX_ICON_TYP = 2;
         private static final int CLOSE_ICON_TYP = 3;
-        
+
         private int iconTyp = ICON_ICON_TYP;
 
         public TitleButtonIcon(int typ) {
             iconTyp = typ;
         }
 
+        @Override
         public int getIconHeight() {
             return 20;
         }
 
+        @Override
         public int getIconWidth() {
             return 20;
         }
 
+        @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
             int w = c.getWidth();
             int h = c.getHeight();
@@ -173,12 +175,12 @@ public class LunaIcons extends BaseIcons {
             boolean isArmed = b.getModel().isArmed();
             boolean isRollover = b.getModel().isRollover();
 
-            Color fc = blueFrameColor;
-            Color cHi = blueColorLight;
-            Color cLo = blueColorDark;
+            Color fc = BLUE_FRAME_COLOR;
+            Color cHi = BLUE_COLOR_LIGHT;
+            Color cLo = BLUE_COLOR_DARK;
             if (iconTyp == CLOSE_ICON_TYP) {
-                cHi = closerColorLight;
-                cLo = closerColorDark;
+                cHi = CLOSER_COLOR_LIGHT;
+                cLo = CLOSER_COLOR_DARK;
             }
 
             if (!isActive) {
@@ -218,18 +220,26 @@ public class LunaIcons extends BaseIcons {
             cHi = Color.white;
             cLo = ColorHelper.darker(cLo, 30);
             Icon icon = null;
-            if (iconTyp == ICON_ICON_TYP) {
-                icon = new BaseIcons.IconSymbol(cHi, cLo, null, new Insets(0, 0, 0, 1));
-            } else if (iconTyp == MIN_ICON_TYP) {
-                icon = new BaseIcons.MinSymbol(cHi, cLo, null, new Insets(0, 0, 0, 0));
-            } else if (iconTyp == MAX_ICON_TYP) {
-                icon = new BaseIcons.MaxSymbol(cHi, cLo, null, new Insets(0, 0, 0, 1));
-            } else if (iconTyp == CLOSE_ICON_TYP) {
-                icon = new BaseIcons.CloseSymbol(cHi, cLo, null, new Insets(0, 0, 0, 1));
+            switch (iconTyp) {
+                case ICON_ICON_TYP:
+                    icon = new BaseIcons.IconSymbol(cHi, cLo, null, new Insets(0, 0, 0, 1));
+                    break;
+                case MIN_ICON_TYP:
+                    icon = new BaseIcons.MinSymbol(cHi, cLo, null, new Insets(0, 0, 0, 0));
+                    break;
+                case MAX_ICON_TYP:
+                    icon = new BaseIcons.MaxSymbol(cHi, cLo, null, new Insets(0, 0, 0, 1));
+                    break;
+                case CLOSE_ICON_TYP:
+                    icon = new BaseIcons.CloseSymbol(cHi, cLo, null, new Insets(0, 0, 0, 1));
+                    break;
+                default:
+                    break;
             }
             if (icon != null) {
                 icon.paintIcon(c, g, 0, 0);
             }
         }
     }
-}
+    
+} // end of class LunaIcons

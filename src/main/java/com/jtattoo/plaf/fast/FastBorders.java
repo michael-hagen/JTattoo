@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.fast;
 
 import com.jtattoo.plaf.*;
@@ -74,9 +73,10 @@ public class FastBorders extends BaseBorders {
 //------------------------------------------------------------------------------------
     public static class ButtonBorder implements Border, UIResource {
 
-        private static final Color defaultFrameColor = new Color(0, 64, 255);
-        private static final Insets insets = new Insets(4, 8, 4, 8);
+        private static final Color DEFAULT_FRAME_COLOR = new Color(0, 64, 255);
+        private static final Insets INSETS = new Insets(4, 8, 4, 8);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             AbstractButton button = (AbstractButton) c;
             ButtonModel model = button.getModel();
@@ -95,7 +95,7 @@ public class FastBorders extends BaseBorders {
                 if (c instanceof JButton) {
                     JButton b = (JButton) c;
                     if (b.getRootPane() != null && b.equals(b.getRootPane().getDefaultButton())) {
-                        g.setColor(defaultFrameColor);
+                        g.setColor(DEFAULT_FRAME_COLOR);
                         g.drawRect(x, y, w - 1, h - 1);
                     }
                 }
@@ -105,28 +105,31 @@ public class FastBorders extends BaseBorders {
             }
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
-            return insets;
+            return INSETS;
         }
 
         public Insets getBorderInsets(Component c, Insets borderInsets) {
-            borderInsets.left = insets.left;
-            borderInsets.top = insets.top;
-            borderInsets.right = insets.right;
-            borderInsets.bottom = insets.bottom;
+            borderInsets.left = INSETS.left;
+            borderInsets.top = INSETS.top;
+            borderInsets.right = INSETS.right;
+            borderInsets.bottom = INSETS.bottom;
             return borderInsets;
         }
 
         public boolean isBorderOpaque() {
             return true;
         }
-    } // class ButtonBorder
+        
+    } // end of class ButtonBorder
 
 //------------------------------------------------------------------------------
     public static class ToolButtonBorder implements Border, UIResource {
 
-        private static final Insets insets = new Insets(1, 1, 1, 1);
+        private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             AbstractButton button = (AbstractButton) c;
             ButtonModel model = button.getModel();
@@ -149,28 +152,32 @@ public class FastBorders extends BaseBorders {
             }
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
-            return new Insets(insets.top, insets.left, insets.bottom, insets.right);
+            return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
         }
 
         public Insets getBorderInsets(Component c, Insets borderInsets) {
-            borderInsets.left = insets.left;
-            borderInsets.top = insets.top;
-            borderInsets.right = insets.right;
-            borderInsets.bottom = insets.bottom;
+            borderInsets.left = INSETS.left;
+            borderInsets.top = INSETS.top;
+            borderInsets.right = INSETS.right;
+            borderInsets.bottom = INSETS.bottom;
             return borderInsets;
         }
 
+        @Override
         public boolean isBorderOpaque() {
             return true;
         }
-    } // class ToolButtonBorder
+        
+    } // end of class ToolButtonBorder
 
 //------------------------------------------------------------------------------
     public static class RolloverToolButtonBorder implements Border, UIResource {
 
-        private static final Insets insets = new Insets(1, 1, 1, 1);
+        private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             AbstractButton button = (AbstractButton) c;
             ButtonModel model = button.getModel();
@@ -200,26 +207,30 @@ public class FastBorders extends BaseBorders {
             }
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
-            return new Insets(insets.top, insets.left, insets.bottom, insets.right);
+            return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
         }
 
         public Insets getBorderInsets(Component c, Insets borderInsets) {
-            borderInsets.left = insets.left;
-            borderInsets.top = insets.top;
-            borderInsets.right = insets.right;
-            borderInsets.bottom = insets.bottom;
+            borderInsets.left = INSETS.left;
+            borderInsets.top = INSETS.top;
+            borderInsets.right = INSETS.right;
+            borderInsets.bottom = INSETS.bottom;
             return borderInsets;
         }
 
+        @Override
         public boolean isBorderOpaque() {
             return true;
         }
-    } // class RolloverToolButtonBorder
+        
+    } // end of class RolloverToolButtonBorder
 
 //------------------------------------------------------------------------------
     public static class InternalFrameBorder extends BaseInternalFrameBorder {
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             boolean active = isActive(c);
             boolean resizable = isResizable(c);
@@ -233,7 +244,7 @@ public class FastBorders extends BaseBorders {
             if (!resizable) {
                 JTattooUtilities.draw3DBorder(g, cHi, cLo, x, y, w, h);
                 g.setColor(borderColor);
-                for (int i = 1; i < dw; i++) {
+                for (int i = 1; i < DW; i++) {
                     g.drawRect(i, i, w - (2 * i) - 1, h - (2 * i) - 1);
                 }
                 return;
@@ -248,7 +259,7 @@ public class FastBorders extends BaseBorders {
             g.drawRect(x + 3, y + 3, w - 7, h - 7);
             JTattooUtilities.draw3DBorder(g, ColorHelper.darker(borderColor, 5), ColorHelper.brighter(borderColor, 30), x + 4, y + 4, w - 8, h - 8);
         }
-    } // class InternalFrameBorder
+    } // end of class InternalFrameBorder
 
-} // class FastBorders
+} // end of class FastBorders
 

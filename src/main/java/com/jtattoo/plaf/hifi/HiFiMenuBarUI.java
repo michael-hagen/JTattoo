@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.hifi;
 
 import java.awt.Graphics;
@@ -28,7 +27,6 @@ import javax.swing.JComponent;
 import javax.swing.JMenuBar;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicMenuBarUI;
-
 
 /**
  * @author Michael Hagen
@@ -39,6 +37,7 @@ public class HiFiMenuBarUI extends BasicMenuBarUI {
         return new HiFiMenuBarUI();
     }
 
+    @Override
     public void installUI(JComponent c) {
         super.installUI(c);
         if ((c != null) && (c instanceof JMenuBar)) {
@@ -46,7 +45,9 @@ public class HiFiMenuBarUI extends BasicMenuBarUI {
         }
     }
 
+    @Override
     public void paint(Graphics g, JComponent c) {
         HiFiUtils.fillComponent(g, c);
     }
-}
+    
+} // end of class HiFiMenuBarUI

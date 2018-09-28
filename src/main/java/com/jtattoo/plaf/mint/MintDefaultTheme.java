@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.mint;
 
 import com.jtattoo.plaf.AbstractTheme;
@@ -40,10 +39,12 @@ public class MintDefaultTheme extends AbstractTheme {
         setUpColorArrs();
     }
 
+    @Override
     public String getPropertyFileName() {
         return "MintTheme.properties";
     }
 
+    @Override
     public void setUpColor() {
         super.setUpColor();
 
@@ -53,7 +54,7 @@ public class MintDefaultTheme extends AbstractTheme {
         backgroundColorDark = new ColorUIResource(220, 228, 228);
         alterBackgroundColor = new ColorUIResource(220, 228, 228);
         selectionBackgroundColor = new ColorUIResource(220, 228, 228);
-        selectionForegroundColor = black;
+        selectionForegroundColor = BLACK;
         frameColor = new ColorUIResource(140, 140, 140);
         focusCellColor = focusColor;
 
@@ -64,19 +65,19 @@ public class MintDefaultTheme extends AbstractTheme {
         pressedBackgroundColor = new ColorUIResource(192, 211, 211);
         pressedBackgroundColorLight = new ColorUIResource(ColorHelper.brighter(pressedBackgroundColor, 20));
         pressedBackgroundColorDark = new ColorUIResource(ColorHelper.darker(pressedBackgroundColor, 4));
-        
+
         buttonBackgroundColor = new ColorUIResource(244, 248, 246);
-        buttonColorLight = white;
+        buttonColorLight = WHITE;
         buttonColorDark = new ColorUIResource(220, 228, 228);
 
         controlBackgroundColor = backgroundColor; // netbeans use this for selected tab in the toolbar
         controlColorLight = new ColorUIResource(223, 234, 234);
         controlColorDark = new ColorUIResource(180, 203, 203);
-        controlHighlightColor = white;
+        controlHighlightColor = WHITE;
         controlShadowColor = new ColorUIResource(172, 186, 186);
         controlDarkShadowColor = new ColorUIResource(160, 164, 164);
 
-        windowTitleForegroundColor = black;
+        windowTitleForegroundColor = BLACK;
         windowTitleBackgroundColor = new ColorUIResource(180, 203, 203);//new ColorUIResource(180, 203, 203);
         windowTitleColorLight = new ColorUIResource(223, 234, 234);
         windowTitleColorDark = new ColorUIResource(180, 203, 203);
@@ -87,7 +88,7 @@ public class MintDefaultTheme extends AbstractTheme {
         windowInactiveTitleColorDark = new ColorUIResource(220, 228, 228);
         windowInactiveBorderColor = new ColorUIResource(192, 211, 211);
 
-        menuBackgroundColor = white;//backgroundColor;
+        menuBackgroundColor = WHITE;//backgroundColor;
         menuSelectionBackgroundColor = selectionBackgroundColor;
         menuSelectionForegroundColor = selectionForegroundColor;
         menuColorLight = backgroundColor;
@@ -101,6 +102,7 @@ public class MintDefaultTheme extends AbstractTheme {
         desktopColor = new ColorUIResource(220, 228, 228);
     }
 
+    @Override
     public void setUpColorArrs() {
         super.setUpColorArrs();
 
@@ -116,23 +118,23 @@ public class MintDefaultTheme extends AbstractTheme {
         MENUBAR_COLORS = ColorHelper.createColorArr(menuColorLight, menuColorDark, 20);
         TOOLBAR_COLORS = ColorHelper.createColorArr(toolbarColorLight, toolbarColorDark, 20);
         BUTTON_COLORS = new Color[]{
-                    new Color(255, 255, 255),
-                    new Color(254, 255, 254),
-                    new Color(253, 255, 254),
-                    new Color(252, 255, 254),
-                    new Color(251, 254, 253),
-                    new Color(250, 253, 252),
-                    new Color(250, 253, 252),
-                    new Color(248, 250, 249),
-                    new Color(244, 248, 246),
-                    new Color(240, 245, 243),
-                    new Color(238, 242, 240),
-                    new Color(232, 237, 235),
-                    new Color(232, 237, 235),
-                    new Color(224, 230, 227),
-                    new Color(214, 221, 217),
-                    new Color(204, 212, 208),
-                    new Color(160, 164, 162),};
+            new Color(255, 255, 255),
+            new Color(254, 255, 254),
+            new Color(253, 255, 254),
+            new Color(252, 255, 254),
+            new Color(251, 254, 253),
+            new Color(250, 253, 252),
+            new Color(250, 253, 252),
+            new Color(248, 250, 249),
+            new Color(244, 248, 246),
+            new Color(240, 245, 243),
+            new Color(238, 242, 240),
+            new Color(232, 237, 235),
+            new Color(232, 237, 235),
+            new Color(224, 230, 227),
+            new Color(214, 221, 217),
+            new Color(204, 212, 208),
+            new Color(160, 164, 162),};
         TAB_COLORS = ColorHelper.createColorArr(buttonColorLight, buttonColorDark, 20);
         CHECKBOX_COLORS = TAB_COLORS;
         COL_HEADER_COLORS = ColorHelper.createColorArr(buttonColorLight, buttonColorDark, 20);
@@ -143,4 +145,4 @@ public class MintDefaultTheme extends AbstractTheme {
         INACTIVE_COLORS = ColorHelper.createColorArr(buttonColorLight, buttonColorDark, 20);
     }
 
-}
+} // end of class MintDefaultTheme

@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.mint;
 
 import com.jtattoo.plaf.*;
@@ -71,32 +70,37 @@ public class MintBorders extends BaseBorders {
     //------------------------------------------------------------------------------------
     public static class ButtonBorder implements Border, UIResource {
 
-        private static final Insets insets = new Insets(3, 8, 5, 10);
+        private static final Insets INSETS = new Insets(3, 8, 5, 10);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
-            return insets;
+            return INSETS;
         }
 
         public Insets getBorderInsets(Component c, Insets borderInsets) {
-            borderInsets.left = insets.left;
-            borderInsets.top = insets.top;
-            borderInsets.right = insets.right;
-            borderInsets.bottom = insets.bottom;
+            borderInsets.left = INSETS.left;
+            borderInsets.top = INSETS.top;
+            borderInsets.right = INSETS.right;
+            borderInsets.bottom = INSETS.bottom;
             return borderInsets;
         }
 
+        @Override
         public boolean isBorderOpaque() {
             return true;
         }
-    } // class ButtonBorder
+        
+    } // end of class ButtonBorder
 
     public static class RolloverToolButtonBorder implements Border, UIResource {
 
-        private static final Insets insets = new Insets(1, 1, 1, 1);
+        private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             AbstractButton button = (AbstractButton) c;
             ButtonModel model = button.getModel();
@@ -126,25 +130,29 @@ public class MintBorders extends BaseBorders {
             }
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
-            return new Insets(insets.top, insets.left, insets.bottom, insets.right);
+            return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
         }
 
         public Insets getBorderInsets(Component c, Insets borderInsets) {
-            borderInsets.left = insets.left;
-            borderInsets.top = insets.top;
-            borderInsets.right = insets.right;
-            borderInsets.bottom = insets.bottom;
+            borderInsets.left = INSETS.left;
+            borderInsets.top = INSETS.top;
+            borderInsets.right = INSETS.right;
+            borderInsets.bottom = INSETS.bottom;
             return borderInsets;
         }
 
+        @Override
         public boolean isBorderOpaque() {
             return true;
         }
-    } // class RolloverToolButtonBorder
+        
+    } // end of class RolloverToolButtonBorder
 
     public static class InternalFrameBorder extends BaseInternalFrameBorder {
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             boolean active = isActive(c);
             boolean resizable = isResizable(c);
@@ -158,7 +166,7 @@ public class MintBorders extends BaseBorders {
                 Color cLo = frameColor;
                 JTattooUtilities.draw3DBorder(g, cHi, cLo, x, y, w, h);
                 g.setColor(borderColor);
-                for (int i = 1; i < dw; i++) {
+                for (int i = 1; i < DW; i++) {
                     g.drawRect(i, i, w - (2 * i) - 1, h - (2 * i) - 1);
                 }
                 return;
@@ -170,7 +178,7 @@ public class MintBorders extends BaseBorders {
                 color = AbstractLookAndFeel.getWindowBorderColor();
             }
 
-            // links
+            // left
             g.setColor(color);
             g.drawLine(x, y, x, y + h);
             g.setColor(ColorHelper.brighter(color, 60));
@@ -182,7 +190,7 @@ public class MintBorders extends BaseBorders {
             g.setColor(color);
             g.drawLine(x + 4, y + 4, x + 4, y + h - 4);
 
-            // rechts
+            // right
             g.setColor(color);
             g.drawLine(x + w, y, x + w, y + h);
             g.setColor(ColorHelper.brighter(color, 20));
@@ -194,7 +202,7 @@ public class MintBorders extends BaseBorders {
             g.setColor(color);
             g.drawLine(x + w - 4, y + 4, x + w - 4, y + h - 4);
 
-            // oben
+            // top
             g.setColor(color);
             g.drawLine(x, y, x + w, y);
             g.setColor(ColorHelper.brighter(color, 60));
@@ -206,7 +214,7 @@ public class MintBorders extends BaseBorders {
             g.setColor(color);
             g.drawLine(x + 4, y + 4, x + w - 4, y + 4);
 
-            // unten
+            // bottom
             g.setColor(color);
             g.drawLine(x, y + h, x + w, y + h);
             g.setColor(ColorHelper.brighter(color, 20));
@@ -218,6 +226,8 @@ public class MintBorders extends BaseBorders {
             g.setColor(color);
             g.drawLine(x + 4, y + h - 4, x + w - 4, y + h - 4);
         }
-    } // class InternalFrameBorder
-} // class MintBorders
+        
+    } // end of class InternalFrameBorder
+    
+} // end of class MintBorders
 

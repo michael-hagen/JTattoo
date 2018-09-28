@@ -36,6 +36,7 @@ public class MintComboBoxUI extends BaseComboBoxUI {
         return new MintComboBoxUI();
     }
 
+    @Override
     public JButton createArrowButton() {
         ArrowButton button = new ArrowButton();
         if (JTattooUtilities.isLeftToRight(comboBox)) {
@@ -51,6 +52,7 @@ public class MintComboBoxUI extends BaseComboBoxUI {
 //------------------------------------------------------------------------------------
     static class ArrowButton extends NoFocusButton {
 
+        @Override
         public void paint(Graphics g) {
             Dimension size = getSize();
             if (isEnabled()) {
@@ -76,5 +78,7 @@ public class MintComboBoxUI extends BaseComboBoxUI {
             }
             paintBorder(g);
         }
-    } // end class ArrowButton
-} // end class MintComboBox
+        
+    } // end of end class ArrowButton
+    
+} // end of class MintComboBox

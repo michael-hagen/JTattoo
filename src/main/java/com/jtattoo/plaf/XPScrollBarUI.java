@@ -40,6 +40,7 @@ public class XPScrollBarUI extends BaseScrollBarUI {
         return new XPScrollBarUI();
     }
 
+    @Override
     protected void installDefaults() {
         super.installDefaults();
         Color colors[] = AbstractLookAndFeel.getTheme().getThumbColors();
@@ -55,6 +56,7 @@ public class XPScrollBarUI extends BaseScrollBarUI {
         return Color.white;
     }
 
+    @Override
     protected Color[] getThumbColors() {
         if (isDragging) {
             return dragColors;
@@ -65,6 +67,7 @@ public class XPScrollBarUI extends BaseScrollBarUI {
         return AbstractLookAndFeel.getTheme().getThumbColors();
     }
 
+    @Override
     protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
         if (!c.isEnabled()) {
             return;
@@ -145,4 +148,5 @@ public class XPScrollBarUI extends BaseScrollBarUI {
         g.translate(-x, -y);
         g2D.setComposite(savedComposite);
     }
-}
+    
+} // end of class XPScrollBarUI

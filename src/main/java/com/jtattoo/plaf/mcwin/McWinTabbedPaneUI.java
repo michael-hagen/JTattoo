@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.mcwin;
 
 import com.jtattoo.plaf.*;
@@ -41,11 +40,13 @@ public class McWinTabbedPaneUI extends BaseTabbedPaneUI {
         return new McWinTabbedPaneUI();
     }
 
+    @Override
     public void installDefaults() {
         super.installDefaults();
         tabAreaInsets.bottom = 5;
     }
-    
+
+    @Override
     protected Color[] getContentBorderColors(int tabPlacement) {
         Color controlColorLight = AbstractLookAndFeel.getTheme().getControlColorLight();
         if (!controlColorLight.equals(new ColorUIResource(106, 150, 192))) {
@@ -86,4 +87,4 @@ public class McWinTabbedPaneUI extends BaseTabbedPaneUI {
         }
     }
 
-}
+} // end of class McWinTabbedPaneUI

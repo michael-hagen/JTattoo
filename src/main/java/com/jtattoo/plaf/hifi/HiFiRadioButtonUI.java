@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.hifi;
 
 import com.jtattoo.plaf.*;
@@ -45,6 +44,7 @@ public class HiFiRadioButtonUI extends BaseRadioButtonUI {
         return radioButtonUI;
     }
 
+    @Override
     protected void paintText(Graphics g, JComponent c, String text, Rectangle textRect) {
         View v = (View) c.getClientProperty(BasicHTML.propertyKey);
         if (v != null) {
@@ -52,12 +52,7 @@ public class HiFiRadioButtonUI extends BaseRadioButtonUI {
         } else {
             AbstractButton b = (AbstractButton) c;
             ButtonModel model = b.getModel();
-            int mnemIndex = -1;
-            if (JTattooUtilities.getJavaVersion() >= 1.4) {
-                mnemIndex = b.getDisplayedMnemonicIndex();
-            } else {
-                mnemIndex = JTattooUtilities.findDisplayedMnemonicIndex(b.getText(), model.getMnemonic());
-            }
+            int mnemIndex = b.getDisplayedMnemonicIndex();
             g.setFont(b.getFont());
             FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
             if (model.isEnabled()) {
@@ -77,6 +72,7 @@ public class HiFiRadioButtonUI extends BaseRadioButtonUI {
         }
     }
 
+    @Override
     public void paintBackground(Graphics g, JComponent c) {
         if (c.isOpaque()) {
             if ((c.getBackground() instanceof ColorUIResource) && c.getBackground().equals(AbstractLookAndFeel.getBackgroundColor())) {
@@ -87,4 +83,5 @@ public class HiFiRadioButtonUI extends BaseRadioButtonUI {
             }
         }
     }
-}
+
+} // end of class HiFiRadioButtonUI

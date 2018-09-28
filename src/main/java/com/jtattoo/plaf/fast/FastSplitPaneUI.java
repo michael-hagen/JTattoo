@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.fast;
 
 import com.jtattoo.plaf.BaseSplitPaneUI;
@@ -37,7 +36,9 @@ public class FastSplitPaneUI extends BaseSplitPaneUI {
         return new FastSplitPaneUI();
     }
 
+    @Override
     public BasicSplitPaneDivider createDefaultDivider() {
         return new FastSplitPaneDivider(this);
     }
-}
+
+} // end of class FastSplitPaneUI

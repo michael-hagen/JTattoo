@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.texture;
 
 import com.jtattoo.plaf.*;
@@ -89,10 +88,11 @@ public class TextureBorders extends BaseBorders {
 //------------------------------------------------------------------------------------
     public static class ButtonBorder implements Border, UIResource {
 
-        private static final Color defaultColorHi = new Color(220, 230, 245);
-        private static final Color defaultColorLo = new Color(212, 224, 243);
-        private static final Insets insets = new Insets(3, 4, 3, 4);
+        private static final Color DEFAULT_COLOR_HI = new Color(220, 230, 245);
+        private static final Color DEFAULT_COLOR_LO = new Color(212, 224, 243);
+        private static final Insets INSETS = new Insets(3, 4, 3, 4);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             Graphics2D g2D = (Graphics2D) g;
             AbstractButton button = (AbstractButton) c;
@@ -116,9 +116,9 @@ public class TextureBorders extends BaseBorders {
                     g2D.setColor(ColorHelper.darker(frameColor, 20));
                     g2D.drawRect(x, y, w - 1, h - 2);
                     if (!button.getModel().isRollover()) {
-                        g2D.setColor(defaultColorHi);
+                        g2D.setColor(DEFAULT_COLOR_HI);
                         g2D.drawRect(x + 1, y + 1, w - 3, h - 4);
-                        g2D.setColor(defaultColorLo);
+                        g2D.setColor(DEFAULT_COLOR_LO);
                         g2D.drawRect(x + 2, y + 2, w - 5, h - 6);
                     }
                 } else {
@@ -126,7 +126,7 @@ public class TextureBorders extends BaseBorders {
                     g2D.drawRect(x, y, w - 1, h - 2);
                 }
             } else {
-            
+
                 Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
                 g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
@@ -141,9 +141,9 @@ public class TextureBorders extends BaseBorders {
                     g2D.setColor(ColorHelper.darker(frameColor, 20));
                     g2D.drawRoundRect(x, y, w - 1, h - 2, 6, 6);
                     if (!button.getModel().isRollover()) {
-                        g2D.setColor(defaultColorHi);
+                        g2D.setColor(DEFAULT_COLOR_HI);
                         g2D.drawRoundRect(x + 1, y + 1, w - 3, h - 4, 6, 6);
-                        g2D.setColor(defaultColorLo);
+                        g2D.setColor(DEFAULT_COLOR_LO);
                         g2D.drawRoundRect(x + 2, y + 2, w - 5, h - 6, 6, 6);
                     }
                 } else {
@@ -159,27 +159,31 @@ public class TextureBorders extends BaseBorders {
             }
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
-            return insets;
+            return INSETS;
         }
 
         public Insets getBorderInsets(Component c, Insets borderInsets) {
-            borderInsets.left = insets.left;
-            borderInsets.top = insets.top;
-            borderInsets.right = insets.right;
-            borderInsets.bottom = insets.bottom;
+            borderInsets.left = INSETS.left;
+            borderInsets.top = INSETS.top;
+            borderInsets.right = INSETS.right;
+            borderInsets.bottom = INSETS.bottom;
             return borderInsets;
         }
 
+        @Override
         public boolean isBorderOpaque() {
             return true;
         }
-    } // class ButtonBorder
+        
+    } // end of class ButtonBorder
 
     public static class RolloverToolButtonBorder implements Border, UIResource {
 
-        private static final Insets insets = new Insets(1, 1, 1, 1);
+        private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             AbstractButton button = (AbstractButton) c;
             ButtonModel model = button.getModel();
@@ -209,26 +213,29 @@ public class TextureBorders extends BaseBorders {
             }
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
-            return new Insets(insets.top, insets.left, insets.bottom, insets.right);
+            return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
         }
 
         public Insets getBorderInsets(Component c, Insets borderInsets) {
-            borderInsets.left = insets.left;
-            borderInsets.top = insets.top;
-            borderInsets.right = insets.right;
-            borderInsets.bottom = insets.bottom;
+            borderInsets.left = INSETS.left;
+            borderInsets.top = INSETS.top;
+            borderInsets.right = INSETS.right;
+            borderInsets.bottom = INSETS.bottom;
             return borderInsets;
         }
 
+        @Override
         public boolean isBorderOpaque() {
             return true;
         }
-    } // class RolloverToolButtonBorder
+        
+    } // end of class RolloverToolButtonBorder
 
     public static class PopupMenuBorder extends BasePopupMenuBorder {
 
-        private static final float shadowAlpha[] = {0.6f, 0.4f, 0.2f, 0.1f};
+        private static final float SHOW_ALPHA[] = {0.6f, 0.4f, 0.2f, 0.1f};
 
         public PopupMenuBorder() {
             shadowSize = 4;
@@ -237,6 +244,7 @@ public class TextureBorders extends BaseBorders {
             insets = new Insets(1, 1, 1, 1);
         }
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             Graphics2D g2D = (Graphics2D) g;
             Color frameColor = AbstractLookAndFeel.getFrameColor();
@@ -287,7 +295,7 @@ public class TextureBorders extends BaseBorders {
             Composite savedComposite = g2D.getComposite();
             g2D.setColor(Color.black);
             for (int i = 0; i < shadowSize; i++) {
-                AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, shadowAlpha[i]);
+                AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, SHOW_ALPHA[i]);
                 g2D.setComposite(alpha);
                 // bottom
                 g.drawLine(x + shadowSize, y + h - shadowSize + i, x + w - shadowSize + i, y + h - shadowSize + i);
@@ -296,12 +304,14 @@ public class TextureBorders extends BaseBorders {
             }
             g2D.setComposite(savedComposite);
         }
-    } // class PopupMenuTextureBorder
+        
+    } // end of class PopupMenuTextureBorder
 
     public static class MenuItemBorder extends AbstractBorder implements UIResource {
 
-        private static final Insets insets = new Insets(2, 2, 2, 2);
+        private static final Insets INSETS = new Insets(2, 2, 2, 2);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             JMenuItem b = (JMenuItem) c;
             ButtonModel model = b.getModel();
@@ -322,36 +332,42 @@ public class TextureBorders extends BaseBorders {
             }
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
-            return new Insets(insets.top, insets.left, insets.bottom, insets.right);
+            return new Insets(INSETS.top, INSETS.left, INSETS.bottom, INSETS.right);
         }
 
+        @Override
         public Insets getBorderInsets(Component c, Insets borderInsets) {
-            borderInsets.left = insets.left;
-            borderInsets.top = insets.top;
-            borderInsets.right = insets.right;
-            borderInsets.bottom = insets.bottom;
+            borderInsets.left = INSETS.left;
+            borderInsets.top = INSETS.top;
+            borderInsets.right = INSETS.right;
+            borderInsets.bottom = INSETS.bottom;
             return borderInsets;
         }
 
+        @Override
         public boolean isBorderOpaque() {
             return false;
         }
-    } // class MenuItemBorder
+        
+    } // end of class MenuItemBorder
 
     public static class InternalFrameBorder extends BaseInternalFrameBorder {
 
         private static final Color FRAME_BORDER_COLOR = new Color(128, 128, 128);
         private static final Color FRAME_COLORS[] = new Color[]{new Color(144, 144, 144), new Color(180, 180, 180), new Color(216, 216, 216), new Color(236, 236, 236), new Color(164, 164, 164), new Color(196, 196, 196), new Color(184, 184, 184), new Color(172, 172, 172)};
 
+        @Override
         public Insets getBorderInsets(Component c) {
             if (isResizable(c)) {
                 return new Insets(5, 8, 6, 8);
             } else {
-                return new Insets(paletteInsets.top, paletteInsets.left, paletteInsets.bottom, paletteInsets.right);
+                return new Insets(PALETTE_INSETS.top, PALETTE_INSETS.left, PALETTE_INSETS.bottom, PALETTE_INSETS.right);
             }
         }
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             boolean isJFrameBorder = false;
             if (c instanceof JRootPane) {
@@ -449,13 +465,15 @@ public class TextureBorders extends BaseBorders {
             }
             g2D.setComposite(savedComposite);
         }
-    } // class InternalFrameBorder
+        
+    } // end of class InternalFrameBorder
 
     public static class ToolBarBorder extends AbstractBorder implements UIResource, SwingConstants {
 
         private static final LazyImageIcon HOR_RUBBER_ICON = new LazyImageIcon("texture/icons/HorRubber.gif");
         private static final LazyImageIcon VER_RUBBER_ICON = new LazyImageIcon("texture/icons/VerRubber.gif");
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             if (((JToolBar) c).isFloatable()) {
                 if (((JToolBar) c).getOrientation() == HORIZONTAL) {
@@ -470,6 +488,7 @@ public class TextureBorders extends BaseBorders {
             }
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
             Insets insets = new Insets(2, 2, 2, 2);
             if (((JToolBar) c).isFloatable()) {
@@ -501,6 +520,7 @@ public class TextureBorders extends BaseBorders {
             borderInsets.bottom = insets.bottom;
             return borderInsets;
         }
-    } // class ToolBarBorder
-} // class TextureBorders
+    } // end of class ToolBarBorder
+    
+} // end of class TextureBorders
 

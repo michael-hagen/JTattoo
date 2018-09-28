@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.smart;
 
 import com.jtattoo.plaf.*;
@@ -82,8 +81,8 @@ public class SmartIcons extends BaseIcons {
 //------------------------------------------------------------------------------    
     private static class TitleButtonIcon implements Icon {
 
-        private static Color closerColorLight = new Color(241, 172, 154);
-        private static Color closerColorDark = new Color(224, 56, 2);
+        private static final Color CLOSER_COLOR_LIGHT = new Color(241, 172, 154);
+        private static final Color CLOSER_COLOR_DARK = new Color(224, 56, 2);
         public static final int ICON_ICON_TYP = 0;
         public static final int MIN_ICON_TYP = 1;
         public static final int MAX_ICON_TYP = 2;
@@ -94,14 +93,17 @@ public class SmartIcons extends BaseIcons {
             iconTyp = typ;
         }
 
+        @Override
         public int getIconHeight() {
             return 20;
         }
 
+        @Override
         public int getIconWidth() {
             return 20;
         }
 
+        @Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
             int w = c.getWidth();
             int h = c.getHeight();
@@ -117,8 +119,8 @@ public class SmartIcons extends BaseIcons {
             Color cHi = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getWindowTitleColorLight(), 40);
             Color cLo = ColorHelper.darker(AbstractLookAndFeel.getTheme().getWindowTitleColorDark(), 10);
             if (iconTyp == CLOSE_ICON_TYP) {
-                cHi = closerColorLight;
-                cLo = closerColorDark;
+                cHi = CLOSER_COLOR_LIGHT;
+                cLo = CLOSER_COLOR_DARK;
             }
 
             Color fcHi = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getWindowTitleColorDark(), 80);
@@ -157,18 +159,26 @@ public class SmartIcons extends BaseIcons {
             cHi = Color.white;
             cLo = ColorHelper.darker(cLo, 30);
             Icon icon = null;
-            if (iconTyp == ICON_ICON_TYP) {
-                icon = new BaseIcons.IconSymbol(cHi, cLo, null);
-            } else if (iconTyp == MIN_ICON_TYP) {
-                icon = new BaseIcons.MinSymbol(cHi, cLo, null);
-            } else if (iconTyp == MAX_ICON_TYP) {
-                icon = new BaseIcons.MaxSymbol(cHi, cLo, null);
-            } else if (iconTyp == CLOSE_ICON_TYP) {
-                icon = new BaseIcons.CloseSymbol(cHi, cLo, null);
+            switch (iconTyp) {
+                case ICON_ICON_TYP:
+                    icon = new BaseIcons.IconSymbol(cHi, cLo, null);
+                    break;
+                case MIN_ICON_TYP:
+                    icon = new BaseIcons.MinSymbol(cHi, cLo, null);
+                    break;
+                case MAX_ICON_TYP:
+                    icon = new BaseIcons.MaxSymbol(cHi, cLo, null);
+                    break;
+                case CLOSE_ICON_TYP:
+                    icon = new BaseIcons.CloseSymbol(cHi, cLo, null);
+                    break;
+                default:
+                    break;
             }
             if (icon != null) {
                 icon.paintIcon(c, g, 0, 0);
             }
         }
     }
-}
+    
+} // end of class SmartIcons

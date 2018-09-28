@@ -40,18 +40,21 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
         return new BaseToggleButtonUI();
     }
 
+    @Override
     public void installDefaults(AbstractButton b) {
         super.installDefaults(b);
         b.setOpaque(false);
         b.setRolloverEnabled(true);
     }
 
+    @Override
     public void uninstallDefaults(AbstractButton b) {
         super.uninstallDefaults(b);
         b.setOpaque(true);
         b.setRolloverEnabled(false);
     }
 
+    @Override
     protected BasicButtonListener createButtonListener(AbstractButton b) {
         return new BaseButtonListener(b);
     }
@@ -101,10 +104,11 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
         JTattooUtilities.fillHorGradient(g, colors, 1, 1, width - 2, height - 2);
     }
 
+    @Override
     protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
         ButtonModel model = b.getModel();
         FontMetrics fm = JTattooUtilities.getFontMetrics(b, g, b.getFont());
-        int mnemIndex = (JTattooUtilities.getJavaVersion() >= 1.4) ? b.getDisplayedMnemonicIndex() : JTattooUtilities.findDisplayedMnemonicIndex(b.getText(), model.getMnemonic());
+        int mnemIndex = b.getDisplayedMnemonicIndex();
         if (model.isEnabled()) {
             Color foreground = b.getForeground();
             Color background = b.getBackground();
@@ -135,11 +139,13 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
         }
     }
 
+    @Override
     protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect, Rectangle iconRect) {
         g.setColor(AbstractLookAndFeel.getFocusColor());
         BasicGraphicsUtils.drawDashedRect(g, 4, 3, b.getWidth() - 8, b.getHeight() - 6);
     }
 
+    @Override
     public void paint(Graphics g, JComponent c) {
         Graphics2D g2D = (Graphics2D) g;
 
@@ -156,10 +162,7 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
         textRect.x = textRect.y = textRect.width = textRect.height = 0;
         iconRect.x = iconRect.y = iconRect.width = iconRect.height = 0;
 
-        int iconTextGap = defaultTextIconGap;
-        if (JTattooUtilities.getJavaVersion() >= 1.4) {
-            iconTextGap = b.getIconTextGap();
-        }
+        int iconTextGap = b.getIconTextGap();
         
         String text = SwingUtilities.layoutCompoundLabel(
                 c, fm, b.getText(), b.getIcon(),
@@ -203,4 +206,5 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
             paintFocus(g, b, viewRect, textRect, iconRect);
         }
     }
-}
+    
+} // end of class BaseToggleButtonUI

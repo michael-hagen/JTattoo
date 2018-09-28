@@ -78,4 +78,4 @@ public class AeroIcons extends BaseIcons {
         return closeIcon;
     }
     
-}
+} // end of class AeroIcons

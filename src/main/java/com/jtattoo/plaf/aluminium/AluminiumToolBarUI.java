@@ -19,8 +19,7 @@
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
 *  
 * see: APACHE-LICENSE-2.0.txt
-*/
- 
+ */
 package com.jtattoo.plaf.aluminium;
 
 import com.jtattoo.plaf.AbstractToolBarUI;
@@ -38,20 +37,24 @@ public class AluminiumToolBarUI extends AbstractToolBarUI {
         return new AluminiumToolBarUI();
     }
 
+    @Override
     public Border getRolloverBorder() {
         return AluminiumBorders.getRolloverToolButtonBorder();
     }
 
+    @Override
     public Border getNonRolloverBorder() {
         return AluminiumBorders.getToolButtonBorder();
     }
 
+    @Override
     public boolean isButtonOpaque() {
         return false;
     }
 
+    @Override
     public void paint(Graphics g, JComponent c) {
         AluminiumUtils.fillComponent(g, c);
     }
-}
 
+} // end of class AluminiumToolBarUI
