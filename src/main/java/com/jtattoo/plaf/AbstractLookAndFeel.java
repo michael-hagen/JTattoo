@@ -24,6 +24,8 @@ package com.jtattoo.plaf;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.InsetsUIResource;
@@ -39,6 +41,24 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
 
     private static AbstractTheme myTheme = null;
 
+    /**
+     * List the available themes for this {@link LookAndFeel}.
+     * <br>
+     * Implementation simply returns the static {@link ArrayList} of themes
+     * <br>
+     * @return List
+     */
+    public abstract List getMyThemes();
+    
+    /**
+     * Instance method to set the Theme of the subclass. Because of the way inheritance works
+     * with static methods, this can't be done on {@link AbstractLookAndFeel}. So that's why
+     * we need an instance method. 
+     * <br>
+     * @param theme
+     */
+    public abstract void setMyTheme(String theme);
+    
     abstract public AbstractBorderFactory getBorderFactory();
 
     abstract public AbstractIconFactory getIconFactory();
