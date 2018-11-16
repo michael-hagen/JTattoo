@@ -216,4 +216,14 @@ public class MintLookAndFeel extends AbstractLookAndFeel {
         table.put("SpinnerUI", BaseSpinnerUI.class.getName());
     }
     
+    @Override
+    public List getMyThemes() {
+       return themesList;
+    }
+
+    @Override
+    public void setMyTheme(String theme) {
+       setTheme(theme);
+    }
+    
 } // end of class MintLookAndFeel

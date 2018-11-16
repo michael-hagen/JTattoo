@@ -331,4 +331,14 @@ public class McWinLookAndFeel extends AbstractLookAndFeel {
         table.put("TabbedPane.tabAreaInsets", new InsetsUIResource(5, 5, 6, 5));
     }
     
+    @Override
+    public List getMyThemes() {
+       return themesList;
+    }
+
+    @Override
+    public void setMyTheme(String theme) {
+       setTheme(theme);
+    }
+    
 } // end of class McWinLookAndFeel

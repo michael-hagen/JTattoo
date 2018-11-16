@@ -387,4 +387,14 @@ public class AcrylLookAndFeel extends AbstractLookAndFeel {
         table.put("SpinnerUI", AcrylSpinnerUI.class.getName());
     }
     
+    @Override
+    public List getMyThemes() {
+       return themesList;
+    }
+
+    @Override
+    public void setMyTheme(String theme) {
+       setTheme(theme);
+    }
+    
 } // end of class AcrylLookAndFeel
