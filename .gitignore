@@ -10,3 +10,12 @@
 /pom.custom.build.xml
 /deploy.bat
 /src/main/java/com/jtattoo/plaf/custom/flx/
+/bin/
+# eclipse specific git ignore
+.classpath
+#.project we want to share this file so its easier to import from github
+.settings/
+.metadata
+bin/**
+local.properties
+.classpath
