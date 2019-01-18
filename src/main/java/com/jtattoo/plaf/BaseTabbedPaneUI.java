@@ -45,7 +45,7 @@ import javax.swing.text.View;
 /**
  * This class is a modified copy of the javax.swing.plaf.basic.BasicTabbedPaneUI
  *
- * A Basic L&F implementation of TabbedPaneUI.
+ * A Basic L&amp;F implementation of TabbedPaneUI.
  *
  * @version 1.87 06/08/99
  * @author Amy Fowler

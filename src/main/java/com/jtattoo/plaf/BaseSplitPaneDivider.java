@@ -238,7 +238,6 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
      * Used to layout a <code>BasicSplitPaneDivider</code>.
      * Layout for the divider
      * involves appropriately moving the left/right buttons around.
-     * <p>
      */
     protected class MyDividerLayout implements LayoutManager {
 

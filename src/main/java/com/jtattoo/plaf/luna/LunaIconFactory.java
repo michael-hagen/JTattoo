@@ -82,10 +82,6 @@ public class LunaIconFactory implements AbstractIconFactory {
         return LunaIcons.getFileChooserListViewIcon();
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public Icon getFileChooserDetailViewIcon() {
         return LunaIcons.getFileChooserDetailViewIcon();

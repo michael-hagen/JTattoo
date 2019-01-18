@@ -50,7 +50,7 @@ import javax.swing.plaf.basic.BasicRootPaneUI;
  * <strong>Warning:</strong>
  * Serialized objects of this class will not be compatible with future Swing releases. The current serialization support
  * is appropriate for short term storage or RMI between applications running the same version of Swing. As of 1.4,
- * support for long term storage of all JavaBeans<sup><font size="-2">TM</font></sup>
+ * support for long term storage of all JavaBeans TM
  * has been added to the <code>java.beans</code> package. Please see {@link java.beans.XMLEncoder}.
  *
  * @version 1.20 04/27/04
@@ -230,7 +230,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
     /**
      * Removes any border that may have been installed.
      *
-     * @param root
+     * @param root The root pane
      */
     public void uninstallBorder(JRootPane root) {
         LookAndFeel.uninstallBorder(root);
@@ -242,7 +242,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
      * This takes the parent so that cleanup can be done from <code>removeNotify</code>, at which point the parent
      * hasn't been reset yet.
      *
-     * @param root
+     * @param root The root pane
      * @param parent The parent of the JRootPane
      */
     public void installWindowListeners(JRootPane root, Component parent) {
@@ -263,7 +263,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
     /**
      * Uninstalls the necessary Listeners on the <code>Window</code> the Listeners were last installed on.
      *
-     * @param root
+     * @param root The root pane
      */
     public void uninstallWindowListeners(JRootPane root) {
         if (window != null) {
@@ -275,7 +275,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
     /**
      * Installs the appropriate LayoutManager on the <code>JRootPane</code> to render the window decorations.
      *
-     * @param root
+     * @param root The root pane
      */
     public void installLayout(JRootPane root) {
         if (layoutManager == null) {
@@ -327,8 +327,8 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
     /**
      * Returns the <code>JComponent</code> to render the window decoration style.
      *
-     * @param root
-     * @return
+     * @param root The root pane
+     * @return The title pane
      */
     public JComponent createTitlePane(JRootPane root) {
         return new BaseTitlePane(root, this);
@@ -338,8 +338,8 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
      * Returns a <code>MouseListener</code> that will be added to the <code>Window</code> containing the
      * <code>JRootPane</code>.
      *
-     * @param root
-     * @return
+     * @param root The root pane
+     * @return The mouse listener
      */
     public MouseInputListener createWindowMouseInputListener(JRootPane root) {
         return new MouseInputHandler();
@@ -348,7 +348,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
     /**
      * Returns a <code>LayoutManager</code> that will be set on the <code>JRootPane</code>.
      *
-     * @return
+     * @return The layout manager
      */
     public LayoutManager createLayoutManager() {
         return new BaseRootLayout();

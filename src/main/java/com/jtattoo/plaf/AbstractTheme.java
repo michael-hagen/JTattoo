@@ -220,7 +220,7 @@ public abstract class AbstractTheme extends MetalTheme {
     public void setUpColor() {
         windowDecoration = true;
         macStyleWindowDecoration = JTattooUtilities.isMac();
-        centerWindowTitle = JTattooUtilities.isWindows() && JTattooUtilities.getOSVersion() >= 6.2;
+        centerWindowTitle = JTattooUtilities.isWindows() && JTattooUtilities.getOSVersion() >= 6.2 && JTattooUtilities.getOSVersion() < 10.0;
         linuxStyleScrollBar = !JTattooUtilities.isWindows();
         macStyleScrollBar = JTattooUtilities.isMac();
         dynamicLayout = true;

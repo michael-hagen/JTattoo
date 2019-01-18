@@ -53,10 +53,6 @@ public class AluminiumBorderFactory implements AbstractBorderFactory {
         return AluminiumBorders.getButtonBorder();
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public Border getToggleButtonBorder() {
         return AluminiumBorders.getToggleButtonBorder();
