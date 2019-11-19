@@ -62,6 +62,7 @@ public abstract class AbstractTheme extends MetalTheme {
     public static final ColorUIResource DARK_BLUE = new ColorUIResource(0, 64, 128);
 
     protected static String internalName = "Default";
+    protected static String logoString = "JTattoo";
     protected static boolean windowDecoration = false;
     protected static boolean macStyleWindowDecoration = false;
     protected static boolean centerWindowTitle = false;
@@ -76,10 +77,9 @@ public abstract class AbstractTheme extends MetalTheme {
     protected static boolean showFocusFrame = false;
     protected static boolean drawSquareButtons = false;
     protected static boolean toolbarDecorated = true;
-
     protected static boolean menuOpaque = true;
     protected static float menuAlpha = 0.9f;
-    protected static String logoString = "JTattoo";
+    
     protected static FontUIResource controlFont = null;
     protected static FontUIResource systemFont = null;
     protected static FontUIResource userFont = null;
@@ -218,6 +218,7 @@ public abstract class AbstractTheme extends MetalTheme {
     }
 
     public void setUpColor() {
+        logoString = "JTattoo";
         windowDecoration = true;
         macStyleWindowDecoration = JTattooUtilities.isMac();
         centerWindowTitle = JTattooUtilities.isWindows() && JTattooUtilities.getOSVersion() >= 6.2 && JTattooUtilities.getOSVersion() < 10.0;
@@ -234,7 +235,6 @@ public abstract class AbstractTheme extends MetalTheme {
         toolbarDecorated = true;
         menuOpaque = true;
         menuAlpha = 0.9f;
-        logoString = "JTattoo";
 
         controlFont = null;
         systemFont = null;
@@ -359,6 +359,9 @@ public abstract class AbstractTheme extends MetalTheme {
 
     public void setProperties(Properties props) {
         if (props != null) {
+            if (props.getProperty("logoString") != null) {
+                logoString = props.getProperty("logoString").trim();
+            }
             if (props.getProperty("windowDecoration") != null) {
                 windowDecoration = props.getProperty("windowDecoration").trim().equalsIgnoreCase("on");
             }
@@ -421,9 +424,6 @@ public abstract class AbstractTheme extends MetalTheme {
             }
             if (props.getProperty("menuOpaque") != null) {
                 menuOpaque = props.getProperty("menuOpaque").trim().equalsIgnoreCase("on");
-            }
-            if (props.getProperty("logoString") != null) {
-                logoString = props.getProperty("logoString").trim();
             }
             if (props.getProperty("controlTextFont") != null) {
                 controlFont = createFont(props.getProperty("controlTextFont"));
