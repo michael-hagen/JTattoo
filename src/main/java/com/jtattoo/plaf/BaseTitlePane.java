@@ -313,7 +313,6 @@ public class BaseTitlePane extends JComponent implements TitlePane {
             for (PropertyChangeListener pcl1 : pcl) {
                 pcl1.propertyChange(new PropertyChangeEvent(this, "windowMaximized", Boolean.FALSE, Boolean.FALSE));
             }
-        
         }
     }
 
@@ -352,13 +351,17 @@ public class BaseTitlePane extends JComponent implements TitlePane {
         maxBounds.y = Math.max(0, screenInsets.top);
         maxBounds.width -= (screenInsets.left + screenInsets.right);
         maxBounds.height -= (screenInsets.top + screenInsets.bottom);
+        
         // If Taskbar is in auto hide mode the maximum bounds are not correct, currently I don't now
-        // how to fix this issue, so I just let one pixel space arround the window.
+        // how to fix this issue, so I just let one pixel space at the bottom.
         if (screenInsets.top == 0 && screenInsets.left == 0 && screenInsets.bottom == 0 && screenInsets.right == 0) {
+            /*
             maxBounds.x += 1;
             maxBounds.y += 1;
             maxBounds.width -= 2;
             maxBounds.height -= 2;
+            */
+            maxBounds.height--;
         }
         return maxBounds;
     }
