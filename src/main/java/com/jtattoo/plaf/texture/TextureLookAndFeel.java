@@ -479,5 +479,15 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
         table.put("FormattedTextFieldUI", BaseFormattedTextFieldUI.class.getName());
         table.put("SpinnerUI", BaseSpinnerUI.class.getName());
     }
+    
+    @Override
+    public List getMyThemes() {
+       return themesList;
+    }
+
+    @Override
+    public void setMyTheme(String theme) {
+       setTheme(theme);
+    }
 
 } // end of class TextureLookAndFeel

@@ -212,4 +212,14 @@ public class BernsteinLookAndFeel extends AbstractLookAndFeel {
         table.put("SplitPane.centerOneTouchButtons", Boolean.FALSE);
     }
     
+    @Override
+    public List getMyThemes() {
+       return themesList;
+    }
+
+    @Override
+    public void setMyTheme(String theme) {
+       setTheme(theme);
+    }
+    
 } // end of class BernsteinInternalFrameUI
