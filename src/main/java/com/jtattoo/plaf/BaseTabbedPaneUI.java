@@ -1531,6 +1531,10 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
         if (scrollableTabLayoutEnabled()) {
             translatePointToTabPanel(x, y, p);
+            if (!tabScroller.viewport.getViewRect().contains(p)) {
+                // Tabs that are not visible (e.g. behind movement/menu button area)
+                return -1;
+            }
         }
         int tc = tabPane.getTabCount();
         for (int i = 0; i < tc; i++) {
@@ -1650,7 +1654,18 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         dest.y = srcy - vpp.y + viewp.y;
         return dest;
     }
-
+    
+    /**
+     * The inverse operation from {@link translatePointToTabPanel(int, int, Point)}.
+     */
+    private Point translatePointFromTabPanel(int srcx, int srcy, Point dest) {
+        Point vpp = tabScroller.viewport.getLocation();
+        Point viewp = tabScroller.viewport.getViewPosition();
+        dest.x = srcx + vpp.x - viewp.x;
+        dest.y = srcy + vpp.y - viewp.y;
+        return dest;
+    }
+    
     // BaseTabbedPaneUI methods
     protected Component getVisibleComponent() {
         return visibleComponent;
@@ -3364,7 +3379,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
                     case RIGHT: {
                         int i = index;
                         int y = viewRect.height - rects[index].height;
-                        while ((i > 0) && (y - rects[i - 1].height > 0)) {
+                        while ((i > 0) && (y - rects[i - 1].height >= 0)) {
                             i--;
                             y -= rects[i].height;
                         }
@@ -3760,9 +3775,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         @Override
         public void mouseClicked(MouseEvent e) {
             if (scrollableTabLayoutEnabled()) {
-                MouseListener[] ml = tabPane.getMouseListeners();
-                for (MouseListener ml1 : ml) {
-                    ml1.mouseClicked(e);
+                MouseEvent changedEvent = translateMouseEventCoordinates(e);
+                for (MouseListener ml : tabPane.getMouseListeners()) {
+                    ml.mouseClicked(changedEvent);
                 }
             }
         }
@@ -3770,8 +3785,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         @Override
         public void mousePressed(MouseEvent e) {
             if (scrollableTabLayoutEnabled()) {
+                MouseEvent changedEvent = translateMouseEventCoordinates(e);
                 for (MouseListener ml : tabPane.getMouseListeners()) {
-                    ml.mousePressed(e);
+                    ml.mousePressed(changedEvent);
                 }
             }
             if (!tabPane.isEnabled()) {
@@ -3793,8 +3809,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         @Override
         public void mouseReleased(MouseEvent e) {
             if (scrollableTabLayoutEnabled()) {
+                MouseEvent changedEvent = translateMouseEventCoordinates(e);
                 for (MouseListener ml : tabPane.getMouseListeners()) {
-                    ml.mouseReleased(e);
+                    ml.mouseReleased(changedEvent);
                 }
             }
         }
@@ -3802,8 +3819,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         @Override
         public void mouseEntered(MouseEvent e) {
             if (scrollableTabLayoutEnabled()) {
+                MouseEvent changedEvent = translateMouseEventCoordinates(e);
                 for (MouseListener ml : tabPane.getMouseListeners()) {
-                    ml.mouseEntered(e);
+                    ml.mouseEntered(changedEvent);
                 }
             }
         }
@@ -3811,8 +3829,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         @Override
         public void mouseExited(MouseEvent e) {
             if (scrollableTabLayoutEnabled()) {
+                MouseEvent changedEvent = translateMouseEventCoordinates(e);
                 for (MouseListener ml : tabPane.getMouseListeners()) {
-                    ml.mouseExited(e);
+                    ml.mouseExited(changedEvent);
                 }
             }
             rolloverIndex = -1;
@@ -3838,8 +3857,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         @Override
         public void mouseDragged(MouseEvent e) {
             if (scrollableTabLayoutEnabled()) {
+                MouseEvent changedEvent = translateMouseEventCoordinates(e);
                 for (MouseMotionListener mml : tabPane.getMouseMotionListeners()) {
-                    mml.mouseDragged(e);
+                    mml.mouseDragged(changedEvent);
                 }
             }
         }
@@ -3847,8 +3867,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         @Override
         public void mouseMoved(MouseEvent e) {
             if (scrollableTabLayoutEnabled()) {
+                MouseEvent changedEvent = translateMouseEventCoordinates(e);
                 for (MouseMotionListener mml : tabPane.getMouseMotionListeners()) {
-                    mml.mouseMoved(e);
+                    mml.mouseMoved(changedEvent);
                 }
             }
             rolloverIndex = getTabAtLocation(e.getX(), e.getY());
@@ -3862,6 +3883,23 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
                 oldRolloverIndex = rolloverIndex;
             }
         }
+    }
+    
+    /**
+     * When using the scroll layout mouse events originate in the scroller tab panel, so when
+     * forwarding the event to the context of the overall tab pane, the coordinates should be
+     * translated to that coordinate space. The mouse event is not changed in place, since it may
+     * still be needed in the original event.
+     * 
+     * @param e The original MouseEvent
+     * @return A new MouseEvent with modified coordinates
+     */
+    private MouseEvent translateMouseEventCoordinates(MouseEvent e) {
+        Point p = e.getPoint();
+        translatePointFromTabPanel(p.x, p.y, p);
+        return new MouseEvent(tabPane, e.getID(), e.getWhen(), e.getModifiersEx(),
+                p.x, p.y, e.getLocationOnScreen().x, e.getLocationOnScreen().y,
+                e.getClickCount(), e.isPopupTrigger(), e.getButton());
     }
 
     /**
